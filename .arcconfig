@@ -1,0 +1,7 @@
+{
+  "phabricator.uri" : "https://review.slashwin.dk",
+  "unit.engine": "LatexTestEngine",
+  "phutil_libraries": [
+	".arclib"
+  ]
+}
