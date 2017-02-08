@@ -1,0 +1,34 @@
+@MISC{spotify1,
+  title = {{spotify1}},
+  year = {2013},
+  url = {https://blogs.commons.georgetown.edu/cctp-797-fall2013/archives/557},
+  lastchecked = {12-02-2017},
+}
+
+@MISC{spotifySlides,
+  title = {{spotifySlides}},
+  year = {2011},
+  url = {https://www.csc.kth.se/~gkreitz/spotify/kreitz-spotify_kth11.pdf},
+  lastchecked = {12-02-2017},
+}
+
+@MISC{netflix,
+  title = {{netflix}},
+  year = {2011},
+  url = {https://www-users.cs.umn.edu/~viadhi/netflix.pdf},
+  lastchecked = {12-02-2017},
+}
+
+@MISC{twitch,
+  title = {{twitch}},
+  year = {2015},
+  url = {https://arxiv.org/pdf/1502.04666.pdf},
+  lastchecked = {12-02-2017},
+}
+
+@MISC{youtube,
+  title = {{youtube}},
+  year = {2016},
+  url = {https://en.wikipedia.org/wiki/Real_Time_Streaming_Protocol},
+  lastchecked = {12-02-2017},
+}
