@@ -170,6 +170,8 @@
 \definecolor{GoogleGrey}{HTML}{9E9E9E}
 \definecolor{GoogleBlueGrey}{HTML}{607D8B}
 
+\colorlet{Highlight}{GoogleBlue}
+
 %Listing & Minted
 \usepackage{shellesc}
 \usepackage{listings}
@@ -213,10 +215,14 @@
 \usepackage{acronym}
 \usepackage{fixme}
 \fxsetup{%
-    layout={footnote, marginclue, index},
-    innerlayout={inline, index}
-    theme=color,
+	layout={footnote, index},
+	innerlayout={inline, index},
+	theme=colorsig,
+	mode=multiuser,
 }
+
+\FXRegisterAuthor{jj}{jje}{Jesper}
+
 %External files
 \usepackage{xspace}
 \input{preamble/fixme.tex}
@@ -241,5 +247,8 @@
 \usepackage{longtable}
 
 \usepackage{tabularx}
+
+%Used for problem statement env
+\usepackage{changepage}
 
 \sloppy
