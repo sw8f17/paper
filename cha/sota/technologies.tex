@@ -29,23 +29,24 @@
 
 
 
-\section{Technologies}
+\section{Technologies}\label{sec:sota_technologies}
 In this section we take a closer look at streaming and split this into two primary types of streaming, video and audio.
 As we are focused on audio streaming, services and solutions in this field are the most important ones, however video streaming services are also mentioned in order to compare the two.
 Furthermore we separate Audio streaming and multi-room audio systems, i.e. synchronized audio streaming using multiple devices, as this is a special case of audio streaming and also happens to be closely related to our problem.
 
 \subsection{Audio Streaming}
-Streaming music is a common way of listening to music with services such as Spotify making a large selection of music available through a subscription service.
+Streaming music is a common way of listening to music, with services such as Spotify making a large selection of music available through a subscription service.
 A key part in streaming audio is the streaming protocol, to this end Spotify previously used peer-to-peer networking in order to handle the demand.\cite{spotify1}
 However, demand is not a concern for us, the streaming protocol used is.
 As for streaming protocol, Spotify uses their own proprietary protocol, as is represented on \cref{fig:spotifyOverview}.\cite{spotifySlides} %I kilden skriver de også at de går efter en unified backend protocol istedet for at dvs. de er nok 100% propriatary nu, should this be mentioned? im not sure it matters too much
+Since their protocol is proprietary, only a small amount of information is public about it.
 
-Aside from the fact that Spotify uses a proprietary protocol not much else about the protocol is public.
-Spotify is not the only streaming service out there, another popular service is Airplay.
-Airplay also use their own proprietary protocol, Remote Audio Output Protocol, which is based on \acl{RTSP}.
+Another service which provides audio streaming, is AirPlay, made by Apple. 
+AirPlay is not a provider of music like Spotify is, but is a services used for wireless streaming of audio between Apple devices.
+AirPlay also use their own proprietary protocol, Remote Audio Output Protocol, which is based on \ac{RTSP}.
 In fact the general impression received is that the audio streaming services use proprietary protocols.
 
-\begin{figure}[h!]
+\begin{figure}[!bht]
     \centering
     \includegraphics[width=0.7\textwidth]{img/spotifyOverview.png}
     \caption{High level overview of Spotify from 2011 \cite{spotifySlides}}
@@ -57,14 +58,17 @@ In fact the general impression received is that the audio streaming services use
 %Airplay -  Remote Audio Output Protocol (RAOP), a proprietary variant of RTSP/RTP
 
 \subsection{Video Streaming}
-For streaming video there are a variety of streaming services out there, these are generally of two types, livestreaming services such as twitch, which do not just stream from a server, but streams live from another client.
-The other type streams from a server, such as Netflix which allow for streaming of movies and tv-shows.
+For streaming video there are a variety of streaming services out there, these are generally of two types.
+Livestreaming services such as Twitch\footnote{\url{https://www.twitch.tv/}}, which streams from a ``streamer'' via their servers to the clients, with a relatively short delay (5 to 30 seconds delay). 
+The other type streams from a server, such as Netflix\footnote{\url{https://www.netflix.com/}} which allow for streaming pre--recorded content, e.g. movies and tv-shows.
+YouTube\footnote{\url{https://www.youtube.com}}, offers both types of streaming.
 In contrast to the audio streaming services the video streaming services do not seem to be relying on proprietary streaming protocols.
 
-Netflix uses \acl{DASH}, Twitch uses \acl{HLS} and previously used \acl{RTMP} which they still support, and Youtube uses \acl{RTSP}.\cite{netflix}\cite{twitch}\cite{youtube}
+Netflix uses \ac{DASH}, Twitch uses \ac{HLS} and previously used \ac{RTMP} which they still support, and Youtube uses \ac{RTSP}.\cite{netflix}\cite{twitch}\cite{youtube}
 Neither of these three streaming services use the same protocol, and all three are in the top of the market.
-A difference between perhaps Netflix and twitch may have been because they are slightly different, but Youtube and twitch also offer the same services and yet use different protocols.
-This gives the impression that there must be a considerable difference between audio and video streaming when it comes to the streaming protocol.
+The difference in the services which the aforementioned companies provide could be the reason for the different choice in technologies, however there is quite a big overlap between them. 
+
+This in all gives the impression that there must be a considerable difference between audio and video streaming when it comes to the streaming protocol.
 %Netflix -- DASH
 %Twitch -- HLS&RTMP
 %Youtube -- RTSP
@@ -88,7 +92,7 @@ The market is still very competitive and as such information on the specific tec
 
 
 \subsection{Conclusion}\fxnote{Tænker dette skal nok samles i et større SOTA conclusionsafsnit hvor der opsamles på alle dele frem for at have en conclusion i hver subdel af sota}
-From the information gathered in this section we derive conclusions to help us formulate the problem and elicitate requirements in order to solve that problem.
+From the information gathered in this section we derive conclusions to help us formulate the problem and elicit requirements in order to solve that problem.
 From the audio streaming segment we can see that there is a tendency to use proprietary software, this gives us the impression that there are certain requirements which the well known streaming protocols do not fully support. 
 
 We know specifically from AirPlay that their solution is based on \ac{RTSP}, thus there are some elements to the protocol that works just fine but simply does not fulfill all of AirPlays requirements.
@@ -97,7 +101,7 @@ Our insight into this field show that whilst Sonos use their own network, SonosN
 As for their streaming protocol, similarly to the audio streaming services we know no more than that it is proprietary.
 Our insight into video streaming may help shed some light on as to why proprietary software is used rather than the more common streaming protocols, in this field the companies use the common ones, and not one in particular.
 
-This lets us conclude that the difference in requirements for audio compared to video streaming is what is causing audio focused companies to use proprietary streaming protocols.
+This lets us conclude that the difference in requirements for audio compared to video streaming is what is causing audio focused companies to use their own proprietary streaming protocols.
 Some of these differences may include latency, file size, bit rate, etc.
 As such going forward we must explore how these factors affect the streaming protocols in concern to audio to ascertain which protocol to use, and whether we should fiddle with the protocols.
 
