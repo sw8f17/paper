@@ -56,3 +56,17 @@
 \newenvironment{dankscription}[2]{\begin{description}[labelindent=\parindent, labelwidth=\widthof{#1#2}, align=parright, font=\normalfont#1]}{\end{description}}
 
 \newcommand{\tblgrpsep}{\noalign{\vspace{.75em}}}
+
+%@Temporary: Style to be determined
+\newenvironment{problemstatement}
+{%
+	\begin{mdframed}[
+		outermargin=-11pt,
+		linewidth=1pt,
+		linecolor=Highlight,
+		leftline=true,
+	]
+}
+{%
+	\end{mdframed}
+}
