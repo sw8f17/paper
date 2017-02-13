@@ -32,3 +32,24 @@
   url = {https://en.wikipedia.org/wiki/Real_Time_Streaming_Protocol},
   lastchecked = {12-02-2017},
 }
+
+@MISC{sonos1,
+  title = {{sonos1}},
+  year = {2014},
+  url = {https://www.theregister.co.uk/2014/09/02/sonos_ditches_music_streaming_bridges/},
+  lastchecked = {12-02-2017},
+}
+
+@MISC{sonosWiki,
+  title = {{sonosWiki}},
+  year = {2016},
+  url = {https://en.wikipedia.org/wiki/Sonos},
+  lastchecked = {12-02-2017},
+}
+
+@MISC{sonos2,
+  title = {{sonos2}},
+  year = {2016},
+  url = {http://www.imore.com/how-does-sonos-work},
+  lastchecked = {12-02-2017},
+}

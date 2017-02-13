@@ -32,11 +32,11 @@
 \section{Technologies}\label{sec:sota_technologies}
 In this section we take a closer look at streaming and split this into two primary types of streaming, video and audio.
 As we are focused on audio streaming, services and solutions in this field are the most important ones, however video streaming services are also mentioned in order to compare the two.
-Furthermore we separate Audio streaming and multi-room audio systems, i.e. synchronized audio streaming using multiple devices, as this is a special case of audio streaming and also happens to be closely related to our problem.
+Furthermore we separate Audio streaming and multi--room audio systems, i.e. synchronized audio streaming using multiple devices, as this is a special case of audio streaming and also happens to be closely related to our problem.
 
 \subsection{Audio Streaming}
 Streaming music is a common way of listening to music, with services such as Spotify making a large selection of music available through a subscription service.
-A key part in streaming audio is the streaming protocol, to this end Spotify previously used peer-to-peer networking in order to handle the demand.\cite{spotify1}
+A key part in streaming audio is the streaming protocol, to this end Spotify previously used peer--to--peer networking in order to handle the demand.\cite{spotify1}
 However, demand is not a concern for us, the streaming protocol used is.
 As for streaming protocol, Spotify uses their own proprietary protocol, as is represented on \cref{fig:spotifyOverview}.\cite{spotifySlides} %I kilden skriver de også at de går efter en unified backend protocol istedet for at dvs. de er nok 100% propriatary nu, should this be mentioned? im not sure it matters too much
 Since their protocol is proprietary, only a small amount of information is public about it.
@@ -55,12 +55,12 @@ In fact the general impression received is that the audio streaming services use
 
 %Spotify - propriatary
 %Pandora - unknown
-%Airplay -  Remote Audio Output Protocol (RAOP), a proprietary variant of RTSP/RTP
+%AirPlay -  Remote Audio Output Protocol (RAOP), a proprietary variant of RTSP/RTP
 
 \subsection{Video Streaming}
 For streaming video there are a variety of streaming services out there, these are generally of two types.
 Livestreaming services such as Twitch\footnote{\url{https://www.twitch.tv/}}, which streams from a ``streamer'' via their servers to the clients, with a relatively short delay (5 to 30 seconds delay). 
-The other type streams from a server, such as Netflix\footnote{\url{https://www.netflix.com/}} which allow for streaming pre--recorded content, e.g. movies and tv-shows.
+The other type streams from a server, such as Netflix\footnote{\url{https://www.netflix.com/}} which allow for streaming pre--recorded content, e.g. movies and tv--shows.
 YouTube\footnote{\url{https://www.youtube.com}}, offers both types of streaming.
 In contrast to the audio streaming services the video streaming services do not seem to be relying on proprietary streaming protocols.
 
@@ -73,16 +73,21 @@ This in all gives the impression that there must be a considerable difference be
 %Twitch -- HLS&RTMP
 %Youtube -- RTSP
 
-\subsection{Multi-Room Audio Systems}
+\subsection{Multi--Room Audio Systems}
 Beyond streaming protocols there is another technology which closely relates to our problem, namely Multi-Room Audio.
-Multi-Room Audio is fairly self-descriptive, it provides audio to several rooms, this audio however is synchronized.
-While there are several ways of making a Multi-Room Audio solution for a home, predominately the technology is developed and provided by speaker manufacturers.
+Multi--Room Audio is fairly self--descriptive, it provides audio to several rooms, this audio however is synchronized.
+While there are several ways of making a Multi--Room Audio solution for a home, predominately the technology is developed and provided by speaker manufacturers.
 Several manufacturers provide this service to a degree but one manufacturer in particular is leading the technology and build their entire brand around it, Sonos.
 
 It is Sonos' proprietary network software alongside their hardware that have kept them at the top of the market.
-Sonos' own mesh network was developed due to WiFi not being of sufficient at the time when Sonos started development, this however is no longer the case is can be seen my both their competitors such as Bose, and their own technology which now also supports standard WiFi, although their own network is still more reliable. %https://www.theregister.co.uk/2014/09/02/sonos_ditches_music_streaming_bridges/
-It is their proprietary peer-to-peer mesh network, aptly named SonosNet, which makes them top of the market. %https://en.wikipedia.org/wiki/Sonos
-The market is still very competitive and as such information on the specific technologies and software is scarce, beyond knowing it is proprietary.
+Sonos' own mesh network was developed due to WiFi not being of sufficient at the time when Sonos started development, this however is no longer the case is can be seen my both their competitors such as Bose, and their own technology which now also supports standard WiFi, although their own network is still more reliable.\cite{sonos1} %https://www.theregister.co.uk/2014/09/02/sonos_ditches_music_streaming_bridges/
+The network they use is a proprietary peer-to-peer mesh network, aptly named SonosNet.\cite{sonosWiki} %https://en.wikipedia.org/wiki/Sonos
+
+Sonos' speakers are wireless and stream the music directly from the internet, as such they can run even if the device used to start them is turned off.
+To this end Sonos must support a range of services in order to be useful, and as a well-known brand they support a significant number of services.
+Their speakers can also play different songs in each room, or play the same songs in sync.
+SonosNet is also compatible with existing speakers and sound systems one may have through another Sonos device, the versatility and flexibility provided by Sonos alongside their technology being ahead, is what makes them top--of--the--line when it comes to Multi--Room Audio.\cite{sonos2}
+Multi--Room Audio is a competitive area and as such information on technologies and software used beyond knowing it is proprietary is scarce, as companies want to protect their trade secrets.
 
 %Sonos
 %enon
@@ -96,7 +101,7 @@ From the information gathered in this section we derive conclusions to help us f
 From the audio streaming segment we can see that there is a tendency to use proprietary software, this gives us the impression that there are certain requirements which the well known streaming protocols do not fully support. 
 
 We know specifically from AirPlay that their solution is based on \ac{RTSP}, thus there are some elements to the protocol that works just fine but simply does not fulfill all of AirPlays requirements.
-We want to extend beyond simple streaming of audio to use multi-room audio technology, i.e. synchronize across devices. 
+We want to extend beyond simple streaming of audio to use multi--room audio technology, i.e. synchronize across devices. 
 Our insight into this field show that whilst Sonos use their own network, SonosNet, WiFi and Bluetooth both work just fine, as Sonos' competitors use these, and Sonos themselves also support standard WiFi.
 As for their streaming protocol, similarly to the audio streaming services we know no more than that it is proprietary.
 Our insight into video streaming may help shed some light on as to why proprietary software is used rather than the more common streaming protocols, in this field the companies use the common ones, and not one in particular.
