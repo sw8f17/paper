@@ -46,6 +46,9 @@ AirPlay is not a provider of music like Spotify is, but is a services used for w
 AirPlay also use their own proprietary protocol, Remote Audio Output Protocol, which is based on \ac{RTSP}.
 In fact the general impression received is that the audio streaming services use proprietary protocols.
 
+
+
+
 \begin{figure}[!bht]
     \centering
     \includegraphics[width=0.7\textwidth]{img/spotifyOverview.png}
@@ -67,7 +70,6 @@ In contrast to the audio streaming services the video streaming services do not 
 Netflix uses \ac{DASH}, Twitch uses \ac{HLS} and previously used \ac{RTMP} which they still support, and Youtube uses \ac{RTSP}.\cite{netflix}\cite{twitch}\cite{youtube}
 Neither of these three streaming services use the same protocol, and all three are in the top of the market.
 The difference in the services which the aforementioned companies provide could be the reason for the different choice in technologies, however there is quite a big overlap between them. 
-
 This in all gives the impression that there must be a considerable difference between audio and video streaming when it comes to the streaming protocol.
 %Netflix -- DASH
 %Twitch -- HLS&RTMP
@@ -89,6 +91,8 @@ Their speakers can also play different songs in each room, or play the same song
 SonosNet is also compatible with existing speakers and sound systems one may have through another Sonos device, the versatility and flexibility provided by Sonos alongside their technology being ahead, is what makes them top--of--the--line when it comes to Multi--Room Audio.\cite{sonos2}
 Multi--Room Audio is a competitive area and as such information on technologies and software used beyond knowing it is proprietary is scarce, as companies want to protect their trade secrets.
 
+Multi-Room Audio is not exclusively a technology which is bought, hobbyists have created their own home Multi-Room Audio systems using open source projects such as PulseAudio.\cite{pulseAudioHobbyist}
+PulseAudio is a sound-server program accepting sound from one or multiple sources and then redirecting it to one or more of sinks, one of their supported protocols is \ac{RTP}.\cite{pulseAudioModules}
 %Sonos
 %enon
 %Pure
@@ -101,7 +105,9 @@ From the information gathered in this section we derive conclusions to help us f
 From the audio streaming segment we can see that there is a tendency to use proprietary software, this gives us the impression that there are certain requirements which the well known streaming protocols do not fully support. 
 
 We know specifically from AirPlay that their solution is based on \ac{RTSP}, thus there are some elements to the protocol that works just fine but simply does not fulfill all of AirPlays requirements.
-We want to extend beyond simple streaming of audio to use multi--room audio technology, i.e. synchronize across devices. 
+We want to extend beyond simple streaming of audio to use multi--room audio technology, i.e. synchronize across devices.
+In this field we know hobbyists have used programs such as PulseAudio which supports \ac{RTP}.
+
 Our insight into this field show that whilst Sonos use their own network, SonosNet, WiFi and Bluetooth both work just fine, as Sonos' competitors use these, and Sonos themselves also support standard WiFi.
 As for their streaming protocol, similarly to the audio streaming services we know no more than that it is proprietary.
 Our insight into video streaming may help shed some light on as to why proprietary software is used rather than the more common streaming protocols, in this field the companies use the common ones, and not one in particular.
@@ -109,6 +115,7 @@ Our insight into video streaming may help shed some light on as to why proprieta
 This lets us conclude that the difference in requirements for audio compared to video streaming is what is causing audio focused companies to use their own proprietary streaming protocols.
 Some of these differences may include latency, file size, bit rate, etc.
 As such going forward we must explore how these factors affect the streaming protocols in concern to audio to ascertain which protocol to use, and whether we should fiddle with the protocols.
+Knowing that some audio solutions use \ac{RTP} and AirPlay is based on \ac{RTSP} these two protocol in particular may be worth consideration.
 
 
 

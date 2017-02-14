@@ -53,3 +53,17 @@
   url = {http://www.imore.com/how-does-sonos-work},
   lastchecked = {12-02-2017},
 }
+
+@MISC{pulseAudioHobbyist,
+  title = {{pulseAudioHobbyist}},
+  year = {2014},
+  url = {http://www.danplanet.com/blog/2014/11/26/multi-room-audio-with-multicast-rtp/},
+  lastchecked = {12-02-2017},
+}
+
+@MISC{pulseAudioModules,
+  title = {{pulseAudioModules}},
+  year = {2016},
+  url = {https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Modules/#index38h3},
+  lastchecked = {12-02-2017},
+}
