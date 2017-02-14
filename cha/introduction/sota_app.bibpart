@@ -48,3 +48,13 @@
   url = {http://www.ampme.com/faq?locale=en_US},
   lastchecked = {10-02-2017},
 }
+
+@MISC{chrous_play,
+  author = {{AVR APPS}},
+  title = {Chorus},
+  month = {May},
+  year = {2015},
+  url = {https://play.google.com/store/apps/details?id=com.avrapps.chorus},
+  lastchecked = {13-02-2017},
+}
+
