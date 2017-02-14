@@ -1,7 +1,6 @@
 \section{Android Apps}\label{sec:sota_apps}
 In this section we look at the state of the art within streaming synchronized music between different mobile devices.
-
-The apps which is estimated to be a part of the state of the art is the following:
+We found three apps, which is capable to do this:
 \begin{itemize}
     \item SoundSeeder
     \item AmpMe
@@ -46,7 +45,7 @@ The full app costs 39.90 DKK.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.3\textwidth]{img/soundseeder.png}
+    \includegraphics[width=0.3\textwidth]{img/sota/soundseeder.png}
     \caption{A screenshot of SoundSeeder when the app is opened.}
     \label{fig:soundseeder_screenshot}
 \end{figure}
@@ -83,7 +82,7 @@ AmpMe is free to use in both Google Play and App Store.\cite{amp_faq}\cite{amp_p
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.3\textwidth]{img/ampme.png}
+    \includegraphics[width=0.3\textwidth]{img/sota/ampme.png}
     \caption{A screenshot of AmpMe when the app is opened.}
     \label{fig:ampme_screenshot}
 \end{figure}
@@ -122,7 +121,7 @@ The app is free to download and use without any adds.\cite{chrous_play}
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.3\textwidth]{img/chorus.png}
+    \includegraphics[width=0.3\textwidth]{img/sota/chorus.png}
     \caption{A screenshot of Chorus when the app is opened.}
     \label{fig:chorus_screenshot}
 \end{figure}
@@ -139,16 +138,36 @@ Free
 Manual/automatic sync
 \fi
 \subsection{Comparison}
-\iffalse
-        Func1 FUnc2 
-App1
-App2
-App3
-\fi
 
-\begin{tabular}{l|l|l|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
-                & Rating    & Last update   & Supported devices & Media source & Connectivity & Pricing  \\
-    \toprule
-    SoundSeeder & 3.9       & 11/11 2016    & Android 4.1 and above, Java devices & Google Music, YouTube, online radio, local media & asdf & Free (limited) or 39.90 DKK \\
-\end{tabular}
 
+\begin{table}
+    \scalebox{0.9}{
+    \begin{tabular}{l|l|l|p{2.2cm}|p{2.2cm}|p{2.4cm}|p{2.0cm}|}
+                    & \multirow{2}{*}{Rating}    & \multirow{2}{*}{Last update}   & Supported devices & \multirow{2}{*}{Media source} & \multirow{2}{*}{Connectivity} & \multirow{2}{*}{Pricing}  \\
+        \toprule
+
+        \multirow{4}{*}{SoundSeeder} & \multirow{4}{*}{3.9 Play Store}    & \multirow{4}{*}{11/11 2016}    & \multirow{3}{*}{Android 4.1$\le$,} & Google Music, & \multirow{3}{*}{WiFi,} &  \multirow{3}{*}{Free (limited),} \\
+    & & & \multirow{3}{*}{Java devices} & YouTube, & \multirow{3}{*}{Android hotspot} & \multirow{3}{*}{39.90 DKK} \\
+    & & & & online radio, & & \\
+    & & & & local media & & \\ 
+
+    \midrule
+
+        \multirow{4}{*}{AmpMe} & \multirow{3}{*}{4.2 Play Store} & \multirow{3}{*}{30/01 2017} & \multirow{3}{*}{Android 4.1$\le$,} & Spotify, & \multirow{4}{*}{Internet} & \multirow{4}{*}{Free} \\
+    & \multirow{3}{*}{4.0 App Store} & \multirow{3}{*}{01/02 2017} & \multirow{3}{*}{iOS 9.0 $\le$} & SoundCloud, & & \\
+    & & & & YouTube, & & \\
+    & & & & local media & & \\
+
+    \midrule
+
+        \multirow{2}{*}{Chorus} & \multirow{2}{*}{3.3 Play Store} & \multirow{2}{*}{11/5 2015} & \multirow{2}{*}{Android 4.0 $\le$} & \multirow{2}{*}{Local media} & \multirow{1}{*}{WiFi,} & \multirow{2}{*}{Free} \\
+    & & & & & \multirow{1}{*}{Android hotspot} & \\
+
+    \bottomrule
+
+    \end{tabular}}
+    \label{tab:sota_comp}
+    \caption{asdf}
+\end{table}
+
+% Tilføj deres muligheder for manual sync samt screenshot af disse muligheder
