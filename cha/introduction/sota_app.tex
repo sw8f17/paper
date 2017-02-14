@@ -1,6 +1,6 @@
 \section{Android Apps}\label{sec:sota_apps}
 In this section we look at the state of the art within streaming synchronized music between different mobile devices.
-We found three apps, which is capable to do this:
+We found three apps, which is capable of synchronizing music between other devices:
 \begin{itemize}
     \item SoundSeeder
     \item AmpMe
@@ -8,13 +8,13 @@ We found three apps, which is capable to do this:
 \end{itemize}
 
 These apps are found by search on sources like Google, YouTube, App Store, and Google Play Store and from recommendations on forums. 
-Another criteria was that the app is not depreciated or abandoned by its developers.
-The way to estimate this is by looking at the last update date on Google Play Store and App Store.
-For instance if an app have not been updated since 2013 and do not support new devices, it is probably abandoned.
+A criteria for an app was that the it must not be depreciated or abandoned by its developers.
+The way to estimate this was done by looking at the last update date on Google Play Store and App Store.
+For instance if an app had not been updated for a long time, e.g. 2013 and it do not support new devices, it is probably abandoned.
 
 To clarify, Google Play Store and App Store are the official place to install or buy apps for Android and iOS devices respectively.
 
-\subsection{SoundSeeder}
+\subsection{SoundSeeder}\label{subsec:soundseeder}
 SoundSeeder\footnote{http://soundseeder.com} is an app made by JekApps. 
 It is compatible with Android 4.1 and above, for older versions of Android (2.2 -- 4.0),
 another app called SoundSeeder Speaker can be used as speaker, but not to play the music.
@@ -61,7 +61,7 @@ Free version: two speaksers for up to 15 min as often you want, it contains bann
 Sync settings: ?
 \fi
 
-\subsection{AmpMe}
+\subsection{AmpMe}\label{subsec:ampme}
 The second app is AmpMe\footnote{http://www.ampme.com}, made by Amp Me Inc., which is another app to synchronize music between devices.
 It supports Android 4.1 or newer and iOS 9.0 or newer.
 
@@ -99,7 +99,7 @@ Free
 Resync button, syncs upon connection
 \fi
 
-\subsection{Chorus}
+\subsection{Chorus}\label{subsec:chorus}
 The final app is called Chorus\footnote{https://play.google.com/store/apps/details?id=com.avrapps.chorus} and is made by AVR APPS.
 Is supports Android 4.0 or newer, they state to have an iOS app, but the App Store page returns that the app is not available in our region,
 when open in iTunes\footnote{https://itunes.apple.com/app/chorus/id894014439}.
@@ -137,17 +137,49 @@ Mobile hotspot or WiFi
 Free
 Manual/automatic sync
 \fi
-\subsection{Comparison}
+\subsection{Determining the State of the Art}
+To determine the state of the art in regard to Android apps, we compare the described apps.
+In \cref{tab:sota_comp}, a comparison of the apps can be seen. 
+
+In regard to SoundSeeder versus AmpMe, then in the rating, last update, and supported devices, they are pretty equal.
+When it comes to the media source, they both supports YouTube and local media. 
+AmpMe supports Spotify, which is very popular, but SoundSeeder supports more different and wide technologies,
+like DLNA and UPnP, which makes it possible to e.g. stream from a media server.
+SoundSeeder also supports the possibility of using an external device as media source,
+which could make it possible to use another device to play Spotity (or SoundCloud for that matter) to the SoundSeeder streaming device,
+and then stream it to the connected speaker devices. 
+This could maybe impair the mobility, but that is very dependent on the situation.
+On the other hand, AmpMe do not require the devices to be on the same network, only to have Internet connection,
+where SoundSeeder requires the devices to be on the same network.
+This can be an annoyance in the case where there is no WiFi accessible and all devices have to be on the same access point.
+Furthermore AmpMe is free to use, where SoundSeeder cost 39 DKK for the full version.
+
+When testing the user interface of the two apps in \cref{subsec:ampme} and \cref{subsec:soundseeder}, AmpMe felt more modern and easier to use,
+where SoundSeeder was clotted with features.
+
+Looking at Chorus, it is inferior in regards to the rating, last update, and media source.
+Especially the media source, where it only supports local media is big downturn. 
+The user interface was better than SoundSeeder, but not as good as AmpMe.
+
+To draw a conclusion on the comparison of the apps,
+we deem that SoundSeeder and AmpMe is a part of the state of the art in streaming synchronized music to other devices. 
+This is because SoundSeeder have a lot of useful features and AmpMe have a very good user interface, have Spotify support and is free to use. 
+We do not feel that Chorus have enough extra features than just streaming synchronized music to be a part of the state of the art.
+Furthermore since Chorus have not been updated since the 11\textsuperscript{th} of May 2015,
+it is probably not going to get any new features in the future.
 
 
 \begin{table}
     \scalebox{0.9}{
-    \begin{tabular}{l|l|l|p{2.2cm}|p{2.2cm}|p{2.4cm}|p{2.0cm}|}
+    \begin{tabular}{l|l|l|p{2.2cm}|p{2.5cm}|p{2.4cm}|p{2.0cm}|}
                     & \multirow{2}{*}{Rating}    & \multirow{2}{*}{Last update}   & Supported devices & \multirow{2}{*}{Media source} & \multirow{2}{*}{Connectivity} & \multirow{2}{*}{Pricing}  \\
         \toprule
 
-        \multirow{4}{*}{SoundSeeder} & \multirow{4}{*}{3.9 Play Store}    & \multirow{4}{*}{11/11 2016}    & \multirow{3}{*}{Android 4.1$\le$,} & Google Music, & \multirow{3}{*}{WiFi,} &  \multirow{3}{*}{Free (limited),} \\
-    & & & \multirow{3}{*}{Java devices} & YouTube, & \multirow{3}{*}{Android hotspot} & \multirow{3}{*}{39.90 DKK} \\
+        \multirow{7}{*}{SoundSeeder} & \multirow{7}{*}{3.9 Play Store}    & \multirow{7}{*}{11/11 2016}    & \multirow{6}{*}{Android 4.1$\le$,} & Google Music, & \multirow{6}{*}{WiFi,} &  \multirow{6}{*}{Free (limited),} \\
+    & & & \multirow{6}{*}{Java devices} & YouTube, & \multirow{6}{*}{Android hotspot} & \multirow{6}{*}{39.90 DKK} \\
+    & & & & external device, & & \\
+    & & & & UPnP, & & \\
+    & & & & DLNA, & & \\
     & & & & online radio, & & \\
     & & & & local media & & \\ 
 
@@ -167,7 +199,7 @@ Manual/automatic sync
 
     \end{tabular}}
     \label{tab:sota_comp}
-    \caption{asdf}
+    \caption{Comparison between the apps.}
 \end{table}
 
 % Tilføj deres muligheder for manual sync samt screenshot af disse muligheder
