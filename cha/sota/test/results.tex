@@ -1,1 +1,26 @@
 \subsection{Results}
+The data collected during the test are shown on \cref{fig:ampme_test} and \cref{fig:soundseeker_test}.
+
+\paragraph{AMPme}
+In the test of AMPme we used one Phone which had the media (server), and a single other phone (client) which acted as a client for it. 
+Both phones were connected to the university WiFi network (AAU-1x).
+We used their built in slider, as explained previously, to attempt synchronize the audio, it ranges from $-15$ to $+15$, we tested it with a stepping of $5$. 
+The results of this is shown in \cref{fig:ampme_test}.
+On the x-axis is the value of synchronization slides is shown, and the y-axis is the observed delay between the clients in milliseconds.
+Each step in their slider is approximately $23.2191$ milliseconds.
+Without any manual adjustment the delay between the two phone was $-351.208$, that is sound coming from the client was $351.208$ milliseconds after the audio from the server. 
+After manually tuning using their slider we got to $-3.229$ millisecond difference at the $+15$ setting.  
+
+\paragraph{SoundSeeker}
+SoundSeeker requires all clients to be on the same WiFi network, and for them to have a direct connection. 
+This is not possible on the university WiFi due to their setup, so we used a phone to create an ad--hoc network. 
+The same phone which created the network also acted at the server in the SoundSeeker app. 
+We then had two other phone connect to the ad--hoc network, and connect to the server in the app.
+The app has a synchronize button, we pressed it on both clients and the resulting delay between the clients was $-90.896$, that is one of them was $90.896$ behind of the other. 
+We then attempted to synchronize the audio on them by adjusting the slider in the app.
+The slider in the SoundSeeker app has the unit ms (millisecond), and are in steps of $10$.  
+
+\subsubsection*{Conclusion}
+
+\subimport{}{ampmefigure.tex}
+\subimport{}{soundseekerfigure.tex}

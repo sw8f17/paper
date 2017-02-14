@@ -1,0 +1,22 @@
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            scatter/classes={ c={mark=o,draw=black,fill=black}% 
+            },
+            axis lines=center,
+            axis line style={-},
+            x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
+            y label style={at={(axis description cs:-0.1,0.55)},rotate=90,anchor=south},
+            %xmax=17,
+            %xmin=-17,
+            %ymin=-750,
+            %ymax=auto,
+            xlabel={Manual Adjustment},
+            ylabel={Actual Delay in ms}]
+            
+            \addplot table [col sep=comma, only marks] {\relativepath soundseeker.csv};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{SoundSeeker Data}\label{fig:soundseeker_test}
+\end{figure}
