@@ -1,4 +1,6 @@
 \subsection{Setup}
+In order to perform these tests, we need to have a setup for it. 
+
 Testing the offset between two audio sources is a signal processing
 task. To make the signal processing easy and effective a clear signal is
 needed. Additionally the signal needs to be synchronized between the
@@ -11,3 +13,19 @@ connector, with a common ground between the two channels. To separate
 the channels into separate mono tracks we used a \ac{TRS} to \ac{RCA}
 splitter, and a custom \ac{RCA} to mono \ac{TS}, to capture the two
 separate right\jjnote{Is it right} channels from
+
+% Troels additions below
+Furthermore we limit our tests to a master/slave/slave setup, 
+that is; one phone acts as a master, and we perform the tests 
+on two slaves connected to it. Since we are not able to test
+using three channels as input to our computers. 
+
+In the tests we use three Android phones:
+\begin{itemize}
+	\item Master: Moto X Style (Android 6.0)
+	\item Slave 1: OnePlus One (Android a.b)
+	\item Slave 2: OnePlus X (Android x.y)
+\end{itemize}
+
+The test itself will be performed in an automatic fashion using a Python script we wrote.
+This ensure consistency and minimize the chances of error caused by humans.
