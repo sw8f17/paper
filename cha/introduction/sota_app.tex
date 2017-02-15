@@ -7,47 +7,70 @@ We found three apps, which is capable of synchronizing music between other devic
     \item Chorus
 \end{itemize}
 
-These apps are found by search on sources like Google, YouTube, App Store, and Google Play Store and from recommendations on forums. 
+These apps are found by search on sources like Google\footnote{https://www.google.dk}, YouTube\footnote{https://www.youtube.com/}, App Store\footnote{https://itunes.apple.com/dk}, and Google Play Store\footnote{https://play.google.com/store} and from recommendations on forums. 
 A criteria for an app was that the it must not be depreciated or abandoned by its developers.
 The way to estimate this was done by looking at the last update date on Google Play Store and App Store.
-For instance if an app had not been updated for a long time, e.g. 2013 and it do not support new devices, it is probably abandoned.
+For instance if an app had not been updated for a long time, e.g. since 2013 and it do not support new devices, it is probably abandoned.
 
 To clarify, Google Play Store and App Store are the official place to install or buy apps for Android and iOS devices respectively.
 
+The three apps have the thing in common, that they use a master/slave connection.
+All three apps use different terms for their setup, so to clarify, 
+we will call the device, which selects the music and streams it, the master.
+The devices which connects to the master (SoundSeeder calls it ``Speaker''), are referred to as slaves.
+
 \subsection{SoundSeeder}\label{subsec:soundseeder}
 SoundSeeder\footnote{http://soundseeder.com} is an app made by JekApps. 
+The current (and tested) version is 1.6.5.
+
 It is compatible with Android 4.1 and above, for older versions of Android (2.2 -- 4.0),
-another app called SoundSeeder Speaker can be used as speaker, but not to play the music.
+another app called SoundSeeder Speaker makes it possible for the device to be used as a slave.
+
 SoundSeeder also provides a Java application for compatibility with other platforms e.g. Windows, macOS and Linux.
 JekApps do not support iOS and Windows Phone\cite{soundseeder_ios}.
 
 The app consists of a top menu and a burger menu at he left side, as seen on \cref{fig:soundseeder_screenshot}.
-There the user can choose the different playback possibilities and switch to speaker mode.
+In the burger menu, the user can choose the different playback possibilities and switch to slave mode.
 The main view of the app is a music player, where the music can be controlled as any other music player. 
-To play music to other devices, press the ``add music button'' in the top menu, choose the source of the music and choose the preferred music, and press play. 
+To play music to other devices as a master, press the ``add music button'' in the top menu,
+choose the source of the music and choose the preferred music, and press play. 
 
-To connect to a playing device, select the speaker mode from the side menu and if it finds the device, it connects automatically.
-It took a bit of time before the speaker device found the playing device, which can confuse and make the user think he has to connect manually with an IP. 
+To connect to a playing master device as a slave, select the speaker mode from the side menu and if it finds the device, it connects automatically.
+It took a bit of time before the slave device found the master device, which can confuse and make the user think he has to connect manually with an IP address. 
 
-The process of joining (when the devices are given the time of finding each other) is rather simple.
+The process of joining (when the slave are given the time of finding the master) is rather simple.
 In regard to the user interface, it is quite clotted with features and menus, which can make the app hard to navigate,
 and to know what feature is required to go to the next step of a task.
-The design of the app is old and not and not very pretty.
+The design of the app is old and not pretty.
 
-SoundSeeder streams music via Wi-Fi or the build--in Android hotspot\cite{soundseether_faq}, 
-which means that all phones have to be on the same network.
-In regard to the music source, it can be Google Music, YouTube (via semperVidLinks app), online radio stations, UPnP and DLNA devices, and local media.
+SoundSeeder streams music via Wi-Fi or the build--in Android hotspot, 
+which means that all phones have to be on the same network\cite{soundseether_faq}.
+In regard to the master music source, it can be Google Music, YouTube (via semperVidLinks app), online radio stations, UPnP and DLNA devices, and local media.
 SoundSeeder also supports to stream from an external source, e.g. a microphone or AUX device. 
-The supported media format is depended on the used device and Android version.\cite{soundseether_faq}
+The supported media format is depended on the used master device and its Android version.\cite{soundseether_faq}
 
-SoundSeeder is free to install but the free version is only possible to use with two devices connected as speakers for up to 15 minutes at the time and it do also contains banner adds.
+SoundSeeder synchronizes the music when a slave it connected, but it can also be done manually on the slave device. 
+On \cref{fig:soundseeder_slider}, the manual synchronization adjustment for SoundSeeder can be seen.
+This slider is used in the case that the music is not fully synchronized, the slider goes from $-100 ms$ up to $+100 ms$.
+Furthermore there is also an auto synchronization button in the top menu and on the slider menu window. 
+
+SoundSeeder is free to install but the free version is only possible to use with two slave devices connected for up to 15 minutes at the time and it do also contains banner adds.
 The full app costs 39.90 DKK. 
 
 \begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.3\textwidth]{img/sota/soundseeder.png}
-    \caption{A screenshot of SoundSeeder when the app is opened.}
-    \label{fig:soundseeder_screenshot}
+    \setlength{\fboxsep}{0pt}
+    \setlength{\fboxrule}{2pt}
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering    
+        \fbox{\includegraphics[width=0.65\textwidth]{img/sota/soundseeder.png}}
+        \caption{A screenshot of SoundSeeder when the app is opened.}\label{fig:soundseeder_screenshot}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \fbox{\includegraphics[width=0.65\textwidth]{img/sota/soundseeder_slider.png}}
+        \caption{A screenshot of SoundSeeder's synchronization slider.}\label{fig:soundseeder_slider}
+    \end{minipage}
 \end{figure}
 
 \iffalse
@@ -63,28 +86,45 @@ Sync settings: ?
 
 \subsection{AmpMe}\label{subsec:ampme}
 The second app is AmpMe\footnote{http://www.ampme.com}, made by Amp Me Inc., which is another app to synchronize music between devices.
+The latest (and tested) version is 5.1.1.
 It supports Android 4.1 or newer and iOS 9.0 or newer.
 
-In AmpMe the music player with the connected devices is called ``a party''.
+In AmpMe the master device with the connected slave devices is called ``a party''.
 When AmpMe is opened, it either displays the nearby parties or encourage you to create your own. 
-If a party if found, you can join it and have your device work as a speaker.
+If a party if found, you can join it as a slave and play the master's music.
 If no party is found, or you want to create your own, you can choose to start it by choosing between Spotify, 
 YouTube, your own music library, or SoundCloud as music source, as shown on \cref{fig:ampme_screenshot}. 
-Then when the source type and music is chosen, a player appears with the music playing.
+Then when the source type and music is chosen, a player appears with the music playing,
+and your device works as a master.
 
 It is very intuitive to join a party, or host one yourself and play music.
 Furthermore the interface is modern, minimalistic, and pleasant to use and look at. 
 
-To be able to stream music between devices, AmpMe require internet, in the form of WiFi or mobile data.
+To be able to stream music between a master and slaves, AmpMe require internet, in the form of WiFi or mobile data.
 This means that the connected devices can be on WiFi, mobile data or another network, as long there is Internet access. 
 As for the music source, AmpMe supports Spotify, SoundCloud, YouTube and local media.
+
+In AmpMe, the music is automatically synchronized upon party creation,
+but if there is a delay, it can be synchronized manually on the slave.
+On \cref{fig:ampme_screenshot} the slider to manually synchronize can be seen.
+The slider goes from an offset of $-15$ to $+15$ arbitrary offset units.
+
 AmpMe is free to use in both Google Play and App Store.\cite{amp_faq}\cite{amp_play}\cite{amp_itunes}
 
 \begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.3\textwidth]{img/sota/ampme.png}
-    \caption{A screenshot of AmpMe when the app is opened.}
-    \label{fig:ampme_screenshot}
+\setlength{\fboxsep}{0pt}
+    \setlength{\fboxrule}{2pt}
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \fbox{\includegraphics[width=0.65\textwidth]{img/sota/ampme.png}}
+        \caption{A screenshot of AmpMe when the app is opened.}\label{fig:ampme_screenshot}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \fbox{\includegraphics[width=0.65\textwidth]{img/sota/ampme_slider.png}}
+        \caption{A screenshot of AmpMe's synchronization slider.}\label{fig:ampme_slider}
+    \end{minipage}
 \end{figure}
 
 \iffalse
@@ -101,13 +141,14 @@ Resync button, syncs upon connection
 
 \subsection{Chorus}\label{subsec:chorus}
 The final app is called Chorus\footnote{https://play.google.com/store/apps/details?id=com.avrapps.chorus} and is made by AVR APPS.
+The used (and tested) version of the app is 2.1.
 Is supports Android 4.0 or newer, they state to have an iOS app, but the App Store page returns that the app is not available in our region,
 when open in iTunes\footnote{https://itunes.apple.com/app/chorus/id894014439}.
 
 When the app is opened, it basically looks like a regular music player, as seen on \cref{fig:chorus_screenshot}.
 Music is added by pressing the small plus sign in the right bottom corner. 
-When that music is added, Chorus streams the music to connected devices. 
-To join another user playing music, you press the menu button in the right top corner, and press join.
+When that music is added, Chorus streams the music to connected slave devices.
+To join another master device playing music, you press the menu button in the right top corner, and press join.
 Here a menu pops up with devices playing on the network, and if you selects the device shown, it connects and starts playing.
 The first attempt of connecting to the playing device was unsuccessful, it just kept on loading, after a restart of the app it worked.
 
@@ -117,13 +158,27 @@ The design is a bit old but its simplicity makes up for it.
 To share music between devices, WiFi or mobile hotspot is required,
 which means that all devices have to be on the same network.
 Chorus only supports playback of local media, so the music have to be locally on the device.
+
+Chorus supports manual and automatic synchronization.
+On \cref{fig:chorus_screenshot} the synchronization slider can be seen,
+it slides from $-400ms$ to $+400ms$, and each step is $\Delta 10ms$.
+
 The app is free to download and use without any adds.\cite{chrous_play} 
 
 \begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.3\textwidth]{img/sota/chorus.png}
-    \caption{A screenshot of Chorus when the app is opened.}
-    \label{fig:chorus_screenshot}
+    \setlength{\fboxsep}{0pt}
+    \setlength{\fboxrule}{2pt}
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \fbox{\includegraphics[width=0.65\textwidth]{img/sota/chorus.png}}
+        \caption{A screenshot of Chorus when the app is opened.}\label{fig:chorus_screenshot}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \fbox{\includegraphics[width=0.65\textwidth]{img/sota/chorus_slider.png}}
+        \caption{A screenshot of Chorus' synchronization slider.}\label{fig:chorus_slider}
+    \end{minipage}
 \end{figure}
 
 \iffalse
@@ -143,18 +198,19 @@ In \cref{tab:sota_comp}, a comparison of the apps can be seen.
 
 In regard to SoundSeeder versus AmpMe, then in the rating, last update, and supported devices, they are pretty equal.
 When it comes to the media source, they both supports YouTube and local media. 
-AmpMe supports Spotify, which is very popular, but SoundSeeder supports more different and wide technologies,
+AmpMe supports Spotify, which is very popular, but SoundSeeder supports more different and basic technologies,
 like DLNA and UPnP, which makes it possible to e.g. stream from a media server.
 SoundSeeder also supports the possibility of using an external device as media source,
-which could make it possible to use another device to play Spotity (or SoundCloud for that matter) to the SoundSeeder streaming device,
-and then stream it to the connected speaker devices. 
+which could make it possible to use another device to play Spotity (or SoundCloud for that matter) to the master device,
+and then stream it to the connected slaves. 
 This could maybe impair the mobility, but that is very dependent on the situation.
+
 On the other hand, AmpMe do not require the devices to be on the same network, only to have Internet connection,
 where SoundSeeder requires the devices to be on the same network.
 This can be an annoyance in the case where there is no WiFi accessible and all devices have to be on the same access point.
 Furthermore AmpMe is free to use, where SoundSeeder cost 39 DKK for the full version.
 
-When testing the user interface of the two apps in \cref{subsec:ampme} and \cref{subsec:soundseeder}, AmpMe felt more modern and easier to use,
+When testing the user interface of the two apps in \cref{subsec:soundseeder} and \cref{subsec:ampme}, AmpMe felt more modern and easier to use,
 where SoundSeeder was clotted with features.
 
 Looking at Chorus, it is inferior in regards to the rating, last update, and media source.
@@ -162,12 +218,11 @@ Especially the media source, where it only supports local media is big downturn.
 The user interface was better than SoundSeeder, but not as good as AmpMe.
 
 To draw a conclusion on the comparison of the apps,
-we deem that SoundSeeder and AmpMe is a part of the state of the art in streaming synchronized music to other devices. 
+we deem that SoundSeeder and AmpMe is a part of the state of the art in streaming synchronized music to mobile devices. 
 This is because SoundSeeder have a lot of useful features and AmpMe have a very good user interface, have Spotify support and is free to use. 
 We do not feel that Chorus have enough extra features than just streaming synchronized music to be a part of the state of the art.
 Furthermore since Chorus have not been updated since the 11\textsuperscript{th} of May 2015,
 it is probably not going to get any new features in the future.
-
 
 \begin{table}
     \scalebox{0.9}{
@@ -198,8 +253,5 @@ it is probably not going to get any new features in the future.
     \bottomrule
 
     \end{tabular}}
-    \label{tab:sota_comp}
-    \caption{Comparison between the apps.}
+    \caption{Comparison between the apps.}\label{tab:sota_comp}
 \end{table}
-
-% Tilføj deres muligheder for manual sync samt screenshot af disse muligheder
