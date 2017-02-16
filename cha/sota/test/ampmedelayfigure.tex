@@ -8,15 +8,15 @@
             axis line style={-},
             x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
             y label style={at={(axis description cs:-0.1,0.55)},rotate=90,anchor=south},
-            %xmax=17,
-            %xmin=-17,
+            xmax=17,
+            xmin=-17,
             %ymin=-750,
             %ymax=auto,
-            xlabel={Manual Adjustment in ms},
+            xlabel={Manual Adjustment},
             ylabel={Actual Delay in ms}]
             
-            \addplot table [col sep=comma, only marks] {\relativepath soundseekertest_1.csv};
+            \addplot table [col sep=comma, only marks] {\relativepath ampme_offset_inv_fixed.csv};
         \end{axis}
     \end{tikzpicture}
-    \caption{SoundSeeker Data}\label{fig:soundseeker_test}
+    \caption{AMPme delay Data}\label{fig:ampmedelay_test}
 \end{figure}
