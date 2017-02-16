@@ -30,21 +30,21 @@
 
 
 \section{Technologies}\label{sec:sota_technologies}
-In this section we take a closer look at streaming and split this into two primary types of streaming, video and audio.
+In this section we take a closer look at streaming and split this into two primary types of streaming: video and audio.
 As we are focused on audio streaming, services and solutions in this field are the most important ones, however video streaming services are also mentioned in order to compare the two.
-Furthermore we separate Audio streaming and multi--room audio systems, i.e. synchronized audio streaming using multiple devices, as this is a special case of audio streaming and also happens to be closely related to our problem.
+Furthermore we separate audio streaming and multi--room audio systems, i.e. synchronized audio streaming using multiple devices, as this is a special case of audio streaming and also happens to be closely related to our problem.
 
 \subsection{Audio Streaming}
-Streaming music is a common way of listening to music, with services such as Spotify making a large selection of music available through a subscription service.
+Streaming music is a common way of listening to music, with services such as Spotify\footnote{https://www.spotify.com/} making a large selection of music available through a subscription service.
 A key part in streaming audio is the streaming protocol, to this end Spotify previously used peer--to--peer networking in order to handle the demand.\cite{spotify1}
 However, demand is not a concern for us, the streaming protocol used is.
-As for streaming protocol, Spotify uses their own proprietary protocol, as is represented on \cref{fig:spotifyOverview}.\cite{spotifySlides} %I kilden skriver de også at de går efter en unified backend protocol istedet for at dvs. de er nok 100% propriatary nu, should this be mentioned? im not sure it matters too much
-Since their protocol is proprietary, only a small amount of information is public about it.
+As for streaming protocol, Spotify uses their own proprietary protocol, as is represented on \cref{fig:spotifyOverview}\tnnote{I think this figure needs some explanation in the text}.\cite{spotifySlides} %I kilden skriver de også at de går efter en unified backend protocol istedet for at dvs. de er nok 100% propriatary nu, should this be mentioned? im not sure it matters too much
+Since their protocol is proprietary, only a small amount of information about it is available to the public.
 
-Another service which provides audio streaming, is AirPlay, made by Apple. 
+Another service which provides audio streaming, is AirPlay\footnote{https://support.apple.com/da-dk/HT204289}, made by Apple. 
 AirPlay is not a provider of music like Spotify is, but is a services used for wireless streaming of audio between Apple devices.
 AirPlay also use their own proprietary protocol, Remote Audio Output Protocol, which is based on \ac{RTSP}.
-In fact the general impression received is that the audio streaming services use proprietary protocols.
+In fact the general impression received is that audio streaming services use proprietary protocols.
 
 
 
@@ -62,12 +62,12 @@ In fact the general impression received is that the audio streaming services use
 
 \subsection{Video Streaming}
 For streaming video there are a variety of streaming services out there, these are generally of two types.
-Livestreaming services such as Twitch\footnote{\url{https://www.twitch.tv/}}, which streams from a ``streamer'' via their servers to the clients, with a relatively short delay (5 to 30 seconds delay). 
+Livestreaming services such as Twitch\footnote{\url{https://www.twitch.tv/}}, which streams from a ``streamer'' via their servers to the clients, with a relatively short delay (5 to 30 seconds delay).\tnnote{Maybe a source on this.}\tnnote{I think this sentence can be hard to understand.}
 The other type streams from a server, such as Netflix\footnote{\url{https://www.netflix.com/}} which allow for streaming pre--recorded content, e.g. movies and tv--shows.
-YouTube\footnote{\url{https://www.youtube.com}}, offers both types of streaming.
+YouTube\footnote{\url{https://www.youtube.com}}, offers both types of streaming.\tnnote{Twitch does the same.}
 In contrast to the audio streaming services the video streaming services do not seem to be relying on proprietary streaming protocols.
 
-Netflix uses \ac{DASH}, Twitch uses \ac{HLS} and previously used \ac{RTMP} which they still support, and Youtube uses \ac{RTSP}.\cite{netflix}\cite{twitch}\cite{youtube}
+Netflix uses \ac{DASH}, Twitch uses \ac{HLS} and previously used \ac{RTMP} which they still support, and YouTube uses \ac{RTSP}.\cite{netflix}\cite{twitch}\cite{youtube}
 Neither of these three streaming services use the same protocol, and all three are in the top of the market.
 The difference in the services which the aforementioned companies provide could be the reason for the different choice in technologies, however there is quite a big overlap between them. 
 This in all gives the impression that there must be a considerable difference between audio and video streaming when it comes to the streaming protocol.
@@ -79,10 +79,10 @@ This in all gives the impression that there must be a considerable difference be
 Beyond streaming protocols there is another technology which closely relates to our problem, namely Multi-Room Audio.
 Multi--Room Audio is fairly self--descriptive, it provides audio to several rooms, this audio however is synchronized.
 While there are several ways of making a Multi--Room Audio solution for a home, predominately the technology is developed and provided by speaker manufacturers.
-Several manufacturers provide this service to a degree but one manufacturer in particular is leading the technology and build their entire brand around it, Sonos.
+Several manufacturers provide this service to a degree but one manufacturer in particular is leading the technology and build their entire brand around it, Sonos\footnote{http://www.sonos.com/}.
 
 It is Sonos' proprietary network software alongside their hardware that have kept them at the top of the market.
-Sonos' own mesh network was developed due to WiFi not being of sufficient at the time when Sonos started development, this however is no longer the case is can be seen my both their competitors such as Bose, and their own technology which now also supports standard WiFi, although their own network is still more reliable.\cite{sonos1} %https://www.theregister.co.uk/2014/09/02/sonos_ditches_music_streaming_bridges/
+Sonos' own mesh network was developed due to WiFi not being of sufficient\tnnote{bandwith?} at the time when Sonos started development, this however is no longer the case is can be seen my both their competitors such as Bose\footnote{https://www.bose.com}, and their own technology which now also supports standard WiFi, although their own network is still more reliable.\cite{sonos1} %https://www.theregister.co.uk/2014/09/02/sonos_ditches_music_streaming_bridges/
 The network they use is a proprietary peer-to-peer mesh network, aptly named SonosNet.\cite{sonosWiki} %https://en.wikipedia.org/wiki/Sonos
 
 Sonos' speakers are wireless and stream the music directly from the internet, as such they can run even if the device used to start them is turned off.
@@ -92,7 +92,7 @@ SonosNet is also compatible with existing speakers and sound systems one may hav
 Multi--Room Audio is a competitive area and as such information on technologies and software used beyond knowing it is proprietary is scarce, as companies want to protect their trade secrets.
 
 Multi-Room Audio is not exclusively a technology which is bought, hobbyists have created their own home Multi-Room Audio systems using open source projects such as PulseAudio.\cite{pulseAudioHobbyist}
-PulseAudio is a sound-server program accepting sound from one or multiple sources and then redirecting it to one or more of sinks, one of their supported protocols is \ac{RTP}.\cite{pulseAudioModules}
+PulseAudio is a sound-server program accepting sound from one or multiple sources and then redirecting it to one or more of sinks, one of their supported protocols is \ac{RTP}.\cite{pulseAudioModules}\tnnote{Are there too much about Sonos?}
 %Sonos
 %enon
 %Pure
