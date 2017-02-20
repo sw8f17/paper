@@ -1,0 +1,32 @@
+\subsection{Test Motivaiton}
+The purpose of the testing section is to explore what the capabilities of the state of art is.
+That is we want to identify some parameters, and test to what degree the state of art achieves them.
+
+We have identified the following three categories to test:
+\begin{enumerate*}[label=(\alph*)]
+    \item Offset,
+    \item Consistency,
+    \item Drift.
+\end{enumerate*}
+
+Each of these are required for an app to fulfill the initial problem statement presented in \vref{sec:initial_problem}.
+Moreover if the apps fail, to a certain degree, in any of the categories, then they are not fully suited as a solution for the problem at hand. 
+Concretely we want to answer the following questions in each category:
+\begin{enumerate}[label=(\alph*)]
+    \item Offset
+    \begin{enumerate}[label=(\arabic*)]
+        \item Is the audio synchronized without any manual adjustment?
+        \item Can the manual adjustment make them synchronized?
+    \end{enumerate} 
+    \item Consistency
+    \begin{enumerate}[start=3,label=(\arabic*)]
+        \item If the song changes are the synchronization preserved?
+        \item If a device disconnects and reconnects are the synchronization preserved?
+        \item If a devices pauses the playback, is the synchronization consistent?
+    \end{enumerate}
+    \item Drift
+    \begin{enumerate}[start=6,label=(\arabic*)]
+        \item Is the offset drifting over time?
+    \end{enumerate}
+\end{enumerate}
+
