@@ -21,7 +21,7 @@ The devices which connects to the master (SoundSeeder calls it ``Speaker''), are
 
 \subsection{SoundSeeder}\label{subsec:soundseeder}
 SoundSeeder\footnote{http://soundseeder.com} is an app made by JekApps. 
-The current (and tested) version is 1.6.5.
+The used version of the app is 1.6.5.
 
 It is compatible with Android 4.1 and above, for older versions of Android (2.2 -- 4.0),
 another app called SoundSeeder Speaker makes it possible for the device to be used as a slave.
@@ -74,6 +74,7 @@ The full app costs 39.90 DKK.
 
 \subsection{AmpMe}\label{subsec:ampme}
 The second app is AmpMe\footnote{\url{http://www.ampme.com}}, made by Amp Me Inc.
+The used version of the app is 5.1.1.
 It supports Android 4.1 or newer and iOS 9.0 or newer.
 
 In AmpMe the group of devices is called ``a party''.
@@ -160,7 +161,15 @@ To determine what makes these apps state of the art,
 we look at their vital features.
 In \cref{tab:sota_comp}, a comparison of the apps can be seen. 
 
-To start with SoundSeeder and AmpMe, they have their app ratings, Android support, YouTube and local media support in common.
+To start with Chorus, it does not support other devices than Android, narrowing down the supported devices compared to SoundSeeder and AmpMe.
+Furthermore it only supports local media as music source, requiring all media to be played to be on the device. 
+Chorus also has a lower rating than SoundSeeder and AmpMe, which indicates dissatisfied users,
+and the last update happened on 11/5 2015 indicating that it is abandoned. 
+On the other hand Chorus streams via WiFi and Android hotspot, just as SoundSeeder, and it has automatic and manual synchronization.
+Since Chorus only supports Android, playback of local media and do not seem to further developed,
+we do not deem it as state of the art.
+
+In regard to SoundSeeder and AmpMe, they have their app ratings, Android support, YouTube and local media support in common.
 AmpMe supports iOS devices, but SoundSeeder has a Java version which means that it supports all devices running Java, which is an advantage. 
 Therefore to be a part of the state of the art, it is important to support different types of devices.
 
@@ -182,17 +191,9 @@ Both SoundSeeder and AmpMe synchronizes automatically upon created connection.
 In the case that the synchronization becomes skewed, both apps have the possibility of manually synchronize and to set a synchronization offset.
 Since there is a need for manual synchronization options, this could mean that the automatic synchronization can at times be faulty,
 but it is a good alternative to either disconnect and reconnect or wait for the automatic synchronization synchronize by itself.
-Therefore to be a part of the state of the art, an app have to be able to both automatically and manually synchronize. 
+Therefore to be a part of the state of the art, an app have to be able to both automatically and manually synchronize.
+The actual performance of the synchronization, in SoundSeeder and AmpMe will be tested in a later section.
 
-The third app, Chorus, does not support other devices than Android, narrowing down the supported devices compared to SoundSeeder and AmpMe.
-Furthermore it only supports local media as music source, requiring all media to be played to be on the device. 
-Chorus also has a lower rating than SoundSeeder and AmpMe, which indicates dissatisfied users,
-and the last update happened on 11/5 2015 indicating that it is abandoned. 
-On the other hand Chorus streams via WiFi and Android hotspot, just as SoundSeeder, and it has automatic and manual synchronization.
-Since Chorus only supports Android, playback of local media and do not seem to further developed,
-we do not deem it as state of the art.
-
-%Der skal nok være noget opsamling, ved ikke om det vil være bedre i en fælles konklusion på SOTA afsnittet eller bare her.
 
 \begin{table}
     \scalebox{0.9}{
@@ -223,6 +224,6 @@ we do not deem it as state of the art.
     \bottomrule
 
     \end{tabular}}
-    \caption{Comparison between the apps.}\label{tab:sota_comp}
+    \caption{Comparison between the apps as of the 13\textsuperscript{th} of February 2017.}\label{tab:sota_comp}
 \end{table}
 
