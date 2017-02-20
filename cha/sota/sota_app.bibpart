@@ -1,0 +1,77 @@
+@MISC{__TAG__,
+  author = {__AUTHOR__},
+  title = {__TITLE__},
+  month = {__MONTH__},
+  year = {__YEAR__},
+  url = {__URL__},
+  lastchecked = {__DATE__},
+  abstract = {__DESC__}
+}
+
+@MISC{soundseether_faq,
+  author = {JekApps},
+  title = {FAQ},
+  url = {http://soundseeder.com/help/},
+  lastchecked = {09-02-2017},
+}
+
+@MISC{soundseeder_ios,
+  author = {JekApps},
+  title = {{iOS and Windows support soon?}},
+  month = {March},
+  year = {2015},
+  url = {http://soundseeder.com/support/topic/ios-and-windows-support-soon/#post-751},
+  lastchecked = {09-02-2017},
+}
+
+@MISC{amp_play,
+  author = {Amp Me inc},
+  title = {{AmpMe - Social Music Party}},
+  month = {January},
+  year = {2017},
+  url = {https://play.google.com/store/apps/details?id=com.amp.android},
+  lastchecked = {10-02-2017},
+}
+
+@MISC{amp_itunes,
+  author = {Amp Me inc},
+  title = {{AmpMe - A Portable Social Party Music Speaker}},
+  month = {Februar},
+  year = {2017},
+  url = {https://itunes.apple.com/app/ampme/id986905979},
+  lastchecked = {10-02-2017},
+}
+
+@MISC{amp_faq,
+  author = {Amp Me inc},
+  title = {{Frequently asked questions}},
+  url = {http://www.ampme.com/faq?locale=en_US},
+  lastchecked = {10-02-2017},
+}
+
+@MISC{chrous_play,
+  author = {{AVR APPS}},
+  title = {Chorus},
+  month = {May},
+  year = {2015},
+  url = {https://play.google.com/store/apps/details?id=com.avrapps.chorus},
+  lastchecked = {13-02-2017},
+}
+
+@MISC{spotify_subscribers,
+  author = {{Zac Hall}},
+  title = {{Spotify now has 100M users, but only twice as many paid customers as Apple Music}},
+  month = {Jun},
+  year = {2016},
+  url = {https://9to5mac.com/2016/06/20/spotify-apple-music-users/},
+  lastchecked = {19-02-2017},
+}
+
+@MISC{googlem_subscribers,
+  author = {{Gus Lubin}},
+  title = {{Google could be bigger in streaming music than you think}},
+  month = {Aug},
+  year = {2016},
+  url = {http://www.businessinsider.com/how-many-people-use-google-play-music-and-youtube-music-2016-8?r=US&IR=T&IR=T},
+  lastchecked = {19-02-2017},
+}
