@@ -48,7 +48,7 @@ In regard to the master's music source, it can be Google Music, online radio sta
 SoundSeeder also supports streams from external sources, e.g. a microphone or AUX device. 
 The supported media formats depend on the used master device and its Android version.\cite{soundseether_faq}
 
-SoundSeeder synchronizes the music when a slave it connected, but it can also be done manually on the slave device. 
+SoundSeeder synchronizes the music when a slave connects, but it can also be done manually on the slave device. 
 On \cref{fig:soundseeder_slider}, the manual synchronization adjustment for SoundSeeder can be seen.
 This slider is used in the case that the music is not fully synchronized, the slider goes from $-100 ms$ up to $+100 ms$.
 Furthermore there is also an auto synchronization button in the top menu and on the slider menu window. 
@@ -71,17 +71,6 @@ The full app costs 39.90 DKK.
         \caption{A screenshot of SoundSeeder's synchronization slider.}\label{fig:soundseeder_slider}
     \end{minipage}
 \end{figure}
-
-\iffalse
-3.9 stars on Google Play
-Functionality / How good it works
-11. november 2016 https://play.google.com/store/apps/details?id=com.kattwinkel.android.soundseeder.player
-For Android > 4.1 and Java based devices (RPI, Linux, Windows, macOS etc.), no plans for iOS and Windows Phone http://soundseeder.com/support/topic/ios-and-windows-support-soon/
-Google Music, YouTube (via semperVidLinks app), online radiostations, 
-Steam music via Wi-Fi or portable hotspot, UPnP/DLNA browser, mp3, mp4, m4a, aac, 3gp, ogg, flac (depends on your device / android version)
-Free version: two speaksers for up to 15 min as often you want, it contains banner adds. Priced version: 39,90 DKK
-Sync settings: ?
-\fi
 
 \subsection{AmpMe}\label{subsec:ampme}
 The second app is AmpMe\footnote{http://www.ampme.com}, made by Amp Me Inc.
@@ -123,18 +112,6 @@ AmpMe is free to use in both Google Play and App Store.\cite{amp_faq}\cite{amp_p
         \caption{A screenshot of AmpMe's synchronization slider.}\label{fig:ampme_slider}
     \end{minipage}
 \end{figure}
-
-\iffalse
-By Amp Me Inc.
-4.2 stars on Google Play, current version, 3.5 stars, all versions 4 stars on App Store
-Functionality / How good it works
-30. januar 2017 (Android), Feb 01, 2017 (iOS)
-Android and iOS
-Spotify, SoundCloud, YouTube and your local music library
-Require internet, WiFi/Mobile data
-Free
-Resync button, syncs upon connection
-\fi
 
 \subsection{Chorus}\label{subsec:chorus}
 The final app is called Chorus\footnote{https://play.google.com/store/apps/details?id=com.avrapps.chorus} and is made by AVR APPS.
@@ -178,48 +155,46 @@ The app is free to download and use without any adds.\cite{chrous_play}
     \end{minipage}
 \end{figure}
 
-\iffalse
-By AVR APPS 
-3.3 stars on Google Play
-Functionality / How good it works
-11. maj 2015
-Android 4.0, iOS
-Local media?
-Mobile hotspot or WiFi
-Free
-Manual/automatic sync
-\fi
-\subsection{Conclusion}
-To determine the state of the art in regard to Android apps, we compare the described apps.
+\subsection{Conclusion}%Maybe different title?
+To determine what from these apps makes the state of the art for synchronized streaming of music between different mobile devices,
+we will look at their vital features.
 In \cref{tab:sota_comp}, a comparison of the apps can be seen. 
 
-In regard to SoundSeeder versus AmpMe, then in the rating, last update, and supported devices, they are pretty equal.
-When it comes to the media source, they both supports YouTube and local media. 
-AmpMe supports Spotify, which is very popular, but SoundSeeder supports more different and basic technologies,
-like DLNA and UPnP, which makes it possible to e.g. stream from a media server.
-SoundSeeder also supports the possibility of using an external device as media source,
-which could make it possible to use another device to play Spotity (or SoundCloud for that matter) to the master device,
-and then stream it to the connected slaves. 
-This could maybe impair the mobility, but that is very dependent on the situation.
+To start with SoundSeeder and AmpMe, they have their app ratings, Android support, YouTube and local media support in common.
+AmpMe supports iOS devices, but SoundSeeder have a Java version which means that it supports all devices running Java, which is a big advantage. 
+Therefore to be a part of the state of the art, it is important to support many different types of devices.
 
-On the other hand, AmpMe does not require the devices to be on the same network, only to have an Internet connection,
-where SoundSeeder requires the devices to be on the same network.
-This can be an annoyance in the case where there is no WiFi available and all devices have to be on the same access point.
-Furthermore AmpMe is free to use, where SoundSeeder cost 39.90 DKK for the full version.
+In regard to supported devices, SoundSeeder supports more devices/technologies than AmpMe, but AmpMe supports Spotify.
+Spotify has around 100 million users, which makes it an important source to support\cite{spotify_subscribers}.
+Google Music have not released any official user numbers, but it is expected to be lower than Spotify\cite{googlem_subscribers}.
+On the other hand SoundSeeder supports external sources, so a source supporting Spotify could be used with SoundSeeder that way.
+This means that it is important to support popular and wildly used music sources/technologies to be a part of the state of the art.
 
-When testing the user interface of the two apps in \cref{subsec:soundseeder} and \cref{subsec:ampme}, AmpMe felt more modern and easier to use,
-where SoundSeeder is clotted with features.
+SoundSeeder supports streaming via WiFi or Android hotspot. 
+This means that all devices have to be on the same network and have connection to each other,
+which can be an issue in larger network configurations, where clients can be restricted from communicating with each other,
+which is the case at Aalborg University.
+AmpMe do not have this restriction since it uses an Internet connection, but it cost bandwidth if mobile data is used.
+Furthermore if slow mobile data is used it can cause problems with the synchronization, but so can Internet via WiFi. 
+Using Internet seems to be the superior solution, but it depends on the situation,
+in the case where there is no Internet or sufficient Internet speed available, the hotspot solution still works. 
+Therefore we deem that both using WiFi/hotspot and Internet is a part of the state of the art.
 
-Looking at Chorus, it is inferior in regard to the rating, last update, and media source.
-Especially the media source, where it only supports local media is big downturn. 
-The user interface os better than SoundSeeder, but not as good as AmpMe.
+Both SoundSeeder and AmpMe synchronizes automatically upon created connection.
+In the case that the synchronization becomes skewed, both apps have the possibility of manually synchronize and to set a synchronization offset.
+Since there is a need for manual synchronization options, this could mean that the automatic synchronization can at times be faulty,
+but it is a good alternative to either disconnect and reconnect or wait for the automatic synchronization synchronize by itself.
+Therefore to be a part of the state of the art, an app have to be able to both automatically and manually synchronize. 
 
-To draw a conclusion on the comparison of the apps,
-we deem that SoundSeeder and AmpMe represent the state of the art in streaming synchronized music to mobile devices. 
-This is because SoundSeeder has a lot of useful features and AmpMe has a very good user interface, Spotify support and is free to use. 
-We do not feel that Chorus has enough extra features than just streaming synchronized music to be a part of the state of the art.
-Furthermore since Chorus has not been updated since the 11\textsuperscript{th} of May 2015,
-it is probably not going to get any new features in the future.
+The third app, Chorus, do not support other devices than Android, narrowing down the supported devices compared to SoundSeeder and AmpMe.
+Furthermore it only supports local media as music source, requiring all media to be played to be on the device. 
+Chorus do also have a lower rating than SoundSeeder and AmpMe, which could indicate dissatisfied users,
+and the last update data of the 11/5 2015 could also indicate that the developers do not develop on it anymore. 
+On the other hand Chorus streams via WiFi and Android hotspot, just as SoundSeeder, and it have automatic and manual synchronization.
+Since Chorus only supports Android, playback of local media and do not seem to further developed,
+we do not deem it as a part of the state of the art.
+
+%Der skal nok være noget opsamling, ved ikke om det vil være bedre i en fælles konklusion på SOTA afsnittet eller bare her.
 
 \begin{table}
     \scalebox{0.9}{
@@ -253,8 +228,3 @@ it is probably not going to get any new features in the future.
     \caption{Comparison between the apps.}\label{tab:sota_comp}
 \end{table}
 
-
-
-%Savner generelt en vinkel som er brugbar for os. Der er fokus på user experience hvilket vi ikke rigtig kan bruge til noget i vores project, dette gælder også de enkelte paragrapher der er rundt omkring omkring minimalistisk og simplistisk design. - Conclusionen virker for mig som et app-review du finder på buzzfeed for at finde ud af hvilken app du skal vælge, from for at udmunde i noget som vi kan gå videre med i vores project
-
-%Synes det burde være mere analyse, mindre review - ved godt det er seperat fra tests men synes stadig der burde være value i afsnittet, et eksempel ville være at overveje hvorfor har alle en manual synch feature, hvordan affecter det vores sync, bruger de mic til at autosynch? hvordan virker deres autosynch features hvis du kan finde noget om det - mere dybdegående information kan godt findes uden test
