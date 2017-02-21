@@ -82,7 +82,7 @@ While there are several ways of making a Multi--Room Audio solution for a home, 
 Several manufacturers provide this service to a degree but one manufacturer in particular is leading the technology and build their entire brand around it, Sonos\footnote{http://www.sonos.com/}.
 
 It is Sonos' proprietary network software alongside their hardware that have kept them at the top of the market.
-Sonos' own mesh network was developed due to WiFi not being of sufficient\tnnote{bandwith?} at the time when Sonos started development, this however is no longer the case is can be seen my both their competitors such as Bose\footnote{https://www.bose.com}, and their own technology which now also supports standard WiFi, although their own network is still more reliable.\cite{sonos1} %https://www.theregister.co.uk/2014/09/02/sonos_ditches_music_streaming_bridges/
+Sonos' own mesh network was developed due to WiFi not being sufficient\tnnote{bandwith?} at the time when Sonos started development, this however is no longer the case as can be seen my both their competitors such as Bose\footnote{https://www.bose.com}, and their own technology which now also supports standard WiFi, although their own network is still more reliable.\cite{sonos1} %https://www.theregister.co.uk/2014/09/02/sonos_ditches_music_streaming_bridges/
 The network they use is a proprietary peer-to-peer mesh network, aptly named SonosNet.\cite{sonosWiki} %https://en.wikipedia.org/wiki/Sonos
 
 Sonos' speakers are wireless and stream the music directly from the internet, as such they can run even if the device used to start them is turned off.
@@ -92,7 +92,7 @@ SonosNet is also compatible with existing speakers and sound systems one may hav
 Multi--Room Audio is a competitive area and as such information on technologies and software used beyond knowing it is proprietary is scarce, as companies want to protect their trade secrets.
 
 Multi-Room Audio is not exclusively a technology which is bought, hobbyists have created their own home Multi-Room Audio systems using open source projects such as PulseAudio.\cite{pulseAudioHobbyist}
-PulseAudio is a sound-server program accepting sound from one or multiple sources and then redirecting it to one or more of sinks, one of their supported protocols is \ac{RTP}.\cite{pulseAudioModules}\tnnote{Are there too much about Sonos?}
+PulseAudio is a sound-server program accepting sound from one or multiple sources and then redirecting it to one or more of sinks; one of their supported protocols is \ac{RTP}.\cite{pulseAudioModules}\tnnote{Are there too much about Sonos?}
 %Sonos
 %enon
 %Pure
@@ -100,8 +100,24 @@ PulseAudio is a sound-server program accepting sound from one or multiple source
 %All the speaker producing companies -- Sonos Propriatary, others not looked in to yet.
 
 
-\subsection{Conclusion}\fxnote{Tænker dette skal nok samles i et større SOTA conclusionsafsnit hvor der opsamles på alle dele frem for at have en conclusion i hver subdel af sota}
-From the information gathered in this section we derive conclusions to help us formulate the problem and elicit requirements in order to solve that problem.
+\section{Conclusion}
+From the information gathered in this chapter we derive conclusions to help us formulate the problem and elicit requirements in order to solve that problem.
+
+The apps described in \cref{sec:sota_apps} provides insight into what such an app should be capable of, for each feature we can consider the reasoning behind adding that feature and therefrom determine possibly problems we will need to address in our app.
+
+In our analysis we determined that Chorus did not meet the criteria to be state of the art having low ratings, occasionally stopped working, and poor support for devices and music sources.
+As such we do not gain much information from Chorus aside from knowing that for an app to be useful, it needs to support more than only local audio files.
+
+SoundSeeder and AmpMe both qualified as state of the art, this prompts us to consider their features, why they exist and why we might want to include some in our app.
+First off is the support, both SoundSeeder and AmpMe support various media sources, most important of all audio streaming sources.
+The two apps use their own respective solutions for connectivity, SoundSeeder uses wifi/android hotspot where AmpMe simply uses an internet connection.
+This implies that either solution is capable of solving the problem, tests in \cref{}\fxnote{ref til testafsnit} evaluate just how good these solutions are and determines whether one solution performs better than the other.
+Both apps also support the feature of manual synchronization, the need for such a feature implies that to some extend the automatic synchronization is not enough.
+It can be quite difficult to assert exactly how desynchronized two devices are, SoundSeeder allows the user to change at intervals of 10ms between -400 and +400 whereas AmpMe uses an arbitrary value from -15 to +15.
+Having an arbitrary value gives no impression of the degree to which a delay is added, and being able to hear that the devices are playing at a 70ms discrepancy is impossible to determine; as such the manual synchronization feature is largely a trial and error effort to reach synchronization.
+While we can not disregard that such a feature may be necessary to reach a synchronized state, it is worth considering alternate ways of allowing manual synchronization if it is needed, or perhaps a resynchronize feature.
+
+\bigskip \noindent
 From the audio streaming segment we can see that there is a tendency to use proprietary software, this gives us the impression that there are certain requirements which the well known streaming protocols do not fully support. 
 
 We know specifically from AirPlay that their solution is based on \ac{RTSP}, thus there are some elements to the protocol that works just fine but simply does not fulfill all of AirPlays requirements.
