@@ -12,20 +12,26 @@ The stereo microphone port in the test computer is a \ac{TRS} jack
 connector, with a common ground between the two channels. To separate
 the channels into separate mono tracks we used a \ac{TRS} to \ac{RCA}
 splitter, and a custom \ac{RCA} to mono \ac{TS}, to capture the two
-separate right\jjnote{Is it right} channels from
+separate right\jjnote{Is it right} channels from the audio sources.
 
 % Troels additions below
-Furthermore we limit our tests to a master/slave/slave setup, 
-that is; one phone acts as a master, and we perform the tests 
-on two slaves connected to it. Since we are not able to test
-using three channels as input to our computers. 
+Furthermore we limit our tests to a Master/Slave/Slave setup, that is;
+one phone acts as a master, and we perform the tests on two slaves
+connected to it. This makes the two devices under test as simlar as
+possible, since neither has the advantage of neither having the refence
+sound. Ideally we would also record the refence, the Master, but since
+we only have two input channels that isn't possible.
 
 In the tests we use three Android phones:
-\begin{itemize}
-	\item Master: Moto X Style (Android 6.0)
-	\item Slave 1: OnePlus One (Android a.b)
-	\item Slave 2: OnePlus X (Android x.y)
-\end{itemize}
+\begin{description}
+	\item[Master]{OnePlus One (Android 6.0.1, Kernel 3.4.112-cyanogenmod-g62d75e8)}
+	\item[Slave 1]{Moto X Style (Android 6.0.1, Kernel 3.10.84-perf-gb67345b)}
+	\item[Slave 2]{OnePlus Two (Android 6.0.1, Kernel 3.10.84-perf+)}
+\end{description}
 
-The test itself will be performed in an automatic fashion using a Python script we wrote.
-This ensure consistency and minimize the chances of error caused by humans.
+We will automate the mechnical part of the testing, such as doing the
+analysis and controlling the variables. The scripts are written in
+python, and uses the \ac{ADB} interface to control the android phones.
+The test itself will be performed in an automatic fashion using a Python script
+we wrote.  This ensure consistency and minimize the chances of error caused by
+humans.
