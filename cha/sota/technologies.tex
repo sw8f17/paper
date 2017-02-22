@@ -27,8 +27,6 @@
 
 %SqueezeBox - http://wiki.slimdevices.com/index.php/SlimProto_TCP_protocol - propriatary protocol
 
-
-
 \section{Technologies}\label{sec:sota_technologies}
 In this section we take a closer look at streaming and split this into two primary types of streaming: video and audio.
 As we are focused on audio streaming, services and solutions in this field are the most important ones, however video streaming services are also mentioned in order to compare the two.
@@ -38,21 +36,18 @@ Furthermore we separate audio streaming and multi--room audio systems, i.e. sync
 Streaming music is a common way of listening to music, with services such as Spotify\footnote{https://www.spotify.com/} making a large selection of music available through a subscription service.
 A key part in streaming audio is the streaming protocol, to this end Spotify previously used peer--to--peer networking in order to handle the demand.\cite{spotify1}
 However, demand is not a concern for us, the streaming protocol used is.
-As for streaming protocol, Spotify uses their own proprietary protocol, as is represented on \cref{fig:spotifyOverview}\tnnote{I think this figure needs some explanation in the text}.\cite{spotifySlides} %I kilden skriver de også at de går efter en unified backend protocol istedet for at dvs. de er nok 100% propriatary nu, should this be mentioned? im not sure it matters too much
+As for streaming protocol, Spotify uses their own proprietary protocol, as is represented on \cref{fig:spotifyOverview}.\cite{spotifySlides} %I kilden skriver de også at de går efter en unified backend protocol istedet for at dvs. de er nok 100% propriatary nu, should this be mentioned? im not sure it matters too much
 Since their protocol is proprietary, only a small amount of information about it is available to the public.
 
-Another service which provides audio streaming, is AirPlay\footnote{https://support.apple.com/da-dk/HT204289}, made by Apple. 
+Another service which provides audio streaming, is AirPlay\footnote{https://support.apple.com/da-dk/HT204289}, made by Apple.
 AirPlay is not a provider of music like Spotify is, but is a services used for wireless streaming of audio between Apple devices.
 AirPlay also use their own proprietary protocol, Remote Audio Output Protocol, which is based on \ac{RTSP}.
 In fact the general impression received is that audio streaming services use proprietary protocols.
 
-
-
-
 \begin{figure}[!bht]
     \centering
     \includegraphics[width=0.7\textwidth]{img/spotifyOverview.png}
-    \caption{High level overview of Spotify from 2011 \cite{spotifySlides}}
+    \caption{Overview of Spotify from 2011 showing the protocols used for communication within the app.\cite{spotifySlides}}
     \label{fig:spotifyOverview}
 \end{figure}
 
@@ -61,16 +56,15 @@ In fact the general impression received is that audio streaming services use pro
 %AirPlay -  Remote Audio Output Protocol (RAOP), a proprietary variant of RTSP/RTP
 
 \subsection{Video Streaming}
-For streaming video there are a variety of streaming services out there, these are generally of two types.
-Livestreaming services such as Twitch\footnote{\url{https://www.twitch.tv/}}, which streams from a ``streamer'' via their servers to the clients, with a relatively short delay (5 to 30 seconds delay).\tnnote{Maybe a source on this.}\tnnote{I think this sentence can be hard to understand.}
-The other type streams from a server, such as Netflix\footnote{\url{https://www.netflix.com/}} which allow for streaming pre--recorded content, e.g. movies and tv--shows.
-YouTube\footnote{\url{https://www.youtube.com}}, offers both types of streaming.\tnnote{Twitch does the same.}
-In contrast to the audio streaming services the video streaming services do not seem to be relying on proprietary streaming protocols.
+For streaming video there are a variety of streaming services out there, these are generally of two types, live and pre--recorded.
+Netflix\footnote{\url{https://www.netflix.com/}} exclusively allows for streaming pre--recorded content, e.g. movies and tv--shows.
+Other services such as Twitch\footnote{\url{https://www.twitch.tv/}} and YouTube\footnote{\url{https://www.youtube.com/}} allow for both livestreaming, and streaming of pre--recorded content.
+Livestreaming services such as Twitch, which streams from a ``streamer'' via their servers to the clients, with a baseline short delay.
 
+In contrast to the audio streaming services the video streaming services do not seem to be relying on proprietary streaming protocols.
 Netflix uses \ac{DASH}, Twitch uses \ac{HLS} and previously used \ac{RTMP} which they still support, and YouTube uses \ac{RTSP}.\cite{netflix}\cite{twitch}\cite{youtube}
-Neither of these three streaming services use the same protocol, and all three are in the top of the market.
-The difference in the services which the aforementioned companies provide could be the reason for the different choice in technologies, however there is quite a big overlap between them. 
-This in all gives the impression that there must be a considerable difference between audio and video streaming when it comes to the streaming protocol.
+Neither of these three streaming services use the same protocol, and all three are in the top of the line.
+This gives the impression that there must be a considerable difference between audio and video streaming requirements when it comes to the streaming protocol.
 %Netflix -- DASH
 %Twitch -- HLS&RTMP
 %Youtube -- RTSP
@@ -82,8 +76,8 @@ While there are several ways of making a Multi--Room Audio solution for a home, 
 Several manufacturers provide this service to a degree but one manufacturer in particular is leading the technology and build their entire brand around it, Sonos\footnote{http://www.sonos.com/}.
 
 It is Sonos' proprietary network software alongside their hardware that have kept them at the top of the market.
-Sonos' own mesh network was developed due to WiFi not being of sufficient\tnnote{bandwith?} at the time when Sonos started development, this however is no longer the case is can be seen my both their competitors such as Bose\footnote{https://www.bose.com}, and their own technology which now also supports standard WiFi, although their own network is still more reliable.\cite{sonos1} %https://www.theregister.co.uk/2014/09/02/sonos_ditches_music_streaming_bridges/
-The network they use is a proprietary peer-to-peer mesh network, aptly named SonosNet.\cite{sonosWiki} %https://en.wikipedia.org/wiki/Sonos
+Sonos' own mesh network was developed due to WiFi not being sufficient at the time when Sonos started development, however that is no longer the case as can be seen my both their competitors such as Bose\footnote{https://www.bose.com}, and their own technology which now also supports standard WiFi, although their own network is still more reliable.\cite{sonos1}
+The network they use is a proprietary peer-to-peer mesh network, aptly named SonosNet.\cite{sonosWiki}
 
 Sonos' speakers are wireless and stream the music directly from the internet, as such they can run even if the device used to start them is turned off.
 To this end Sonos must support a range of services in order to be useful, and as a well-known brand they support a significant number of services.
@@ -92,33 +86,46 @@ SonosNet is also compatible with existing speakers and sound systems one may hav
 Multi--Room Audio is a competitive area and as such information on technologies and software used beyond knowing it is proprietary is scarce, as companies want to protect their trade secrets.
 
 Multi-Room Audio is not exclusively a technology which is bought, hobbyists have created their own home Multi-Room Audio systems using open source projects such as PulseAudio.\cite{pulseAudioHobbyist}
-PulseAudio is a sound-server program accepting sound from one or multiple sources and then redirecting it to one or more of sinks, one of their supported protocols is \ac{RTP}.\cite{pulseAudioModules}\tnnote{Are there too much about Sonos?}
-%Sonos
-%enon
-%Pure
-%Samsung
-%All the speaker producing companies -- Sonos Propriatary, others not looked in to yet.
+PulseAudio is a sound-server program accepting sound from one or multiple sources and then redirecting it to one or more of sinks; one of their supported protocols is \ac{RTP}.\cite{pulseAudioModules}
 
+\section{Conclusion}
+From the information gathered in this chapter we derive conclusions to help us formulate the problem and elicit requirements in order to solve said problem.
 
-\subsection{Conclusion}\fxnote{Tænker dette skal nok samles i et større SOTA conclusionsafsnit hvor der opsamles på alle dele frem for at have en conclusion i hver subdel af sota}
-From the information gathered in this section we derive conclusions to help us formulate the problem and elicit requirements in order to solve that problem.
-From the audio streaming segment we can see that there is a tendency to use proprietary software, this gives us the impression that there are certain requirements which the well known streaming protocols do not fully support. 
+\bigskip
+The apps described in \cref{sec:sota_apps} provides insight into what such an app should be capable of.
+For each feature we can consider the reasoning behind adding that feature and from there determine possible problems we will need to address in our app.
 
-We know specifically from AirPlay that their solution is based on \ac{RTSP}, thus there are some elements to the protocol that works just fine but simply does not fulfill all of AirPlays requirements.
-We want to extend beyond simple streaming of audio to use multi--room audio technology, i.e. synchronize across devices.
+In our analysis we determined that Chorus did not meet the criteria to be state of the art having low ratings, occasionally stopped working, and poor support for devices and music sources.
+As such we do not gain much information from Chorus aside from knowing that for an app to be useful, it needs to support more than only local audio files.
+
+SoundSeeder and AmpMe both qualified as state of the art, this prompts us to consider their features, why they exist and why we might want to include some in our app.
+First off is the audio playback support, both SoundSeeder and AmpMe support various media sources, most important of all, audio streaming sources.
+The two apps use their own respective solutions for device connectivity, SoundSeeder uses WiFi/ad-hoc Android hotspots where AmpMe uses any internet connection.
+This implies that either solution is capable of solving the problem, tests in \cref{sec:sota_test} evaluate just how good these solutions are and determines whether one solution performs better than the other.
+Both apps also support the feature of manual synchronization, the need for such a feature implies that to some extend the automatic synchronization is not enough.
+It can be quite difficult to assert exactly how desynchronized two devices are.
+SoundSeeder allows the user to change at intervals of $10 ms$ between $-400 ms$ and $+400 ms$ whereas AmpMe uses an arbitrary value from $-15$ to $+15$.
+
+Having an arbitrary value gives no impression of the degree to which a delay is added, and being able to hear that the devices are playing at an exact $70ms$ discrepancy is impossible to pinpoint simply by listening; as such the manual synchronization feature is largely a trial and error effort to reach synchronization.
+While we can not disregard that such a feature may be necessary to reach a synchronized state, it is worth considering alternate ways of allowing manual synchronization if it is needed, or perhaps a resynchronization feature.
+
+\bigskip
+From the audio streaming segment we can see that there is a tendency to use proprietary software solutions.
+This gives us the impression that there are certain requirements which the well known streaming protocols do not fully support.
+
+We know specifically from AirPlay that their solution is based on \ac{RTSP}, thus there are some elements to the protocol that work just fine but does not fulfill all of AirPlay's requirements.
+We want to extend beyond simple streaming of audio to use multi--room audio technology, i.e.~synchronize across devices.
 In this field we know hobbyists have used programs such as PulseAudio which supports \ac{RTP}.
 
-Our insight into this field show that whilst Sonos use their own network, SonosNet, WiFi and Bluetooth both work just fine, as Sonos' competitors use these, and Sonos themselves also support standard WiFi.
+Our insight into this field show that whilst Sonos uses their own network, SonosNet, WiFi and Bluetooth both work as well, as Sonos' competitors use these, and Sonos also supports standard WiFi.
 As for their streaming protocol, similarly to the audio streaming services we know no more than that it is proprietary.
-Our insight into video streaming may help shed some light on as to why proprietary software is used rather than the more common streaming protocols, in this field the companies use the common ones, and not one in particular.
+Our insight into video streaming may help shed some light on as to why proprietary software is used rather than the more common streaming protocols.
+In this field the companies use a variety of well established protocols rather than proprietary ones.
 
 This lets us conclude that the difference in requirements for audio compared to video streaming is what is causing audio focused companies to use their own proprietary streaming protocols.
-Some of these differences may include latency, file size, bit rate, etc.
-As such going forward we must explore how these factors affect the streaming protocols in concern to audio to ascertain which protocol to use, and whether we should fiddle with the protocols.
-Knowing that some audio solutions use \ac{RTP} and AirPlay is based on \ac{RTSP} these two protocol in particular may be worth consideration.
-
-
-
+Some of these differences may include latency, file size, bit rate and buffering requirements.
+As such going forward we must explore how these factors affect the streaming protocols in concern to audio to ascertain which protocol to use, and whether we should fiddle with the open protocols.
+Knowing that some audio solutions use \ac{RTP} and AirPlay is based on \ac{RTSP}, these two protocols in particular might be worth considering.
 
 %Audio generally uses some sort of propriatary software, latency perhaps?
 %Multi-Room Audio done succesfully is generally done by speaker manufactorers using propriatary software alongside their own hardware(Sonos only works with Sonos)
@@ -131,9 +138,6 @@ Knowing that some audio solutions use \ac{RTP} and AirPlay is based on \ac{RTSP}
 %                    Assumption: Propriatary software is used to reduce latency such that a song can start asap? or to fix some other criteria that the basic protocols dont live up to.
 
 %This is propriatary because there are no standard protocols for controlling several speakers at once in a synchronized manner(This is very hard to source, reviews focus on the tech, and sound quality, not software - protocols are rarely mentioned in more than 1 line and software is never the focus of speaker reviews)
-
-
-
 
 %RandomLinks:
     %http://www.trustedreviews.com/opinions/the-ultimate-multi-room-audio-guide
