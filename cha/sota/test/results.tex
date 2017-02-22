@@ -1,7 +1,7 @@
 \subsection{Results}
 In this section we present the results of the tests.
 The interpretation of these is presented later.
-For all results shown in tables; each of the measurements is the median of five. 
+For all results shown in tables; each of the measurements is the median of five measurements. 
 Furthermore it should be noted that the measurements of which we took the median were generally within $\pm 0.1 ms$ of each other. 
 
 \subsubsection{SoundSeeder}
@@ -10,18 +10,18 @@ In \vref{fig:soundseeder_test} the results of the first test, using the slider t
 A total of 115 datapoints were collected in the test.
 A trend--line for this data can be described by the function $f(x) = 0.9744 * x - 70.497$ with $R^2=0.9974$.
 The trend--line is a linear regression meaning the relationship between the sliders values and the measured values are nearly linear with $1$ being exactly linear.
-Here it should be noted that SoundSeeder labeled their slides with milliseconds as a unit, if that were true then the scaling for the trend--line would be exactly $1$.
+Here it should be noted that SoundSeeder labeled their slides with milliseconds as a unit, if this unit was precise then the scaling for the trend--line would be exactly $1$.
 It is a bit less than that, $9.744$ milliseconds to be exact.
 \subimport{}{soundseederfigure.tex}
 
 In \vref{fig:soundseedersyncbutton} we test SoundSeeders synchronize button.
 \subimport{}{soundseedersyncfigure.tex}
 
-In \vref{fig:soundseedernextsongfigure} the result of the test, in which we change the playing song, are shown. 
+In \vref{fig:soundseedernextsongfigure} the results of the test, in which we change the song being played, are shown. 
 \subimport{}{soundseedernextsongfigure.tex}
 
 \subsubsection{AmpMe}
-Secondly we tested the AmpMe app, using the exact same setup as the one for SoundSeeder. 
+Secondly, we tested the AmpMe app using the exact same setup as the one for SoundSeeder. 
 In \vref{fig:ampmedelay_test} the results of using the slider in AmpMe are presented.
 A linear regression trend--line is drawn onto this data, the function for which is $f(x) = 23.211 * x + 131.260$ with $R^2 = 1.0$.
 That means that the trend--line matches the data measured in a linear fashion. 
