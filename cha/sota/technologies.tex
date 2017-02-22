@@ -91,7 +91,7 @@ PulseAudio is a sound-server program accepting sound from one or multiple source
 \section{Conclusion}
 From the information gathered in this chapter we derive conclusions to help us formulate the problem and elicit requirements in order to solve said problem.
 
-/bigskip
+\bigskip
 The apps described in \cref{sec:sota_apps} provides insight into what such an app should be capable of.
 For each feature we can consider the reasoning behind adding that feature and from there determine possible problems we will need to address in our app.
 
@@ -100,8 +100,8 @@ As such we do not gain much information from Chorus aside from knowing that for 
 
 SoundSeeder and AmpMe both qualified as state of the art, this prompts us to consider their features, why they exist and why we might want to include some in our app.
 First off is the audio playback support, both SoundSeeder and AmpMe support various media sources, most important of all, audio streaming sources.
-The two apps use their own respective solutions for device connectivity, SoundSeeder uses WiFi/ad-hoc android hotspots where AmpMe uses any internet connection.
-This implies that either solution is capable of solving the problem, tests in \cref{}\fxnote{ref til testafsnit} evaluate just how good these solutions are and determines whether one solution performs better than the other.
+The two apps use their own respective solutions for device connectivity, SoundSeeder uses WiFi/ad-hoc Android hotspots where AmpMe uses any internet connection.
+This implies that either solution is capable of solving the problem, tests in \cref{sec:sota_test} evaluate just how good these solutions are and determines whether one solution performs better than the other.
 Both apps also support the feature of manual synchronization, the need for such a feature implies that to some extend the automatic synchronization is not enough.
 It can be quite difficult to assert exactly how desynchronized two devices are.
 SoundSeeder allows the user to change at intervals of $10 ms$ between $-400 ms$ and $+400 ms$ whereas AmpMe uses an arbitrary value from $-15$ to $+15$.
