@@ -1,7 +1,7 @@
 \begin{figure}[h]
     \centering
     \begin{tikzpicture}
-        \begin{axis}[
+        \begin{axis}[legend pos=north west,
             scatter/classes={ c={mark=o,draw=black,fill=black}% 
             },
             axis lines=center,
@@ -16,6 +16,8 @@
             ylabel={Actual Delay in ms}]
             
             \addplot table [col sep=comma, only marks] {\relativepath ampme_offset_inv_fixed.csv};
+            \addplot[domain=-15:15, samples=100,red]{(23.211)*x+131.26};
+            \legend{$Data$,$f(x)=23.211*x+131.26$}
         \end{axis}
     \end{tikzpicture}
     \caption{AMPme delay Data}\label{fig:ampmedelay_test}

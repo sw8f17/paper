@@ -1,7 +1,7 @@
 \begin{figure}[h]
     \centering
     \begin{tikzpicture}
-        \begin{axis}[
+        \begin{axis}[legend pos=north west,
             scatter/classes={ c={mark=o,draw=black,fill=black}% 
             },
             axis lines=center,
@@ -14,8 +14,11 @@
             %ymax=auto,
             xlabel={Manual Adjustment in ms},
             ylabel={Actual Delay in ms}]
+
             
             \addplot table [col sep=comma, only marks] {\relativepath soundseedertest_1.csv};
+            \addplot[domain=-400:400, samples=100,red]{(0.9744)*x-70.497};
+            \legend{$Data$,$f(x)=0.9744*x-70.497$}
         \end{axis}
     \end{tikzpicture}
     \caption{Results of testing the manual synchronization slider in SoundSeeder}\label{fig:soundseeder_test}

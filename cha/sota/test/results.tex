@@ -1,24 +1,32 @@
 \subsection{Results}
 In this section we present the results of the tests.
 The interpretation of these will come later.
+For all results shown in tables; each of the measurements is the median of five. 
+Furthermore it should be note that the values were generally within $\pm 0.1 ms$ of each other. 
+
 \subsubsection{SoundSeeder}
 First we tested the SoundSeeeder app, using the setup and methods listed previously. 
 In \vref{fig:soundseeder_test} the results of the first test, using the slider to manually adjust the offset, is shown. 
 A total of 115 datapoints were collected in the test.
+A trend--line for this data can be $f(x) = 0.9744x - 70.497$ with $R^2=0.9974$.
+That is there is a very near linear relationship between the sliders values and the measured values.
 \subimport{}{soundseederfigure.tex}
 
 In \vref{fig:soundseedersyncbutton} we test SoundSeeders synchronize button.
-Each of the measurements is the median of five. 
-Furthermore it should be note that the values were generally within $\pm 0.5 ms$ of each other. 
 \subimport{}{soundseedersyncfigure.tex}
 
-next song test \vref{fig:soundseedernextsongfigure}
+In \vref{fig:soundseedernextsongfigure} the result of the test, in which we change the playing song, are shown. 
 \subimport{}{soundseedernextsongfigure.tex}
 
-\subsubsection{AMPme}
-delay slider test \vref{fig:ampmedelay_test}
+\subsubsection{AmpMe}
+Secondly we tested the AmpMe app, using the exact same setup as the one for SoundSeeder which was described previously. 
+In \vref{fig:ampmedelay_test} are the results of using the slider in AmpMe.
+A trend--line drawn onto this data can be $f(x) = 23.211 * x + 131.260$ with $R^2 = 1.0$.
+That means that the trend--line matches the data measured in a linear fashion. 
 \subimport{}{ampmedelayfigure.tex}
 
-next song test \vref{fig:ampmenextsongfigure}
+In \vref{fig:ampmenextsongfigure} we show the result of the song change test. 
+It is notable that the relative offset to previous synchronizations are close the the factor in the trend--line, however the cause is unknown. 
 \subimport{}{ampmenextsongfigure.tex}
 
+% drift tests, wait for new phones ...
