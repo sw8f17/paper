@@ -40,8 +40,8 @@ task. Within the field of signal processing the specific measure is
 called cross correlation. Cross correlation is normally
 a computationally intensive task, but due to the Convolution
 Theorem\cite{conv_theo}, it can be solved rather quickly with \ac{FFT}.
-The algorithm to calculate \ac{FFT} audio offset thus becomes doing
-a \ac{FFT} on one of the signals, and multiplying the results with
+The algorithm to calculate the \ac{FFT} of the audio offset thus becomes
+doing a \ac{FFT} on one of the signals, and multiplying the results with
 a time reversed \ac{FFT} of the other. Finally we do an inverse \ac{FFT}
 to get the actual correlation value. The index of the maximum value is
 the sample offset which gives the best correlation. By multiplying the
