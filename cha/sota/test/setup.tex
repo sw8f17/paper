@@ -18,7 +18,7 @@ separate right\jjnote{Is it right} channels from the audio sources.
 Furthermore we limit our tests to a Master/Slave/Slave setup, that is;
 one phone acts as a master, and we perform the tests on two slaves
 connected to it. This makes the two devices under test as similar as
-possible, since have the reference sound. 
+possible, since neither has the reference sound.
 Ideally we would also record the reference, the Master,
 but since we only have two input channels that is not possible.
 
@@ -30,10 +30,10 @@ In the tests we use three Android phones:
 \end{description}
 
 We automate the mechanical part of the testing, such as doing the
-analysis and controlling the variables. To do this we use scripts written in
-python. The scripts use the \ac{ADB} interface to control the android phones.
-Furthermore the tests are executed by a Python script to ensure consistency
-and minimize the chances of error caused by humans.
+analysis and controlling the variables. To do so we use scripts written
+in python, which use the \ac{ADB} interface to control the android
+phones. The tests are executed by a Python script to ensure
+consistency and minimize the chances of error caused by humans.
 
 Measuring the offset between the two signals is a signal processing
 task. Within the field of signal processing the specific measure is
