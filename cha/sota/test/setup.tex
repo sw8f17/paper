@@ -17,10 +17,10 @@ separate right\jjnote{Is it right} channels from the audio sources.
 % Troels additions below
 Furthermore we limit our tests to a Master/Slave/Slave setup, that is;
 one phone acts as a master, and we perform the tests on two slaves
-connected to it. This makes the two devices under test as simlar as
-possible, since neither has the advantage of neither having the refence
-sound. Ideally we would also record the refence, the Master, but since
-we only have two input channels that isn't possible.
+connected to it. This makes the two devices under test as similar as
+possible, since neither has the advantage of neither having the
+reference sound. Ideally we would also record the reference, the Master,
+but since we only have two input channels that isn't possible.
 
 In the tests we use three Android phones:
 \begin{description}
@@ -29,9 +29,25 @@ In the tests we use three Android phones:
 	\item[Slave 2]{OnePlus Two (Android 6.0.1, Kernel 3.10.84-perf+)}
 \end{description}
 
-We will automate the mechnical part of the testing, such as doing the
+We will automate the mechanical part of the testing, such as doing the
 analysis and controlling the variables. The scripts are written in
 python, and uses the \ac{ADB} interface to control the android phones.
-The test itself will be performed in an automatic fashion using a Python script
-we wrote.  This ensure consistency and minimize the chances of error caused by
-humans.
+The test itself will be performed in an automatic fashion using a Python
+script we wrote.  This ensure consistency and minimize the chances of
+error caused by humans.
+
+Measuring the offset between the two signals is a signal processing
+task. Within the field of signal processing the specific measure is
+called cross correlation. Cross correlation is normally
+a computationally intensive task, but due to the Convolution
+Theorem\cite{conv_theo}, it can be solved rather quickly with \ac{FFT}.
+The algorithm to calculate \ac{FFT} audio offset thus becomes doing
+a \ac{FFT} on one of the signals, and multiplying the results with
+a time reversed \ac{FFT} of the other. Finally we do an inverse \ac{FFT}
+to get the actual correlation value. The index of the maximum value is
+the sample offset which gives the best correlation. By multiplying the
+number of samples by the time between samples, we calculate the
+millisecond offset between the two audio tracks.
+
+The scripts used for testing can be seen in \jjwarning{Insert the final
+scripts and a ref here}
