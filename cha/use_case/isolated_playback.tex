@@ -17,13 +17,21 @@ Two examples of use cases, which fit this category are:
 
         In this use case scenario, it would also be possible for the individual user to apply an equalizer to the music, and more importantly control their own volume.
     \item[Multilingual movie theater] \hfill\\
-        % Translation on demand
-        % Synchronization must match what is on the screen
-        % Multiple audio streams
-        % Possible to do large buffers
-        % Device can listen to sound in movie theater and use for sync.
+        Most popular movies nowadays are translated into a myriad of different languages, mostly by way of subtitles but also by rerecording the dialogue in a different language.
+        This rises a new problem, when watching a translated movie in the theater.
+        Surely only one translation can be used, thereby making it more difficult to follow along if one is not fluent in the spoken or subtitled language.
+
+        One solution could be what this use case example proposes.
+        Making the audience in a movie theater able to choose between multiple different audio tracks.
+        These different audio tracks could be different translations, but also uncensored audio or a narrating audio track for blind persons.
+
+        In such a setup the synchronization would need to be precise, since the audio should match the picture.
+        However, because screening a movie does not include \enquote{live} or unpredictable audio, the individual audio streams could be sent well ahead of playing,
+        thereby relieving the need for fast and stable network connection.
+        Moreover, to aid in the synchronization the individual devices could utilize the main audio being played from the movie theater's speakers to line up with.
 \end{description}
 
-% In common: Data/audio signal comes from central device such as computer or dedicated hardware.
-%            People must have additional hardware (headphones) which can isolate their own audio
-
+These examples have two significant things in common.
+Firstly, both of these require the involvement of the business or organization in charge of the club or movie theater.
+This means that the data to be transmitted to the guests' or audience's devices, could be sent from something like a dedicated computer, i.e.~a device without limited memory and computational power.
+Secondly, both examples require the users of the individual devices to have some kind of headphones, which is a requirement that should be considered, as it may restrict some people from using the system.
