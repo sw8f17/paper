@@ -1,7 +1,7 @@
-\subsection{Test Discussion and Conclusion}
+\subsection{Test Discussion}
 
-In the tests we have tested the questions we posed for the apps in \vref{sec:sota_test}.
-These are questions which determines if the apps are suitable answers for the initial problem statement, \vref{sec:initial_problem}.
+We have tested the apps we found in the state of the art, in order to see if they fulfill the initial problem statement we posed, \vref{sec:initial_problem}.
+Moreover in \vref{sec:sota_test}, we posed several specific questions to answer in order to test them. 
 The questions are in three categories: 
 \begin{enumerate*}[label=(\alph*)]
     \item Offset,
@@ -46,14 +46,10 @@ We will go through each of them, and try to answer them.
 \subsubsection*{Drift:}
 \begin{description}
     \item[Is the synchronization stable over time?] \hfill \\
-    Yet to test formally, but we expect AmpMe to be better than SoundSeeder, but none of them to be acceptable. 
+    THIS TEST IS NOT COMPLETED YET. 
 \end{description}
 
-
-\begin{tenote}{inline}
-    I find the following pretty poor, any suggestions for improvement would be appreciated. 
-\end{tenote}
-In total, both of these apps attempts to answer the initial problem statement we posed, however neither of them does so in an acceptable fashion. 
-Specifically the synchronization without any manual adjustment is poor. 
-And if one were to manually adjust it to be somewhat close, one can only get so far.
-And even then, when the song changes, this changes the offset again, and one has to start over.
+\subsection{Test Conclusion}
+These test shows the shortcomings of the apps. 
+Neither of them is able to synchronize the audio without manual adjustment, and moreover they can not preserve a synchronization when the song is changed. 
+Thus neither of them answers our initial problem statement. 
