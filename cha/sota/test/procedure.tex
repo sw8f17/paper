@@ -1,0 +1,36 @@
+\subsection{Procedure}\label{subsec:procedure}
+
+Referring back to \jjwarning{Ref to the list from the whywetest.tex}, the
+first aspect we wanted to test was offset between playing devices.
+
+\paragraph{Offset}
+To test the offset aspect of the apps, we use the method described in
+\cref{subsec:test_setup}. We plug the devices into a computer, and take
+5 measurements, each of which are the median of 5 measurements. The
+measurements are correlated using the FFT method also described in
+\cref{subsec:test_setup}.
+
+\paragraph{Manual adjustment}
+Testing the manual adjustments generally follow the same methodology as
+the offset test. We plug the phones into the computer headphone jack,
+and start the script. The script takes 5 measurements and moves the
+slider one step for every iteration. It starts off moving right, until
+the maximum adjustment has been reached, it then moves back to the
+initial position and repeats for the negative offset values. After the
+last negative offset it return to the median position and records
+another set of 5 samples.
+
+\paragraph{Playback consistency}
+Playback consistency is, like the previous test, done by a script. The
+script takes 5 samples and then switches songs. It does this 5 times.
+For AmpMe switching songs can be triggered by clicking the previous song
+button, while Soundseeder requires the app to go to the next song and
+then back to the previous.
+
+\paragraph{Drift}
+The drift of an app necessarily takes a while to test. Like the other
+tests, a script is written to handle the testing part. The test is
+accomplished by starting playback of a long song, created by repeating
+a short song multiple times, and then measuring the offset over time. To
+give us an idea of the drift over we take 5 samples every 5 minutes for
+2 hours.
