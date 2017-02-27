@@ -1,11 +1,11 @@
-\subsection{Results}
+\section{Test Results}
 In this section we present the results of the tests.
 The interpretation of these is presented later.
 For all results shown in tables; each of the measurements is the median of five measurements. 
 Furthermore it should be noted that the measurements of which we took the median were generally within $\pm 0.1 ms$ of each other. 
 
-\subsubsection{SoundSeeder}
-First we tested the SoundSeeeder app, using the setup and methods listed previously.\fxnote{Add cref when setup section exists}
+\subsection{SoundSeeder}
+First we tested the SoundSeeeder app, using the setup and methods listed previously in \cref{sec:test_setup}.
 In \vref{fig:soundseeder_test} the results of the first test, using the slider to manually adjust the offset, is shown. 
 A total of 115 datapoints were collected in the test.
 A trend--line for this data can be described by the function $f(x) = 0.9744 * x - 70.497$ with $R^2=0.9974$.
@@ -20,7 +20,7 @@ In \vref{fig:soundseedersyncbutton} we test SoundSeeders synchronize button.
 In \vref{fig:soundseedernextsongfigure} the results of the test, in which we change the song being played, are shown. 
 \subimport{}{soundseedernextsongfigure.tex}
 
-\subsubsection{AmpMe}
+\subsection{AmpMe}
 Secondly, we tested the AmpMe app using the exact same setup as the one for SoundSeeder. 
 In \vref{fig:ampmedelay_test} the results of using the slider in AmpMe are presented.
 A linear regression trend--line is drawn onto this data, the function for which is $f(x) = 23.211 * x + 131.260$ with $R^2 = 1.0$.
