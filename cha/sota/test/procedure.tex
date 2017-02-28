@@ -1,18 +1,22 @@
-\section{Procedure}\label{subsec:procedure}
+\section{Test Procedure}\label{sec:test_procedure}
+To make the tests reproducible we follow a specific and detailed
+procedure for every test. We also have some considerations about the
+test sample.
 
 \subsection{Test sample}
 We use the song ``Goodness Gracious'' by ``Ellie Goulding''.  We didn't
 want the apps to change song, possibly causing a resync, while testing.
 To avoid that possibility we loop the song for 30 minutes within
-a single mp3 file.
+a single mp3 file. 
 
 \subsection{Connecting}
 Since the apps being tested are network connected systems, we have to
 connect them before the test can begin. The connection procedure is
 slightly different for each app. Common for both apps is that we use
 3 devices to test, one is the ``master'' while the others are
-``speakers''. The ``speakers'' are the ones connected to the computer,
-and where we are measuring the offset.
+``speakers''. The ``speakers'' are the ones connected to the computer
+with the dual mono to stereo cable described earlier, and where we are
+measuring the offset.
 
 \paragraph{AmpMe}
 AmpMe allows the devices to connect over the public internet. We test
@@ -25,7 +29,7 @@ master and wait for the app to resume playback.
 
 \paragraph{Soundseeder}
 Soundseeder does require the devices to be able to connect directly. We
-fulfilled that requirement by having the master serve a wifi hotspot,
+fulfilled that requirement by having the master serve a ad-hoc hotspot,
 which allowed the devices to connect, while keeping the speakers
 similarly configured. Soundseeder doesn't require a song to be playing
 for it to connect. For the tests we connect the speakers to the master,
@@ -39,6 +43,11 @@ clipping, since the microphone input is amplified. For the tests we keep
 the volume levels of both devices at 3 steps above the minimum in
 android.
 
+\subsection{Individual test procedure}
+Outside of the overarching and common procedure steps we also have some
+steps that are specific and different for every factor of the app we
+want to test.
+
 \paragraph{Offset}
 To test the offset aspect of the apps, we use the method described in
 \cref{sec:test_setup}. We plug the devices into a computer, and take
@@ -51,15 +60,18 @@ Testing the manual adjustments generally follow the same methodology as
 the offset test. We plug the phones into the computer headphone jack,
 and start the script. The script takes 5 measurements and moves the
 slider one step for every iteration. It starts off moving the adjustment
-slider to the right, until the maximum adjustment has been reached, it
-then moves back to the initial position and repeats for the negative
-adjustment values. After the last negative adjustment it returns to the
-median slider position and records a final set of 5 measurements.
+slider, seen on~\vref{fig:ampme_slider} and~\vref{fig:soundseeder_slider}
+\jjnote{I'm going to bet that it's going to get funky with these page
+numbers at some point}, to the right, until the maximum adjustment has
+been reached, it then moves back to the initial position and repeats for
+the negative adjustment values. After the last negative adjustment it
+returns to the median slider position and records a final set of
+5 measurements.
 
 \paragraph{Playback consistency}
 Playback consistency is, like the previous test, done by a script. The
 script takes 5 measurements and then switches songs. It does this
-5 times.  For AmpMe switching songs can be triggered by clicking the
+5 times. For AmpMe switching songs can be triggered by clicking the
 previous song button, while Soundseeder requires the app to go to the
 next song and then back to the previous.
 
