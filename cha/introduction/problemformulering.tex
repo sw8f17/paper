@@ -1,18 +1,29 @@
-\chapter{Problemstatement}
+\chapter{Problem statement}
 %Opsummering af pointer fra indledning, sota, test og use cases
-Our initial problemstatement in \cref{sec:initial_problem} refers to the ability to seamlessly synchronize audio playback across multiple devices.
-Through our state of the art (analysis) we investigated applications that enable this for smartphone devices, while also exploring speaker manufactor companies which use this concept to produce multi-room audio systems.
-Several well--established speaker manufactors successfully produce multi-room audio technology, and as such we investigated the smartphones applications further.
+Our initial problem statement in \cref{sec:initial_problem} refers to the ability to seamlessly synchronize audio playback across multiple devices.
+Through our state of the art (analysis) we investigated applications that enable this for smartphone devices, while also exploring speaker manufacturer companies which use this concept to produce multi-room audio systems.
+Several well--established speaker manufacturers successfully produce multi-room audio technology, and as such we investigated the smartphones applications further.
 Through tests we were able to conclude that the current applications on the market are not solving the problem to a satisfactory degree, as such we choose to focus on smartphones.
 
 %Mangler stadig at læse noget om usecase for at skrive det følgende fuldstændigt
 %Use cases går beyond smartphones maybe? if so afgrænsning skal flyttes
-Envisioning use cases where the audio playback of multiple smartphone devices could be manipulated, the use cases in \cref{} were created.
-These use cases are not exclusively scenarios where the audio playback must be synchronous, but also adhere other factors to reach certain psuchoacoustic effects, such as 3D sound, i.e. manipulating where a listener observes the sound to originate from.
+Envisioning use cases where the audio playback of multiple smartphone devices could be manipulated, the use cases in \cref{cha:establishing_use_cases} were created.
+These use cases are not exclusively scenarios where the audio playback must be synchronous, but also adhere other factors to reach certain psychoacoustic effects, such as 3D sound, i.e. manipulating where a listener observes the sound to originate from.
 
-This leads us to formulate the following problemstatement:
+This leads us to formulate the following problem statement:
 
 %Current Best:
 \begin{problemstatement}
     How can we design, implement, and test an Android application which manipulates the audio playback of multiple Android devices in order to achieve various psychoacoustic effects, such as synchronous playback?
 \end{problemstatement}
+
+The key terms in the problem statement and their contextual meaning is as follows:
+
+\begin{description}
+    \item [Manipulates Audio Playback] \hfill \\
+
+    \item [Psychoacoustic effects] \hfill \\
+    \item [Synchronous Playback] \hfill \\
+        Synchronous playback has been mentioned frequently throughout the introduction part, however for something to be synchronous and seem synchronous, is not the same.
+        As such when we talk about synchronous playback we talk about the perception of the audio being synchronous, not that it technically is synchronous.
+\end{description}
