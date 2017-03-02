@@ -2,49 +2,59 @@
 \pdfbookmark[0]{Front page}{label:frontpage}%
 \newcommand{\titlefont}{\sffamily\fontsize{36pt}{0pt}\selectfont}
 \newcommand{\subtitlefont}{\sffamily\fontsize{26pt}{0pt}\selectfont}
-\newcommand{\otherfont}{\sffamily\fontsize{18pt}{0pt}\selectfont}
 \newcommand{\smallfont}{\sffamily\fontsize{12pt}{0pt}\selectfont}
+\newgeometry{margin=1in}
 \begin{titlepage}
-    \addtolength{\hoffset}{0.5\evensidemargin-0.5\oddsidemargin} %set equal margins on the frontpage - remove this line if you want default margins
     \noindent%
-    \begin{tabular}{@{}p{\textwidth}@{}}
-        \toprule[2pt]
-        \midrule
-        \vspace{0.2cm}
         \begin{center}
-        \titlefont Mobile Systems
+            \titlefont Mobile Systems\\
+            \vspace{0.2cm}
+            \rule{90pt}{1pt}\\
+            \vspace{0.2cm}
+            \subtitlefont Synchronized Playback of Music
         \end{center}
-    \vspace{0.1cm}
-        \begin{center}
-        \subtitlefont Synchronized playback of music
-    \end{center}
-        \vspace{0.2cm}\\
-        \midrule
-        \toprule[2pt]
-    \end{tabular}
-    \vspace{1.5 cm}
-    \begin{figure}[h!]
+    \null\vfill
+    \begin{minipage}{1\textwidth}
         \centering
-        \includegraphics[width=0.5\textwidth]{img/aau_logo_en.pdf}
-    \end{figure}
-    \vspace{1.5 cm}
-    \begin{center}
-        \otherfont
-            Project Report
-        %Insert document type (e.g., Project Report)
-        \\
-        \vspace{0.2cm}
-        \otherfont
-            Group: SW806F17
-    \end{center}
-    \vfill
-    \begin{center}
-    \smallfont
-    Aalborg Universitet\\
-    8\textsuperscript{th} Semester Software\\ \vspace{0.1cm}
-    Selma Lagerløfs Vej 300\\
-    DK-9220 Aalborg
-    \end{center}
+        \includegraphics[width=0.7\textwidth]{img/scotty_white.png}
+    \end{minipage}
+    \null\vfill
+    \vspace*{1cm}
+    \noindent
+    \begin{minipage}{0.35\linewidth}
+        \begin{flushleft}
+        \includegraphics[width=0.8\linewidth]{img/aau_logo_en.pdf}
+        \end{flushleft}
+    \end{minipage}
+    %
+    \hfill
+    \begin{minipage}{0.3\linewidth}
+        \begin{flushright}
+        \smallfont
+        \begin{tabular}{r}
+            8\textsuperscript{th} Semester Software\\[0.2cm]
+            Project Report\\[0.2cm]
+            SW806F17
+        \end{tabular}
+        \end{flushright}
+    \end{minipage}
+    %
+    \begin{minipage}{0.02\linewidth}
+        \centering
+        \rule{1pt}{80pt}
+    \end{minipage}
+    %
+    \begin{minipage}{0.3\linewidth}
+        \begin{flushleft}
+        \smallfont
+        \begin{tabular}{l}
+            Aalborg Universitet\\[0.2cm]
+            Selma Lagerløfs Vej 300\\[0.2cm]
+            DK-9220 Aalborg
+        \end{tabular}
+        \end{flushleft}
+    \end{minipage}
 \end{titlepage}
+\restoregeometry
 \clearpage
 \cleardoublepage

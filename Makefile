@@ -30,8 +30,8 @@ clean:
 	rm -f bibtex.bib
 
 once: $(MAIN).tex .refresh $(SOURCES) $(FIGURES) bibtex.bib
-	$(LATEXMK) $(LATEXMKOPT) -pdflatex="$(LATEX) $(LATEXOPT) $(NONSTOP) %O %S" $(MAIN) \
-		|| rubber-info $(MAIN)
+	./onfail.sh $(LATEXMK) $(LATEXMKOPT) -pdflatex=\"$(LATEX) $(LATEXOPT) $(NONSTOP) %O %S\" $(MAIN) \
+		-- rubber-info $(MAIN)
 
 continuous: $(MAIN).tex .refresh $(SOURCES) $(FIGURES) bibtex.bib
 	$(LATEXMK) $(LATEXMKOPT) $(CONTINUOUS) \
