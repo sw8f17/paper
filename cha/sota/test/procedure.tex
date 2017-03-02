@@ -1,52 +1,6 @@
 \section{Test Procedure}\label{sec:test_procedure}
 To make the tests reproducible we follow a specific and detailed
-procedure for every test. We also have some considerations about the
-test sample.
-
-\subsection{Test sample}
-We use the song ``Goodness Gracious'' by ``Ellie Goulding''.  We didn't
-want the apps to change song, possibly causing a resync, while testing.
-To avoid that possibility we loop the song for 30 minutes within
-a single mp3 file. 
-
-\subsection{Connecting}
-Since the apps being tested are network connected systems, we have to
-connect them before the test can begin. The connection procedure is
-slightly different for each app. Common for both apps is that we use
-3 devices to test, one is the ``master'' while the others are
-``speakers''. The ``speakers'' are the ones connected to the computer
-with the dual mono to stereo cable described earlier, and where we are
-measuring the offset.
-
-\paragraph{AmpMe}
-AmpMe allows the devices to connect over the public internet. We test
-them on the AAU internal network, where they are technically connected,
-but the internal network topology makes them unable to connect directly.
-To connect speakers with the master, we start the master playing a song,
-thereby starting a ``party'' and allowing the speaker devices to
-connect. Once the speakers have connected we restart the song on the
-master and wait for the app to resume playback.
-
-\paragraph{Soundseeder}
-Soundseeder does require the devices to be able to connect directly. We
-fulfilled that requirement by having the master serve a ad-hoc hotspot,
-which allowed the devices to connect, while keeping the speakers
-similarly configured. Soundseeder doesn't require a song to be playing
-for it to connect. For the tests we connect the speakers to the master,
-and only after they are connected begin playback.
-
-\subsection{Volume}
-The volume of the devices should not be particularly important, since
-the method we use for correlation shouldn't care about the relative
-amplitude. Regardless we will need to keep the volume low to avoid
-clipping, since the microphone input is amplified. For the tests we keep
-the volume levels of both devices at 3 steps above the minimum in
-android.
-
-\subsection{Individual test procedure}
-Outside of the overarching and common procedure steps we also have some
-steps that are specific and different for every factor of the app we
-want to test.
+procedure for every test.
 
 \paragraph{Offset}
 To test the offset aspect of the apps, we use the method described in

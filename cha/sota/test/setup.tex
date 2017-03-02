@@ -29,6 +29,7 @@ In the tests we use three Android phones:
 	\item[Slave 2]{OnePlus Two (Android 6.0.1, Kernel 3.10.84-perf+)}
 \end{description}
 
+\subsection{Test Scripts}
 We automate the mechanical part of the testing, such as doing the
 analysis and controlling the variables. To do so we use scripts written
 in python, which use the \ac{ADB} interface to control the android
@@ -50,3 +51,44 @@ millisecond offset between the two audio tracks.
 
 The scripts used for testing can be seen in \jjwarning{Insert the final
 scripts and a ref here}
+
+\subsection{Test sample}
+We use the song ``Goodness Gracious'' by ``Ellie Goulding''.  We didn't
+want the apps to change song, possibly causing a resync, while testing.
+To avoid that possibility we loop the song for 30 minutes within
+a single mp3 file.
+
+\subsection{Connecting}
+Since the apps being tested are network connected systems, we have to
+connect them before the test can begin. The connection procedure is
+slightly different for each app. Common for both apps is that we use
+3 devices to test, one is the ``master'' while the others are
+``speakers''. The ``speakers'' are the ones connected to the computer
+with the dual mono to stereo cable described earlier, and where we are
+measuring the offset.
+
+\paragraph{AmpMe}
+AmpMe allows the devices to connect over the public internet. We test
+them on the AAU internal network, where they are technically connected,
+but the internal network topology makes them unable to connect directly.
+To connect speakers with the master, we start the master playing a song,
+thereby starting a ``party'' and allowing the speaker devices to
+connect. Once the speakers have connected we restart the song on the
+master and wait for the app to resume playback.
+
+\paragraph{Soundseeder}
+Soundseeder does require the devices to be able to connect directly. We
+fulfilled that requirement by having the master serve a ad-hoc hotspot,
+which allowed the devices to connect, while keeping the speakers
+similarly configured. Soundseeder doesn't require a song to be playing
+for it to connect. For the tests we connect the speakers to the master,
+and only after they are connected begin playback.
+
+\subsection{Volume}
+The volume of the devices should not be particularly important, since
+the method we use for correlation shouldn't care about the relative
+amplitude. Regardless we will need to keep the volume low to avoid
+clipping, since the microphone input is amplified. For the tests we keep
+the volume levels of both devices at 3 steps above the minimum in
+android.
+
