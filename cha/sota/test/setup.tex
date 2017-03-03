@@ -1,8 +1,8 @@
 \section{Test Setup}\label{sec:test_setup}
-In order to perform test these criteria, we need to have a setup to do so.
+In order to perform test for these criteria, we need to have a setup to do so.
 
 Testing the offset between two audio sources is a signal processing
-task. To make the signal processing easy and effective a clear signal is
+task. To make the signal processing easy and effective, a clear signal is
 needed. Additionally the signal needs to be synchronized between the
 channels at recording time, since otherwise the analysis would be
 mislead by desync in the recording. Luckily most computers include
@@ -32,18 +32,18 @@ In the tests we use three Android phones:
 \subsection{Test Scripts}
 We automate the mechanical part of the testing, such as doing the
 analysis and controlling the variables. To do so we use scripts written
-in python, which use the \ac{ADB} interface to control the android
+in Python, which use the \ac{ADB} interface to control the Android
 phones. The tests are executed by a Python script to ensure
 consistency and minimize the chances of error caused by humans.
 
 Measuring the offset between the two signals is a signal processing
-task. Within the field of signal processing the specific measure is
+task. Within the field of signal processing, the specific measure is
 called cross correlation. Cross correlation is normally
 a computationally intensive task, but due to the Convolution
 Theorem\cite{conv_theo}, it can be solved rather quickly with \ac{FFT}.
 The algorithm to calculate the \ac{FFT} of the audio offset thus becomes
 doing a \ac{FFT} on one of the signals, and multiplying the results with
-a time reversed \ac{FFT} of the other. Finally we do an inverse \ac{FFT}
+a time reversed \ac{FFT} of the other.\tnwarning{Jeg forstår ikke denne sætning.} Finally we do an inverse \ac{FFT}
 to get the actual correlation value. The index of the maximum value is
 the sample offset which gives the best correlation. By multiplying the
 number of samples by the time between samples, we calculate the
@@ -53,7 +53,7 @@ The scripts used for testing can be seen in \jjwarning{Insert the final
 scripts and a ref here}
 
 \subsection{Test sample}
-We use the song ``Goodness Gracious'' by ``Ellie Goulding''.  We didn't
+We use the song ``Goodness Gracious'' by ``Ellie Goulding''.  We did not
 want the apps to change song, possibly causing a resync, while testing.
 To avoid that possibility we loop the song for 2 hours within
 a single mp3 file.
@@ -62,33 +62,33 @@ a single mp3 file.
 Since the apps being tested are network connected systems, we have to
 connect them before the test can begin. The connection procedure is
 slightly different for each app. Common for both apps is that we use
-3 devices to test, one is the ``master'' while the others are
-``speakers''. The ``speakers'' are the ones connected to the computer
+three devices to test, one is the ``master'' while the others are
+``slaves''. The ``slaves'' are the ones connected to the computer
 with the dual mono to stereo cable described earlier, and where we are
 measuring the offset.
 
 \paragraph{AmpMe}
-AmpMe allows the devices to connect over the public internet. We test
+AmpMe allows the devices to connect over the public Internet. We test
 them on the AAU internal network, where they are technically connected,
 but the internal network topology makes them unable to connect directly.
-To connect speakers with the master, we start the master playing a song,
-thereby starting a ``party'' and allowing the speaker devices to
-connect. Once the speakers have connected we restart the song on the
+To connect slaves with the master, we start the master playing a song,
+thereby starting a ``party'' and allowing the slave devices to
+connect. Once the slaves have connected we restart the song on the
 master and wait for the app to resume playback.
 
-\paragraph{Soundseeder}
-Soundseeder does require the devices to be able to connect directly. We
+\paragraph{SoundSeeder}
+SoundSeeder does require the devices to be able to connect directly. We
 fulfilled that requirement by having the master serve a ad-hoc hotspot,
-which allowed the devices to connect, while keeping the speakers
-similarly configured. Soundseeder doesn't require a song to be playing
-for it to connect. For the tests we connect the speakers to the master,
+which allowed the devices to connect, while keeping the slaves
+similarly configured. SoundSeeder does not require a song to be playing
+for it to connect. For the tests we connect the slaves to the master,
 and only after they are connected begin playback.
 
 \subsection{Volume}
 The volume of the devices should not be particularly important, since
-the method we use for correlation shouldn't care about the relative
+the method we use for correlation should not care about the relative
 amplitude. Regardless we will need to keep the volume low to avoid
 clipping, since the microphone input is amplified. For the tests we keep
 the volume levels of both devices at 3 steps above the minimum in
-android.
+Android.
 
