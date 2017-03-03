@@ -1,19 +1,21 @@
 @MISC{spotify1,
-  title = {{spotify1}},
+  title = {{Understanding How Spotify Works}},
+  author = {{Martin Irvine}},
   year = {2013},
   url = {https://blogs.commons.georgetown.edu/cctp-797-fall2013/archives/557},
   lastchecked = {12-02-2017},
 }
 
 @MISC{spotifySlides,
-  title = {{spotifySlides}},
+  title = {{Spotify — Behind the Scenes}},
+  authur = {{Gunnar Kreitz}},
   year = {2011},
   url = {https://www.csc.kth.se/~gkreitz/spotify/kreitz-spotify_kth11.pdf},
   lastchecked = {12-02-2017},
 }
 
 @MISC{netflix,
-  title = {{netflix}},
+  title = {{Unreeling Netflix: Understanding and Improving Multi-CDN Movie Delivery}},
   year = {2011},
   url = {https://www-users.cs.umn.edu/~viadhi/netflix.pdf},
   lastchecked = {12-02-2017},
