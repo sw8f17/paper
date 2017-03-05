@@ -1,30 +1,22 @@
-\chapter{Problem statement}
-%Opsummering af pointer fra indledning, sota, test og use cases
+\chapter{Problem statement}\label{cha:problem_statement}
 Our initial problem statement in \cref{sec:initial_problem} refers to the ability to seamlessly synchronize audio playback across multiple devices.
-Through our state of the art chapter we investigated applications that enable this for smartphone devices, while also exploring speaker manufacturer companies which use this concept to produce multi-room audio systems. 
-We concluded that contrary to the speaker manufactuers, the current mobile applications on the market are not solving the problem to a satisfactory degree, as such we choose to focus on smartphones.
+Through \cnameref{cha:sota} we investigated applications that enable this for smart phone devices, while also exploring proprietary solutions with both software and hardware which use this concept of synchronized playback to produce multi--room audio setups. 
+We concluded that contrary to the proprietary solutions, the current mobile applications on the market are not solving the problem to a satisfactory degree.
+This fact, in conjunction with the ease of developing a mobile application compared to a proprietary software and hardware solution, directs our focus on smart phones.
 
-%Mangler stadig at læse noget om usecase for at skrive det følgende fuldstændigt
-%Use cases går beyond smartphones maybe? if so afgrænsning skal flyttes
-Envisioning use cases where the audio playback of multiple smartphone devices could be manipulated, the use cases in \cref{cha:establishing_use_cases} were created.
-These use cases are not exclusively scenarios where the audio playback must be synchronous, but also adhere other factors to reach certain psychoacoustic effects, such as 3D sound, i.e. manipulating where a listener observes the sound to originate from.
+Because of the availability of Android devices in our project group, and no need for special additional hardware, we also choose to develop for Android and not iOS or Windows Phone.
 
-This leads us to formulate the following problem statement:
+\bigskip
+In \cnameref{cha:establishing_use_cases}, we envision different use case scenarios, where some form of manipulated wireless playback of audio on multiple devices could be useful.
+The term manipulations means that the audio is not simply broadcasted to a myriad of devices and played back as soon as the device receives the data.
+Instead we want to control when the playback happens, therefore we define it as manipulated playback and not synchronized playback.
 
-%Current Best:
+This manipulation of the audio playback, will also enable us to achieve what is called psychoacoustic effects, which means that we can utilize the way the human brain perceives sound to out advantage.
+This concept of psychoacoustic effects will be expanded upon in \msmnote{ref to the future}.
+
+\bigskip
+All of the above can be summarized as the following problem, which will be examined throughout the rest of this paper.
+
 \begin{problemstatement}
-    How can we design, implement, and test an Android application which manipulates the audio playback of multiple Android devices in order to achieve various psychoacoustic effects, such as synchronous playback?
+    How can an Android application be used to achieve manipulated playback wirelessly across multiple smart phones running Android, such that psychoacoustic effects can be utilized to direct focus or enhance playback?
 \end{problemstatement}
-
-The key terms in the problem statement and their contextual meaning is as follows:
-
-\begin{description}
-    \item [Psychoacoustic effects] \hfill \\
-        In order to fulfil the use cases described in \cref{cha:establishing_use_cases}, we have to manipulate sound in a manner that goes beyond synchronizing audio playback.
-        For something to not simply sound synchronous but have the volume amplified, psychoacoustic effects must be utilized.
-        Similarly in order to manipulate the perception of the sounds origin, i.e. 3D audio manipulation, other psychoacoustic effects must be utilizd.
-        Which psychoacoustic effects will be explored depends on the specific use cases we decide to try to solve, as the project progresses more psychoacoustic effects may be explored, as feature development goes on. 
-    \item [Synchronous Playback] \hfill \\
-        Synchronous playback has been mentioned frequently throughout the introduction part, however for something to be synchronous and seem synchronous, is not the same.
-        As such when we talk about synchronous playback we talk about the perception of the audio being synchronous, not that it technically is synchronous.
-\end{description}
