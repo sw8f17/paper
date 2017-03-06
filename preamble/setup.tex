@@ -2,19 +2,38 @@
 
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
-%TODO: There's something wrong here. Roboto causes fvextra to fail
-%Maybe find another font?
-%\usepackage[thin, type1]{roboto}
 \usepackage{inconsolata}
+
+%Give me those text sizes
+\usepackage{lmodern}
+
+%TODO: Do we even use this?
 \usepackage{multicol}
 \renewcommand{\multicolsep}{\itemsep}
+
+%Space between line commands
 \usepackage{setspace}
+
+%Control enumerate and friends
 \usepackage[inline]{enumitem}
+
+%Line numbers
+\usepackage[modulo]{lineno} %Keep before fvextra
+
+\usepackage{fvextra} %Keep this before csquote
+
+%Neat context sensitive quotes
 \usepackage{csquotes}
+
+%Cool options for the includegraphics command
 \usepackage{graphicx}
+
+%Commands with multiple optional args
 \usepackage{xargs}
+
+%Lets get the ref working
 \usepackage[english]{varioref}
-\usepackage{hyperref}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
 \hypersetup{%
     plainpages=false,%
     bookmarksnumbered=true,%
@@ -26,12 +45,16 @@
     pdfstartview=FitH%
 }
 \usepackage[english, capitalize]{cleveref}
+
+%Use relative imports
 \usepackage{import}
+
+%Fancy table layout help
 \usepackage{booktabs}
+
+%Set some crefs
 \crefname{appchap}{appendix}{appendices}
 \Crefname{appchap}{Appendix}{Appendices}
-\newcommand{\myref}[1]{\vref{#1}}
-\newcommand{\Myref}[1]{\Vref{#1}}
 
 %Titles and captions
 \usepackage{titlesec, blindtext, color}
@@ -54,13 +77,27 @@
 {\normalfont\normalsize\sffamily}
 {\color{numbers}\thesubsubsection}{1em}{}
 
+%Set some margins
 \usepackage[
     left=28mm,% left margin on an odd page
     right=41mm,% right margin on an odd page
+%    showframe,
 ]{geometry}
 
+\usepackage[
+    style=numeric,
+    maxnames=1,
+    backend=biber,
+    defernumbers=true,
+    hyperref=true,
+    alldates=long,
+]{biblatex}
+\bibliography{bibtex.bib}
+
+%Customize captions
 \usepackage{caption}
-\usepackage{subcaption}
+\usepackage{subcaption} %Used together with caption
+
 \captionsetup{%
     font=footnotesize,% set font size to footnotesize
     labelfont=bf % bold label (e.g., Figure 3.2) font
@@ -70,18 +107,16 @@
     labelfont=bf % bold label (e.g., Figure 3.2) font
 }
 
-%Line numbers
-\usepackage[modulo]{lineno}
-
+%Apparently all "serious math typesetters" need this for math
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
 
 %Tikz related
 \usepackage{tikz}
-\usepackage{tkz-graph}
 \usepackage{tikz-qtree}
 \usepackage{tikzscale}
+%TODO: Could we clean this up?
 \usetikzlibrary{%
     shapes,
     shapes.symbols,
@@ -98,19 +133,16 @@
     shadows,
     decorations.pathreplacing
 }
+%Pgf plots is nice for making fancy plots
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.12}
+
+%Two uml packages. I love it
 \usepackage{packages/tikz-uml}
 \usepackage{pgf-umlsd}
-%Easy Diagrams
-%\usepackage{smartdiagram}
-%\smartdiagramset{%
-%    set color list={smartdiagram2,smartdiagram1,smartdiagram3,smartdiagram4,smartdiagram5,smartdiagram6},
-%    sequence item border color=none,
-%    sequence item font size=\small\sffamily,
-%}
 
 %Curfile stuff
+%We need this to figure out the path if a command doesn't support import
 \usepackage{currfile}
 \makeatletter
 \def\relativepath{\import@path}
@@ -126,6 +158,10 @@
 \fancyhead[LE,RO]{\thepage} %page number on all pages
 \raggedbottom
 \usepackage[para]{footmisc}
+
+\makeatletter
+    \renewcommand\@makefntext[1]{\sloppy\@makefnmark#1}
+\makeatother
 
 %Colors
 \usepackage{xcolor}
@@ -204,6 +240,7 @@
     postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}
 }
 
+%Minted makes nice looking code listings, but requires listings
 \usepackage{minted}
 \newminted[java2]{java}{frame=leftline, framesep=2mm, linenos, fontsize=\footnotesize, baselinestretch=1.1, autogobble}
 \newminted[xmlblock]{xml}{frame=leftline, framesep=2mm, linenos, fontsize=\footnotesize, baselinestretch=1.1, autogobble}
@@ -214,6 +251,7 @@
 
 %Acronyms and Fixmes
 \usepackage{acronym}
+%Fixme for configurable notes
 \usepackage{fixme}
 \fxsetup{%
 	layout={footnote, index},
@@ -227,14 +265,17 @@
 \FXRegisterAuthor{m}{bigdick}{Marc}
 \FXRegisterAuthor{msm}{msme}{Michno}
 \FXRegisterAuthor{t}{te}{Troels}
+%Eat some spaces
+\usepackage{xspace}
 
 %External files
-\usepackage{xspace}
 \input{preamble/fixme.tex}
 \input{preamble/commands.tex}
 
+%Outlines, apparently nice for nestes lists
 \usepackage{outlines}
 
+%Frames for the problemstatements env
 \usepackage{mdframed}
 \mdfsetup{%
     topline=false,
@@ -249,11 +290,10 @@
 %Cells spanning multiple rows
 \usepackage{multirow}
 
+%I guess it allows for breaking tables
 \usepackage{longtable}
 
 \usepackage{tabularx}
 
 %Used for problem statement env
 \usepackage{changepage}
-
-\sloppy
