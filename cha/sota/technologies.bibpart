@@ -1,68 +1,77 @@
 @MISC{spotify1,
-  title = {{spotify1}},
+  title = {{Understanding How Spotify Works}},
+  author = {{Martin Irvine}},
   year = {2013},
   url = {https://blogs.commons.georgetown.edu/cctp-797-fall2013/archives/557},
   lastchecked = {12-02-2017},
 }
 
 @MISC{spotifySlides,
-  title = {{spotifySlides}},
+  title = {{Spotify — Behind the Scenes}},
+  authur = {{Gunnar Kreitz}},
   year = {2011},
   url = {https://www.csc.kth.se/~gkreitz/spotify/kreitz-spotify_kth11.pdf},
   lastchecked = {12-02-2017},
 }
 
 @MISC{netflix,
-  title = {{netflix}},
+  title = {{Unreeling Netflix: Understanding and Improving Multi-CDN Movie Delivery}},
   year = {2011},
   url = {https://www-users.cs.umn.edu/~viadhi/netflix.pdf},
   lastchecked = {12-02-2017},
 }
 
 @MISC{twitch,
-  title = {{twitch}},
+  title = {{On Crowdsourced Interactive Live Streaming: A Twitch.TV-Based Measurement Study}},
+  author = {Cong Zhang and Jiangchuan Liu},
   year = {2015},
   url = {https://arxiv.org/pdf/1502.04666.pdf},
   lastchecked = {12-02-2017},
 }
 
-@MISC{youtube,
-  title = {{youtube}},
+@MISC{rtsp_youtube,
+  title = {{RTSP}},
+  author = {Wikipedia},
   year = {2016},
   url = {https://en.wikipedia.org/wiki/Real_Time_Streaming_Protocol},
   lastchecked = {12-02-2017},
 }
 
 @MISC{sonos1,
-  title = {{sonos1}},
+  title = {{Sonos burns its Bridges: Our home-grown Wi-Fi mesh will do}},
+  author = {Chris Mellor},
   year = {2014},
   url = {https://www.theregister.co.uk/2014/09/02/sonos_ditches_music_streaming_bridges/},
   lastchecked = {12-02-2017},
 }
 
 @MISC{sonosWiki,
-  title = {{sonosWiki}},
+  title = {{Sonos}},
+  author = {Wikipedia},  
   year = {2016},
   url = {https://en.wikipedia.org/wiki/Sonos},
   lastchecked = {12-02-2017},
 }
 
 @MISC{sonos2,
-  title = {{sonos2}},
+  title = {{What is Sonos and how does it work?}},
+  author = {Mike Tanasychuk},
   year = {2016},
   url = {http://www.imore.com/how-does-sonos-work},
   lastchecked = {12-02-2017},
 }
 
 @MISC{pulseAudioHobbyist,
-  title = {{pulseAudioHobbyist}},
+  title = {{Multi-room audio with multicast RTP}},
+  author = {Dan Planet},
   year = {2014},
   url = {http://www.danplanet.com/blog/2014/11/26/multi-room-audio-with-multicast-rtp/},
   lastchecked = {12-02-2017},
 }
 
 @MISC{pulseAudioModules,
-  title = {{pulseAudioModules}},
+  title = {{RTP/SDP/SAP Transport}},
+  Author = {PulseAudio},
   year = {2016},
   url = {https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Modules/#index38h3},
   lastchecked = {12-02-2017},
