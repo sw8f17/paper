@@ -23,7 +23,7 @@
 
 @MISC{twitch,
   title = {{On Crowdsourced Interactive Live Streaming: A Twitch.TV-Based Measurement Study}},
-  author = {Cong Zhang{,} Jiangchuan Liu},
+  author = {Cong Zhang and Jiangchuan Liu},
   year = {2015},
   url = {https://arxiv.org/pdf/1502.04666.pdf},
   lastchecked = {12-02-2017},
