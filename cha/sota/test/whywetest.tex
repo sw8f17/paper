@@ -11,7 +11,7 @@ We have identified the following three categories to test:
 
 These three categories are related but slightly different.
 Firstly offset, refers to whether or not there is an offset between different devices, e.g. is the playback of one device behind that of another.
-Secondly consistency refers to whether or not a potential offset is consistent as the playback is manipulated, i.e. if a device is $50 ms$ behind another, if that device stays $50 ms$ behind through pauses and song changes, then the consistency criteria is upheld.
+Secondly consistency refers to whether or not a potential offset is consistent as the playback is manipulated (by something diffirent than time), i.e. is the offset consistent when the song is changed, or the playback is paused and then resumed.
 Thirdly drift refers to whether the offset changes during playback over time.
 Each of these are required for an app to fulfill the initial problem statement presented in \vref{sec:initial_problem}.
 Moreover if the apps fail, to a certain degree, in any of the categories, then they are not fully suited as a solution for the problem at hand.
@@ -37,3 +37,5 @@ Concretely we want to answer the following questions in each category:
         \item Is the synchronization stable over time?
     \end{enumberate}
 \end{eletterate}
+
+These question are, to some degree, independent and an application can fulfill some or all of them. 
