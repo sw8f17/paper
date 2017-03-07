@@ -58,12 +58,18 @@
 
 %Titles and captions
 \usepackage{titlesec, blindtext, color}
-\titleformat{\part}[display]{%
-\fontsize{38pt}{8pt}\filcenter\sffamily\selectfont\thispagestyle{empty}}
-{\textcolor{part}{Part \thepart \vspace{6pt}\linebreak {\rule{120pt}{1pt}} \linebreak}}
-{0pt}
-{}
-\titleformat{\chapter}[hang]{\Huge\sffamily\mdseries\vspace{-40pt}}{\textcolor{numbers}{\thechapter\hsp{|}\hsp}}{0pt}{\Huge\sffamily\mdseries}[\vspace{-20pt}]
+\titleformat{\part}[display]%
+    {\fontsize{38pt}{8pt}\filcenter\sffamily\selectfont\thispagestyle{empty}}
+    {\textcolor{part}{Part \thepart \vspace{6pt}\linebreak {\rule{120pt}{1pt}} \linebreak}}
+    {0pt}
+    {}
+
+\titleformat{\chapter}[hang]%
+    {\Huge\sffamily\mdseries\vspace{-20pt}}
+    {\textcolor{numbers}{\thechapter \hsp{\rule[-5pt]{1.5pt}{29pt}}\hsp}}
+    {0pt}
+    {\Huge\sffamily\mdseries}
+    [\vspace{-20pt}]
 
 \titleformat{\section}
 {\normalfont\Large\sffamily}
