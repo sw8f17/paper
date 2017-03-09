@@ -12,7 +12,7 @@ The stereo microphone port in the test computer is a \ac{TRS} jack
 connector, with a common ground between the two channels. To separate
 the channels into separate mono tracks we used a \ac{TRS} to \ac{RCA}
 splitter, and a custom \ac{RCA} to mono \ac{TS}, to capture the two
-separate right\jjnote{Is it right} channels from the audio sources.
+separate right\jjnote{Is it right} channels from the audio sources. \tnote{Vejleder vil gerne have et billede el. illustation gider vi det?}
 
 % Troels additions below
 Furthermore we limit our tests to a Master/Slave/Slave setup, that is;
@@ -45,7 +45,7 @@ The algorithm to calculate the \ac{FFT} of the audio offset thus becomes
 doing a \ac{FFT} on one of the signals, and multiplying the results with
 a time reversed \ac{FFT} of the other.\tnwarning{Jeg forstår ikke denne sætning.}\mnote{Den har aldrig givet mening} Finally we do an inverse \ac{FFT}
 to get the actual correlation value. The index of the maximum value is
-the sample offset which gives the best correlation. By multiplying the
+the sample offset which gives the best correlation.\mnote{vejleder har bedt om illustration af dette såvel som en forklaring på hvad cross correleation har med offset at gøre} By multiplying the
 number of samples by the time between samples, we calculate the
 millisecond offset between the two audio tracks.
 
