@@ -4,27 +4,60 @@ Technical requirements:
 
 \begin{eletterate}
     \item \textbf{Run on Android 5.0+} \hfill\\
-    The app have to be able to run on Android versions 5 and above.  
-    \item \textbf{At least two devices must be able to connect to the same session.} \hfill\\
-    A session is two or more devices connected in a master/slave relation,
-    where they are able to transmit data between .
-    The type of connection have to be wireless.
-    \item The device which start the session, i.e. the master, must be able to control the playback, e.g. pause, resume and change media, on all devices. 
-    \item Each user must be able to change their own volume.
-    \item Each user can temporarily or permanently mute their own audio.
-    \item Manipulate playback on all devices within the same session.
-    master kan styre de andre
-    \item The app must have the ability to perform an automatic synchronization.
-    \item Following an automatic synchronization, the audio offset between any two devices must not exceed x ms.
-    \item Where x is the maximum desynchronization that will not be noticed by a listener
-    \item The change in offset following a change in media must not exceed y ms. 
-    \item The change in offset after pausing, and resuming playback of any media must not exceed y ms. 
-    \item The drift must not exceed z ms over n seconds. 
+        The app has to be able to run on Android versions 5 and above.
+
+    \item \textbf{At least two devices must be able to connect to the same session wirelessly.} \hfill\\
+        Two or more devices have to be able to connect to each other wirelessly.
+        They connect through a ``session'', which is a master/slave relation, where only one device is the master, the rest are slaves.
+        This session makes it possible to transmit data from the master to the connected slaves.
+        The device which creates the session is automatically the master, slaves can find already created sessions and connect to one.
+
+    \item \textbf{The device which start the session, i.e. the master, must be able to control the playback, e.g. pause, resume and change media, on all devices.} \hfill\\
+        The master is in control of the created session, including the playback of the media.
+        This means that the master device can pause and resume the playing media for the connected slaves.
+        Furthermore the master can also change the media being played, skip media or completely stop the playback of media.
+
+    \item \textbf{Each user must be able to change their own volume.} \hfill\\
+        A user must be able to control and change the volume his device when it is connected to a session.
+        This possibility applies for both the master device and the connected slaves.
+        The change must not have an effect on the other devices connected to the session.
+
+    \begin{itemize}
+        \item \textbf{Each user can temporarily or permanently mute their own audio.} \hfill\\
+            A user must be able to mute the playback when it is connected to a session.
+            This possibility applies for both the master device and the connected slaves.
+            The change must not have an effect on the other devices connected to the session.
+        
+        \item \textbf{Manipulate playback on all devices within the same session.} \hfill\\
+            The master must be able to manipulate the playback on all devices connected to its session.
+            Manipulate means to control the playback offset between the devices.\tnnote{This can maybe be specified further.}
+    
+        \item \textbf{The app must have the ability to perform an automatic synchronization.} \hfill\\
+            When a device is connected to a session, the app must be able to synchronize the playback automatically,
+            so the devices play in sync.
+    
+        \item \textbf{Following an automatic synchronization, the audio offset between any two devices must not exceed $x$ ms.} \hfill\\
+            With the ability to synchronize automatically, the audio offset between any two devices must not exceed $x$ ms.
+            $x$ is the maximum desynchronization that will not be noticed by a listener.
+    
+        \item \textbf{The change in offset following a change in media must not exceed $y$ ms.} \hfill\\
+            When the media is changed, for instance a change in song, the offset change must not exceed $y$ ms.
+            This means that the media change must be consistent to the extend of $y$ ms.
+
+        \item \textbf{The change in offset after pausing, and resuming playback of any media must not exceed $y$ ms.} \hfill\\
+            When the media is paused and resumed by the master, the offset change must not exceed $y$ ms.
+            This means that the pause and subsequently resuming must be consistent to the extend of $y$ ms.
+
+        \item \textbf{The drift must not exceed $z$ ms over $n$ seconds.} \hfill\\
+            When the media have been playing for $n$ seconds, the drift must not exceed $z$ ms.
+
+    \end{itemize}
 \end{eletterate}
 UI/UX requirements:
-\begin{eletterate}
-    \item Display song information (artist, title, duration/length)
-    \item Have support for playlists (with shuffle, repeat button and queue functionality).
-    \item Support Spotify as an audio source.
-    \item Play mp3 audio files from the master device local storage.
+\begin{eletterate}[resume]
+    \item \textbf{Display song information (artist, title, duration/length)} \hfill\\
+        The song information must be displayed 
+    \item \textbf{Have support for playlists (with shuffle, repeat button and queue functionality).} \hfill\\
+    \item \textbf{Support Spotify as an audio source.} \hfill\\
+    \item \textbf{Play mp3 audio files from the master device local storage.} \hfill\\
 \end{eletterate}
