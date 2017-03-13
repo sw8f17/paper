@@ -52,6 +52,18 @@ millisecond offset between the two audio tracks.
 The scripts used for testing can be seen in \jjwarning{Insert the final
 scripts and a ref here}
 
+To determine the accuracy and reliability of the tests, we do what we
+call an assurance test. In this case, the variable we need to assure
+ourselves of, is inter-stereo delay of the microphone input on the
+measurement computer. If theres a intrinsic delay between the left and
+the right channel of the computer, then the whole test will be
+compromised, or at least in need of adjustment. We use the delay
+measuring script above, along with a standard AUX\jjnote{Not an
+abbreviation} cable, and the test song in mono, to detect the delay
+between the left and right channel. In our equipment the delay is 0ms
+consistently, which means the results wont be tainted by inter-stereo
+delay.
+
 \subsection{Test sample}
 We use the song \textit{Goodness Gracious} by \textit{Ellie Goulding}.  We did not
 want the apps to change song, possibly causing a resync, while testing.
