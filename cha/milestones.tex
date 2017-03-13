@@ -3,7 +3,7 @@
 %What - milestones are small versions of the ideal app, each milstone fulfill a subset of requirements and implement a subset of features, the combined set of milstones encapsulates all requirements and features
 %Why - fits with iterative, allows us to always have a working version, we can extend features iteratively, we can divide requirements into realistic and dreams
 In order to partition the app into smaller manageable parts we create what we call milestones.
-We define a milestone as a buildable subset of the ideal app, each milestone must satisfy a subset of requirements and add or improve features from the former milestones.
+We define a milestone as a functional constituent of the ideal app, each milestone must satisfy a subset of requirements and add or improve features from the former milestones.
 Creating these milestones provide us with more tangible small goals; each milestone acts as a constituent of the application.
 Thus every time a milestone is completed the application is improved, this provides an iterative structure where we can create milestones ranging from simple and feasible milestones to very complex and time consuming milestones and segment the requirements into these categories.
 
@@ -13,9 +13,11 @@ Thus every time a milestone is completed the application is improved, this provi
 \begin{description}
     \item [Basic Audio Player] \hfill \\
         The first milestone is to make a simple audio player able to play local audio files and display the information of the file.
+        A simple audio player includes control feature such as queue, skip, volume control and playlist support.
         With the success of this milestone the following requirements would be fulfilled: \mnote{requirements indeks}.
     \item [Multi--Device Audio Player] \hfill \\
         With a working basic audio player the application can be extended to multiple devices.
+        This includes limiting control from slaves such that they can only add songs to the playlist and adjust the volume of their own device.
         The successful implementation of this milestone would fulfill the following requirements: \mnote{requirements indeks}.
     \item [Basic Synchronization] \hfill \\
         The synchronization is the most central part of the application, we have split this into two separate milestones, the basic synchronization encapsulates reaching the same level of synchronization as the applications in \cnameref{sec:sota_apps} did.
