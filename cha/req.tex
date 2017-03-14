@@ -1,10 +1,12 @@
-
+\section{Requirement Elicitation}
 
 Technical requirements:
 
 \begin{eletterate}
     \item \textbf{Run on Android 5.0+} \hfill\\
-        The app has to be able to run on Android versions 5 and above.
+        The app has to be able to run on Android versions five and above.
+        Android is chosen since it is the available system in our project group, as mentioned in \cref{cha:problem_statement}.
+        Version five is chosen since significant changes happened to the Android sound stack\cite{android_5_sound_stack}.
 
     \item \textbf{At least two devices must be able to connect to the same session wirelessly.} \hfill\\
         Two or more devices have to be able to connect to each other wirelessly.
@@ -22,27 +24,27 @@ Technical requirements:
         This possibility applies for both the master device and the connected slaves.
         The change must not have an effect on the other devices connected to the session.
 
+    \item \textbf{Each user can temporarily or permanently mute their own audio.} \hfill\\
+        A user must be able to mute the playback when it is connected to a session.
+        This possibility applies for both the master device and the connected slaves.
+        The change must not have an effect on the other devices connected to the session.
+    
+    \item \textbf{Manipulate playback on all devices within the same session.} \hfill\\
+        The master must be able to manipulate the playback on all devices connected to its session.
+        Manipulate means to control the playback offset between the devices.\tnnote{This can maybe be specified further.}
+    
+    \item \textbf{The app must have the ability to perform an automatic synchronization.} \hfill\\
+        When a device is connected to a session, the app must be able to synchronize the playback automatically,
+        so the devices play in sync.
+
     \begin{itemize}
-        \item \textbf{Each user can temporarily or permanently mute their own audio.} \hfill\\
-            A user must be able to mute the playback when it is connected to a session.
-            This possibility applies for both the master device and the connected slaves.
-            The change must not have an effect on the other devices connected to the session.
-        
-        \item \textbf{Manipulate playback on all devices within the same session.} \hfill\\
-            The master must be able to manipulate the playback on all devices connected to its session.
-            Manipulate means to control the playback offset between the devices.\tnnote{This can maybe be specified further.}
-    
-        \item \textbf{The app must have the ability to perform an automatic synchronization.} \hfill\\
-            When a device is connected to a session, the app must be able to synchronize the playback automatically,
-            so the devices play in sync.
-    
         \item \textbf{Following an automatic synchronization, the audio offset between any two devices must not exceed $x$ ms.} \hfill\\
             With the ability to synchronize automatically, the audio offset between any two devices must not exceed $x$ ms.
             $x$ is the maximum desynchronization that will not be noticed by a listener.
-    
+
         \item \textbf{The change in offset following a change in media must not exceed $y$ ms.} \hfill\\
             When the media is changed, for instance a change in song, the offset change must not exceed $y$ ms.
-            This means that the media change must be consistent to the extend of $y$ ms.
+            This means that the media change must be consistent to the extent of $y$ ms.
 
         \item \textbf{The change in offset after pausing, and resuming playback of any media must not exceed $y$ ms.} \hfill\\
             When the media is paused and resumed by the master, the offset change must not exceed $y$ ms.
@@ -50,14 +52,23 @@ Technical requirements:
 
         \item \textbf{The drift must not exceed $z$ ms over $n$ seconds.} \hfill\\
             When the media have been playing for $n$ seconds, the drift must not exceed $z$ ms.
-
     \end{itemize}
 \end{eletterate}
 UI/UX requirements:
 \begin{eletterate}[resume]
-    \item \textbf{Display song information (artist, title, duration/length)} \hfill\\
-        The song information must be displayed 
-    \item \textbf{Have support for playlists (with shuffle, repeat button and queue functionality).} \hfill\\
-    \item \textbf{Support Spotify as an audio source.} \hfill\\
+    \item \textbf{Display song information} \hfill\\
+        The song information, i.e. artist, title, duration/length must be displayed,
+        so the user can see what song is playing and how much is left of the song.
+
+    \item \textbf{Have support for playlists.} \hfill\\
+        The app must have playlists, so media can be put in a list without having to manually select a new song after a song is done.
+        With having playlists, the app must be able to shuffle a playlist, 
+        have a repeat button to repeat a specific media and be able to queue media selected by the users.
+
     \item \textbf{Play mp3 audio files from the master device local storage.} \hfill\\
+        The app must be able to play audio files of the format mp3 from the local storage on the device.
+
+    \item \textbf{Support Spotify as an audio source.} \hfill\\
+        The app must be able to use audio from Spotify as source,
+        which means that a master device must be able to stream Spotify audio to the connected slaves.
 \end{eletterate}
