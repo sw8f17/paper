@@ -1,41 +1,50 @@
 \section{Requirement Elicitation}
+To do requirement elicitation, we focus on the problem statement, in \cref{cha:problem_statement}.
+From this problem statement we can elicitate requirements, which have to be fulfilled to fulfil the problem statement.
 
-Technical requirements:
+The elicitated requirements will be divided into two categories: functional requirements and UI/UX requirements.
+
+We start with describing the technical requirements which can be elicitated from the problem statement.
 
 \begin{eletterate}
     \item \textbf{Run on Android 5.0+} \hfill\\
-        The app has to be able to run on Android versions five and above.
-        Android is chosen since it is the available system in our project group, as mentioned in \cref{cha:problem_statement}.
-        Version five is chosen since significant changes happened to the Android sound stack\cite{android_5_sound_stack}.
+        As mentioned in the problem statement in \cref{cha:problem_statement}, Android is chosen since it is the available system in our project group.
+        This means that the app have to run on Android five and later versions.
+        Version five is chosen since significant changes happened to the Android sound stack in version five\cite{android_5_sound_stack}.
 
-    \item \textbf{At least two devices must be able to connect to the same session wirelessly.} \hfill\\
-        Two or more devices have to be able to connect to each other wirelessly.
+    \item \textbf{At least two devices\tnnote{device (written in reqiurements) vs smartphone (written in problem statement)} must be able to connect to the same session wirelessly.}\tnnote{Session is not mentioned in the problem statement.} \hfill\\
+        To be able to achieve multiple playback across multiple devices, as mentioned in \cref{cha:problem_statement},
+        then two or more devices have to be able to connect to each other wirelessly.
         They connect through a ``session'', which is a master/slave relation, where only one device is the master, the rest are slaves.
         This session makes it possible to transmit data from the master to the connected slaves.
         The device which creates the session is automatically the master, slaves can find already created sessions and connect to one.
 
     \item \textbf{The device which start the session, i.e. the master, must be able to control the playback, e.g. pause, resume and change media, on all devices.} \hfill\\
+        \tnnote{There's no mention of this requirement in the problem statement.}
         The master is in control of the created session, including the playback of the media.
         This means that the master device can pause and resume the playing media for the connected slaves.
         Furthermore the master can also change the media being played, skip media or completely stop the playback of media.
 
     \item \textbf{Each user must be able to change their own volume.} \hfill\\
+        \tnnote{There's no mention of this requirement in the problem statement.}
         A user must be able to control and change the volume his device when it is connected to a session.
         This possibility applies for both the master device and the connected slaves.
         The change must not have an effect on the other devices connected to the session.
 
     \item \textbf{Each user can temporarily or permanently mute their own audio.} \hfill\\
+        \tnnote{There's no mention of this requirement in the problem statement.}
         A user must be able to mute the playback when it is connected to a session.
         This possibility applies for both the master device and the connected slaves.
         The change must not have an effect on the other devices connected to the session.
     
     \item \textbf{Manipulate playback on all devices within the same session.} \hfill\\
-        The master must be able to manipulate the playback on all devices connected to its session.
-        Manipulate means to control the playback offset between the devices.\tnnote{This can maybe be specified further.}
+        As stated in the problem statement in \cref{cha:problem_statement}, the app must be able to manipulate the playback of the audio. 
+        To specify, the master must be able to manipulate the playback on all devices connected to its session.
     
     \item \textbf{The app must have the ability to perform an automatic synchronization.} \hfill\\
+        \tnnote{There's no mention of this requirement in the problem statement.}
         When a device is connected to a session, the app must be able to synchronize the playback automatically,
-        so the devices play in sync.
+        so the device play in sync with the rest of the connected devices in the session.
 
     \begin{itemize}
         \item \textbf{Following an automatic synchronization, the audio offset between any two devices must not exceed $x$ ms.} \hfill\\
