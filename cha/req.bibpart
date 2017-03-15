@@ -4,3 +4,20 @@
   url = {https://developer.android.com/about/versions/android-5.0-changes.html},
   lastchecked = {14-03-2017},
 }
+
+@MISC{android_mp3_support,
+  author = {{Android Open Source Project}},
+  title = {{Supported Media Formats}},
+  url = {https://developer.android.com/guide/topics/media/media-formats.html},
+  lastchecked = {15-03-2017},
+}
+
+@MISC{mp3_compression,
+  author = {Ian Corbett},
+  title = {{What Data Compression Does To Your Music}},
+  month = {4},
+  year = {2012},
+  url = {http://www.soundonsound.com/techniques/what-data-compression-does-your-music},
+  lastchecked = {15-03-2017},
+}
+

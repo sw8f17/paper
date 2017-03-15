@@ -1,10 +1,9 @@
 \section{Requirement Elicitation}
-To do requirement elicitation, we focus on the problem statement, in \cref{cha:problem_statement}.
-From this problem statement we can elicitate requirements, which have to be fulfilled to fulfil the problem statement.
+To do requirement elicitation, we focus on the requirements posed in \cref{part:introduction}.
+These requirements will be elicitated and explained, to get an overview of the requirements for the app.
 
 The elicitated requirements will be divided into two categories: functional requirements and UI/UX requirements.
-
-We start with describing the technical requirements which can be elicitated from the problem statement.
+We start with describing the technical requirements which can be elicitated from \cref{part:introduction}.
 
 \begin{eletterate}
     \item \textbf{Run on Android 5.0+} \hfill\\
@@ -12,7 +11,7 @@ We start with describing the technical requirements which can be elicitated from
         This means that the app have to run on Android five and later versions.
         Version five is chosen since significant changes happened to the Android sound stack in version five\cite{android_5_sound_stack}.
 
-    \item \textbf{At least two devices\tnnote{device (written in reqiurements) vs smartphone (written in problem statement)} must be able to connect to the same session wirelessly.}\tnnote{Session is not mentioned in the problem statement.} \hfill\\
+    \item \textbf{At least two devices\tnnote{device (written in reqiurements) vs smartphone (written in problem statement)} must be able to connect to the same session wirelessly.}\tnnote{Session is first mentioned here.} \hfill\\
         To be able to achieve multiple playback across multiple devices, as mentioned in \cref{cha:problem_statement},
         then two or more devices have to be able to connect to each other wirelessly.
         They connect through a ``session'', which is a master/slave relation, where only one device is the master, the rest are slaves.
@@ -20,30 +19,30 @@ We start with describing the technical requirements which can be elicitated from
         The device which creates the session is automatically the master, slaves can find already created sessions and connect to one.
 
     \item \textbf{The device which start the session, i.e. the master, must be able to control the playback, e.g. pause, resume and change media, on all devices.} \hfill\\
-        \tnnote{There's no mention of this requirement in the problem statement.}
+        This requirement relates to the use cases described in \cref{sec:category_increase_volume_and_area}\tnnote{This needs to be added explicit in use case.}.
         The master is in control of the created session, including the playback of the media.
         This means that the master device can pause and resume the playing media for the connected slaves.
         Furthermore the master can also change the media being played, skip media or completely stop the playback of media.
 
     \item \textbf{Each user must be able to change their own volume.} \hfill\\
-        \tnnote{There's no mention of this requirement in the problem statement.}
-        A user must be able to control and change the volume his device when it is connected to a session.
+        If the user do not want to listen to the music as loud as the rest connected to the session, as mentioned in \cref{sec:category_increase_volume_and_area}, 
+        then a user must be able to control and change the volume his device when it is connected to a session.
         This possibility applies for both the master device and the connected slaves.
         The change must not have an effect on the other devices connected to the session.
 
     \item \textbf{Each user can temporarily or permanently mute their own audio.} \hfill\\
-        \tnnote{There's no mention of this requirement in the problem statement.}
-        A user must be able to mute the playback when it is connected to a session.
+        A user must be able to mute the playback when it is connected to a session, which relates to the use cases found in \cref{sec:category_increase_volume_and_area}.
         This possibility applies for both the master device and the connected slaves.
         The change must not have an effect on the other devices connected to the session.
     
     \item \textbf{Manipulate playback on all devices within the same session.} \hfill\\
-        As stated in the problem statement in \cref{cha:problem_statement}, the app must be able to manipulate the playback of the audio. 
+        As mentioned in the problem statement in \cref{cha:problem_statement}, the app must be able to manipulate the playback of the audio. 
         To specify, the master must be able to manipulate the playback on all devices connected to its session.
     
     \item \textbf{The app must have the ability to perform an automatic synchronization.} \hfill\\
-        \tnnote{There's no mention of this requirement in the problem statement.}
-        When a device is connected to a session, the app must be able to synchronize the playback automatically,
+        To be able to make a system as mentioned in \cref{sec:category_increase_volume_and_area}\tnnote{Automatic sync should be mentioned in use case}, 
+        the app must be able to automatically synchronize between the devices in the session. 
+        This means that when a device is connected to a session, the app must be able to synchronize the playback automatically,
         so the device play in sync with the rest of the connected devices in the session.
 
     \begin{itemize}
@@ -63,21 +62,28 @@ We start with describing the technical requirements which can be elicitated from
             When the media have been playing for $n$ seconds, the drift must not exceed $z$ ms.
     \end{itemize}
 \end{eletterate}
-UI/UX requirements:
+
+The following requirements are the eliciteted UI/UX requirements:
 \begin{eletterate}[resume]
     \item \textbf{Display song information} \hfill\\
-        The song information, i.e. artist, title, duration/length must be displayed,
-        so the user can see what song is playing and how much is left of the song.
+        When users use the app in according to the use cases mentioned in \cref{sec:category_increase_volume_and_area},
+        then the song information, i.e. artist, title, duration/length must be displayed.
+        Then the user can see what song is playing and how much is left of the song.
 
-    \item \textbf{Have support for playlists.} \hfill\\
-        The app must have playlists, so media can be put in a list without having to manually select a new song after a song is done.
+    \item \textbf{Have support for playlists.} \hfill\\ 
+        The app must have playlists, so media can be put in a list without having to manually select a new song after a song is done,
+        which is in relation to the use cases mentioned in \cref{sec:category_increase_volume_and_area}.
         With having playlists, the app must be able to shuffle a playlist, 
         have a repeat button to repeat a specific media and be able to queue media selected by the users.
 
     \item \textbf{Play mp3 audio files from the master device local storage.} \hfill\\
         The app must be able to play audio files of the format mp3 from the local storage on the device.
+        mp3 is chosen since Android supports the file format and because mp3 is a compressed file format,
+        resulting in a smaller file size\cite{android_mp3_support}\cite{mp3_compression}.
 
     \item \textbf{Support Spotify as an audio source.} \hfill\\
         The app must be able to use audio from Spotify as source,
         which means that a master device must be able to stream Spotify audio to the connected slaves.
+        This requirement is related to the use cases mentioned in \cref{sec:category_increase_volume_and_area},
+        where users having a social gathering must have access to music which is not local on the device.
 \end{eletterate}
