@@ -13,12 +13,12 @@ Thus every time a milestone is completed the application is improved, this provi
 \begin{description}
     \item [Basic Audio Player] \hfill \\
         The first milestone is to make a simple audio player able to play local audio files and display the information of the file.
-        A simple audio player includes control feature such as queue, skip, volume control and playlist support.
-        With the success of this milestone the following requirements would be fulfilled: \textit{a, h, i, j}.
+        A simple audio player includes only the most basic control features such as skip, play, pause, and volume control.
+        With the success of this milestone the following requirements would be fulfilled: \textit{a, d, h, j}.
     \item [Multi--Device Audio Player] \hfill \\
         With a working basic audio player the application can be extended to multiple devices.
-        This includes limiting control from slaves such that they can only add songs to the playlist and adjust the volume of their own device.
-        The successful implementation of this milestone would fulfill the following requirements: \textit{b, c, d, e}.
+        This includes limiting control from slaves such that they can not skip or change songs.
+        The successful implementation of this milestone would fulfill the following requirements: \textit{b, c, e}.
     \item [Basic Synchronization] \hfill \\
         The synchronization is the most central part of the application, we have split this into two separate milestones, the basic synchronization encapsulates reaching the same level of synchronization as the applications in \cnameref{sec:sota_apps} did.
         Reaching this milestone would fulfill the following requirements: \textit{g}.
@@ -33,6 +33,10 @@ Thus every time a milestone is completed the application is improved, this provi
         Our large milestone is to reach a level of synchronization and audio playback manipulation where we can be precise enough to induce psychoacoustic effects upon users.
         Psychoacoustic effects covers a wide range of features from the precedence effect, which essentially amplifies volume, to 3D sound manipulation.
         While achieving multiple psychoacoustic effects would create a marketable application, the theory and time to do so, particularly for 3D sound manipulation is not feasible, as such we our goal for this milestone, and ultimately our ideal application goal, would be to successfully utilize the precedence effect.
+    \item [Advanced Audio Player] \hfill \\
+        This milestone we consider less relevant as our primary focus is on synchronizing devices and manipulating playback, not on the utilities offered as an audio player.
+        This milestone concerns adding features you would expect from an audio player such as playlists, queues and support for external sound sources such as Spotify integration.
+        The implementation of these features would fulfill the following requirements: \textit{i, k}.
 \end{description}
 
 
