@@ -1,13 +1,28 @@
-\section{Android sound stack}
+\section{Android Sound Stack}
+In this section we describe the Android sound stack.
+First we will go through the stack and briefly describe the different parts. 
+Then we focus on the parts of the stack which is relevant for us.
 %Noget indledende tekst forklarende hvorfor vi ser på Android sound stacken
 %Noget overblik over sektionen
 
+\subsection{The Sound Stack}
+The Android sound stack is all the different components which makes up the sound system on Android devices.
+On \cref{} the full sound stack can be seen.
+
+On the top of the stack is the Application Framework.
+The frameworks an app, coded in Java, use when dealing with sound is a part of the Application Framework,
+for instance the \code{android.media.*} frameworks.
+
+Below the Application Framework is the \ac{JNI}.
+
+
+
+%Et billede af soundstacken, lille tekst til hver trin i stacken.
+
+
 \subsection{Application Framework}
-\subsection{JNI}
 \subsection{Native Framework}
-\subsection{Binder IPC Proxies}
 \subsection{Media Server}
-\subsection{Hardware Abstraction Layer}
 \subsection{Linux Kernel}
 \subsection{Summary}
 %Hvad fandt vi ud af.
