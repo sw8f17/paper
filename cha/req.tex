@@ -18,14 +18,15 @@ The technical requirements are concerned with features relevant for how the devi
 
         Under normal circumstances each individual device in a session should have control of their own volume and whether they are playing or not, however if the volume affects the desired psychoacoustic effect then the session host may assume control of volume on any device in the session.
     
-    \item\label{req:manipulate} \textbf{Manipulate playback on all devices in a session.} \hfill\\
-        As mentioned in the problem statement in \cref{cha:problem_statement}, the app must be able to manipulate the playback of the audio. 
-        To specify, the session host must be able to manipulate the playback on all devices connected to its session.
+    \item\label{req:manipulate} \textbf{It should be possible to manipulate the playback on each device separately.} \hfill\\
+        As mentioned in the problem statement in \cref{cha:problem_statement}, the application must be able to manipulate the playback of the audio.
+        The manipulation refers to applying an offset to the playback on the respective devices such that the playback, can be adjusted to deal with device placement and to help achieving psychoacoustic effects.
+        Furthermore the manipulation may help acquire audible sync.
     
-    \item\label{req:sync} \textbf{The app must have the ability to perform an automatic synchronization.} \hfill\\
+    \item\label{req:sync} \textbf{The application must have the ability to perform an automatic synchronization.} \hfill\\
         To be able to use our system for the use cases we identified in \vref{sec:category_increase_volume_and_area}\tnnote{Automatic sync should be mentioned in use case}, 
-        the app must be able to automatically synchronize the devices in the session. 
-        This means that when a device is connected to a session, the app must be able to synchronize the playback automatically,
+        the application must be able to automatically synchronize the devices in the session. 
+        This means that when a device is connected to a session, the application must be able to synchronize the playback automatically,
         so the device plays in sync with the rest of the connected devices in the session.
 
     \begin{itemize}
@@ -55,21 +56,21 @@ The \ac{UX} requirements are concerned with features that should be available in
         The change media feature should be reserved for the session host, this limiting of control helps to let songs play out for the use cases mentioned in \cref{sec:category_increase_volume_and_area}.
 
     \item\label{req:info} \textbf{Display song information} \hfill\\
-        When users use the app in according to the use cases mentioned in \cref{sec:category_increase_volume_and_area},
+        When users use the application in according to the use cases mentioned in \cref{sec:category_increase_volume_and_area},
         then the song information, i.e. artist, title, duration/length must be displayed.
 
     \item\label{req:queue} \textbf{Support a play queue.} \hfill\\ 
         This requirement relates to the use cases mentioned in \cref{sec:category_increase_volume_and_area}.
-        The app should support a queue feature such that a play queue can be developed by the devices in the session.
+        The application should support a queue feature such that a play queue can be developed by the devices in the session.
         Any device in the session should be able to add audio the the queue.
 
     \item\label{req:mp3} \textbf{Play mp3 audio files from the session host's local storage.} \hfill\\
-        The app must be able to play audio files of the format mp3 from the local storage on the device.
+        The application must be able to play audio files of the format mp3 from the local storage on the device.
         mp3 is chosen since it is in widespread use, Android supports the file format and because mp3 is a compressed file format,
         resulting in a smaller file size\cite{android_mp3_support}\cite{mp3_compression}.
 
     \item\label{req:spotify} \textbf{Support Spotify as an audio source.} \hfill\\
-        The app must be able to use audio from Spotify as source,
+        The application must be able to use audio from Spotify as source,
         which means that a session host device must be able to stream Spotify audio to the connected slaves.
         This requirement is related to the use cases mentioned in \cref{sec:category_increase_volume_and_area},
         where users having a social gathering must have access to music which is not local on the device.
