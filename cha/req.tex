@@ -1,6 +1,7 @@
 \chapter{Requirement Elicitation}\label{cha:requirement_elicitation}
-To elicit requirements for the design and development process of a solution, we focus on the loose requirements posed in \cnameref{part:introduction}.
-Each requirement will be described and elaborated upon, and assigned to one of three categories which are \textbf{technical requirements}, \textbf{\ac{UX} requirements}, and \textbf{non-requirements}.
+To elicit requirements for the design and development process of a solution, we gather on the loose requirements posed in \cnameref{part:introduction}.
+For each requirement, we first state the requirement and then we elaborate, thus giving it context and where it came from.
+We have grouped the requirements in three categories: \textbf{technical requirements}, \textbf{\ac{UX} requirements}, and \textbf{non--requirements}.
 
 \paragraph{Technical Requirements} \hfill\\
 The technical requirements are concerned with features relevant for how the devices can interact with one another, they are as follows:
@@ -22,8 +23,8 @@ The technical requirements are concerned with features relevant for how the devi
         To specify, the session host must be able to manipulate the playback on all devices connected to its session.
     
     \item\label{req:sync} \textbf{The app must have the ability to perform an automatic synchronization.} \hfill\\
-        To be able to make a system as mentioned in \cref{sec:category_increase_volume_and_area}\tnnote{Automatic sync should be mentioned in use case}, 
-        the app must be able to automatically synchronize between the devices in the session. 
+        To be able to use our system for the use cases we identified in \vref{sec:category_increase_volume_and_area}\tnnote{Automatic sync should be mentioned in use case}, 
+        the app must be able to automatically synchronize the devices in the session. 
         This means that when a device is connected to a session, the app must be able to synchronize the playback automatically,
         so the device plays in sync with the rest of the connected devices in the session.
 
@@ -49,8 +50,8 @@ The technical requirements are concerned with features relevant for how the devi
 The \ac{UX} requirements are concerned with features that should be available in the application from the users point of view in order for the application to be usable.
 
 \begin{eletterate}[resume]
-    \item\label{req:basic} \textbf{A session should have support for basic audio player functions, e.g.~pause, resume and change media} \hfill\\
-        In order for the application to be useful, simple audio player features are required such that users can pause, play and change media.
+    \item\label{req:basic} \textbf{A session should have support for basic audio player functions, e.g.~pause, resume, seek and change media} \hfill\\
+        In order for the application to be useful, simple audio player features are required such that users can pause, play, seek and change media.
         The change media feature should be reserved for the session host, this limiting of control helps to let songs play out for the use cases mentioned in \cref{sec:category_increase_volume_and_area}.
 
     \item\label{req:info} \textbf{Display song information} \hfill\\
@@ -60,11 +61,11 @@ The \ac{UX} requirements are concerned with features that should be available in
     \item\label{req:queue} \textbf{Support a play queue.} \hfill\\ 
         This requirement relates to the use cases mentioned in \cref{sec:category_increase_volume_and_area}.
         The app should support a queue feature such that a play queue can be developed by the devices in the session.
-        Any device in the session should be able to queue audio.
+        Any device in the session should be able to add audio the the queue.
 
     \item\label{req:mp3} \textbf{Play mp3 audio files from the session host's local storage.} \hfill\\
         The app must be able to play audio files of the format mp3 from the local storage on the device.
-        mp3 is chosen since Android supports the file format and because mp3 is a compressed file format,
+        mp3 is chosen since it is in widespread use, Android supports the file format and because mp3 is a compressed file format,
         resulting in a smaller file size\cite{android_mp3_support}\cite{mp3_compression}.
 
     \item\label{req:spotify} \textbf{Support Spotify as an audio source.} \hfill\\
@@ -74,10 +75,9 @@ The \ac{UX} requirements are concerned with features that should be available in
         where users having a social gathering must have access to music which is not local on the device.
 \end{eletterate}
 
-\paragraph{Non-Requirements} \hfill\\
-The non-requirements are areas of the application where we do not wish to invest our time, our focus is on synchronization and psychoacoustics, as such the following areas have been down--prioritised:
-\mnote{evt. lave disse om til tal/romertal for at fremhaeve forskellen.}
-\begin{eletterate}[resume]
+\paragraph{Non--Requirements} \hfill\\
+The non-requirements are areas of the application where we do not wish to invest our time, our focus is on synchronization and psychoacoustics, as such the following areas have been down--prioritized:
+\begin{eromanrate}
     \item \textbf{Security} \hfill\\
     Security is one area in which we will not be focusing our efforts.
     Within a session we choose to trust those that we connect with. 
@@ -92,4 +92,4 @@ The non-requirements are areas of the application where we do not wish to invest
     When mentioning scalability we consider both number of devices and type of devices.
     We only work with Android devices and will not concern ourselves on how to include iPhone or Windows Phone devices.
     As for number of devices, we will be working with four phones, expanding beyond this and testing when the system breaks is not something we prioritize.
-\end{eletterate}
+\end{eromanrate}
