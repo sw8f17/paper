@@ -14,7 +14,19 @@ The frameworks an app, coded in Java, use when dealing with sound is a part of t
 for instance the \code{android.media.*} frameworks.
 
 Below the Application Framework is the \ac{JNI}.
+The \ac{JNI} makes it possible for Java code to call and be called by the native applications\cite{jni}.
 
+Below the \ac{JNI} is the Native Framework.
+The Native Framework is used for implementing apps which runs natively on the system,
+for instance an app written in C++. 
+
+Below the Native Framework is the Binder IPC Proxies.
+The purpose of the Binder IPC Proxies is to facilitate communication over process boundaries.
+
+Below the Binder ICP Proxies is the Media Server.
+The Media Server contains the audio services, which is the code that interacts with the \ac{HAL} layer,
+right below the Media Server, in the sound stack.
+The sound server implementation on Android is called AudioFlinger, and runs within the Media Server process\cite{audioflinger}.
 
 
 %Et billede af soundstacken, lille tekst til hver trin i stacken.
