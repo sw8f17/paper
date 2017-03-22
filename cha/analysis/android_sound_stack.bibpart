@@ -1,0 +1,15 @@
+@MISC{jni,
+  author = {Chua Hock-Chuan},
+  title = {{Java Programming Tutorial Java Native Interface (JNI)}},
+  month = {2},
+  year = {2014},
+  url = {https://www3.ntu.edu.sg/home/ehchua/programming/java/JavaNativeInterface.html},
+  lastchecked = {22-03-2017},
+}
+
+@MISC{audioflinger,
+  author = {{Android Open Source Project}},
+  title = {{Audio Terminology}},
+  url = {https://source.android.com/devices/audio/terminology.html},
+  lastchecked = {22-03-2017},
+}
