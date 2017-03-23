@@ -1,9 +1,7 @@
 \section{Android Sound Stack}
 In this section we describe the Android sound stack.
-First we will go through the stack and briefly describe the different parts.
-Then we focus on the parts of the stack which is relevant for us.
-%Noget indledende tekst forklarende hvorfor vi ser på Android sound stacken
-%Noget overblik over sektionen
+We will go through the stack and briefly describe the different parts.
+During the description we will point out the parts of the stack which can be relevant in the design of an 
 
 \subsection{The Sound Stack}
 The Android sound stack is all the different components which makes up the sound system on Android devices.
@@ -34,13 +32,13 @@ Below the Native Framework is the Binder IPC Proxies.
 The purpose of the Binder IPC Proxies is to facilitate communication over process boundaries.
 
 \paragraph{Media Server}
-Below the Binder ICP Proxies, but on \cref{fig:sound_stack} right of the native framework, is the media server.
+Below the Binder ICP Proxies stack wise, but on \cref{fig:sound_stack} at the right of the native framework, is the media server.
 The Media Server contains the audio services, which is the code that interacts with the \ac{HAL} layer,
 right below the Media Server, in the sound stack.
 The sound server implementation on Android is called AudioFlinger, and runs within the media server process\cite{audioflinger}.
 
 It is possible to change the media server, 
-for instance examples are given where changing from AudioFlinger saved $8 ms$ on the round--trip latency on a HTC Nexus 9\cite{superpowered_8ms}.
+for instance an example are given where changing from AudioFlinger to a media server called  saved $8 ms$ on the round--trip latency on a HTC Nexus 9\cite{superpowered_8ms}.
 The round--trip latency is the time it takes sound to be recorded by the microphone,
 travel through the audio stack to the user application and then back through the stack to the speakers\cite{superpowered_8ms}.
 Since audio latency can be saved by making changes to the media server,
@@ -53,8 +51,13 @@ The \ac{HAL} is driver--agnostic, which means it can work with any drivers witho
 
 \paragraph{Linux Kernel}
 At the bottom of the stack is the Linux Kernel.
-In the Linux Kernel is the audio driver is residing,
-there exists different audio drivers, e.g. \ac{ALSA}, \ac{OSS} or custom drivers. 
+In the Linux Kernel the audio driver is residing.
+There exists different audio drivers, e.g. \ac{ALSA}, \ac{OSS} or custom drivers.
+
+Since the \ac{HAL} is driver--agnostic, then the audio driver can be changed. 
+There exist several audio drivers for Android, e.g. ``Voodoo Sound'' or ``ViPER4Android音效FX v2版'',
+but it is also possible to make a custom audio driver\cite{voodoo_sound}\cite{viper4_android}.
+Therefore the sound driver in the Linux kernel should be considered as well in the design of an app to solve the problem statement.
 
 \begin{figure}[!bht]
     \centering
@@ -63,14 +66,9 @@ there exists different audio drivers, e.g. \ac{ALSA}, \ac{OSS} or custom drivers
     \label{fig:sound_stack}
 \end{figure}
 
-\subsection{Application Framework}
-\subsection{Native Framework}
-\subsection{Media Server}
-\subsection{Linux Kernel}
 \subsection{Summary}
-%Hvad fandt vi ud af.
+The sound stack on Android have several layers, which sound have to go through.
+Some of these layers are more relevant for this project than others,
+especially the application framework, native framework, media server and Linux kernel. 
 
-%https://source.android.com/devices/audio/index.html Main source, dog skal mange af de enkelte punkter findes mere dybdegående information om andetsteds. 
-%http://androidsexample.blogspot.dk/2015/01/android-audio-architecture.html Kun som inspiration til en TikZ figur
-%https://source.android.com/devices/
 

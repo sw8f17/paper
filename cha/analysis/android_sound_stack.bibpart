@@ -21,15 +21,6 @@
   lastchecked = {23-03-2017},
 }
 
-@MISC{nat_perf,
-  author = {David Bolton},
-  title = {{5 Reasons to Use C++ for Android Development}},
-  month = {2},
-  year = {2016},
-  url = {http://insights.dice.com/2016/02/03/5-reasons-to-use-c-for-android-development/},
-  lastchecked = {23-03-2017},
-}
-
 @MISC{nat_perf_2,
   author = {{Android Open Source Project}},
   title = {{Getting Started with the NDK}},
@@ -45,3 +36,22 @@
   url = {http://superpowered.com/superpowered-android-media-server},
   lastchecked = {23-03-2017},
 }
+
+@MISC{voodoo_sound,
+  author = {``supercurio''},
+  title = {{Voodoo Sound}},
+  month = {5},
+  year = {2013},
+  url = {https://play.google.com/store/apps/details?id=org.projectvoodoo.controlapp},
+  lastchecked = {23-03-2017},
+}
+
+@MISC{viper4_android,
+  author = {{枫影（尹湘中）}},
+  title = {{ViPER4Android音效FX v2版}},
+  month = {3},
+  year = {2015},
+  url = {https://play.google.com/store/apps/details?id=com.vipercn.viper4android_v2_fx},
+  lastchecked = {23-03-2017},
+}
+
