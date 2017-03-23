@@ -13,3 +13,35 @@
   url = {https://source.android.com/devices/audio/terminology.html},
   lastchecked = {22-03-2017},
 }
+
+@MISC{sound_stack,
+  author = {{Android Open Source Project}},
+  title = {Audio},
+  url = {https://source.android.com/devices/audio/index.html},
+  lastchecked = {23-03-2017},
+}
+
+@MISC{nat_perf,
+  author = {David Bolton},
+  title = {{5 Reasons to Use C++ for Android Development}},
+  month = {2},
+  year = {2016},
+  url = {http://insights.dice.com/2016/02/03/5-reasons-to-use-c-for-android-development/},
+  lastchecked = {23-03-2017},
+}
+
+@MISC{nat_perf_2,
+  author = {{Android Open Source Project}},
+  title = {{Getting Started with the NDK}},
+  url = {https://developer.android.com/ndk/guides/index.html},
+  lastchecked = {23-03-2017},
+}
+
+@MISC{superpowered_8ms,
+  author = {Gabor Szanto},
+  title = {{Android's 10 ms Problem? SOLVED.}},
+  month = {7},
+  year = {2016},
+  url = {http://superpowered.com/superpowered-android-media-server},
+  lastchecked = {23-03-2017},
+}
