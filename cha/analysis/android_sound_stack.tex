@@ -3,8 +3,8 @@ In this section we describe the Android sound stack.
 We look into the Android sound stack to identify parts of the sound stack,
 which can have an effect on the sound latency and furthermore identify parts of the sound stack which can be customized to cater our needs.
 
-We will go through the stack and briefly describe the different parts.
-During the description we will point out the parts of the stack which can be relevant in the design of an 
+We  go through the stack and briefly describe the different parts.
+During the description we point out the parts of the stack which can be relevant in the design of an 
 
 The Android sound stack is all the different components which makes up the sound system on Android devices.
 On \cref{fig:sound_stack} the full sound stack can be seen for a standard Android system.
@@ -12,8 +12,8 @@ On \cref{fig:sound_stack} the full sound stack can be seen for a standard Androi
 \paragraph{Application Framework}
 On the top of the stack is the application framework.
 This is the framework an app, coded in Java, use for sound.
-For instance there is the \code{android.media.*} frameworks, which is a part of the application framework.
-When programming to the application framework, the Android \ac{SDK} is used.
+For instance the \code{android.media.*} frameworks, which are a part of the application framework.
+When using the application framework, the Android \ac{SDK} is used.
 
 Using the application framework can potentially be slower, compared to the native framework.
 This is caused by the fact that the application framework is higher up the stack than the native framework and therefore further away from the ``bare metal''.
@@ -26,8 +26,8 @@ Below the Application Framework is the \ac{JNI}.
 The \ac{JNI} makes it possible for Java code to call and be called by the native applications\cite{jni}.
 
 \paragraph{Native Framework}
-The native framework is below the \ac{JNI} and used for implementing apps which runs natively on the system.
-To run natively on the system the app can be written in C++.
+The native framework is below the \ac{JNI} and used for implementing apps which run natively on the system.
+To run natively on the system an app can be written in C++.
 When writing apps for the native framework, the Android \ac{NDK} is used.
 
 Using the native framework can give improved performance compared to the application framework used with Java\cite{nat_perf_2}.
@@ -35,7 +35,7 @@ This can result in lower latency, and could potential be an advantage when deali
 Therefore the native framework should be considered when designing an app to solve the problem statement.
 
 \paragraph{Binder Inter--process Communication Proxies}%Inter process communication
-Below the native framework is the Binder \ac{IPC} Proxies.
+Below the native framework are the Binder \ac{IPC} Proxies.
 The purpose of the Binder \ac{IPC} Proxies is to facilitate communication over process boundaries.
 
 \paragraph{Media Server}
@@ -45,7 +45,7 @@ The \ac{HAL} is right below the media server, in the sound stack.
 The sound server implementation on Android is called AudioFlinger, and runs within the media server process\cite{audioflinger}.
 
 It is possible to change the media server, 
-for instance an example are given where changing from AudioFlinger, to a media server called Superpowered Media Server for Android\footnote{\url{http://superpowered.com/}}, saved $8 ms$ on the round--trip latency on a HTC Nexus 9\cite{superpowered_8ms}.
+for instance an example is given where changing from AudioFlinger, to a media server called Superpowered Media Server for Android\footnote{\url{http://superpowered.com/}}, saved $8 ms$ on the round--trip latency on a HTC Nexus 9\cite{superpowered_8ms}.
 The round--trip latency is the time it takes sound to be recorded by the microphone,
 travel through the audio stack to the user application and then back through the stack to the speakers\cite{superpowered_8ms}.
 Since audio latency can be reduced by making changes to the media server,
@@ -58,12 +58,12 @@ The \ac{HAL} is driver--agnostic, which means it can work with any drivers witho
 
 \paragraph{Linux Kernel}
 At the bottom of the stack is the Linux Kernel, where the audio driver resides.
-There exists different audio drivers, e.g. \ac{ALSA} and \ac{OSS}, which is made for Linux but there also exist custom drivers.
+Different audio drivers exist, e.g. \ac{ALSA} and \ac{OSS}, which are made for Linux but custom drivers are also available.
 
 Since the \ac{HAL} is driver--agnostic, then the audio driver can be changed without having to alter the \ac{HAL}. 
-There exist several audio drivers for Android, e.g. ``Voodoo Sound'' or ``ViPER4Android音效FX v2版'',
+Several audio drivers exist for Android, e.g. ``Voodoo Sound'' or ``ViPER4Android音效FX v2版'',
 but it is also possible to make a custom audio driver\cite{voodoo_sound}\cite{viper4_android}.
-Therefore the sound driver in the Linux kernel should be considered as well in the design of an app to solve the problem statement.\cite{sound_stack}%Denne kilde er sådan set for hele afsnittet, ved ikke lige hvordan jeg skal angive det uden at paste det ved hver paragraph
+Therefore the sound driver in the Linux kernel should be considered as well, in the design of an app to solve the problem statement.\cite{sound_stack}%Denne kilde er sådan set for hele afsnittet, ved ikke lige hvordan jeg skal angive det uden at paste det ved hver paragraph
 
 \begin{figure}[!bht]
     \centering
