@@ -10,7 +10,7 @@ On \cref{fig:sound_stack} the full sound stack can be seen for a standard Androi
 
 \paragraph{Application Framework}
 On the top of the stack is the application framework.
-This is the frameworks an app, coded in Java, use when dealing with sound.
+This is the framework an app, coded in Java, use for sound.
 For instance there is the \code{android.media.*} frameworks, which is a part of the application framework.
 
 The application framework is important to consider if the app is made in Java,
@@ -34,7 +34,7 @@ Below the native framework is the Binder IPC Proxies.
 The purpose of the Binder IPC Proxies is to facilitate communication over process boundaries.
 
 \paragraph{Media Server}
-Below the Binder ICP Proxies stack wise, but on \cref{fig:sound_stack} at the right of the native framework, is the media server.
+Below the Binder IPC Proxies stack wise, but on \cref{fig:sound_stack} at the right of the native framework, is the media server.
 The media server contains the audio services, which is the code that interacts with the \ac{HAL}.
 The \ac{HAL} is right below the media server, in the sound stack.
 The sound server implementation on Android is called AudioFlinger, and runs within the media server process\cite{audioflinger}.
@@ -52,7 +52,7 @@ The \ac{HAL} is the standard interface between the audio services and the audio 
 The \ac{HAL} is driver--agnostic, which means it can work with any drivers without making any special adaptations.
 
 \paragraph{Linux Kernel}
-At the bottom of the stack is the Linux Kernel, where the audio driver is residing.
+At the bottom of the stack is the Linux Kernel, where the audio driver resides.
 There exists different audio drivers, e.g. \ac{ALSA} and \ac{OSS}, which is made for Linux but there also exist custom drivers.
 
 Since the \ac{HAL} is driver--agnostic, then the audio driver can be changed without having to alter the \ac{HAL}. 
