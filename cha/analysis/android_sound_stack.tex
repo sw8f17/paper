@@ -11,7 +11,7 @@ On \cref{fig:sound_stack} the full sound stack can be seen for a standard Androi
 
 \paragraph{Application Framework}
 On the top of the stack is the application framework.
-This is the frameworks an app, coded in Java, use when dealing with sound.
+This is the framework an app, coded in Java, use for sound.
 For instance there is the \code{android.media.*} frameworks, which is a part of the application framework.
 When programming to the application framework, the Android \ac{SDK} is used.
 
@@ -57,7 +57,7 @@ The \ac{HAL} is the standard interface between the audio services and the audio 
 The \ac{HAL} is driver--agnostic, which means it can work with any drivers without making any special adaptations.
 
 \paragraph{Linux Kernel}
-At the bottom of the stack is the Linux Kernel, where the audio driver is residing.
+At the bottom of the stack is the Linux Kernel, where the audio driver resides.
 There exists different audio drivers, e.g. \ac{ALSA} and \ac{OSS}, which is made for Linux but there also exist custom drivers.
 
 Since the \ac{HAL} is driver--agnostic, then the audio driver can be changed without having to alter the \ac{HAL}. 
