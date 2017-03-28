@@ -4,7 +4,7 @@ We look into the Android sound stack to identify parts of the sound stack,
 which can have an effect on the sound latency and furthermore identify parts of the sound stack which can be customized to cater our needs.
 
 We  go through the stack and briefly describe the different parts.
-During the description we point out the parts of the stack which can be relevant in the design of an 
+During the description we point out the parts of the stack which can be relevant in the design of an
 
 The Android sound stack is all the different components which makes up the sound system on Android devices.
 On \cref{fig:sound_stack} the full sound stack can be seen for a standard Android system.
@@ -18,7 +18,7 @@ When using the application framework, the Android \ac{SDK} is used.
 Using the application framework can potentially be slower, compared to the native framework.
 This is caused by the fact that the application framework is higher up the stack than the native framework and therefore further away from the ``bare metal''.
 Therefore it is important to consider if the application framework should be used,
-since it is the only thing the Java app interfaces with directly, 
+since it is the only thing the Java app interfaces with directly,
 and the choice of framework can have big consequences on the performance and functionality of the app.
 
 \paragraph{JNI}
@@ -44,7 +44,7 @@ The media server contains the audio services, which is the code that interacts w
 The \ac{HAL} is right below the media server, in the sound stack.
 The sound server implementation on Android is called AudioFlinger, and runs within the media server process\cite{audioflinger}.
 
-It is possible to change the media server, 
+It is possible to change the media server,
 for instance an example is given where changing from AudioFlinger, to a media server called Superpowered Media Server for Android\footnote{\url{http://superpowered.com/}}, saved $8 ms$ on the round--trip latency on a HTC Nexus 9\cite{superpowered_8ms}.
 The round--trip latency is the time it takes sound to be recorded by the microphone,
 travel through the audio stack to the user application and then back through the stack to the speakers\cite{superpowered_8ms}.
@@ -60,7 +60,7 @@ The \ac{HAL} is driver--agnostic, which means it can work with any drivers witho
 At the bottom of the stack is the Linux Kernel, where the audio driver resides.
 Different audio drivers exist, e.g. \ac{ALSA} and \ac{OSS}, which are made for Linux but custom drivers are also available.
 
-Since the \ac{HAL} is driver--agnostic, then the audio driver can be changed without having to alter the \ac{HAL}. 
+Since the \ac{HAL} is driver--agnostic, then the audio driver can be changed without having to alter the \ac{HAL}.
 Several audio drivers exist for Android, e.g. ``Voodoo Sound'' or ``ViPER4Android音效FX v2版'',
 but it is also possible to make a custom audio driver\cite{voodoo_sound}\cite{viper4_android}.
 Therefore the sound driver in the Linux kernel should be considered as well, in the design of an app to solve the problem statement.\cite{sound_stack}%Denne kilde er sådan set for hele afsnittet, ved ikke lige hvordan jeg skal angive det uden at paste det ved hver paragraph
