@@ -1,0 +1,57 @@
+@MISC{jni,
+  author = {Chua Hock-Chuan},
+  title = {{Java Programming Tutorial Java Native Interface (JNI)}},
+  month = {2},
+  year = {2014},
+  url = {https://www3.ntu.edu.sg/home/ehchua/programming/java/JavaNativeInterface.html},
+  lastchecked = {22-03-2017},
+}
+
+@MISC{audioflinger,
+  author = {{Android Open Source Project}},
+  title = {{Audio Terminology}},
+  url = {https://source.android.com/devices/audio/terminology.html},
+  lastchecked = {22-03-2017},
+}
+
+@MISC{sound_stack,
+  author = {{Android Open Source Project}},
+  title = {Audio},
+  url = {https://source.android.com/devices/audio/index.html},
+  lastchecked = {23-03-2017},
+}
+
+@MISC{nat_perf_2,
+  author = {{Android Open Source Project}},
+  title = {{Getting Started with the NDK}},
+  url = {https://developer.android.com/ndk/guides/index.html},
+  lastchecked = {23-03-2017},
+}
+
+@MISC{superpowered_8ms,
+  author = {Gabor Szanto},
+  title = {{Android's 10 ms Problem? SOLVED.}},
+  month = {7},
+  year = {2016},
+  url = {http://superpowered.com/superpowered-android-media-server},
+  lastchecked = {23-03-2017},
+}
+
+@MISC{voodoo_sound,
+  author = {``supercurio''},
+  title = {{Voodoo Sound}},
+  month = {5},
+  year = {2013},
+  url = {https://play.google.com/store/apps/details?id=org.projectvoodoo.controlapp},
+  lastchecked = {23-03-2017},
+}
+
+@MISC{viper4_android,
+  author = {{枫影（尹湘中）}},
+  title = {{ViPER4Android音效FX v2版}},
+  month = {3},
+  year = {2015},
+  url = {https://play.google.com/store/apps/details?id=com.vipercn.viper4android_v2_fx},
+  lastchecked = {23-03-2017},
+}
+
