@@ -6,7 +6,7 @@
     %Why this, how does this fit our purpose better than the other two.
 This section presents our thoughts on the external architecture.
 External architecture refers to the architecture between devices, i.e. the way in which they communicate and are structured.
-We consider three different external architectures, before deciding upon the one we deem the best fit.
+We consider three different external architectures namely remote centralized, local centralized and \ac{P2P}; before deciding upon the one we deem the best fit.
 
 \subsection{Remote Centralized}
 Firstly we consider the option of using a remote centralized solution, i.e. having a server which propagates communication.
@@ -27,16 +27,16 @@ Slaves would retain the status which Android devices holds in the remote central
 In contrast to the remote centralized idea this would remove the need for external hardware and decrease latency however, we also produce the need for peer discovery and LAN management.
 We would still have the single point of failure in the master, but with no internet requirement.
 
-\subsection{Peer--To--Peer}
+\subsection{\acl{P2P}}
 A common denominator between the two previous solutions is their single point of failure produced by their master--slave type relationship.
-A Peer--To--Peer solution would remove this single point of failure, but not without adding its own complications.
-In a Peer--To--Peer solution all devices would be equal, this in turn means that should a device fail or leave the session, it does not matter which device it was as the network of devices would be unaffected, given that no device is of higher authority.
-With all devices being equal it also means having to reach consensus to make decisions, simple decisions like playback control could be managed through a majority voting system, but the more complex underlying communication such as synchronization is infinitely more complex due to not having an authority.
+A \ac{P2P} solution would remove this single point of failure, but not without adding its own complications.
+In a \ac{P2P} solution all devices would be equal, this in turn means that should a device fail or leave the session, it does not matter which device it was as the network of devices would be unaffected, given that no device is of higher authority.
+With all devices being equal it also means having to reach consensus to make decisions, simple decisions like playback control could be managed through a majority voting system, but the more complex underlying communication such as synchronization increases in complexity significantly due to not having an authority.
 
 This solution could be expanded to consider a rotating master which would help resolve possible consensus issues, but at that point it becomes overcomplicating the local centralized solution in order to reduce the chance of the master leaving or failing, however that would still be possible.
 
 \subsection{Conclusion}
-Ultimately the key challenge is synchronizing the clocks, and to utilize a synchronized network even a few milliseconds matter; as such we are not interested in a Peer--To--Peer network as synchronization in a Peer-To--Network makes this challenge far more complex than it already is.
+Ultimately the key challenge is synchronizing the clocks, and to utilize a synchronized network even a few milliseconds matter; as such we are not interested in a \ac{P2P} network as synchronization in a \ac{P2P} network makes this challenge far more complex than it already is.
 Both the local and remote centralized solutions, while not trivial, are easier to synchronize due to having an authority to synchronize towards.
 A remote solution would require external hardware and an internet connection.
 This may prove inconvenient for multiple use scenarios as social gatherings and festivals also occur in remote areas where internet may be unaccessible or slow. 
