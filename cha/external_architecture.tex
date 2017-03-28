@@ -1,0 +1,45 @@
+\section{External Architecture}
+%Intro to what it is - External, what makes it external contra internal
+    %The 3 ideas
+    %Pros and cons for each idea
+%Conclusion(Local Centralized)
+    %Why this, how does this fit our purpose better than the other two.
+This section presents our thoughts on the external architecture.
+External architecture refers to the architecture between devices, i.e. the way in which they communicate and are structured.
+We consider three different external architectures namely remote centralized, local centralized and \ac{P2P}; before deciding upon the one we deem the best fit.
+
+\subsection{Remote Centralized}
+Firstly we consider the option of using a remote centralized solution, i.e. having a server which propagates communication.
+This solution simplifies the communicative part of the problem by simply using the Internet and using a server as an intermediary between all devices.
+Using a server also provides the system with a powerful control device, the server, which would alleviate the Android devices from any significant computational needs as they would simply act as speakers and information providers.
+Furthermore the server would act as an authority, providing a clock to synchronize towards.
+
+This solution also relies on an internet connection being available and is affected by bandwidth, furthermore a server needs to be available, in the case of widespread use we would need enough hardware to support multiple users. 
+Lastly the server would also provide a single point of failure; no server, no application.
+
+\subsection{Local Centralized}
+While having external hardware available and requiring an internet connection would limit the application use scenarios, this can be rectified by localizing the solution.
+To do so a device would act as the server, a master device.
+The session host would become the master, and any connecting devices would be slaves.
+A master device would, similarly to the server, provide an authority to synchronize towards.
+Slaves would retain the status which Android devices holds in the remote centralized solution, simply acting as information providers and speakers, whereas the master would manage computational requirements, LAN management and file distribution.
+
+In contrast to the remote centralized idea this would remove the need for external hardware and decrease latency however, we also produce the need for peer discovery and LAN management.
+We would still have the single point of failure in the master, but with no internet requirement.
+
+\subsection{\acl{P2P}}
+A common denominator between the two previous solutions is their single point of failure produced by their master--slave type relationship.
+A \ac{P2P} solution would remove this single point of failure, but not without adding its own complications.
+In a \ac{P2P} solution all devices would be equal, this in turn means that should a device fail or leave the session, it does not matter which device it was as the network of devices would be unaffected, given that no device is of higher authority.
+With all devices being equal it also means having to reach consensus to make decisions, simple decisions like playback control could be managed through a majority voting system, but the more complex underlying communication such as synchronization increases in complexity significantly due to not having an authority.
+
+This solution could be expanded to consider a rotating master which would help resolve possible consensus issues, but at that point it becomes overcomplicating the local centralized solution in order to reduce the chance of the master leaving or failing, however that would still be possible.
+
+\subsection{Conclusion}
+Ultimately the key challenge is synchronizing the clocks, and to utilize a synchronized network even a few milliseconds matter; as such we are not interested in a \ac{P2P} network as synchronization in a \ac{P2P} network makes this challenge far more complex than it already is.
+Both the local and remote centralized solutions, while not trivial, are easier to synchronize due to having an authority to synchronize towards.
+A remote solution would require external hardware and an internet connection.
+This may prove inconvenient for multiple use scenarios as social gatherings and festivals also occur in remote areas where internet may be unaccessible or slow. 
+Furthermore we will not be performing heavy computations, which makes the computational gain from a server irrelevant.
+
+With this in mind we deem that a local centralized solution best fits the application we have in mind. 
