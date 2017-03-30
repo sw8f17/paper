@@ -26,7 +26,7 @@ Additionally, this architecture is used in systems that needs to store a large a
 \subsubsection{\acl{MVC}}
 This architectural pattern seeks to separate interaction and presentation from the data, thereby the name, model, the data, view, the presentation, and controller, the interaction.
 The pattern allows for data to change form without necessarily affecting the presentation or interaction and vice versa.
-It is a pattern that yields low coupling, and it can help us ensure that the code regarding \ac{UX} doesn't interfere with the business logic.
+It is a pattern that yields low coupling, and it can help us ensure that the code regarding \ac{UX} does not interfere with the business logic.
 This means that the maintainability and especially the testability, of code adhering to the \ac{MVC} architectural pattern, is significantly higher than code without a clear separation of model view and controller.
 
 A downside to using the MVC pattern is that simple data interactions can become complex and require additional code.
@@ -41,9 +41,7 @@ Moreover, this architectural pattern allows for a myriad of different clients to
 E.g.~if playback of music is implemented as a service, a local client driven by the user could change songs just as easily as a client controlled remotely.
 This would give a seamless experience of control, since both clients are connected to the same service; meanwhile, they do not need to know about each others existence.
 
-The separation of client and service
-%what it means internally
-%middleground between MVC and Repo
-%Clients use functionality through services
-%This one i think
+The separation of client and service also allows for more focused testing, since the components can be tested completely independent and the in conjunction.
+In our case the client--server architecture lies somewhere between the two previously presented architectures, and gives a middle ground where we do not need a heavy focus on data.
+However, because we want to disconnect client functionality from presentation, to improve testability and maintainability, the concept of a client in the client--server architecture, will have to be designed and developed with a more granular aspect.
 
