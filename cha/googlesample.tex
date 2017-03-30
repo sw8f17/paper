@@ -1,0 +1,47 @@
+%MediaService
+    %Foundation
+
+%MusicProvider
+    %Generic Android stuff -> Lets us find the media Source
+
+
+%MusicPlayerActivity
+    %Main Activity -> Initializes, UI    
+
+%Seperation
+    %Playback -> Executed code
+    %Model -> file access
+
+%UI Baseactivity
+
+%Music service and how it is controlled
+    %Services, why a service, close app, connect controller, controller can be accessed from outside the app;
+    %Cross device will use controller.
+    %You have App --> controlled by service, acessable without the app open --> from any activity/service
+    %This is why we make a sync service, which can acess controller.
+%Providers, simply adding providers i.e. spotify in the future
+
+\section{Googlesamples Media Player(WIP)}
+%%%Meta%%%
+    %This section describes our implementation and use of googlesamples media player, as a foundation for our app.
+    %This work fulfills our first milestone <quote.milestone.one>, and produces a foundation for which we will continue with our next milestone <quote.milestone.two>
+    %the googlesamples media player which we are using, is a large codebase, in this section we will be covering the elements and design choices that are used.
+    %These choices are relevant as they decide how we will approach further development atop this code base, we use a code base like this such that we can focus on what is required in order to utilize multiple devices, rather than spending time developing a local media player.
+
+%Basics
+    %We have an activity(app??)
+    %We utilize services such that we can control the activity without it being "active"(app open)
+        %We have a musicservice at present, a communication service will come later to support cross device commands
+    %Controllers are used to give the services commands (so what exactly is a controller?)
+
+%Code stuff
+    %Mainactivity  ---> Initializing the activity (app launcher) --> UI -> inherits from BaseActivity
+    %Playback   ---> The code executed, pause, seek, etc.
+        %This is what is controlled by the service calls???
+    %Model ---> Media source access(we made external to access audio on device) --> relates to MusicProvider somehow
+        %This is providers??
+
+
+%Uncovered
+    %MediaBrowser?, this is related to activity, mediabrowser updates UI? me
+    %
