@@ -1,0 +1,48 @@
+\subsection{Candidates for Internal Architecture}
+In this section we will present three proposed internal architectures;
+\begin{eletterate*}
+    \item Repository architecture;
+    \item \ac{MVC}; and
+    \item Client--Server architecture.
+\end{eletterate*}
+These architectural patterns are often used when designing full systems, but can be adapted to the inner workings of components in a system, such as an Android app in our case.
+
+\subsubsection{Repository Architecture}
+%all data is managed by single repository
+%many components, never interact directly only through repo
+%e.g. an IDE
+%independent components
+%single point of failure
+The repository architecture, as described by Ian Sommerville in \textit{Software Engineering}\cite[p. 179-180]{sommerville}, consists of a single \enquote{repository} which manages all data.
+This data is then accessible by all components in the system, thereby restricting any component to component interaction.
+
+When implementing the repository architectural pattern, the different components can be developed completely independent, and does not need to know anything about each other.
+This results in extremely low coupling; components can be added and removed without breaking the system, and thoroughly tested independently.
+An example of applications with the repository architecture, are IDEs; they consist of a single repository containing all project data, and multiple components interacting with the data such as code generators, editors, and analyzers.
+
+A disadvantage of the repository architectural pattern is, that the central repository is a single point of failure.
+Additionally, this architecture is used in systems that needs to store a large amount of data for a long time, which does not fit our use.
+
+\subsubsection{\acl{MVC}}
+This architectural pattern, also presented in \textit{Software Engineering}\cite[p. 176]{sommerville}, seeks to separate interaction and presentation from the data, thereby the name; \textit{model}, the data, \textit{view}, the presentation, and \textit{controller}, the interaction.
+The pattern allows for data to change form without necessarily affecting the presentation or interaction and vice versa.
+It is a pattern that yields low coupling, and it can help us ensure that the code regarding \ac{UX} does not interfere with the business logic.
+This means that the maintainability and especially the testability, of code adhering to the \ac{MVC} architectural pattern, is significantly higher than code without a clear separation of model view and controller.
+
+A downside to using the MVC pattern is that simple data interactions can become complex and require additional code.
+Furthermore, there needs to be a clear data model, something our Android app does not have.
+
+\subsubsection{Client--Server Architecture}
+Normally when addressing a client--server architecture, it is in the context of web applications consisting of a client running in the browser which connects to a server running application code.
+In our case, where we talk about the internal architecture of an Android app, the server is a service, i.e.~some components which runs separately and can be connected to.
+The Client--Server pattern is described by Ian Sommerville in \textit{Software Engineering} \cite[p. 180-181]{sommerville}.
+The clients are only used to make the services accessible by the user, as the services does not depend on the clients, which means that services can be developed and tested without being influenced by user interfaces.
+
+Moreover, this architectural pattern allows for a myriad of different clients to use a given service, such that the same functionality can be available in different scenarios.
+E.g.~if playback of music is implemented as a service, a local client driven by the user could change songs just as easily as a client controlled remotely.
+This would give a seamless experience of control, since both clients are connected to the same service; meanwhile, they do not need to know about each others existence.
+
+The separation of client and service also allows for more focused testing, since the components can be tested completely independent and the in conjunction.
+In our case the client--server architecture lies somewhere between the two previously presented architectures, and gives a middle ground where we do not need a heavy focus on data.
+However, because we want to disconnect client functionality from presentation, to improve testability and maintainability, the concept of a client in the client--server architecture, will have to be designed and developed with a more granular aspect.
+
