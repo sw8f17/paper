@@ -13,7 +13,7 @@ These architectural patterns are often used when designing full systems, but can
 %e.g. an IDE
 %independent components
 %single point of failure
-The repository architecture consists of a single \enquote{repository} which manages all data.
+The repository architecture, as described by Ian Sommerville in \textit{Software Engineering}\cite[p. 179-180]{sommerville}, consists of a single \enquote{repository} which manages all data.
 This data is then accessible by all components in the system, thereby restricting any component to component interaction.
 
 When implementing the repository architectural pattern, the different components can be developed completely independent, and does not need to know anything about each other.
@@ -24,7 +24,7 @@ A disadvantage of the repository architectural pattern is, that the central repo
 Additionally, this architecture is used in systems that needs to store a large amount of data for a long time, which does not fit our use.
 
 \subsubsection{\acl{MVC}}
-This architectural pattern seeks to separate interaction and presentation from the data, thereby the name, model, the data, view, the presentation, and controller, the interaction.
+This architectural pattern, also presented in \textit{Software Engineering}\cite[p. 176]{sommerville}, seeks to separate interaction and presentation from the data, thereby the name; \textit{model}, the data, \textit{view}, the presentation, and \textit{controller}, the interaction.
 The pattern allows for data to change form without necessarily affecting the presentation or interaction and vice versa.
 It is a pattern that yields low coupling, and it can help us ensure that the code regarding \ac{UX} does not interfere with the business logic.
 This means that the maintainability and especially the testability, of code adhering to the \ac{MVC} architectural pattern, is significantly higher than code without a clear separation of model view and controller.
@@ -35,6 +35,7 @@ Furthermore, there needs to be a clear data model, something our Android App doe
 \subsubsection{Client--Server Architecture}
 Normally when addressing a client--server architecture, it is in the context of web applications consisting of a client running in the browser which connects to a server running application code.
 In our case, where we talk about the internal architecture of an Android App, the server is a service, i.e.~some components which runs separately and can be connected to.
+The Client--Server pattern is described by Ian Sommerville in \textit{Software Engineering} \cite[p. 180-181]{sommerville}.
 The clients are only used to make the services accessible by the user, as the services does not depend on the clients, which means that services can be developed and tested without being influenced by user interfaces.
 
 Moreover, this architectural pattern allows for a myriad of different clients to use a given service, such that the same functionality can be available in different scenarios.

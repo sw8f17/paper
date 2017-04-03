@@ -1,0 +1,8 @@
+@book{sommerville,
+ author = {Sommerville, Ian},
+ title = {Software Engineering: (10th Edition)},
+ year = {2016},
+ isbn = {1292096136},
+ publisher = {Pearson Education Limited},
+ address = {Edinburgh Gate, Harlow, Essex CM20 2JE, England},
+}
