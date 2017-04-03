@@ -5,7 +5,7 @@ In this section we will present three proposed internal architectures;
     \item \ac{MVC}; and
     \item Client--Server architecture.
 \end{eletterate*}
-These architectural patterns are often used when designing full systems, but can be adapted to the inner workings of components in a system, such as an Android App in our case.
+These architectural patterns are often used when designing full systems, but can be adapted to the inner workings of components in a system, such as an Android app in our case.
 
 \subsubsection{Repository Architecture}
 %all data is managed by single repository
@@ -30,11 +30,11 @@ It is a pattern that yields low coupling, and it can help us ensure that the cod
 This means that the maintainability and especially the testability, of code adhering to the \ac{MVC} architectural pattern, is significantly higher than code without a clear separation of model view and controller.
 
 A downside to using the MVC pattern is that simple data interactions can become complex and require additional code.
-Furthermore, there needs to be a clear data model, something our Android App does not have.
+Furthermore, there needs to be a clear data model, something our Android app does not have.
 
 \subsubsection{Client--Server Architecture}
 Normally when addressing a client--server architecture, it is in the context of web applications consisting of a client running in the browser which connects to a server running application code.
-In our case, where we talk about the internal architecture of an Android App, the server is a service, i.e.~some components which runs separately and can be connected to.
+In our case, where we talk about the internal architecture of an Android app, the server is a service, i.e.~some components which runs separately and can be connected to.
 The Client--Server pattern is described by Ian Sommerville in \textit{Software Engineering} \cite[p. 180-181]{sommerville}.
 The clients are only used to make the services accessible by the user, as the services does not depend on the clients, which means that services can be developed and tested without being influenced by user interfaces.
 

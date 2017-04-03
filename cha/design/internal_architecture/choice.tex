@@ -3,10 +3,10 @@ To choose a fitting architecture is a balance act and may end up limiting a proj
 This is something we want to avoid and as such, we will be picking certain concepts from different architectural patterns, to achieve a tailor made internal architecture.
 
 We deem that the internal architecture should have the client--server architecture as foundation.
-This means that the internals of our Android App will consist of several services and clients;
+This means that the internals of our Android app will consist of several services and clients;
 where the services provides features, and the clients accesses these features and exposes them to different parts of the system or the user.
 
-However, because we are developing an Android App, which inevitably will have some form of \ac{UI}, we want to incorporate the idea of views from the \ac{MVC} pattern.
+However, because we are developing an Android app, which inevitably will have some form of \ac{UI}, we want to incorporate the idea of views from the \ac{MVC} pattern.
 These views will be anything that is to be presented to the user, such as playlists or playback controls.
 This further separation will enable us to decouple client functionality from client presentation, and allow for testing of the clients functionality independently from the graphical presentation.
 
