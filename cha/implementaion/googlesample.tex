@@ -6,7 +6,7 @@
 
 
 %MusicPlayerActivity
-    %Main Activity -> Initializes, UI    
+    %Main Activity -> Initializes, UI
 
 %Seperation
     %Playback -> Executed code
@@ -31,21 +31,21 @@
     %This work fulfills our first milestone <quote.milestone.one>, and produces a foundation for which we will continue with our next milestone <quote.milestone.two>
     %the googlesamples media player which we are using, is a large codebase, in this section we will be covering the elements and design choices that are used.
     %These choices are relevant as they decide how we will approach further development atop this code base, we use a code base like this such that we can focus on what is required in order to utilize multiple devices, rather than spending time developing a local media player.
-This section describes our implementation and use of googlesamples' media player\footnote{https://github.com/googlesamples/android-UniversalMusicPlayer} as a foundation for our app.
-We use this sample such that we can focus our project on the device communication and psychoacoustic effects from the beginning, rather than building a music player.
-The sample is a large codebase, as such we do not cover everything in the codebase, rather we present the elements and general design choices.
-The googlesamples code foundations follows the android development guidelines, as such this section will introduce the basic android building blocks that we will use in further development of the application.
+This section describes our implementation and use of googlesamples' universal music player\footnote{https://github.com/googlesamples/android-UniversalMusicPlayer} as a foundation for our app.
+We use this sample such that we can focus our project on the device communication and psychoacoustic effects from the beginning, rather than building a generic music player.
+The sample is a large codebase, as such we do not cover everything, but rather we present the elements and general implementation choices.
+The googlesamples code foundations follows the android development guidelines, as such this section will introduce the basic android building blocks that we use in further development of the application.
 %%%MMeta%%%%
 
 \subsubsection{Activity}
 %MusicPlayerActivity
 %BaseActivity
 %%%GenPop%%%
-An \texttt{activity} is the primary point of interaction between application and user.
+An \texttt{activity} is the primary point of interaction between an application and user.
 Each different view is considered a different activity in the application, the media player we use have a fairly limited amount of activities, with \texttt{MusicPlayerActivity} being the main activity.
 %%%GenPop%%%
 
-The \texttt{MusicPlayerActivity} holds a \texttt{MediaController} and a \texttt{MediaBrowser}, these classes facilitate browsing media and basic playback control features.
+The \texttt{MusicPlayerActivity} holds a \texttt{MediaController} and \texttt{MediaBrowser} instance, these facilitate browsing media and basic playback control features.
 A media player is rarely an application for which an activity is kept active.
 An activity has three states, foreground, visible and background.
 Having an application run, without its activity visible would be considered a background activity, however these are killable, and by extension so is the process.
@@ -75,7 +75,7 @@ Essentially a bound service is used in order for two processes to communicate, t
 %%%GenPop%%%
 
 In googlesamples we have a started service, \texttt{MusicService}.
-\texttt{MusicService} provides a \texttt{MediaBrowser} through a service.
+\texttt{MusicService} extends the \texttt{MediaBrowserServiceCompat} class and implements a playback callback interface.
 It creates a \texttt{MediaSession}, in doing so it allows the client to create a \texttt{MediaController} which can send commands to the \texttt{MediaSession} and thereby perform playback controls without the app having to be actively used.
 
 
