@@ -5,8 +5,9 @@
 %Conclusion(Local Centralized)
     %Why this, how does this fit our purpose better than the other two.
 This section presents our thoughts on the external architecture.
-External architecture refers to the architecture between devices, i.e. the way in which they communicate and are structured.
+External architecture refers to the architecture between devices, i.e. the network architecture.
 We consider three different external architectures namely remote centralized, local centralized and \ac{P2P}; before deciding upon the one we deem the best fit.
+\cref{tbl:external_comparison} presents some  noticeable differences between the proposed architectures.
 
 \subsection{Remote Centralized}
 Firstly we consider the option of using a remote centralized solution, i.e. having a server which propagates communication.
@@ -36,10 +37,17 @@ With all devices being equal it also means having to reach consensus to make dec
 This solution could be expanded to consider a rotating master which would help resolve possible consensus issues, but at that point it becomes overcomplicating the local centralized solution in order to reduce the chance of the master leaving or failing, however that would still be possible.
 
 \subsection{Conclusion}
-Ultimately the key challenge is synchronizing the clocks, and to utilize a synchronized network even a few milliseconds matter; as such we are not interested in a \ac{P2P} network as synchronization in a \ac{P2P} network makes this challenge far more complex than it already is.
-Both the local and remote centralized solutions, while not trivial, are easier to synchronize due to having an authority to synchronize towards.
-A remote solution would require external hardware and an internet connection.
-This may prove inconvenient for multiple use scenarios as social gatherings and festivals also occur in remote areas where internet may be unaccessible or slow.
-Furthermore we will not be performing heavy computations, which makes the computational gain from a server irrelevant.
+Ultimately the key challenge and the most important consideration for the external architecture, is clock synchronization.
+To properly manipulate the clock to achieve psychoacoustic effects, even a few milliseconds matter; as such with how the external architecture can affect this, it is a very important choice.
 
-With this in mind we deem that a local centralized solution best fits the application we have in mind.
+The three aforementioned proposals are all ``pure'' proposals, however reality is that they can be modified to resolve some of their weaknesses.
+An example would be \ac{P2P}, the particular difficulty with this architecture is the problem of consensus which drastically increases the complexity of clock synchronization, a way to rectify this issues could be having a rotating master.
+While still making synchronization more complex than the local centralized proposal, it would solve the issue of consensus, however it would also create a single point of failure.
+Despite some modifications being available, certain variables for each proposal can not be modified, such as the requirement of internet and external hardware for the remote centralized proposal.
+
+The remote centralized proposal holds the most restrictions on the users by requiring internet, and also requires a server to communicate with, which based on location could impose further issues.
+As such we prefer both \ac{P2P} and local centralized to this proposal.
+The pure \ac{P2P} proposal on the other hand imposes few requirements, but do complicate the clock synchronization a lot, as such we do not wish to use a pure \ac{P2P} implementation.
+This leaves us with local centralized or a modified version of \ac{P2P}, a particular issue with a rotating master however, would be how do we provide the music source, queue system etc.
+These issues are primarily \ac{UX} issues, which as mentioned in \cnameref{cha:requirement_elicitation} is not a priority, with this in mind both of these ideas will be considered when implementing the system and the final decision is made.
+\subimport{}{comparisontable.tex}
