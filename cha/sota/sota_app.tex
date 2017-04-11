@@ -8,7 +8,7 @@ We found three apps capable this:
     \item Chorus
 \end{itemize}
 
-These apps are found by searching sources like Google\footnote{https://www.google.dk with search terms ``android sync music playback''}, YouTube\footnote{https://www.youtube.com/}, App Store\footnote{https://itunes.apple.com/dk}, and Google Play Store\footnote{https://play.google.com/store} and from recommendations on forums.
+These apps are found by searching sources like Google\footnote{\url{https://www.google.dk} with search terms ``android sync music playback''}, YouTube\footnote{\url{https://www.youtube.com/}}, App Store\footnote{\url{https://itunes.apple.com/dk}}, and Google Play Store\footnote{\url{https://play.google.com/store}} and from recommendations on forums.
 An additional criteria for an app to be considered here is that the app must not be abandoned by the developers,
 which we defined as being without an update since, at least, 2013, and being incompatible with new devices.
 
@@ -19,7 +19,7 @@ For clarification we generalise these terms.
 We call the device which selects the music and streams it, the master, and the devices which connects to the master (SoundSeeder calls it ``Speaker''), are referred to as slaves.
 
 \subsection{SoundSeeder}\label{subsec:soundseeder}
-SoundSeeder\footnote{http://soundseeder.com} is an app made by JekApps.
+SoundSeeder\footnote{\url{http://soundseeder.com}} is an app made by JekApps.
 The current version as of \formatdate{9}{2}{2017} is 1.6.5.
 
 It is compatible with Android 4.1 and above, for older versions of Android (2.2 -- 4.0),
@@ -32,7 +32,6 @@ In the burger menu, the user can choose the different playback possibilities and
 The main view of the app is a music player, where the music can be controlled as any other music player.
 To play music to other devices as a master, press the ``add music button'' in the top menu,
 choose the source of the music and choose the preferred music, and press play.
-\jjnote{Det virker måske lidt specifikt, men det kommer an på hvad vi bruger det til senere}
 
 To connect to a playing master device, as a slave, select the speaker mode from the burger menu.
 If it finds the device, it connects automatically.
@@ -133,7 +132,7 @@ Here a menu pops up with devices playing on the network, and if you select the d
 We encountered a scenario where the app kept loading when attempting to join an active network, after a restart of the app it worked.
 
 It is intuitive to use the app, it is very minimalistic hence easy to navigate.
-The design is very minimalistic, and seems to follow the new ``Material Design''\footnote{https://material.io/guidelines/} guidelines set out by Google.
+The design is very minimalistic, and seems to follow the new ``Material Design''\footnote{\url{https://material.io/guidelines/}} guidelines set out by Google.
 
 Chorus supports manual and automatic synchronization.
 On \cref{fig:chorus_screenshot} the synchronization slider can be seen,
@@ -167,7 +166,6 @@ We look at these characteristics since we find them important to mobile apps and
 There are also other characteristics of the apps, but we deem these are the most important ones.
 In \cref{tab:sota_comp}, a comparison of the apps can be seen.
 
-\jjnote{This is where I got to, here be dragons}
 To start with Chorus, it does not support other devices than Android, narrowing down the supported devices compared to SoundSeeder and AmpMe.
 Furthermore it only supports local media as music source, requiring all media to be played to be on the device.
 Chorus also has a lower rating than SoundSeeder and AmpMe, which indicates dissatisfied users,
@@ -201,37 +199,15 @@ but it is a good alternative to either disconnect and reconnect or wait for the 
 Therefore to be a part of the state of the art, an app have to be able to both automatically and manually synchronize.
 The actual performance of the synchronization, in SoundSeeder and AmpMe will be tested in a later section.
 
-
-\begin{table}
-    \centering
-    \scalebox{0.75}{
-    \begin{tabular}{l|l|l|p{2.2cm}|p{2.5cm}|p{2.6cm}|p{2.2cm}|}
-                    & \multirow{2}{*}{Rating}    & \multirow{2}{*}{Last update}   & Supported devices & \multirow{2}{*}{Media source} & \multirow{2}{*}{Connectivity} & \multirow{2}{*}{Pricing}  \\
-        \toprule
-
-        \multirow{7}{*}{SoundSeeder} & \multirow{7}{*}{3.9 Play Store}    & \multirow{7}{*}{11/11 2016}    & \multirow{6}{*}{Android 4.1$+$,} & Google Music, & \multirow{6}{*}{WiFi,} &  \multirow{6}{*}{Free (limited),} \\
-    & & & \multirow{6}{*}{Java devices} & YouTube, & \multirow{6}{*}{Android hotspot} & \multirow{6}{*}{39.90 DKK} \\
-    & & & & external device, & & \\
-    & & & & UPnP, & & \\
-    & & & & DLNA, & & \\
-    & & & & online radio, & & \\
-    & & & & local media & & \\
-
-    \midrule
-
-        \multirow{4}{*}{AmpMe} & \multirow{3}{*}{4.2 Play Store} & \multirow{3}{*}{30/01 2017} & \multirow{3}{*}{Android 4.1 $+$} & Spotify, & \multirow{4}{*}{Internet} & \multirow{4}{*}{Free} \\
-    & \multirow{3}{*}{4.0 App Store} & \multirow{3}{*}{01/02 2017} & \multirow{3}{*}{iOS 9.0 $+$} & SoundCloud, & & \\
-    & & & & YouTube, & & \\
-    & & & & local media & & \\
-
-    \midrule
-
-        \multirow{2}{*}{Chorus} & \multirow{2}{*}{3.3 Play Store} & \multirow{2}{*}{11/5 2015} & \multirow{2}{*}{Android 4.0 $+$} & \multirow{2}{*}{Local media} & \multirow{1}{*}{WiFi,} & \multirow{2}{*}{Free} \\
-    & & & & & \multirow{1}{*}{Android hotspot} & \\
-
-    \bottomrule
-
-    \end{tabular}}
+\renewcommand\tabularxcolumn[1]{m{#1}}
+\renewcommand{\arraystretch}{1.5}
+\begin{sidewaystable}
+    \small
+    \begin{tabularx}{\textwidth}{XXXXXXX}\toprule
+        & Rating \newline (Out of 5) & Latest update & Supported \newline devices & Media source & Connectivity & Pricing \\\midrule
+        SoundSeeder & 3.9 Play Store & 11/11 2016    & Android 4.1+ \newline Java Devices & Google Music \newline YouTube \newline external devices \newline UPnP \newline DLNA \newline Online radio \newline Local media & WiFi \newline Android Hotspot & Free (limited) \newline 39.90 DKK \\
+        AmpMe & 4.2 Play Store \newline 4.0 App Store & 30/01 2017 & Android 4.1+ \newline iOS 9.0+ & Spotify \newline SoundCloud \newline YouTube \newline Local media & Internet & Free \\
+        Chorus & 3.3 Play Store & 11/05 2017 & Android 4.0+ & Local media & WiFi \newline Android Hotspot & Free  \\\bottomrule
+    \end{tabularx}
     \caption{Comparison between the apps as of the 13\textsuperscript{th} of February 2017.}\label{tab:sota_comp}
-\end{table}
-
+\end{sidewaystable}
