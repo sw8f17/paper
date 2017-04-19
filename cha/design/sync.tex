@@ -1,0 +1,59 @@
+%%OLD% \chapter{Synchronization}
+%%OLD% % Why are we writing about this?
+%%OLD% A central element in this project is the ability to synchronize. 
+%%OLD% This chapter aims to explore and evaluate different methods which could be used to synchronize several Android devices. 
+%%OLD% % What requirements does this stem from?
+%%OLD% Several of our requirements are directly related to synchronization, these are \tnote{insæt dem her \ldots}.
+%%OLD% % What are some of the issues regarding synchronization?
+%%OLD% 
+%%OLD% Synchronizing multiple devices is a hard problem, as there is a large amount of hardware and software between each of the devices in form of operating systems, driver, wireless chips, and various layers %%OLD% of abstraction, which all introduce either latency, either predictable or not. 
+%%OLD% %Furthermore, even if the devices are synchronized, then the delay from a command is issued by our app, to the time the audio playback start  
+%%OLD% Furthermore, there is a delay from when the command to play sound in software is issued, to when the actual playback occurs, which depends on the hard- and software of the smartphone. 
+%%OLD% That is, that the delay might differ from smartphone to smartphone to such a degree that we need to take it into account. 
+%%OLD% 
+%%OLD% % What ways of sync do we imagine that exists?
+%%OLD% 
+%%OLD% We have identified four categories of methods to synchronize the devices:
+%%OLD% \begin{itemize}
+%%OLD%    \item Using a network connection,
+%%OLD%    \item Using the GPS,
+%%OLD%    \item Using the audio system of the devices,
+%%OLD%    \item Using light, i.e. camera, screen and/or LED.
+%%OLD% \end{itemize}
+%%OLD% % http://ieeexplore.ieee.org/document/1424575/?arnumber=1424575&tag=1
+%%OLD% 
+%%OLD% % What way is "best"?
+%%OLD% % How will we do it? 
+\section{Synchronization}
+%What is the importance of synchronization to us
+    %hope for the best is not feasable
+    %To make psychoacoustic effects reality we need farily accurate manipulation depending on effect
+    %Audible sync is not the same as clock synchronization, a slight desync in clocks may actually cause psychoacoustic effects (precedence effect), essentially providing us with an acceptable threshold for desynchronization.
+Synchronization is an essential part of the application we are developing;as simply sending playback commands between devices and hoping they are received fast enough to not disrupt the audible synchronization, is not a reliable solution.\mnote{What a sentence}
+In order for us to achieve any kind of audible synchronization we need a somewhat accurate clock synchronization across multiple devices.
+The accuracy of the synchronization will also determine the degree to which we can manipulate playback to achieve psychoacoustic effects should we reach this milestone.
+This section explores and evaluates the methods we have considered using.
+%Why is sync of such importance?
+
+An important distinction to make when discussing synchronization for our application is the difference between audible synchronization and clock synchronization.
+This section focuses clock synchronization, the better clock synchronization we acquire the more accurate our playback manipulation becomes, and by extension our audible synchronization.
+In that audible synchronization is the goal for the application, this also means that precision in the range of milliseconds is sufficient, furthermore one of our requirements mentioned in \cnameref{cha:requirement_elicitation} is to compete with \ac{SOTA} which is also in the double digit milliseconds.
+
+%How can we achieve this synchronization
+    %We propose and have looked into several methods
+        %GPS
+        %Audio
+        %Light ques
+        %Messages/Protocols(my time, adjust to this)
+            %We looked into some academic research on this, however found that it was mostly unimplemented theories, often a bit off the mark from what we wanted to do.
+        %NTP(external sync/offset calculations)
+
+%What are the primary issues regarding synchronization.
+    %msg delay
+        %using offsets can help
+%Perfect syncrhonization may actually cause problems, audible sync != clock sync
+
+%What way is "best"
+%What seems feasable/which one are we attempting
+%could we merge/utilize elements from multiple ideas to acquire a superior form of synchronization
+%This would solve "basic" synchronization milestone, how does it affect advanced synchronization milestone, are other solutions better for this? in that case why not start with those?
