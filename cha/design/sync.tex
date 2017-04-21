@@ -36,23 +36,42 @@ This section explores and evaluates the methods we have considered using.
 %Why is sync of such importance?
 
 An important distinction to make when discussing synchronization for our application is the difference between audible synchronization and clock synchronization.
-This section focuses clock synchronization, the better clock synchronization we acquire the more accurate our playback manipulation becomes, and by extension our audible synchronization.
-In that audible synchronization is the goal for the application, this also means that precision in the range of milliseconds is sufficient, furthermore one of our requirements mentioned in \cnameref{cha:requirement_elicitation} is to compete with \ac{SOTA} which is also in the double digit milliseconds.
+This section focuses clock synchronization, the better clock synchronization we acquire the more accurate our playback manipulation becomes, and by extension our ability to create audible synchronization.
+In that audible synchronization is the goal for the application, this also means that precision in the range of milliseconds is sufficient, furthermore one of our requirements mentioned in \cnameref{cha:requirement_elicitation} is to compete with \ac{SOTA}.
 
 %How can we achieve this synchronization
     %We propose and have looked into several methods
         %GPS
         %Audio
-        %Light ques
+        %Light cues
         %Messages/Protocols(my time, adjust to this)
             %We looked into some academic research on this, however found that it was mostly unimplemented theories, often a bit off the mark from what we wanted to do.
         %NTP(external sync/offset calculations)
+\subsection{Methods}
+The following is a list of the possible solutions we have considered:
+\begin{itemize}
+    \item GPS
+    \item Audio
+    \item Light cues.
+    \item Timestamps\mnote{Could expand this here already(NTP, PTP, clock sync to master etc.)}
+\end{itemize}
+
+\subsubsection{GPS}
+%https://spectracom.com/resources/essential-education/gps-clock-synchronization
+GPS satellites contain multiple atomic clocks.
+These clocks are monitored and controlled to keep them synchronized with the UTC standard.
+This provides us with an accurate clock to synchronize towards.
+The synchronization could be done in two ways.
+\subsubsection{Audio}
+\subsubsection{Light Cues}
+\subsubsection{Timestamps}
 
 %What are the primary issues regarding synchronization.
     %msg delay
         %using offsets can help
 %Perfect syncrhonization may actually cause problems, audible sync != clock sync
 
+\subsection{Choice/Conclusion}
 %What way is "best"
 %What seems feasable/which one are we attempting
 %could we merge/utilize elements from multiple ideas to acquire a superior form of synchronization
