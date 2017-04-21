@@ -29,7 +29,7 @@ They serve to allow apps to perform long--running operations, which happens to b
 There are two primary distinctions between services, started services and bound services.
 A started service tells the OS to keep it running, even when the user leaves the app.
 A bound service is spawned by another app because it wants to utilize the service in some form.
-Essentially a bound service is used in order for two processes to communicate, these however are only relevant as long as the application is relevant, as such if the application that caused the service to be spawn is closed, then the service can be killed alongside the application.\cite{androidFundamentals}
+Essentially a bound service is used in order for two processes to communicate, these however are only relevant as long as the application is relevant, as such if the application that caused the service to be spawned is closed, then the service can be killed alongside the application.\cite{androidFundamentals}
 
 In googlesamples we have a started service, \code{MusicService}.
 \code{MusicService} extends the \code{MediaBrowserServiceCompat} class and implements a playback enabling interface.
