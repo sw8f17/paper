@@ -1,0 +1,6 @@
+@MISC{androidFundamentals,
+  author = {Android},
+  title = {{Application Fundamentals}},
+  url = {https://developer.android.com/guide/components/fundamentals.html},
+  lastchecked = {06-04-2017},
+}
