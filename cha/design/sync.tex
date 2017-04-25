@@ -79,11 +79,18 @@ The idea would be that a device uses the flashlight, once observed by another de
 Using Einstein Synchronization we can use the respective times collected from this, to synchronize the two devices.
 %https://en.wikipedia.org/wiki/Einstein_synchronisation
 \subsubsection{Timestamps/Clock Synchronization}\mnote{Considering whether or not to place GPS here as it also uses clock/timestamp and not some special method. Alternatively split NTP/PTP into seperate sections}
-The last option we are considering is to use existing protocols used for synchronization, the two primary methods we are considering are \ac{NTP} and \ac{PTP}.
+The last option we are considering is to use existing protocols used for synchronization, the two primary meth ods we are considering are \ac{NTP} and \ac{PTP}.
 \ac{NTP} works by using a hierarchical system with high-precision atomic clocks at the highest level, each level is then synchronized towards devices from the higher level.
 \ac{NTP} polls multiple servers in the hierarchy and uses this to determine the time.
+The idea here would be for each device to keep track of their own \ac{NTP} offset, and then have then play in accordance with the time acquired from \ac{NTP}. 
 While \ac{NTP} requires internet to function, \ac{PTP} is designed for LAN.
 \ac{PTP} on the other hand uses the \ac{BMC} algorithm to determine a master and thereby disallowing us from making this decision.
+If we are to use \ac{PTP} each device would keep track of their offset towards the master.
+While \ac{PTP} has an expected accuracy in the nanoseconds, contrary to NTP's up to ten miliseconds, this is due to the LAN design.
+This expected accuracy is also with a cable connection, with wireless, which we are using, it is not expected to have a precision in nanoseconds, rather miliseconds like \ac{NTP}.
+
+\ac{NTP} is both more mature and widespread protocol, furthermore we were also able to find examples of it being used on android whereas we could find no android apps using \ac{PTP}.
+As such, for this solution we will be using \ac{NTP}.
 
 %What are the primary issues regarding synchronization.
     %msg delay
