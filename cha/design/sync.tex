@@ -1,29 +1,3 @@
-%%OLD% \chapter{Synchronization}
-%%OLD% % Why are we writing about this?
-%%OLD% A central element in this project is the ability to synchronize. 
-%%OLD% This chapter aims to explore and evaluate different methods which could be used to synchronize several Android devices. 
-%%OLD% % What requirements does this stem from?
-%%OLD% Several of our requirements are directly related to synchronization, these are \tnote{insæt dem her \ldots}.
-%%OLD% % What are some of the issues regarding synchronization?
-%%OLD% 
-%%OLD% Synchronizing multiple devices is a hard problem, as there is a large amount of hardware and software between each of the devices in form of operating systems, driver, wireless chips, and various layers %%OLD% of abstraction, which all introduce either latency, either predictable or not. 
-%%OLD% %Furthermore, even if the devices are synchronized, then the delay from a command is issued by our app, to the time the audio playback start  
-%%OLD% Furthermore, there is a delay from when the command to play sound in software is issued, to when the actual playback occurs, which depends on the hard- and software of the smartphone. 
-%%OLD% That is, that the delay might differ from smartphone to smartphone to such a degree that we need to take it into account. 
-%%OLD% 
-%%OLD% % What ways of sync do we imagine that exists?
-%%OLD% 
-%%OLD% We have identified four categories of methods to synchronize the devices:
-%%OLD% \begin{itemize}
-%%OLD%    \item Using a network connection,
-%%OLD%    \item Using the GPS,
-%%OLD%    \item Using the audio system of the devices,
-%%OLD%    \item Using light, i.e. camera, screen and/or LED.
-%%OLD% \end{itemize}
-%%OLD% % http://ieeexplore.ieee.org/document/1424575/?arnumber=1424575&tag=1
-%%OLD% 
-%%OLD% % What way is "best"?
-%%OLD% % How will we do it? 
 \chapter{Synchronization}
 %What is the importance of synchronization to us
     %hope for the best is not feasable
@@ -63,7 +37,7 @@ As such we will strictly speaking not be synchronizing the clocks, rather we wil
 %https://spectracom.com/resources/essential-education/gps-clock-synchronization
 GPS satellites contain multiple atomic clocks.
 These clocks are monitored and controlled to keep them synchronized with the UTC standard.
-This provides us with an accurate clock to synchronize towards.
+This provides us with an accurate clock to synchronize towards.\citep{gpsclock}
 After testing this, by developing an application to retrieve time from GPS, it was clear to us that the GPS hardware in our phones are limited to 1Hz updates and do not provide millisecond precision, which makes us unable to use GPS as a solution.
 
 \subsubsection{Audio}\mnote{Can go into more detail about how we would solve the difficulties in this, but i do not think it is worth}
@@ -77,11 +51,11 @@ While this may not have an effect on humans given only a few milliseconds of var
 Alternatively we can use light rather than audio to synchronize.
 This would also allow devices to respond as to achieve synchronization better.
 The idea would be that a device uses the flashlight, once observed by another device it flashes back.
-Using Einstein Synchronization we can use the respective times collected from this, to synchronize the two devices.
+Using Einstein Synchronization we can use the respective times collected from this, to synchronize the two devices \citep{einstein}.
 This has the significant disadvantage that the facing of the phones becomes important for synchronization, as the phones must have their flashes and cameras facing the synchronization target.
 %https://en.wikipedia.org/wiki/Einstein_synchronisation
 
-\subsubsection{\aclong{NTP}}
+\subsubsection{\acl{NTP}}
 The last two options we are considering are to use existing protocols used for synchronization, one of which is \ac{NTP}.
 \ac{NTP} works by using a hierarchical system with high--precision atomic clocks at the highest level, each level is then synchronized towards devices from the higher level.
 \ac{NTP} polls multiple servers in the hierarchy and uses this to determine an actual time.
@@ -89,7 +63,7 @@ Essentially the \ac{NTP} servers we will be polling act like a clock master, as 
 This also produces a hybrid solution between our proposed local centralized and remote centralized solutions, mentioned in \cnameref{sec:external_architectures}, by making the clock remote centralized, but maintaining all other control in a local network.
 The idea here would be for each device to keep track of their own \ac{NTP} offset, and then have then play in accordance with the time acquired from \ac{NTP}. 
 
-\subsubsection{\aclong{PTP}}
+\subsubsection{\acl{PTP}}
 While \ac{NTP} requires internet to poll the \ac{NTP} hierarchy, \ac{PTP} is designed for LAN.
 \ac{PTP} on the other hand uses the \ac{BMC} algorithm to determine a master and thereby disallowing us from making this decision.
 If we are to use \ac{PTP} each device would keep track of their offset towards the master.
@@ -101,9 +75,19 @@ This expected accuracy is also with a cable connection, with wireless, which we 
         %using offsets can help
 %Perfect syncrhonization may actually cause problems, audible sync != clock sync
 
-\section{Choice/Conclusion}
-\ac{NTP} is both more mature and widespread protocol, furthermore we were also able to find examples of it being used on android whereas we could find no android apps using \ac{PTP}.
-As such, for this solution we will be using \ac{NTP}.
+\section{Conclusion}
+While all the five presented solutions can be used to synchronize, some are simply superior and easier to work with than others, in this section we present our choice, as well as our reasoning for the choice we make.
+Unfortunately the hardware used in smartphones makes it such that GPS is not a feasible solution, this leaves us with four other possible solutions.
+With light cues we feel that the manual work required to make it work, i.e. facing the phones towards each other, makes this solution significantly inferior to the others, leaving us with three remaining possibilities.
+
+We believe that all of the last three solutions could solve the issue and provide sufficient clock synchronization.
+However, as explained in the presentation of the audio synchronization this is comparatively far more complex to do than either of the two protocols we have mentioned.
+With our initial milestone being basic synchronization, we do not wish to overly complicate it, as such our initial solution will not be utilizing audio for synchronization.
+Despite us not using it initially, it may be worth reconsidering or perhaps looking into a hybrid solution for the advanced synchronization milestone, in the case that we get so far in the development process.
+
+This leaves us with the two protocols we found for synchronization, \ac{NTP} and \ac{PTP}.
+\ac{NTP} is both a more mature and widespread protocol, furthermore we were also able to find examples of it being used on android whereas we could find no android apps using \ac{PTP}.
+While we have no proof of better or worse performance for the two, the maturity of \ac{NTP} and lackluster use of \ac{PTP} on android leads us to choose \ac{NTP} as the synchronization method for our basic synchronization milestone.
 %What way is "best"
 %What seems feasable/which one are we attempting
     %audio may be possible, but complexity is very high

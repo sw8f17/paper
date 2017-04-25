@@ -1,0 +1,11 @@
+@MISC{einstein,
+  title = {{Einstein Synchronization}},
+  url = {https://en.wikipedia.org/wiki/Einstein_synchronisation},
+  lastchecked = {24-04-2017},
+}
+
+@MISC{gpsclock,
+  title = {{GPS Clock Synchronization}},
+  url = {https://spectracom.com/resources/essential-education/gps-clock-synchronization},
+  lastchecked = {24-04-2017},
+}
