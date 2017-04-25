@@ -27,7 +27,8 @@ The following is a list of the possible solutions we have considered:
     \item GPS
     \item Audio
     \item Light cues.
-    \item Timestamps\mnote{Could expand this here already(NTP, PTP, GPS? may need to encapsulated here if not expandedd)}
+    \item \ac{NTP}
+    \item \ac{PTP}
 \end{itemize}
 An important thing to realize is also that if we were to synchronize the clocks, as in change the actual clock on the phones, they are required to be rooted for an application to do so.
 While we placed \ac{UX} as a non-requirement, we can not expect users to root their device as, depending on country, it may violate copyright, warranty, and/or terms on service on the phone.
@@ -37,7 +38,7 @@ As such we will strictly speaking not be synchronizing the clocks, rather we wil
 %https://spectracom.com/resources/essential-education/gps-clock-synchronization
 GPS satellites contain multiple atomic clocks.
 These clocks are monitored and controlled to keep them synchronized with the UTC standard.
-This provides us with an accurate clock to synchronize towards.\citep{gpsclock}
+This provides us with an accurate clock to synchronize towards.\cite{gpsclock}
 After testing this, by developing an application to retrieve time from GPS, it was clear to us that the GPS hardware in our phones are limited to 1Hz updates and do not provide millisecond precision, which makes us unable to use GPS as a solution.
 
 \subsubsection{Audio}\mnote{Can go into more detail about how we would solve the difficulties in this, but i do not think it is worth}
@@ -51,7 +52,7 @@ While this may not have an effect on humans given only a few milliseconds of var
 Alternatively we can use light rather than audio to synchronize.
 This would also allow devices to respond as to achieve synchronization better.
 The idea would be that a device uses the flashlight, once observed by another device it flashes back.
-Using Einstein Synchronization we can use the respective times collected from this, to synchronize the two devices \citep{einstein}.
+Using Einstein Synchronization we can use the respective times collected from this, to synchronize the two devices \cite{einstein}.
 This has the significant disadvantage that the facing of the phones becomes important for synchronization, as the phones must have their flashes and cameras facing the synchronization target.
 %https://en.wikipedia.org/wiki/Einstein_synchronisation
 
