@@ -4,14 +4,13 @@
     %To make psychoacoustic effects reality we need farily accurate manipulation depending on effect
     %Audible sync is not the same as clock synchronization, a slight desync in clocks may actually cause psychoacoustic effects (precedence effect), essentially providing us with an acceptable threshold for desynchronization.
 Simply sending playback commands between devices and hoping they are received fast enough to not disrupt the audible synchronization, is not a reliable solution and as such synchronization is important to the application.\mnote{What a sentence}
-In order for us to achieve any kind of audible synchronization we need reasonably accurate clock synchronization across multiple devices.
-The accuracy of the synchronization will also determine the degree to which we can manipulate playback to achieve psychoacoustic effects should we reach this milestone.
-This section explores and evaluates the methods we have considered using.
+An important distinction to make when discussing synchronization for our application is the difference between audible synchronization and clock synchronization.
+In order for us to achieve any kind of audible synchronization we need reasonably accurate clock synchronization across multiple devices such that we have a medium across devices for which we can decide when to execute playback control commands; as a result this chapter focuses on clock synchronization.
+The accuracy of the clock synchronization will also determine the degree to which we can manipulate playback to achieve psychoacoustic effects should we reach this milestone.
+This chapter explores and evaluates the methods we have considered using.
 %Why is sync of such importance?
 
-An important distinction to make when discussing synchronization for our application is the difference between audible synchronization and clock synchronization.
-This section focuses clock synchronization, the better clock synchronization we acquire the more accurate our playback manipulation becomes, and by extension our ability to create audible synchronization.
-In that audible synchronization is the goal for the application, this also means that precision in the range of milliseconds is sufficient, furthermore one of our requirements mentioned in \cnameref{cha:requirement_elicitation} is to compete with the \ac{SOTA} applications.
+In that audible synchronization is the goal for the application, this also means that precision in the range of milliseconds is sufficient, furthermore solving clock synchronization is also in accordance with requirement \cref{req:sync} in \cnameref{cha:requirement_elicitation}.
 
 %How can we achieve this synchronization
     %We propose and have looked into several methods
@@ -21,7 +20,7 @@ In that audible synchronization is the goal for the application, this also means
         %Messages/Protocols(my time, adjust to this)
             %We looked into some academic research on this, however found that it was mostly unimplemented theories, often a bit off the mark from what we wanted to do.
         %NTP(external sync/offset calculations)
-\section{Methods}
+\section{Clock Synchronization Methods}
 The following is a list of the possible solutions we have considered:
 \begin{itemize}
     \item GPS
@@ -30,8 +29,8 @@ The following is a list of the possible solutions we have considered:
     \item \ac{NTP}
     \item \ac{PTP}
 \end{itemize}
-An important thing to realize is also that if we were to synchronize the clocks, as in change the actual clock on the phones, they are required to be rooted for an application to do so.
-While we placed \ac{UX} as a non-requirement, we can not expect users to root their device as, depending on country, it may violate copyright, warranty, and/or terms on service on the phone.
+In order to change the actual clock on Android, the phone either requires user interaction to do so manually, or it must be rooted such that an application can do so.
+While we placed usability as a non-requirement, we can not expect users to root their device as, depending on country, it may violate copyright, warranty, and/or terms on service on the phone.
 As such we will strictly speaking not be synchronizing the clocks, rather we will keep track of each devices offset to the source we want to synchronize with.
 
 \subsubsection{GPS}
@@ -39,13 +38,13 @@ As such we will strictly speaking not be synchronizing the clocks, rather we wil
 GPS satellites contain multiple atomic clocks.
 These clocks are monitored and controlled to keep them synchronized with the UTC standard.
 This provides us with an accurate clock to synchronize towards.\cite{gpsclock}
-After testing this, by developing an application to retrieve time from GPS, it was clear to us that the GPS hardware in our phones are limited to 1Hz updates and do not provide millisecond precision, which makes us unable to use GPS as a solution.
+After testing this, by developing an application to retrieve time from GPS, it was clear to us that the GPS hardware in our phones are limited to 1 Hz updates and do not provide millisecond precision, which makes us unable to use GPS as a solution.
 
 \subsubsection{Audio}\mnote{Can go into more detail about how we would solve the difficulties in this, but i do not think it is worth}
 Another possible method is to use the audio to synchronize.
 This would have every device attempt to synchronize based on their perception.
 This method introduces several issues to be addressed, first of all there would be a ramp up time for the devices to figure out synchronization.
-Furthermore adding more devices to the network introduces more complexity as each introduces a new audio source, and with each device figuring out their own synchronization it is unlikely that the devices are synchronization towards the same source.
+Furthermore adding more devices to the network introduces more complexity as each introduces a new audio source, and with each device figuring out their own synchronization it is unlikely that the devices are synchronizing towards the same source.
 While this may not have an effect on humans given only a few milliseconds of variance, due to psychoacoustic effects, it complicates the synchronization of the devices and our possible manipulation.
 
 \subsubsection{Light Cues}
@@ -54,21 +53,24 @@ This would also allow devices to respond as to achieve synchronization better.
 The idea would be that a device uses the flashlight, once observed by another device it flashes back.
 Using Einstein Synchronization we can use the respective times collected from this, to synchronize the two devices \cite{einstein}.
 This has the significant disadvantage that the facing of the phones becomes important for synchronization, as the phones must have their flashes and cameras facing the synchronization target.
+Furthermore post--processing and hardware limitations provide further complexity and unreliability to this system, even more so with the shear variety of phones with varied camera and flash quality.
+
 %https://en.wikipedia.org/wiki/Einstein_synchronisation
 
 \subsubsection{\acl{NTP}}
 The last two options we are considering are to use existing protocols used for synchronization, one of which is \ac{NTP}.
 \ac{NTP} works by using a hierarchical system with high--precision atomic clocks at the highest level, each level is then synchronized towards devices from the higher level.
 \ac{NTP} polls multiple servers in the hierarchy and uses this to determine an actual time.
+Depending on the servers and network available, precision may vary but generally considered to be within tens of milliseconds
 Essentially the \ac{NTP} servers we will be polling act like a clock master, as such even the master of the network will have an offset.
 This also produces a hybrid solution between our proposed local centralized and remote centralized solutions, mentioned in \cnameref{sec:external_architectures}, by making the clock remote centralized, but maintaining all other control in a local network.
-The idea here would be for each device to keep track of their own \ac{NTP} offset, and then have then play in accordance with the time acquired from \ac{NTP}. 
+The idea here would be for each device to keep track of their own offset relative to \ac{NTP}, and then have them perform playback control in accordance with the time acquired from \ac{NTP}. 
 
 \subsubsection{\acl{PTP}}
 While \ac{NTP} requires internet to poll the \ac{NTP} hierarchy, \ac{PTP} is designed for LAN.
 \ac{PTP} on the other hand uses the \ac{BMC} algorithm to determine a master and thereby disallowing us from making this decision.
 If we are to use \ac{PTP} each device would keep track of their offset towards the master.
-While \ac{PTP} has an expected accuracy in the nanoseconds, contrary to NTP's up to ten milliseconds, this is due to the LAN design.
+While \ac{PTP} has an expected accuracy in the nanoseconds, contrary to NTP's up to tens milliseconds, this is due to the LAN design.
 This expected accuracy is also with a cable connection, with wireless, which we are using, it is not expected to have a precision in nanoseconds, rather the performance is expected to be similar to \ac{NTP}.
 
 %What are the primary issues regarding synchronization.
@@ -78,8 +80,8 @@ This expected accuracy is also with a cable connection, with wireless, which we 
 
 \section{Conclusion}
 While all the five presented solutions can be used to synchronize, some are simply superior and easier to work with than others, in this section we present our choice, as well as our reasoning for the choice we make.
-Unfortunately the hardware used in smartphones makes it such that GPS is not a feasible solution, this leaves us with four other possible solutions.
-With light cues we feel that the manual work required to make it work, i.e. facing the phones towards each other, makes this solution significantly inferior to the others, leaving us with three remaining possibilities.
+Unfortunately the GPS time features used in Android makes it such that GPS is not a feasible solution, this leaves us with four other possible solutions.
+With light cues we feel that the precision issues combined with manual work required to make it work, i.e. facing the phones towards each other, makes this solution significantly inferior to the others, leaving us with three remaining possibilities.
 
 We believe that all of the last three solutions could solve the issue and provide sufficient clock synchronization.
 However, as explained in the presentation of the audio synchronization this is comparatively far more complex to do than either of the two protocols we have mentioned.
@@ -87,8 +89,8 @@ With our initial milestone being basic synchronization, we do not wish to overly
 Despite us not using it initially, it may be worth reconsidering or perhaps looking into a hybrid solution for the advanced synchronization milestone, in the case that we get so far in the development process.
 
 This leaves us with the two protocols we found for synchronization, \ac{NTP} and \ac{PTP}.
-\ac{NTP} is both a more mature and widespread protocol, furthermore we were also able to find examples of it being used on android whereas we could find no android apps using \ac{PTP}.
-While we have no proof of better or worse performance for the two, the maturity of \ac{NTP} and lackluster use of \ac{PTP} on android leads us to choose \ac{NTP} as the synchronization method for our basic synchronization milestone.
+\ac{NTP} is both a more mature and widespread protocol, furthermore we were also able to find examples of it being used on Android whereas we could find no Android apps using \ac{PTP}.
+While we have no proof of better or worse performance for the two, the maturity of \ac{NTP} and lackluster use of \ac{PTP} on Android leads us to choose \ac{NTP} as the synchronization method for our basic synchronization milestone.
 %What way is "best"
 %What seems feasable/which one are we attempting
     %audio may be possible, but complexity is very high
