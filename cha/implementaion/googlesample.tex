@@ -1,4 +1,4 @@
-\section{Foundation of Our Android App}
+\section{Foundation of Our Android App}\label{sec:foundation_of_our_android_app}
 This section describes our implementation and adaptation of a sample app by Google called \textit{UniversalMusicPlayer}\footnote{https://github.com/googlesamples/android-UniversalMusicPlayer} as a foundation for our app.
 We use this sample such that we can focus our project on the device communication and psychoacoustic effects from the beginning, rather than building a generic Android music player with suitable \ac{UI}.
 The sample is a large codebase, as such we do not cover everything, but rather we present the elements and general implementation choices.
@@ -6,7 +6,7 @@ The code provided by Google follows the android development guidelines, as such 
 
 These basic building blocks of an Android application are: Activities and services.
 
-\subsubsection{Activities}
+\subsubsection{Activities}\label{subsec:activities}
 An \code{Activity} is the primary point of interaction between an application and user.
 Each different screen presented to the user is considered a different activity in the application, the media player we use have a fairly limited amount of activities, with \code{MusicPlayerActivity} being the main activity.
 
@@ -21,7 +21,7 @@ As such, we need some other way to keep the application alive, such that the app
 To do so we use a service.
 
 
-\subsubsection{Service}
+\subsubsection{Service}\label{subsec:services}
 A service is used to keep an app running in the background for any reason.
 They serve to allow apps to perform long--running operations, which happens to be exactly what a media player does.
 
