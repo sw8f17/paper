@@ -1,0 +1,355 @@
+\chapter{Test Scripts}\label{magicscripts}
+\begin{mdframed}
+    \begin{python}
+from adb_android import adb_android
+from time import sleep
+from audioshift import run_test
+
+offset = 0
+def do_test():
+    sleep(5)
+    #Actually test here
+    for i in range(5):
+        res = run_test(5)
+        print("Test {} {}:{}ms".format(i, offset, res[0][1]), flush=True)
+
+#Initial control
+do_test()
+
+#Test positive offsets
+for i in range(5):
+    sleep(1)
+    adb_android.shell("input tap " + str(0x1af) + " " + str(0x6a9))
+    sleep(10)
+    offset += 1
+    do_test()
+    \end{python}
+    \captionof{listing}{Test script for AmpMe for the playback control command next.}
+    \label{ampme_next}
+\end{mdframed}
+\clearpage
+
+\begin{mdframed}
+    \begin{python}
+from adb_android import adb_android
+from time import sleep
+from audioshift import run_test
+
+offset = 0
+def do_test():
+    sleep(5)
+    #Actually test here
+    for i in range(5):
+        res = run_test(5)
+        print("Test {} {}:{}ms".format(i, offset, res[0][1]), flush=True)
+
+#Initial control
+do_test()
+
+#Test positive offsets
+for i in range(7):
+    adb_android.shell("input tap " + str(0x22d) + " " + str(0x570))
+    sleep(1)
+    adb_android.shell("input keyevent 22") #Get focus
+    adb_android.shell("input keyevent 22") #Get focus
+    adb_android.shell("input keyevent 22")
+    sleep(1)
+    adb_android.shell("input tap " + str(0xae) + " " + str(0x49a))
+    offset += 1
+    do_test()
+
+#Reset offset
+adb_android.shell("input tap " + str(0x22d) + " " + str(0x570))
+sleep(1)
+adb_android.shell("input keyevent 22") #Get focus
+adb_android.shell("input keyevent 22") #Get focus
+for i in range(7):
+    adb_android.shell("input keyevent 21")
+    offset -= 1
+sleep(1)
+adb_android.shell("input tap " + str(0xae) + " " + str(0x49a))
+
+#Halfway control
+do_test()
+
+#Test negative offsets
+for i in range(7):
+    adb_android.shell("input tap " + str(0x22d) + " " + str(0x570))
+    sleep(1)
+    adb_android.shell("input keyevent 22") #Get focus
+    adb_android.shell("input keyevent 22") #Get focus
+    adb_android.shell("input keyevent 21")
+    sleep(1)
+    adb_android.shell("input tap " + str(0xae) + " " + str(0x49a))
+    offset -= 1
+    do_test()
+
+#Reset offset
+adb_android.shell("input tap " + str(0x22d) + " " + str(0x570))
+sleep(1)
+adb_android.shell("input keyevent 22") #Get focus
+adb_android.shell("input keyevent 22") #Get focus
+for i in range(7):
+    adb_android.shell("input keyevent 22")
+    offset += 1
+sleep(1)
+adb_android.shell("input tap " + str(0xae) + " " + str(0x49a))
+
+#End control
+do_test()
+    \end{python}
+    \captionof{listing}{Test script for AmpMe manual offset adjustment.}
+    \label{ampme_manualoffset}
+\end{mdframed}
+\clearpage
+
+\begin{mdframed}
+    \begin{python}
+from scipy.io import wavfile
+import numpy as np
+from numpy.fft import fft, ifft, fftshift
+import begin
+from itertools import combinations
+from glob import glob
+import os.path
+from matplotlib import pyplot as plt
+import sounddevice as sd
+
+
+def _cross_correlation_using_fft(x, y):
+    """
+    Make cross correlation between two signals using fft
+    :param x: Sample 1
+    :param y: Sample 2
+    :returns: Cross correlation of sample 1 and 2
+    """
+    f1 = fft(x)
+    f2 = fft(np.flipud(y))
+    cc = np.real(ifft(f1 * f2))
+    return fftshift(cc)
+
+
+def _compute_shift(x, y):
+    """
+    Compute the time shift of signal y in regards to signal x
+    :param x: Sample 1
+    :param y: Sample 2
+    :returns: < 0 means that y starts 'shift' time steps before x
+        > 0 means that y starts 'shift' time steps after x
+    """
+    assert len(x) == len(y)
+    c = _cross_correlation_using_fft(x, y)
+    assert len(c) == len(x)
+    zero_index = int(len(x) / 2) - 1
+    shift = zero_index - np.argmax(np.abs(c))
+    return shift
+
+def run_test(time):
+    duration = time # seconds
+    fs = 48000
+    sd.default.samplerate = fs
+    audio = sd.rec(duration * fs, channels=2, dtype="float64")
+    sd.wait()
+
+    combs = {}
+    for pair in combinations(range(audio.shape[1]), 2):
+        if not pair[0] in combs:
+            combs[pair[0]] = {}
+        shift = _compute_shift(audio[:, pair[1]], audio[:, pair[0]])
+        combs[pair[0]][pair[1]] = shift / (fs / 1000)
+    return combs
+
+@begin.subcommand
+def offline():
+    print("Offline analysis")
+    duration = 5 # seconds
+    fs = 48000
+    sd.default.samplerate = fs
+    audio = sd.rec(duration * fs, channels=2, dtype="float64")
+    sd.wait()
+
+    print("  [{} channels, {:.2f} sec. {} Hz]".format(audio.shape[1], audio.shape[0] / fs, fs))
+    for pair in combinations(range(audio.shape[1]), 2):
+        print("  Ch. {} -> {}:".format(*pair), end='')
+        shift = _compute_shift(audio[:, pair[1]], audio[:, pair[0]])
+        print(" {:>5} sample(s) [{:>7,.3f} ms]".format(shift, shift / (fs / 1000)))
+
+    sd.play(audio)
+    sd.wait()
+
+def callback(indata, outdata, frames, time, status):
+    global buffc, buff
+    if status:
+        print(status, flush=True)
+    outdata[:] = indata
+    fs = 48000
+
+    audio = indata
+    print("  [{} channels, {:.2f} sec. {} Hz]".format(audio.shape[1], audio.shape[0] / fs, fs))
+    for pair in combinations(range(audio.shape[1]), 2):
+        print("  Ch. {} -> {}:".format(*pair), end='')
+        shift = _compute_shift(audio[:, pair[1]], audio[:, pair[0]])
+        print(" {:>5} sample(s) [{:>7,.3f} ms]".format(shift, shift / (fs / 1000)))
+
+@begin.subcommand
+def online():
+    print("Online analysis")
+    duration = 10 # seconds
+    fs = 48000
+    sd.default.samplerate = fs
+    with sd.Stream(channels=2, blocksize=1*fs, dtype="float32", callback=callback):
+        sd.sleep(duration*10000000)
+
+@begin.subcommand
+def file(in_file: 'Wavfile(s) to test. Glob syntax can be used'):
+    for file in glob(in_file):
+        print("\nFile:", os.path.basename(file), end='')
+        rate = 0
+        audio = None
+        try:
+            rate, audio = wavfile.read(file)
+        except:
+            print("  Not wav file!")
+            continue
+        print("  [{} channels, {:.2f} sec. {} Hz]".format(audio.shape[1], audio.shape[0] / rate, rate))
+        for pair in combinations(range(audio.shape[1]), 2):
+            print("  Ch. {} -> {}:".format(*pair), end='')
+            shift = _compute_shift(audio[:, pair[1]], audio[:, pair[0]])
+            print(" {:>5} sample(s) [{:>7,.3f} ms]".format(shift, shift / (rate / 1000)))
+
+@begin.start(auto_convert=True)
+def main():
+    print("A")
+    \end{python}
+    \captionof{listing}{A magic script}
+    \label{mainmagic}
+\end{mdframed}
+\clearpage
+
+\begin{mdframed}
+    \begin{python}
+from adb_android import adb_android
+from time import sleep
+from audioshift import run_test
+
+time = 0
+def do_test():
+    sleep(5)
+    #Actually test here
+    for i in range(5):
+        res = run_test(5)
+        print("Test {} {}:{}ms".format(i, time, res[0][1]), flush=True)
+
+#Initial control
+for i in range(5):
+    #Next
+    adb_android.shell("input tap " + str(0x3fb) + " " + str(0x8ea))
+    #Play/Pause
+    adb_android.shell("input tap " + str(0x2c2) + " " + str(0x8f4))
+    sleep(5)
+    #Prev
+    adb_android.shell("input tap " + str(0x1aa) + " " + str(0x8f9))
+    #Prev
+    adb_android.shell("input tap " + str(0x1aa) + " " + str(0x8f9))
+    #Play/Pause
+    adb_android.shell("input tap " + str(0x2c2) + " " + str(0x8f4))
+    sleep(10)
+    time = i
+    do_test()
+    \end{python}
+    \captionof{listing}{Test script for soundseeder for the playback control command next.}
+    \label{soundseeder_next}
+\end{mdframed}
+\clearpage
+
+\begin{mdframed}
+    \begin{python}
+from adb_android import adb_android
+from time import sleep
+from audioshift import run_test
+
+offset = 0
+def do_test():
+    sleep(5)
+    #Actually test here
+    for i in range(5):
+        res = run_test(5)
+        print("Test {} {}ms:{}ms".format(i, offset, res[0][1]))
+
+#Initial control
+do_test()
+
+#Test positive offsets
+for i in range(10):
+    adb_android.shell("input tap " + str(0x3ec) + " " + str(0xa7))
+    sleep(1)
+    adb_android.shell("input keyevent 22") #Get focus
+    adb_android.shell("input keyevent 22")
+    adb_android.shell("input tap " + str(0x390) + " " + str(0x49c))
+    offset += 40
+    do_test()
+
+#Reset offset
+adb_android.shell("input tap " + str(0x3ec) + " " + str(0xa7))
+sleep(1)
+adb_android.shell("input keyevent 21") #Get focus
+for i in range(10):
+    adb_android.shell("input keyevent 21")
+    offset -= 40
+adb_android.shell("input tap " + str(0x390) + " " + str(0x49c))
+
+#Halfway control
+do_test()
+
+#Test negative offsets
+for i in range(10):
+    adb_android.shell("input tap " + str(0x3ec) + " " + str(0xa7))
+    sleep(1)
+    adb_android.shell("input keyevent 21") #Get focus
+    adb_android.shell("input keyevent 21")
+    adb_android.shell("input tap " + str(0x390) + " " + str(0x49c))
+    offset -= 40
+    do_test()
+
+#Reset offset
+adb_android.shell("input tap " + str(0x3ec) + " " + str(0xa7))
+sleep(1)
+adb_android.shell("input keyevent 22") #Get focus
+for i in range(10):
+    adb_android.shell("input keyevent 22")
+    offset += 40
+adb_android.shell("input tap " + str(0x390) + " " + str(0x49c))
+
+#End control
+do_test()
+    \end{python}
+    \captionof{listing}{Test script for soundseeder manual offset adjustment.}
+    \label{soundseeder_manualoffset}
+\end{mdframed}
+\clearpage
+
+\begin{mdframed}
+    \begin{python}
+from adb_android import adb_android
+from time import sleep
+from audioshift import run_test
+
+time = 0
+def do_test():
+    sleep(5)
+    #Actually test here
+    for i in range(5):
+        res = run_test(5)
+        print("Test {} {}:{}ms".format(i, time, res[0][1]), flush=True)
+
+#Initial control
+for i in range(5):
+    adb_android.shell("input tap " + str(0x37d) + " " + str(0x79))
+    sleep(1)
+    time = i
+    do_test()
+    \end{python}
+    \captionof{listing}{Test script for soundseeder resync feature.}
+    \label{soundseeder_resync}
+\end{mdframed}
+\clearpage

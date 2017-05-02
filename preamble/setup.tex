@@ -255,11 +255,15 @@
 %Minted makes nice looking code listings, but requires listings
 \usepackage{minted}
 \newminted[java2]{java}{frame=leftline, framesep=2mm, linenos, fontsize=\footnotesize, baselinestretch=1.1, autogobble}
+\newminted[python]{python}{frame=leftline, framesep=2mm, linenos, fontsize=\footnotesize, baselinestretch=1.1, autogobble}
 \newminted[xmlblock]{xml}{frame=leftline, framesep=2mm, linenos, fontsize=\footnotesize, baselinestretch=1.1, autogobble}
 \newminted[bashblock]{shell}{frame=leftline, framesep=2mm, linenos, fontsize=\footnotesize, baselinestretch=1.1, autogobble, breaklines, breakanywhere}
 \newmintedfile{java}{frame=leftline, framesep=2mm, linenos, fontsize=\footnotesize, baselinestretch=1.1}
 \usemintedstyle{tango}
 \usepackage{tcolorbox}
+
+\usepackage{mdframed}
+\mdfsetup{topline=false, rightline=false, leftline=false, bottomline=false}
 
 %Acronyms and Fixmes
 \usepackage{acronym}
