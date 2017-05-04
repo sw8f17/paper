@@ -1,0 +1,8 @@
+@MISC{nearby_messages,
+  author = {{Google Developers}},
+  title = {Overview},
+  month = {5},
+  year = {2016},
+  url = {https://developers.google.com/nearby/messages/overview},
+  lastchecked = {04-05-2017},
+}

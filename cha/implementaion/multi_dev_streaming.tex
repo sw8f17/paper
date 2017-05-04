@@ -1,0 +1,32 @@
+\chapter{Multi-device Streaming}
+In this chapter we will describe...
+
+\section{Communication protocols}
+In \cref{sec:external_architectures} it was discussed what type of external architecture should be used in the app.
+The conclusion of that discussion was to go with a local centralized architecture.
+This gives the requirement that the communication protocols, chosen for the communication between devices,
+should adhear to the local centralized architecture.
+This meant that the protocol used have to connect the devices, without the requirement of the Internet or external hardware, to a chosen master device.
+
+In the attempt to fulfil the requirement posed in \cref{sec:external_architectures}, we found three protols: Nearby Messages API\footnote{\url{https://developers.google.com/nearby/messages/overview}}, Nearby connections API\footnote{\url{https://developers.google.com/nearby/connections/overview}}, and WiFi Direct\footnote{\url{http://www.wi-fi.org/discover-wi-fi/wi-fi-direct}}.
+We will describe these protocols and choose on to implement in the app in the following text.
+
+\subsection{Nearby Messages API}
+The Nearby Messages API is a API by Google which lets one pass small binary payloads between internet connected Android and iOS devices. 
+It uses a combination of Bluetooth, Bluetooth Low Energy, WiFi and near--ultrasonic audio to communicate between devices.
+The Nearby Messages API uses Googles servers to relay the payloads between devices, hence requiring internet to be working. 
+Furthermore since it had to connect to a Google server, we experienced delay between the messages,
+which we estimate will make it impossible for us to fulfilling requirement \ref{req:manipulate} from \cref{cha:requirement_elicitation}.
+Therefore we do not choose to implement the Nearby Messages API.\cite{nearby_messages}
+
+\subsection{Nearby connections AP}
+
+
+\subsection{WiFi Direct}
+
+
+indledende med hvilket design vi vil implementere, referer til cha 8 architecture
+
+historien om wifi direct, nearby connection api, nearby messaging api
+hurtig disreard ad-hoc netværk - selv sætte wifi op, dele kode
+nearbymistede hosten da den virker som router
