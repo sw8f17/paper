@@ -1,12 +1,12 @@
-\section{Foundation of Our Android App}
-This section describes our implementation and adaptation of a sample app by Google called \textit{UniversalMusicPlayer}\footnote{https://github.com/googlesamples/android-UniversalMusicPlayer} as a foundation for our app.
-We use this sample such that we can focus our project on the device communication and psychoacoustic effects from the beginning, rather than building a generic Android music player with suitable \ac{UI}.
-The sample is a large codebase, as such we do not cover everything, but rather we present the elements and general implementation choices.
-The code provided by Google follows the android development guidelines, as such this section will introduce the basic android building blocks that we use in further development of the application.
+\section{Foundation of Our Android App}\label{sec:foundation_of_our_android_app}
+This section describes our implementation and adaptation of an example app by Google called \textit{UniversalMusicPlayer}\footnote{https://github.com/googlesamples/android-UniversalMusicPlayer} as a foundation for our app.
+We use this example such that we can focus our project on the device communication and psychoacoustic effects from the beginning, rather than building a generic Android music player with suitable \ac{UI}.
+The example is a large codebase, as such we do not cover everything, but rather we present the elements and general implementation choices.
+The code provided by Google follows the Android development guidelines, as such this section will introduce the basic Android building blocks that we use in further development of the application.
 
-These basic building blocks of an Android application are: Activities and services.
+These basic building blocks of an Android application are: activities and services.
 
-\subsubsection{Activities}
+\subsubsection{Activities}\label{subsec:activities}
 An \code{Activity} is the primary point of interaction between an application and user.
 Each different screen presented to the user is considered a different activity in the application, the media player we use have a fairly limited amount of activities, with \code{MusicPlayerActivity} being the main activity.
 
@@ -21,7 +21,7 @@ As such, we need some other way to keep the application alive, such that the app
 To do so we use a service.
 
 
-\subsubsection{Service}
+\subsubsection{Service}\label{subsec:services}
 A service is used to keep an app running in the background for any reason.
 They serve to allow apps to perform long--running operations, which happens to be exactly what a media player does.
 
@@ -31,5 +31,17 @@ A bound service is spawned by another app because it wants to utilize the servic
 Essentially a bound service is used in order for two processes to communicate, these however are only relevant as long as the application is relevant, as such if the application that caused the service to be spawned is closed, then the service can be killed alongside the application.\cite{androidFundamentals}
 
 In googlesamples we have a started service, \code{MusicService}.
-\code{MusicService} extends the \code{MediaBrowserServiceCompat} class and implements a playback enabling interface.
+\sloppy\code{MusicService} extends the \code{MediaBrowserServiceCompat} class and implements a playback enabling interface.
 It creates a \code{MediaSession}, in doing so it allows the client to create a \code{MediaController} which can send commands to the \code{MediaSession} and thereby perform playback controls without the app having to be actively used.
+
+In \cref{fig:simple_class_diagram}, it is shown how the aforementioned classes belong together.
+As previously mentioned, \code{MusicPlayerActivity} inherits from \code{BaseActivity}, which is shown in \cref{fig:simple_class_diagram}.
+This is a very simple and minimalistic representation of the app, there are other classes, but these are not relevant in this context.
+It is only \code{MusicPlayerActivity}, \code{BaseActivity}, and \code{MusicService} that is shown, since the rest of the mentioned classes are a part of the Android library. 
+
+\begin{figure}[!bht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/simple_class_diagram.png}
+    \caption{A simple diagram of the essential functionality from the example app.}
+    \label{fig:simple_class_diagram}
+\end{figure}

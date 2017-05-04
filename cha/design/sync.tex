@@ -23,14 +23,16 @@ In that audible synchronization is the goal for the application, this also means
             %We looked into some academic research on this, however found that it was mostly unimplemented theories, often a bit off the mark from what we wanted to do.
         %NTP(external sync/offset calculations)
 \section{Clock Synchronization Methods}
-The following is a list of the possible solutions we have considered:
-\begin{itemize}
-    \item GPS
-    \item Audio
-    \item Light cues.
-    \item \ac{NTP}
-    \item \ac{PTP}
-\end{itemize}
+In this section we will describe, discuss, and compare the following methods of synchronization:
+\begin{multicols}{2}
+    \begin{itemize}
+        \item GPS
+        \item Audio
+        \item Light cues
+        \item \ac{NTP}
+        \item \ac{PTP}
+    \end{itemize}
+\end{multicols}
 In order to change the actual clock on Android, the phone either requires user interaction to do so manually, or it must be rooted such that an application can do so.
 While we placed usability as a non-requirement, we can not expect users to root their device as, depending on country, it may violate copyright, warranty, and/or terms on service on the phone.
 As such we will strictly speaking not be synchronizing the clocks, rather we will keep track of each devices offset to the source we want to synchronize with.
@@ -83,10 +85,12 @@ This expected accuracy is also with a cable connection, with wireless, which we 
 
 \section{Conclusion}
 While all the five presented solutions can be used to synchronize, some are simply superior and easier to work with than others, in this section we present our choice, as well as our reasoning for the choice we make.
-Unfortunately the GPS time features used in Android makes it such that GPS is not a feasible solution, this leaves us with four other possible solutions.
-With light cues we feel that the precision issues combined with manual work required to make it work, i.e. facing the phones towards each other, makes this solution significantly inferior to the others, leaving us with three remaining possibilities.
+In \cref{tab:pros_cons_sync} the pros and cons of the different synchronization methods can be seen and compared. 
 
-We believe that all of the last three solutions could solve the issue and provide sufficient clock synchronization.
+Unfortunately the GPS time features used in Android makes it such that GPS is not a feasible solution, since the precision is not expected to be able to fulfil requirement \ref{req:manipulate} from \cref{cha:requirement_elicitation}, which leaves us with four other possible solutions.
+With light cues we feel that the precision issues, again not fulfilling requirement \ref{req:manipulate} from \cref{cha:requirement_elicitation}, combined with manual work required to make it work, i.e. facing the phones towards each other, makes this solution significantly inferior to the others, leaving us with three remaining possibilities.
+
+We believe that all of the last three solutions could solve the issue and provide sufficient clock synchronization, and fulfilling requirement \ref{req:manipulate} from \cref{cha:requirement_elicitation}.
 However, as explained in the presentation of the audio synchronization this is comparatively far more complex to do than either of the two protocols we have mentioned.
 With our initial milestone being basic synchronization, we do not wish to overly complicate it, as such our initial solution will not be utilizing audio for synchronization.
 Despite us not using it initially, it may be worth reconsidering or perhaps looking into a hybrid solution for the advanced synchronization milestone, in the case that we get so far in the development process.
@@ -100,3 +104,16 @@ While we have no proof of better or worse performance for the two, the maturity 
     %light cues arent feasable as it requires facing the phones properly
 %could we merge/utilize elements from multiple ideas to acquire a superior form of synchronization
 %This would solve "basic" synchronization milestone, how does it affect advanced synchronization milestone, are other solutions better for this? in that case why not start with those?
+
+\begin{table}
+    \begin{tabularx}{\textwidth}{XXX}\toprule
+        \textbf{Sync method} & \textbf{Pros} & \textbf{Cons} \\ \midrule
+        GPS     & Precise clocks. & Limited to 1 Hz updates on Android. \\
+        Audio   & No external hardware requirements. & Very complicated with large number of devices, \newline large synchronization time, \newline audio lantency is different from device to device. \\
+        Light cues & No external hardware requirements. & Require cameras to face each other, \newline hardware limitations proces further complexity, \newline requires manual work. \\
+        \ac{NTP} & High--precition clocks, \newline mature protocol. & Requires internet. \\
+        \ac{PTP} & Do not require internet, \newline accuracy in nanoseconds & Accuracy in nanoseconds only with cabled network \newline not very widespread among Android apps. \\ \bottomrule
+    \end{tabularx}
+    \caption{Pros and cons of the different synchronization methods.}
+    \label{tab:pros_cons_sync}
+\end{table}
