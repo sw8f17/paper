@@ -18,3 +18,18 @@ Since we cannot expect the clocks on each Android phone to be in--sync, we need 
 % Communication over network
 	% For data
 	% For commands
+
+The central concept of our idea to achieve synchronization and control is for the devices to have a common clock, and issue all commands with a timestamp for when the action is supposed to occur. 
+This proposes several problems which would have to be resolved. 
+Among these are: 
+
+\begin{itemize}
+	\item How do we connect the devices?
+	\item How do we give the devices a common clock?
+	\item How do we transmit audio?
+	\begin{itemize}
+		\item Do we send the raw files to each device ahead of time?
+		\item Do we send parts of files to each devices, in a streaming manner?
+		\item Do we need to do some pre--computation on the audio before transmitting it?
+	\end{itemize}
+\end{itemize}
