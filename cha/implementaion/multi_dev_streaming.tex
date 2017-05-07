@@ -5,28 +5,51 @@ In this chapter we will describe...
 In \cref{sec:external_architectures} it was discussed what type of external architecture should be used in the app.
 The conclusion of that discussion was to go with a local centralized architecture.
 This gives the requirement that the communication protocols, chosen for the communication between devices,
-should adhear to the local centralized architecture.
+should adhere to the local centralized architecture.
 This meant that the protocol used have to connect the devices, without the requirement of the Internet or external hardware, to a chosen master device.
 
 In the attempt to fulfil the requirement posed in \cref{sec:external_architectures}, we found three protols: Nearby Messages API\footnote{\url{https://developers.google.com/nearby/messages/overview}}, Nearby connections API\footnote{\url{https://developers.google.com/nearby/connections/overview}}, and WiFi Direct\footnote{\url{http://www.wi-fi.org/discover-wi-fi/wi-fi-direct}}.
 We will describe these protocols and choose on to implement in the app in the following text.
 
 \subsection{Nearby Messages API}
-The Nearby Messages API is a API by Google which lets one pass small binary payloads between internet connected Android and iOS devices. 
+The Nearby Messages API is an API by Google which lets one pass small binary payloads between internet connected Android and iOS devices. 
 It uses a combination of Bluetooth, Bluetooth Low Energy, WiFi and near--ultrasonic audio to communicate between devices.
-The Nearby Messages API uses Googles servers to relay the payloads between devices, hence requiring internet to be working. 
+The Nearby Messages API uses Google's servers to relay the payloads between devices, hence requiring internet to be working. 
 Furthermore since it had to connect to a Google server, we experienced delay between the messages,
 which we estimate will make it impossible for us to fulfilling requirement \ref{req:manipulate} from \cref{cha:requirement_elicitation}.
 Therefore we do not choose to implement the Nearby Messages API.\cite{nearby_messages}
 
-\subsection{Nearby connections AP}
+\subsection{Nearby Connections API}
+The Nearby Connections API is an API by Google which lets one discover, connects and exchange messages with other devices on a network. 
+It can exchange messages through WiFi in real--time.\cite{nearby_connection} 
+The Nearby Connections API fulfil the requirements put by the external architecture in \cref{sec:external_architectures},
+since internet is not required, and no external hardware is required as well.
 
+When tried in a test environment, we used a WiFi ad--hoc network to test it,
+since the network at Aalborg University is configured so devices can not connect to each other.
+Normal WiFi can be used, but when there is no access to WiFi, for instance outside, an ad--hoc WiFi network must be used. 
+We found an ad--hoc network to be an annoyance to set up with having to connect each device to the network.
+When using the ad--hoc network hosted by a device, in this case a smartphone,
+the device which hosted the network could not be a part of the network, but only route traffic.
+This was a huge downside and it would be hard to justify that one device have to act as a router for the network.
+Therefore we choose not to use the Nearby Connections API. 
 
 \subsection{WiFi Direct}
+WiFi Direct is a technology which enables devices with WiFi to directly connect to one another,
+without having to use a traditional router, and it do not need internet to function.
+WiFi Direct can be used to make one--to--one connection or to create a group of devices,
+which can connect to each other simultaneously.\cite{wifi_direct}
+WiFi Direct fulfil the requirements put by the external architecture in \cref{sec:external_architectures},
+since internet is no requirement, and no external hardware is required. 
 
+When tried in a test environment, WiFi Direct worked as expected,
+and there was no requirement for one device to act as router, as with the Nearby Connections API.
+Therefore WiFi Direct is chosen for the communication protocol in the app.
 
-indledende med hvilket design vi vil implementere, referer til cha 8 architecture
-
-historien om wifi direct, nearby connection api, nearby messaging api
-hurtig disreard ad-hoc netværk - selv sætte wifi op, dele kode
-nearbymistede hosten da den virker som router
+\subsection{Summary}
+The requirements in \cref{sec:external_architectures} states that the communication protocol should work without internet and external hardware.
+We found three different ways of connecting devices: Nearby Messages API, Nearby Connections API, and WiFi Direct.
+The Nearby Messages API required internet and was slow, hence not fulfilling the requirements.
+The Nearby Connections API required a device to act as router when an ad--hoc network was used, thus not being an ideal solution.
+The last, WiFi Direct, did not require internet or external hardware, and when tested it worked as expected.
+Therefore WiFi Direct is chosen to create the connection between the different devices. 
