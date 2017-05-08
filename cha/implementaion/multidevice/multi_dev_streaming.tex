@@ -1,4 +1,4 @@
-\chapter{Multi-device Streaming}
+\chapter{Multi--device Streaming}
 In this chapter we will describe...
 
 \section{Communication protocols}
@@ -8,14 +8,14 @@ This gives the requirement that the communication protocols, chosen for the comm
 should adhere to the local centralized architecture.
 This meant that the protocol used have to connect the devices, without the requirement of the Internet or external hardware, to a chosen master device.
 
-In the attempt to fulfil the requirement posed in \cref{sec:external_architectures}, we found three protols: Nearby Messages API\footnote{\url{https://developers.google.com/nearby/messages/overview}}, Nearby connections API\footnote{\url{https://developers.google.com/nearby/connections/overview}}, and WiFi Direct\footnote{\url{http://www.wi-fi.org/discover-wi-fi/wi-fi-direct}}.
+In the attempt to fulfill the requirement posed in \cref{sec:external_architectures}, we found three protocols: Nearby Messages API\footnote{\url{https://developers.google.com/nearby/messages/overview}}, Nearby connections API\footnote{\url{https://developers.google.com/nearby/connections/overview}}, and WiFi Direct\footnote{\url{http://www.wi-fi.org/discover-wi-fi/wi-fi-direct}}.
 We will describe these protocols and choose on to implement in the app in the following text.
 
 \subsection{Nearby Messages API}
 The Nearby Messages API is an API by Google which lets one pass small binary payloads between internet connected Android and iOS devices. 
 It uses a combination of Bluetooth, Bluetooth Low Energy, WiFi and near--ultrasonic audio to communicate between devices.
-The Nearby Messages API uses Google's servers to relay the payloads between devices, hence requiring internet to be working. 
-Furthermore since it had to connect to a Google server, we experienced delay between the messages,
+The Nearby Messages API uses Google's servers to relay the payloads between devices, hence the internet requirement. 
+Furthermore since it has to connect to a Google server, we experienced delay between the messages when we tested it,
 which we estimate will make it impossible for us to fulfilling requirement \ref{req:manipulate} from \cref{cha:requirement_elicitation}.
 Therefore we do not choose to implement the Nearby Messages API.\cite{nearby_messages}
 
@@ -31,12 +31,14 @@ Normal WiFi can be used, but when there is no access to WiFi, for instance outsi
 We found an ad--hoc network to be an annoyance to set up with having to connect each device to the network.
 When using the ad--hoc network hosted by a device, in this case a smartphone,
 the device which hosted the network could not be a part of the network, but only route traffic.
+The reason for this is that the Nearby Connections API uses multicast DNS to discover devices, and such packets is not sent received by the host of the ad--hoc network.
 This was a huge downside and it would be hard to justify that one device have to act as a router for the network.
 Therefore we choose not to use the Nearby Connections API. 
 
 \subsection{WiFi Direct}
 WiFi Direct is a technology which enables devices with WiFi to directly connect to one another,
-without having to use a traditional router, and it do not need internet to function.
+without having to use an access point, and it do not need internet to function.
+In Android this technology is called ``Wi-Fi Peer-to-Peer''\footnote{\url{https://developer.android.com/guide/topics/connectivity/wifip2p.html}}. 
 WiFi Direct can be used to make one--to--one connection or to create a group of devices,
 which can connect to each other simultaneously.\cite{wifi_direct}
 WiFi Direct fulfil the requirements put by the external architecture in \cref{sec:external_architectures},
