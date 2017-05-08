@@ -8,8 +8,8 @@ This means that we need some way of continuously integrating new features, bug--
 However, we still want to have some assurance of our product working as intended, which means that we also need to perform some form of testing.
 
 \bigskip
-To meet these needs, we utilize \textit{continuous integration}, or \textit{CI}, in our development process.
-This CI includes conducting the following steps in a sandboxed environment, meaning that no state is saved across runs:
+To meet these needs, we utilize \ac{CI}, in our development process.
+This \ac{CI} includes conducting the following steps in a sandboxed environment, meaning that no state is saved across runs:
 \begin{enumberate}
 \item checkout the changed code base to be build in two seperate build processes;
 \begin{enumberate}
@@ -27,7 +27,7 @@ This ensures that if both processes pass successfully, the new or changed code c
 
 To carry out these tasks we use a piece of software called Jenkins\footnote{\url{https://jenkins.io/}}, which is a build automation server.
 The build and build process, our Android app in this case, is then defined in a \textit{Jenkinsfile}, which is a recipe with steps to follow for the Jenkins server.
-In our case, the output of the continuous integration using a Jenkins server, are test and linting reports, documentation, and the aforementioned packaged apk--file.
+In our case, the output of the \acl{CI} using a Jenkins server, are test and linting reports, documentation, and the aforementioned packaged apk--file.
 
 The process of developing on our Android app, is based upon a workflow revolving around source code management using \textit{git}\footnote{\url{https://git-scm.com/}}, and project management using Phabricator\footnote{\url{https://www.phacility.com/}} and the Github\footnote{\url{https://github.com}} feature \textit{pull requests}.
 This development process will be further explained and discussed in \cnameref{cha:development_method}.
@@ -35,7 +35,7 @@ This development process will be further explained and discussed in \cnameref{ch
 We set up the continuous integration, such that any pull request and update to the master branch activates the automated build system on a in--house Jenkins server.
 This ensures that code, to be merged into the master branch and hereby the current product, will be required to pass the continuous integration process.
 
-The workflow of our Jenkins server can be seen on \cref{fig:jenkins_workflow}, where we have simplified the process for illustration purposes; e.g. the three last steps are executed for each processing, i.e. both the clean run and the one merged with the master branch.
+The workflow of our Jenkins server can be seen on \cref{fig:jenkins_workflow}, where we have simplified the process for illustration purposes; e.g.~the three last steps are executed for each processing, i.e.~both the clean run and the one merged with the master branch.
 Moreover, the step which includes testing, linting, and generating documentation, should be seen as a parallel process, where the subcomponents are executed in parallel on the server.
 
 \begin{figure}[tb]
@@ -46,7 +46,7 @@ Moreover, the step which includes testing, linting, and generating documentation
 A consequence of the automated build system, is then that when a developer reviews new or changed code in pull request, they are assisted by the linting and tests reports, and are furthermore able to quickly try out the application by downloading and installing the packaged apk on their own device.
 
 \bigskip
-Another benefit to the continuous integration and automated build system, we set up, is that it also supports an agile development process, especially since all updated to the master branch, are presented as a ready--to--use product in the form of a downloadable apk.
+Another benefit to the \acl{CI} and automated build system, we set up, is that it also supports an agile development process, especially since all updated to the master branch, are presented as a ready--to--use product in the form of a downloadable apk.
 
 In a future iteration, one could even integrate continuous deployment in the automated build system, such that all approved changes to the master branch would be pushed directly to a distribution platform such as Google Play.
 
