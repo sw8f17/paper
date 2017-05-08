@@ -1,2 +1,30 @@
-\chapter{Psychoacoustic Effects}
-\mnote{write this}
+\section{Psychoacoustic Effects}
+%%META%%
+Throughout the paper we refer to psychoacoustic effects.
+Psychoacoustic effects is the study of sound perception, and as such covers a wide range of effects, of which a few have an impact on our subject.
+The effects studied in psychoacoustics primarily relate to music therapy and speech, as such few of the theories explored are relevant for a multi--device speaker scenario. 
+Despite this, psychoacoustics is still a broad field of study, and its applied context often includes computer science, as such there may very well be far more psychoacoustic effects that the problem we propose could benefit from. 
+However, for now we focus on one effect, namely the \textit{Haas effect} known also as the precedence effect and law of the first wavefront.
+
+\subsection{Precedence Effect}
+The precedence effect has two primary effects, it masks sound localization and increases perceived volume.
+According to the precedence effect, when multiple identical sounds are received within a sufficient time delay, the sounds are instead perceived as one.
+This masks sound localization, with the first sound wave dominating the perceived origin of the sound, however it also increases the perceived volume.
+
+This effect means that the used devices do not have to play sound in perfect sync, rather they all need to play sound within a time frame as for the effect to occur.
+The threshold for this effect is called an echo threshold, i.e.~the delay that can be between two sound waves, before the second wave is perceived as an echo.
+Several factors affect this threshold, a particular factor is sound complexity, a simple sound like a click has a low threshold of merely a couple of milliseconds, whereas for more complex sound, such as music, the effect may still appear at a delay of $100 ms$.\cite{precedence_wiki}
+
+The threshold does vary depending on multiple factors, including the sounds composition, as a result expecting it to work perfectly with a $100 ms$ delay is not something we can rely on.
+For speech the effect should appear if the delay is kept under 50 ms, and when using the effect for mixing sounds, an upper threshold of $30 - 40 ms$ seems to be used.
+Furthermore if the delay is too low, the increase in volume will not appear, yet the listener will still only perceive one sound.\cite{useprecedence1}\cite{useprecedence2}\cite{useprecedence3}
+
+Comparing the differences in echo threshold given by research and the factors that change that threshold to the actual use of the effect in sound mixing, we are aiming for a delay between devices less than $40 ms$, which fits with actual use of the effect in sound mixing.
+
+\subsection{3D Audio Effect}
+Another psychoacoustic we could attempt to utilize depending on the time available is to manipulate the listeners sound localization.
+This would require a slight refinement of the problem, as the focus would be on 3D audio effects rather than multiple devices playing in auditory sync.
+It may very well be possible to merge the two effects into the same solution, however with the time requirements, solving both issues would not be feasible, particularly because creating 3D audio effects would be heavily reliant on precise control of the audio playback.
+
+Rather than smartphones this would preferably use speakers, and then perhaps a smartphone to designate where it should seem the sound is originating from.
+For this to be made in conjunction with the proposed multiple smartphone problem, that would have to already be solved with accurate playback offset manipulation, which is a project in itself.

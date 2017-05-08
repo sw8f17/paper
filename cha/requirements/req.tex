@@ -30,17 +30,17 @@ The technical requirements are concerned with features relevant for how the devi
         so the device plays in sync with the rest of the connected devices in the session.
 
     \begin{eletterate}
-        \item \textbf{Following an automatic synchronization, the audio offset between any two devices must not exceed $x$ ms.} \hfill\\
-            With the ability to synchronize automatically, the audio offset between any two devices must not exceed $x$ ms.
-            $x$ is the maximum desynchronization that will not be noticed by a listener.\tnwarning{x, y, z and n must be specified.}
+        \item \textbf{Following an automatic synchronization, the audio offset between any two devices must not exceed $40$ ms.} \hfill\\
+            With the ability to synchronize automatically, the audio offset between any two devices must not exceed $40$ ms.
+            $40$ is the maximum desynchronization that will not be noticed by a listener.\tnwarning{x, y, z and n must be specified.}
 
         \item \textbf{The change in offset following a change in media must not exceed $y$ ms.} \hfill\\
             When the media is changed, for instance a change in song, the offset change must not exceed $y$ ms.
-            This means that the media change must be consistent to the extent of $y$ ms.
+            This means that the media change must be consistent to the extent of $y$ ms.\mnote{fill in y, also what is important is that the change does not push the first statement over 40 ms, which makes it dependent on the current delay, if the delay is +2 every time this also creates a max limit on number of songs you can play}
 
         \item \textbf{The change in offset after pausing, and resuming playback of any media must not exceed $y$ ms.} \hfill\\
             When the media is paused and resumed by the session host, the offset change must not exceed $y$ ms.
-            This means that the pause and subsequently resuming must be consistent to the extend of $y$ ms.
+            This means that the pause and subsequently resuming must be consistent to the extend of $y$ ms.\mnote{fill in y, also what is important is that the change does not push the first statement over 40 ms, which makes it dependent on the current delay, if the delay is +2 every time this also creates a max limit on number of pauses u can do}
 
         \item \textbf{The drift must not exceed $z$ ms over $n$ seconds.} \hfill\\
             When the media have been playing for $n$ seconds, the drift must not exceed $z$ ms.
