@@ -32,7 +32,7 @@ In our case, the output of the continuous integration using a Jenkins server, ar
 The process of developing on our Android app, is based upon a workflow revolving around source code management using \textit{git}\footnote{\url{https://git-scm.com/}}, and project management using Phabricator\footnote{\url{https://www.phacility.com/}} and the Github\footnote{\url{https://github.com}} feature \textit{pull requests}.
 This development process will be further explained and discussed in \cnameref{cha:development_method}.
 
-We set up the continuous integration, such that any pull request and update to the master branch is activated the automated build system on a in--house Jenkins server.
+We set up the continuous integration, such that any pull request and update to the master branch activates the automated build system on a in--house Jenkins server.
 This ensures that code, to be merged into the master branch and hereby the current product, will be required to pass the continuous integration process.
 
 The workflow of our Jenkins server can be seen on \cref{fig:jenkins_workflow}, where we have simplified the process for illustration purposes; e.g. the three last steps are executed for each processing, i.e. both the clean run and the one merged with the master branch.
