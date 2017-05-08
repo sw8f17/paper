@@ -19,11 +19,11 @@ This CI includes conducting the following steps in a sandboxed environment, mean
 \item finally, packaging the Android app into a downloadable apk--file, for pre--release distribution.
 \end{enumberate}
 
-To carry out these tasks we use a piece of software called Jenkins \footnote{\url{https://jenkins.io/}}, which is a build automation server.
+To carry out these tasks we use a piece of software called Jenkins\footnote{\url{https://jenkins.io/}}, which is a build automation server.
 The build and build process, our Android app in this case, is then defined in a \textit{Jenkinsfile}, which is a recipe with steps to follow for the Jenkins server.
-In our case, the output of the continuous integration using a Jenkins server, are test and linting reports, documentation, and the aforementioned packaged apk file.
+In our case, the output of the continuous integration using a Jenkins server, are test and linting reports, documentation, and the aforementioned packaged apk--file.
 
-The process of developing on our Android app, is based upon a workflow revolving around source code management using \textit{git}\footnote{\url{https://git-scm.com/}}, and project management using Phabricator and the Github\footnote{\url{https://github.com}} feature \textit{pull requests}.
+The process of developing on our Android app, is based upon a workflow revolving around source code management using \textit{git}\footnote{\url{https://git-scm.com/}}, and project management using Phabricator\footnote{\url{https://www.phacility.com/}} and the Github\footnote{\url{https://github.com}} feature \textit{pull requests}.
 This development process will be further explained and discussed in \cnameref{cha:development_method}.
 
 We set up the continuous integration, such that any pull request and update to the master branch is activated the automated build system on a in--house Jenkins server.
