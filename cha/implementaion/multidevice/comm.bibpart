@@ -1,0 +1,24 @@
+@MISC{nearby_messages,
+  author = {{Google Developers}},
+  title = {Overview},
+  month = {5},
+  year = {2016},
+  url = {https://developers.google.com/nearby/messages/overview},
+  lastchecked = {04-05-2017},
+}
+
+@MISC{nearby_connection,
+  author = {{Google Developers}},
+  title = {Overview},
+  month = {8},
+  year = {2015},
+  url = {https://developers.google.com/nearby/connections/overview},
+  lastchecked = {05-05-2017},
+}
+
+@MISC{wifi_direct,
+  author = {{Wi-Fi Alliance}},
+  title = {{Wi-Fi Direct}},
+  url = {http://www.wi-fi.org/discover-wi-fi/wi-fi-direct},
+  lastchecked = {07-05-2017},
+}
