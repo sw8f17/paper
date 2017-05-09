@@ -1,3 +1,4 @@
+\newpage
 \section{Transmitting the Data}
 In \cref{sec:communication_methods} it was decided to use WiFi Direct as communication method.
 In this section we will determine a way to structure the data for network transmission.
@@ -6,14 +7,16 @@ In this section we will determine a way to structure the data for network transm
 
 The main problem is to be able to transmit different types of data over the network with as little overhead as possible.
 We have three types of data to transmit between the devices: music data, sync, and commands. 
-Music data is the song itself which is streamed to the devices, sync is the time for which the devices can sync against, and the commands are the play, pause, stop, etc. commends sent from the master device to the slaves. 
-
+Music data is the song itself which is streamed to the devices,
+sync is the time for which the devices can sync against, and the commands are the play, pause, stop, etc. commends sent from the master device to the slaves. 
+We need a method to send these three kinds of data between the devices in an efficient way,
+to limit the amount of data transferred between the devices.
 We do not want to make our own system to do it, we want to use well defined and well supported technology to do it.
 Furthermore the data do not need to be human readable, since the data is 
 
 \subsection{Protocol Buffers}
 This lead us to Protocol Buffers, also called protobuf, made by Google, which is a language and platform neutral extensible mechanism for serialized structured data. 
-
+Protobuf works by defining the way the data should be structured, this definition is then used to generate source code which can read and write the data to and from streams.\cite{protobuf}
 
 There exist two versions of protobuf: proto2 and proto3, where proto3 is the newest, but proto2 is still supported by Google\cite{proto3}.
 proto3 have some changes from proto2, which makes it easier to implement in languages like Android Java, Objective C and Go\cite{proto3}.
@@ -24,6 +27,7 @@ proto3 have some changes from proto2, which makes it easier to implement in lang
 
 \bigskip
 
+\iffalse
 binary files
 Kunne sende forskellige former for pakker med så lidt overhead som muligt.
 Gad ikke lave vores egen.
@@ -32,3 +36,4 @@ send both control and sound.
 
 
 Kender ikke pakke formatet, sende først tal som siger hvilken type pakke det er, der efter længden af protobuffen, derefter læses bufferen.
+\fi
