@@ -1,76 +1,6 @@
-%Sonos - They solved the problem for their wireless speakers
-%The speakers streams the music individually, not the phone to speakers
-%RTP(RTSP) -- Protocols for data streams
-	%RTP is for audio and video streams
-	%RTSP is usecd to control streaming media services, they are used together, RTP also uses H.323  (utube)
-	%http://stackoverflow.com/questions/19620219/does-youtube-stream-videos-via-tcp
-	%Build on UPD
-%RTCP
-%RTMP
-%MMS
-%Smooth Streaming
-%HLS (twitch)
-%https://www.reddit.com/r/Twitch/comments/2cnztw/why_does_twitch_have_a_delay/
-%http://www.streamingmedia.com/Articles/Editorial/What-Is-.../What-Is-a-Streaming-Media-Protocol-84496.aspx
-%DASH(Netflix used)
-%https://www-users.cs.umn.edu/~viadhi/netflix.pdf
-%Spotify uses its own propriatary
-%https://blogs.commons.georgetown.edu/cctp-797-fall2013/archives/557
-%http://pansentient.com/2011/04/spotify-technology-some-stats-and-how-spotify-works/
-%https://www.csc.kth.se/~gkreitz/spotify/kreitz-spotify_kth11.pdf
+\section{Multi--Room Audio Systems}
+A concept which closely relates to our problem is Multi--Room Audio.
 
-%http://applian.com/replay-media-catcher/support/supported_protocols5
-
-%Conclusion: synchronized streaming services seem to be generally using propriatary software
-
-%https://snarfed.org/synchronizing_mp3_playback  --- this guy did it
-
-%SqueezeBox - http://wiki.slimdevices.com/index.php/SlimProto_TCP_protocol - propriatary protocol
-
-\section{Technologies}\label{sec:sota_technologies}
-In this section we take a closer look at streaming and split this into two primary types of streaming: video and audio.
-As we are focused on audio streaming, services and solutions in this field are the most important ones, however video streaming services are also mentioned in order to compare the two.
-Furthermore we separate audio streaming and multi--room audio systems, i.e. synchronized audio streaming using multiple devices, as this is a special case of audio streaming and also happens to be closely related to our problem.
-
-\subsection{Audio Streaming}
-Streaming music is a common way of listening to music, with services such as Spotify\footnote{\url{https://www.spotify.com/}} making a large selection of music available through a subscription service.
-A key part in streaming audio is the streaming protocol, to this end Spotify previously used peer--to--peer networking in order to handle the demand.\cite{spotify1}
-However, demand is not a concern for us, the streaming protocol used is.
-As for streaming protocol, Spotify uses their own proprietary protocol, as is represented on \cref{fig:spotifyOverview}.\cite{spotifySlides}\tnnote{Jeg synes stadig at figuren skal beskrives bedre, ved dog ikke om den overhovedet er relevant.} %I kilden skriver de også at de går efter en unified backend protocol istedet for at dvs. de er nok 100% propriatary nu, should this be mentioned? im not sure it matters too much
-Since their protocol is proprietary, only a small amount of information about it is available to the public.
-
-Another service which provides audio streaming, is AirPlay\footnote{\url{https://support.apple.com/da-dk/HT204289}}, made by Apple.
-AirPlay is not a provider of music like Spotify is, but a service used for wireless streaming of audio between Apple devices.
-AirPlay also use their own proprietary protocol, Remote Audio Output Protocol, which is based on \ac{RTSP}.
-In fact the general impression received is that audio streaming services use proprietary protocols.
-
-\begin{figure}[!bht]
-    \centering
-    \includegraphics[width=0.7\textwidth]{img/spotifyOverview.png}
-    \caption{Overview of Spotify from 2011 showing the protocols used for communication within the app.\cite{spotifySlides}}
-    \label{fig:spotifyOverview}
-\end{figure}
-
-%Spotify - propriatary
-%Pandora - unknown
-%AirPlay -  Remote Audio Output Protocol (RAOP), a proprietary variant of RTSP/RTP
-
-\subsection{Video Streaming}
-For streaming video there are a variety of streaming services out there, these are generally of two types, live and pre--recorded.
-Netflix\footnote{\url{https://www.netflix.com/}} allows for streaming pre--recorded content, e.g. movies and tv--shows.
-Other services such as Twitch\footnote{\url{https://www.twitch.tv/}} and YouTube\footnote{\url{https://www.youtube.com/}} allow for both livestreaming, and streaming of pre--recorded content.
-Livestreaming services such as Twitch, which streams from a ``streamer'' via their servers to the clients, with a baseline short delay.
-
-In contrast to the audio streaming services the video streaming services do not seem to be relying on proprietary streaming protocols.
-Netflix uses \ac{DASH}, Twitch uses \ac{HLS} and previously used \ac{RTMP} which they still support, and YouTube uses \ac{RTSP}.\cite{netflix}\cite{twitch}\cite{rtsp_youtube}
-Neither of these three streaming services use the same protocol, and all three are in the top of the line.
-This gives the impression that there must be a considerable difference between audio and video streaming requirements when it comes to the streaming protocol.
-%Netflix -- DASH
-%Twitch -- HLS&RTMP
-%Youtube -- RTSP
-
-\subsection{Multi--Room Audio Systems}
-Beyond streaming protocols there is another technology which closely relates to our problem, namely Multi--Room Audio.
 Multi--Room Audio is fairly self--descriptive, it provides audio to several rooms, this audio however is synchronized.
 While there are several ways of making a Multi--Room Audio solution for a home, predominately the technology is developed and provided by speaker manufacturers.
 Several manufacturers provide this service to a degree but one
@@ -87,8 +17,8 @@ Their speakers can also play different songs in each room, or play the same song
 SonosNet is also compatible with existing speakers and sound systems one may have through another Sonos device, the versatility and flexibility provided by Sonos alongside their technology being ahead, is what makes them top--of--the--line when it comes to Multi--Room Audio.\cite{sonos2}
 Multi--Room Audio is a competitive area and as such information on technologies and software used beyond knowing it is proprietary is scarce, as companies want to protect their trade secrets.
 
-Multi--Room Audio is not exclusively a technology which is bought, hobbyists have created their own home Multi--Room Audio systems using open source projects such as PulseAudio.\cite{pulseAudioHobbyist}
-PulseAudio is a sound--server program accepting sound from one or multiple sources and then redirecting it to one or more of sinks; one of their supported protocols is \ac{RTP}.\cite{pulseAudioModules}
+Multi--Room Audio is not exclusively a concept which is bought, hobbyists have created their own home Multi--Room Audio systems using open source projects such as PulseAudio.\cite{pulseAudioHobbyist}
+PulseAudio is a sound--server program accepting sound from one or multiple sources and then redirecting it to one or more of sinks supporting several streaming protocols.\cite{pulseAudioModules}
 
 \section{Conclusion}
 From the information gathered in this chapter we derive conclusions to help us formulate the problem and elicit requirements in order to solve said problem.
@@ -112,40 +42,11 @@ Having an arbitrary value gives no impression of the degree to which a delay is 
 While we can not disregard that such a feature may be necessary to reach a synchronized state, it is worth considering alternate ways of allowing manual synchronization if it is needed, or perhaps a resynchronization feature.
 
 \bigskip
-From the audio streaming segment we can see that there is a tendency to use proprietary software solutions.
-This gives us the impression that there are certain requirements which the well known streaming protocols do not fully support.
+Our insight into Multi--Room Audio shows a competetive and saturated market, albeit they work exclusively in speakers, which provide a more static environment.
+We also know that with speakers, hobbyists have been able to obtain Multi--Room Audio using open source solutions without all the proprietary networks and protocols used commercially.
+Our insight into the applications we have selected, shows that the very same system, is lackluster on a more mobile platform.
+As for how to do it, Sonos and their competetors gives us very little details into how it can be done, merely that it can be done with a variety of technologies.
+There is a variety of solutions, they include wifi, bluetooth, internet, proprietary network establishment and communication as well as common streaming protocols.
 
-We know specifically from AirPlay that their solution is based on \ac{RTSP}, thus there are some elements to the protocol that work just fine but does not fulfill all of AirPlay's requirements.
-We want to extend beyond simple streaming of audio to use multi--room audio technology, i.e.~synchronize across devices.
-In this field we know hobbyists have used programs such as PulseAudio which supports \ac{RTP}.
-
-Our insight into this field show that whilst Sonos uses their own network, SonosNet, WiFi and Bluetooth both work as well, as Sonos' competitors use these, and Sonos also supports standard WiFi.
-As for their streaming protocol, similarly to the audio streaming services we know no more than that it is proprietary.
-Our insight into video streaming may help shed some light on as to why proprietary software is used rather than the more common streaming protocols.
-In this field the companies use a variety of well established protocols rather than proprietary ones.
-
-This lets us conclude that the difference in requirements for audio compared to video streaming is what is causing audio focused companies to use their own proprietary streaming protocols.
-Some of these differences may include latency, file size, bit rate, and buffering requirements.
-As such going forward we must explore how these factors affect the streaming protocols in concern to audio to ascertain which protocol to use, and whether we should fiddle with the open protocols.
-Knowing that some audio solutions use \ac{RTP} and AirPlay is based on \ac{RTSP}, these two protocols in particular might be worth considering.
-
-%Audio generally uses some sort of propriatary software, latency perhaps?
-%Multi-Room Audio done succesfully is generally done by speaker manufactorers using propriatary software alongside their own hardware(Sonos only works with Sonos)
-%Video streaming, uses the well known protocols such as Hls,Dash and RTSP
-
-%=The difference between audio and video streaming is causing audio streaming to use propriatary software protocols?
-%So what is the major differences? --> File sizes, bit rate.
-%            A movie can buffer for a few minutes before starting to not lag during the movie, users understand this
-%            A song cannot buffer for a few minutes before starting, users will notice and dislike this
-%                    Assumption: Propriatary software is used to reduce latency such that a song can start asap? or to fix some other criteria that the basic protocols dont live up to.
-
-%This is propriatary because there are no standard protocols for controlling several speakers at once in a synchronized manner(This is very hard to source, reviews focus on the tech, and sound quality, not software - protocols are rarely mentioned in more than 1 line and software is never the focus of speaker reviews)
-
-%RandomLinks:
-    %http://www.trustedreviews.com/opinions/the-ultimate-multi-room-audio-guide
-    %http://www.techhive.com/article/3034868/speakers/yamaha-musiccast-review-this-multi-room-audio-system-is-better-than-expected.html
-    %https://www.cnet.com/news/bose-soundtouch-throws-down-multiroom-audio-gauntlet-to-sonos/
-    %http://www.danplanet.com/blog/2014/11/26/multi-room-audio-with-multicast-rtp/
-    %http://www.pocket-lint.com/news/136462-multi-room-audio-what-is-it-and-what-are-your-options
-
-    %https://attackllama.com/2014/04/sonos-like-synchronised-streaming-part-2/
+This leads us to believe that there are no significant differences in choosing network type or communication protocols, which would rule them out as possibilities, rather the differences are trade--offs to be considered depending on what the goal is.
+Furthermore this leads us to believe that developing an application to compete with the apps we have chosen as the best, is possible.
