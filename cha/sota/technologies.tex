@@ -33,13 +33,13 @@ As we are focused on audio streaming, services and solutions in this field are t
 Furthermore we separate audio streaming and multi--room audio systems, i.e. synchronized audio streaming using multiple devices, as this is a special case of audio streaming and also happens to be closely related to our problem.
 
 \subsection{Audio Streaming}
-Streaming music is a common way of listening to music, with services such as Spotify\footnote{https://www.spotify.com/} making a large selection of music available through a subscription service.
+Streaming music is a common way of listening to music, with services such as Spotify\footnote{\url{https://www.spotify.com/}} making a large selection of music available through a subscription service.
 A key part in streaming audio is the streaming protocol, to this end Spotify previously used peer--to--peer networking in order to handle the demand.\cite{spotify1}
 However, demand is not a concern for us, the streaming protocol used is.
 As for streaming protocol, Spotify uses their own proprietary protocol, as is represented on \cref{fig:spotifyOverview}.\cite{spotifySlides}\tnnote{Jeg synes stadig at figuren skal beskrives bedre, ved dog ikke om den overhovedet er relevant.} %I kilden skriver de også at de går efter en unified backend protocol istedet for at dvs. de er nok 100% propriatary nu, should this be mentioned? im not sure it matters too much
 Since their protocol is proprietary, only a small amount of information about it is available to the public.
 
-Another service which provides audio streaming, is AirPlay\footnote{https://support.apple.com/da-dk/HT204289}, made by Apple.
+Another service which provides audio streaming, is AirPlay\footnote{\url{https://support.apple.com/da-dk/HT204289}}, made by Apple.
 AirPlay is not a provider of music like Spotify is, but a service used for wireless streaming of audio between Apple devices.
 AirPlay also use their own proprietary protocol, Remote Audio Output Protocol, which is based on \ac{RTSP}.
 In fact the general impression received is that audio streaming services use proprietary protocols.

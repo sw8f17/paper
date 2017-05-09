@@ -7,7 +7,6 @@
 %Give me those text sizes
 \usepackage{lmodern}
 
-%TODO: Do we even use this?
 \usepackage{multicol}
 \renewcommand{\multicolsep}{\itemsep}
 
@@ -33,21 +32,27 @@
 %Commands with multiple optional args
 \usepackage{xargs}
 
+
 %Lets get the ref working
 \usepackage[english]{varioref}
-\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
-\hypersetup{%
-    plainpages=false,%
-    bookmarksnumbered=true,%
-    colorlinks,%
-    citecolor=aaublue,%
-    filecolor=aaublue,%
-    linkcolor=aaublue,% you should probably change this to black before printing
-    urlcolor=aaublue,%
-    pdfstartview=FitH%
-}
+\usepackage{hyperref}
+  \hypersetup{
+    bookmarksnumbered,
+    bookmarksdepth=1,
+    % pdfauthor={\groupname},
+    % pdftitle={\projecttitle},
+    pdfsubject={Student Report, Aalborg University},
+    pdfpagelayout=TwoPageRight,
+    pdfdisplaydoctitle,
+    breaklinks,
+    linktoc=all,
+    pdfprintscaling=None,
+    plainpages=false,
+    hyperfootnotes=false
+  }
 \usepackage[english, capitalize]{cleveref}
 
+\usepackage[para]{footmisc}
 %Use relative imports
 \usepackage{import}
 
@@ -169,7 +174,6 @@
 \fancyhead[LO]{\color{aaublue}\small\nouppercase\rightmark}
 \fancyhead[LE,RO]{\thepage} %page number on all pages
 \raggedbottom
-\usepackage[para]{footmisc}
 
 \makeatletter
     \renewcommand\@makefntext[1]{\sloppy\@makefnmark#1}
