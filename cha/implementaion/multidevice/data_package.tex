@@ -1,4 +1,3 @@
-\newpage
 \section{Transmitting the Data}
 In \cref{sec:communication_methods} it was decided to use WiFi Direct as communication method.
 In this section we will determine a way to structure the data for network transmission.
@@ -12,28 +11,26 @@ sync is the time for which the devices can sync against, and the commands are th
 We need a method to send these three kinds of data between the devices in an efficient way,
 to limit the amount of data transferred between the devices.
 We do not want to make our own system to do it, we want to use well defined and well supported technology to do it.
-Furthermore the data do not need to be human readable, since the data is 
+Furthermore the data do not need to be human readable.
 
 \subsection{Protocol Buffers}
 This lead us to Protocol Buffers, also called protobuf, made by Google, which is a language and platform neutral extensible mechanism for serialized structured data. 
 Protobuf works by defining the way the data should be structured, this definition is then used to generate source code which can read and write the data to and from streams.\cite{protobuf}
+This makes it easy to define the data structure once, and then use it throughout the code.
+Protobuf can be used with C++, C\#, Go, Java and Python, which makes it available on many different platforms\cite{protobuf}.
 
-There exist two versions of protobuf: proto2 and proto3, where proto3 is the newest, but proto2 is still supported by Google\cite{proto3}.
-proto3 have some changes from proto2, which makes it easier to implement in languages like Android Java, Objective C and Go\cite{proto3}.
+In regarding to speed and package size, Protobuf is, compared to XML, three to 10 times smaller and 20 to 100 times faster.
+This comes from among other things that protobuf is not human readable since it is encoded in a binary format.\cite{protobuf} 
 
+There exist two versions of protobuf: proto2 and proto3, where proto3 is the newest, but proto2 is still supported by Google.
+proto3 have some changes from proto2, which makes it easier to implement in languages like Android Java, Objective C and Go.\cite{proto3}
 
+\subsection{Conclusion}
+Protobuf is a language and platform neutral mechanism for serialize structured data.
+It is lightweight and fast, compared to XML, which is what we seek to transmit data between the devices.
+It is easy to once define the data structure and then use it, which helps getting quick started with the development.
+Therefore we choose to use protobuf to transmit data between the devices.
 
+Since there exist two versions of protobuf, proto2 and proto3, we choose to use proto3.
+We make this choice since proto3 is the newest and it should be easier to implement with Android Java, which we use in creating the app.
 
-
-\bigskip
-
-\iffalse
-binary files
-Kunne sende forskellige former for pakker med så lidt overhead som muligt.
-Gad ikke lave vores egen.
-sende data med så lidt overhead som muligt, ingen grund til human readable
-send both control and sound.
-
-
-Kender ikke pakke formatet, sende først tal som siger hvilken type pakke det er, der efter længden af protobuffen, derefter læses bufferen.
-\fi
