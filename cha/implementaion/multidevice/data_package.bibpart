@@ -1,0 +1,17 @@
+@MISC{proto3,
+  author = {Jisi Liu},
+  title = {{Protocol Buffers v3.0.0}},
+  month = {7},
+  year = {2016},
+  url = {https://github.com/google/protobuf/releases/tag/v3.0.0},
+  lastchecked = {09-05-2017},
+}
+
+@MISC{protobuf,
+  author = {Google Inc.},
+  title = {{Developer Guide}},
+  month = {8},
+  year = {2016},
+  url = {https://developers.google.com/protocol-buffers/docs/overview},
+  lastchecked = {09-05-2017},
+}
