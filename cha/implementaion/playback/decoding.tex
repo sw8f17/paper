@@ -1,1 +1,38 @@
 \section{Decoding MP3}
+In \cnameref{cha:initial_development} we presented out initial base of development, namely Google samples' implementation of a media player.
+In that implementation an Android implementation, \texttt{android.media.MediaPlayer}, is used to control the playback of audio streams.
+
+The decoding from MP3 to \ac{PCM} is already handled by the base implementation from Google samples, however we have no guarantees when actions occur, as it is left up to this already implemented system and done in correlation with playing the \ac{PCM} data.
+We replace the \texttt{android.media.MediaPlayer} API with our own implementation in order to obtain more control over the data and the decoding, which is covered in this section.
+
+The reason we want more control is that we want to enable certain guarantees, and control the data such that we can properly stream it from one device to another.
+With MP3 being a compressed format, certain data is lost, as an example we cannot confirm the length of a single sample, unlike PCM where we know the precise length and time it takes to play a single sample.
+Furthermore \ac{PCM} samples are independent of each other unlike MP3 samples, this introduces complications when working with buffers, which may have different capabilities and requirements depending on the hardware.
+With these reasons in mind, it makes sense for us to decode the MP3 data to \ac{PCM} prior to distributing it, rather than distributing the file as MP3 and leaving both the decoding and playing of the files up to an already implemented media player.\mnote[inline]{Tis what i understood from what Jesper said, he might wanna fact check}
+\bigskip
+While figuring out how to decode, we came across several mentions that decoding MP3 to \ac{PCM} in Java libraries was slow, and at for this it would be beneficial to do native development\cite{slow_java_stackoverflow}\cite{slow_java_lib}.
+%opensource available in C, so we used that
+%
+
+%%%%% NOTES %%%%%
+MP3 compressed
+Not sure how long a single sample is
+PCM u know every sample size preciesly, can the time it takes
+PCM samples are independant, MP3 have dependant frames
+
+Hardware differences, different buffers
+Transfer data, epends on hardware + how big frames we want, mp3 cant limit this control.
+cant transfer 1 fram of mp3, also need the former 5.
+
+PCM, single frame can be played.
+
+
+frame in mp3 is not a sample. compressed samples, part of the lossy compression.
+frame for pcm, is a bunch of samples, each sample can be controlled.
+
+must decode to play.
+Android mediaplayer is not real time with the hardware, no guarentees.
+
+We transfer PCM, we have pipeline control so we avoid the randomness of hardware.
+%%%%% NOTES %%%%%
+\mnote{lessons learned: toolchain/crosscompile made a relative easy process take a while; mediacodec??}
