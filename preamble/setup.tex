@@ -313,3 +313,12 @@
 
 %For Chinese characters
 \usepackage{luatexja-fontspec}
+
+% For refs to description itmes
+\makeatletter
+\def\namedlabel#1#2{\begingroup
+    #2%
+    \def\@currentlabel{#2}%
+    \phantomsection\label{#1}\endgroup
+}
+
