@@ -17,6 +17,7 @@ Examples of use cases in this category are:
 
         For all the participants to have the impression of only one speaker is playing,
         the synchronization has to be precise enough so that there is no perceived shift in time in playback of the music between the devices.
+        In conclusion, this use case must be able to utilize the aforementioned precedence effect.
 
     \item[Festival Scenario] \hfill\\
         At a music festival, there is often an area for the concerts and an area for people to stay before and after the concerts, often called a camp.
@@ -31,11 +32,14 @@ Examples of use cases in this category are:
         the festival participants should be able to control the volume locally without affecting the rest of the participating devices.
         Furthermore everybody should be able to request songs, such that everybody can influence the choice of music.
 
+        In contras to the previously presented use case, this one does not need to exploit the precedence effect, since the area of the playback likely is too large for a listener to hear more than a couple of devices.
+        Therefore, in this use case the focus would be on a seemingly seamless playback, which would fill the area with music.
+
     \item[Multi--room Setup] \hfill\\
         When at home, people often listen to music.
         What if the music playback would be synchronous across all rooms of the home?
         Then there should not be a difference in synchronization between each room,
-        it should be an experience of walking from room to room and listen to the exact same song.
+        it should be an experience of walking from room to room and listen to the same song.
 
         By having a system which can synchronize music, devices in each room can be connected to the sound system and play the music synchronized.
         This renders the area of the music larger and gives the experience of one speaker or sound system playing.
@@ -43,7 +47,7 @@ Examples of use cases in this category are:
         without affecting other connected devices.
 \end{description}
 
-This category is the one which relates the closest to the solutions covered in \cref{cha:sota}.
-\textbf{Multi--room Setup} specifically is exactly what Sonos does to a very satisfactory degree.
-This being a more static scenario, as rooms rarely change, speakers make sense in this scenario making a more mobile implementation, e.g. smartphones, less needed.
-As for the other two use cases, these cases are seemingly what both AmpMe and SoundSeeker are designed for, however as revealed through our tests in \cref{sec:sota_test_conclusion}, these solutions are not satisfactory.
+This category is the one which relates the closest to the solutions covered in \cnameref{cha:sota}.
+\textbf{Multi--room Setup} specifically is exactly what Sonos does to a satisfactory degree.
+This being a more static scenario, as rooms rarely change, speakers make sense in this scenario making a more mobile implementation, e.g.\ smartphones, less needed.
+As for the other two use cases, these cases are seemingly what both AmpMe and SoundSeeker are designed for, however as revealed through our tests in \cnameref{sec:sota_test_conclusion}, these solutions are not satisfactory.
