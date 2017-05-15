@@ -5,12 +5,12 @@
 %Conclusion(Local Centralized)
     %Why this, how does this fit our purpose better than the other two.
 This section presents our thoughts on the external architecture.
-External architecture refers to the architecture between devices, i.e. the network architecture.
+External architecture refers to the architecture between devices, i.e.\ the network architecture.
 We consider three different external architectures namely remote centralized, local centralized and \ac{P2P}; before deciding upon the one we deem the best fit.
 \cref{tbl:external_comparison} presents some  noticeable differences between the proposed architectures.
 
 \subsection{Remote Centralized}
-Firstly we consider the option of using a remote centralized solution, i.e. having a server which propagates communication.
+Firstly we consider the option of using a remote centralized solution, i.e.\ having a server which propagates communication.
 This solution simplifies the communicative part of the problem by simply using the Internet and using a server as an intermediary between all devices.
 Using a server also provides the system with a powerful control device, the server, which would alleviate the Android devices from any significant computational needs as they would simply act as speakers and information providers.
 Furthermore the server would act as an authority, providing a clock to synchronize towards.
@@ -29,7 +29,7 @@ In contrast to the remote centralized idea this would remove the need for extern
 We would still have the single point of failure in the master, but with no internet requirement.
 
 \subsection{\acl{P2P}}
-A common denominator between the two previous solutions is their single point of failure produced by their master--slave type relationship.
+A common denominator between the two previous solutions is their single point of failure produced by their master-slave type relationship.
 A \ac{P2P} solution would remove this single point of failure, but not without adding its own complications.
 In a \ac{P2P} solution all devices would be equal, this in turn means that should a device fail or leave the session, it does not matter which device it was as the network of devices would be unaffected, given that no device is of higher authority.
 With all devices being equal it also means having to reach consensus to make decisions, simple decisions like playback control could be managed through a majority voting system, but the more complex underlying communication such as synchronization increases in complexity significantly due to not having an authority.
@@ -38,7 +38,7 @@ This solution could be expanded to consider a rotating master which would help r
 
 \subsection{Conclusion}
 Ultimately the key challenge and the most important consideration for the external architecture, is clock synchronization.
-To properly manipulate the clock to achieve psychoacoustic effects, even a few milliseconds matter; as such with how the external architecture can affect this, it is a very important choice.
+To properly manipulate the clock to achieve psychoacoustic effects, even a few milliseconds matter; as such with how the external architecture can affect this, it is a important choice.
 
 The three aforementioned proposals are all ``pure'' proposals, however reality is that they can be modified to resolve some of their weaknesses.
 An example would be \ac{P2P}, the particular difficulty with this architecture is the problem of consensus which drastically increases the complexity of clock synchronization, a way to rectify this issues could be having a rotating master.
@@ -51,3 +51,4 @@ The pure \ac{P2P} proposal on the other hand imposes few requirements, but do co
 This leaves us with local centralized or a modified version of \ac{P2P}, a particular issue with a rotating master however, would be how do we provide the music source, queue system etc.
 These issues are primarily \ac{UX} issues, which as mentioned in \cnameref{cha:requirement_elicitation} is not a priority, with this in mind both of these ideas will be considered when implementing the system and the final decision is made.
 \subimport{}{comparisontable.tex}
+

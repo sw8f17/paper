@@ -1,7 +1,7 @@
 \chapter{Requirement Elicitation}\label{cha:requirement_elicitation}
 To elicit requirements for the design and development process of a solution, we gather on the loose requirements posed in \cnameref{part:introduction}.
 For each requirement, we first state the requirement and then we elaborate, thus giving it context and where it came from.
-We have grouped the requirements in three categories: \textbf{technical requirements}, \textbf{\ac{UX} requirements}, and \textbf{non--requirements}.
+We have grouped the requirements in three categories: \textbf{technical requirements}, \textbf{\ac{UX} requirements}, and \textbf{non-requirements}.
 
 \paragraph{Technical Requirements} \hfill\\
 The technical requirements are concerned with features relevant for how the devices can interact with one another, they are as follows:
@@ -9,9 +9,9 @@ The technical requirements are concerned with features relevant for how the devi
     \item\label{req:wireless} \textbf{At least two devices must be able to communicate wirelessly with one another.} \hfill\\
         To be able to achieve multiple playback across multiple devices, as mentioned in \cnameref{cha:problem_statement},
         then two or more devices have to be able to communicate wirelessly.
-        Active use of the application, i.e. when devices are communicating in order to play audio, is referred to as a ``session''.
+        Active use of the application, i.e.~when devices are communicating in order to play audio, is referred to as a ``session''.
 
-    \item\label{req:host_control} \textbf{The device which starts the session, i.e. session host, must be able to assume playback control of all devices in the session, i.e. volume control, pause, resume, change media, seek} \hfill\\
+    \item\label{req:host_control} \textbf{The device which starts the session, i.e.~session host, must be able to assume playback control of all devices in the session, i.e.~volume control, pause, resume, change media, seek} \hfill\\
         This requirements relates to both psychoacoustic effects and \cnameref{sec:category_increase_volume_and_area}.
         The session host should be able to control playback to ensure that devices are playing the same media, and obtain the desired psychoacoustic effects.
         Furthermore some psychoacoustic effects may require that one device controls the volume across any connected devices as the relative volume affects the psychoacoustic effects.
@@ -57,16 +57,16 @@ The \ac{UX} requirements are concerned with features that should be available in
 
     \item\label{req:info} \textbf{Display song information} \hfill\\
         When users use the application in according to the use cases mentioned in \cnameref{sec:category_increase_volume_and_area},
-        then the song information, i.e. artist, title, duration/length must be displayed.
+        then the song information, i.e.~artist, title, duration/length must be displayed.
 
     \item\label{req:queue} \textbf{Support a play queue.} \hfill\\
         This requirement relates to the use cases mentioned in \cnameref{sec:category_increase_volume_and_area}.
         The application should support a queue feature such that a play queue can be developed by the devices in the session.
-        Any device in the session should be able to add audio the the queue.
+        Any device in the session should be able to add audio to the queue.
 
     \item\label{req:mp3} \textbf{Play mp3 audio files from the session host's local storage.} \hfill\\
-        The application must be able to play audio files of the format mp3 from the local storage on the device.
-        mp3 is chosen since it is in widespread use, Android supports the file format and because mp3 is a compressed file format,
+        The application must be able to play audio files of the format mp3 from the local storage on the devicea.
+        Mp3 is chosen since it is in widespread use, Android supports the file format and because mp3 is a compressed file format,
         resulting in a smaller file size\cite{android_mp3_support}\cite{mp3_compression}.
 
     \item\label{req:spotify} \textbf{Support Spotify as an audio source.} \hfill\\
@@ -76,19 +76,19 @@ The \ac{UX} requirements are concerned with features that should be available in
         where users having a social gathering must have access to music which is not local on the device.
 \end{eletterate}
 
-\paragraph{Non--Requirements} \hfill\\
-The non-requirements are areas of the application where we do not wish to invest our time, our focus is on synchronization and psychoacoustics, as such the following areas have been down--prioritized:
+\paragraph{Non-Requirements} \hfill\\
+The non-requirements are areas of the application where we do not wish to invest our time, our focus is on synchronization and psychoacoustics, as such the following areas have been down-prioritized:
 \begin{eromanrate}
     \item \textbf{Security} \hfill\\
     Security is one area in which we will not be focusing our efforts.
     Within a session we choose to trust those that we connect with.
     As such we will not be putting effort into security concerns.
     \item \textbf{Resource Efficiency} \hfill\\
-    Efficient use of resources, e.g. energy and network, is not something we will be focusing on this project.
-    Optimizations in resource usage might improve the quality of the application, but is not important in order to find a solution to our problem statement.
+    Efficient use of resources, e.g.~energy and network, is not something we will be focusing on this project.
+    Optimizations in resource usage might improve the quality of the application, but is trifling in order to find a solution to our problem statement.
     \item \textbf{Usability} \hfill\\
     While we have \ac{UX} requirements this varies from usability.
-    The \ac{UX} features necessary for the application to be used, when speaking of usability we consider features like robustness, learnability etc. and we choose not to focus on these elements.
+    The \ac{UX} features necessary for the application to be used, when speaking of usability we consider features like robustness, learnability etc.~and we choose not to focus on these elements.
     \item \textbf{Scalability} \hfill\\
     When mentioning scalability we consider both number of devices and type of devices.
     We only work with Android devices and will not concern ourselves on how to include iPhone or Windows Phone devices.

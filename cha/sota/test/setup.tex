@@ -19,8 +19,7 @@ Furthermore we limit our tests to a Master/Slave/Slave setup, that is;
 one phone acts as a master, and we perform the tests on two slaves
 connected to it. This makes the two devices under test as similar as
 possible, since neither has the reference sound.
-Ideally we would also record the reference, the Master,
-but since we only have two input channels that is not possible.
+Ideally we would also record the reference, the Master, but since we only have two input channels that is not possible.
 
 In the tests we use three Android phones:
 \begin{dankscription}{\bfseries}{Master}
@@ -53,14 +52,14 @@ The scripts used for testing can be seen in \cnameref{magicscripts}.
 
 To determine the accuracy and reliability of the tests, we do what we
 call an assurance test. The variable we need to assure
-ourselves of, is inter--stereo delay of the microphone input on the
+ourselves of, is inter-stereo delay of the microphone input on the
 measurement computer. If there is an intrinsic delay between the left and
 right channel of the computer, the whole test will be
 compromised, or at least in need of adjustment. We use the delay
 measuring script above, along with a standard AUX cable,
 and the test song in mono, to detect the delay
 between the left and right channel. In our equipment the delay is 0ms
-consistently, which means the results wont be tainted by inter--stereo
+consistently, which means the results wont be tainted by inter-stereo
 delay.
 
 \subsection{Test sample}

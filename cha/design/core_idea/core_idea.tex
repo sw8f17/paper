@@ -1,14 +1,13 @@
 \chapter{Core Idea} % Better title?!? Måske ``Central Problems''?
 
-The purpose of this chapter is to provide an overview of the idea we plan to use to solve the problem at hand. 
-The purpose is also to identify and highlight the sub--problems which we need to resolve in order to solve the big problem.
-
+The purpose of this chapter is to provide an overview of the idea we plan to use to solve the problem at hand.
+The purpose is also to identify and highlight the sub-problems which we need to resolve in order to solve the big problem.
 The primary problem we are dealing with is the ability to execute commands and play audio synchronously.
 That is, we need to have a way to execute a given action at once, on all devices.
-Since we cannot expect the clocks on each Android phone to be in--sync, we need to find a way of relating their clock to a master clock. 
+Since we cannot expect the clocks on each Android phone to be in-sync, we need to find a way of relating their clock to a master clock.
 
-The central concept of our idea to achieve synchronization of audio and control is for the devices to have a common clock, and issue all commands with a timestamp for when the action is supposed to occur. 
-The transmission of audio and commands should be separate, such that the devices can buffer audio data to increase stability. 
+The central concept of our idea to achieve synchronization of audio and control is for the devices to have a common clock, and issue all commands with a timestamp for when the action is supposed to occur.
+The transmission of audio and commands should be separate, such that the devices can buffer audio data to increase stability.
 
 This proposes several problems which would have to be resolved:
 \begin{itemize}
@@ -19,13 +18,13 @@ This proposes several problems which would have to be resolved:
     \begin{itemize}
         \item Do we send the raw files to each device ahead of time?
         \item Do we send parts of files to each devices, in a streaming manner?
-        \item Do we need to do some pre--computation on the audio before transmitting it?
+        \item Do we need to do some pre-computation on the audio before transmitting it?
     \end{itemize}
     \item How do we transmit commands?
 \end{itemize}
 
-These are the questions we need to solve before we are able to develop our app. 
-Thus the next part of the paper is analyzing these questions and finding solutions for them. 
+These are the questions we need to solve before we are able to develop our app.
+Thus the next part of the paper is analyzing these questions and finding solutions for them.
 
 \tnote{Do we want a figure to illustrate sending audio and control packets to each device, or is this on too abstract a level?}
 \begin{minipage}{0.5\textwidth}

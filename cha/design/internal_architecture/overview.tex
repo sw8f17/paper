@@ -1,12 +1,12 @@
 \subsection{Candidates for Internal Architecture}
 In this section we will present three proposed internal architectures.
-We define the internal architecture as the architecture of the application device in its own instance, i.e. how the separate components that make up the application are structured.
+We define the internal architecture as the architecture of the application device in its own instance, i.e.\ how the separate components that make up the application are structured.
 The architectural patterns we will consider in this section are chosen from a selection of patterns in Ian Sommerville's \textit{Software Engineering}\cite[p. 175-184]{sommerville}, where they are presented as architectural patterns commonly used.
 We then further picked the three patterns most applicable for our App, which are:
 \begin{eletterate*}
     \item Repository architecture;
     \item \ac{MVC}; and
-    \item Client--Server architecture.
+    \item Client-Server architecture.
 \end{eletterate*}
 These architectural patterns are often used when designing full systems, but can be adapted to the inner workings of components in a system, such as an Android app in our case.
 
@@ -38,10 +38,10 @@ A downside to using the MVC pattern is that simple data interactions can become 
 MVC is particularly helpful for apps with loads of interaction, which our app does not have, rather we want ours to simply run in the background which in itself makes MVC match poorly with the application we want to obtain.
 Furthermore, there needs to be a clear data model, something our Android app does not have, essentially leaving control as the sole focus should we choose this architecture.
 
-\subsubsection{Client--Server Architecture}
-Normally when addressing a client--server architecture, it is in the context of web applications consisting of a client running in the browser which connects to a server running application code.
+\subsubsection{Client-Server Architecture}
+Normally when addressing a client-server architecture, it is in the context of web applications consisting of a client running in the browser which connects to a server running application code.
 In our case, where we talk about the internal architecture of an Android app, the server is a service, i.e.~some components which runs separately and can be connected to.
-The Client--Server pattern is described in \textit{Software Engineering} \cite[p. 180-181]{sommerville}.
+The Client-Server pattern is described in \textit{Software Engineering}\cite[p. 180-181]{sommerville}.
 The clients are only used to make the services accessible by the user, as the services does not depend on the clients, which means that services can be developed and tested without being influenced by user interfaces.
 
 Moreover, this architectural pattern allows for a myriad of different clients to use a given service, such that the same functionality can be available in different scenarios.
@@ -49,6 +49,6 @@ E.g.~if playback of music is implemented as a service, a local client driven by 
 This would give a seamless experience of control, since both clients are connected to the same service; meanwhile, they do not need to know about each others' existence.
 
 The separation of client and service also allows for more focused testing, since the components can be tested completely independent and the in conjunction.
-In our case the client--server architecture lies somewhere between the two previously presented architectures, and gives a middle ground where we do not need a heavy focus on data.
-However, because we want to disconnect client functionality from presentation, to improve testability and maintainability, the concept of a client in the client--server architecture, will have to be designed and developed with a more fine grained aspect.
+In our case the client-server architecture lies somewhere between the two previously presented architectures, and gives a middle ground where we do not need a heavy focus on data.
+However, because we want to disconnect client functionality from presentation, to improve testability and maintainability, the concept of a client in the client-server architecture, will have to be designed and developed with a more fine grained aspect.
 
