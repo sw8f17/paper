@@ -95,7 +95,7 @@ In AmpMe, the music is automatically synchronized upon party creation, but if th
 On \cref{fig:ampme_screenshot}, the slider to manually synchronize can be seen.
 The slider goes from an offset of $-15$ to $+15$ arbitrary offset units, in $1$ increments.
 
-AmpMe is free to use in both Google Play and the App Store.\cite{amp_faq}\cite{amp_play}\cite{amp_itunes}
+AmpMe is free to use in both Google Play and the App Store.\cite{amp_faq, amp_play, amp_itunes}
 
 \begin{figure}[h!]
     \centering
@@ -132,7 +132,7 @@ Here a menu pops up with devices playing on the network, and if you select the d
 We encountered a scenario where the app kept loading when attempting to join an active network, after a restart of the app it worked.
 
 It is intuitive to use the app, it is minimalistic hence easy to navigate.
-The design is very minimalistic, and seems to follow the new ``Material Design''\footnote{\url{https://material.io/guidelines/}} guidelines set out by Google.
+The design is minimalistic, and seems to follow the new ``Material Design''\footnote{\url{https://material.io/guidelines/}} guidelines set out by Google.
 
 Chorus supports manual and automatic synchronization.
 On \cref{fig:chorus_screenshot} the synchronization slider can be seen,
@@ -169,7 +169,7 @@ Only its connectivity options seems on par with the other two mentioned apps, ho
 As for SoundSeeder and AmpMe, they have their app ratings, Android support, YouTube and local media support in common.
 AmpMe goes slightly beyond SoundSeeder when it comes to media support, by also supporting Spotify and SoundCloud.
 Spotify has around 100 million users, which makes it an important source to support\cite{spotify_subscribers}.
-SoundSeeder supports Google Music, and while they have not released any official user numbers it is expected to be lower than Spotify\cite{googlem_subscribers}.
+SoundSeeder supports Google Music, and while they have not released any official user numbers it is expected to be lower than Spotify~\cite{googlem_subscribers}.
 
 As for device support, AmpMe supports iOS devices, but SoundSeeder has a Java version which means that it supports all devices running Java.
 Java support could prove advantageous in the case a computer was available as a media source, however this merely evens out the superior media support of Spotify in AmpMe.
@@ -185,14 +185,17 @@ The need for manual synchronization options could indicate that the automatic sy
 The actual performance of the synchronization, in SoundSeeder and AmpMe will be tested in \cnameref{sec:sota_test}.
 
 \renewcommand\tabularxcolumn[1]{m{#1}}
-\renewcommand{\arraystretch}{1.5}
-\begin{sidewaystable}
+\renewcommand{\arraystretch}{1.8}
+\begin{table}
     \small
-    \begin{tabularx}{\textwidth}{XXXXXXX}\toprule
-        & Rating \newline (Out of 5) & Latest update & Supported \newline devices & Media source & Connectivity & Pricing \\\midrule
-        SoundSeeder & 3.9 Play Store & 11/11 2016    & Android 4.1+ \newline Java Devices & Google Music \newline YouTube \newline external devices \newline UPnP \newline DLNA \newline Online radio \newline Local media & WiFi \newline Android Hotspot & Free (limited) \newline 39.90 DKK \\
-        AmpMe & 4.2 Play Store \newline 4.0 App Store & 30/01 2017 & Android 4.1+ \newline iOS 9.0+ & Spotify \newline SoundCloud \newline YouTube \newline Local media & Internet & Free \\
-        Chorus & 3.3 Play Store & 11/05 2015 & Android 4.0+ & Local media & WiFi \newline Android Hotspot & Free  \\\bottomrule
+    \begin{tabularx}{\textwidth}{XXXX}\toprule
+                                    & SoundSeeder                   & AmpMe                                     & Chorus                        \\\midrule
+        Rating (Out of 5)           & 3.9 Play Store                & 4.2 Play Store \newline 4.0 App Store     & 3.3 Play Store                \\
+        Latest update               & 11/11 2016                    & 30/1 2017                                 & 11/5 2015                     \\
+        Supported \newline devices  & Android 4.1+ \newline Java Devices & Android 4.1+ \newline iOS 9.0+       & Android 4.0+                  \\
+        Media source                & Google Music \newline YouTube \newline External devices \newline UPnP, DLNA \newline Online radio \newline Local media & Spotify \newline SoundCloud \newline YouTube \newline Local media & Local media \\
+        Connectivity                & WiFi \newline Android Hotspot & Internet                                  & WiFi \newline Android Hotspot \\
+        Pricing                     & 39.90 DKK                     & Free                                      & Free                          \\\bottomrule
     \end{tabularx}
     \caption{Comparison between the apps as of the 13\textsuperscript{th} of February 2017.}\label{tab:sota_comp}
-\end{sidewaystable}
+\end{table}
