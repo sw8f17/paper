@@ -21,3 +21,10 @@
   url = {https://www.lifewire.com/monaural-stereo-multichannel-surround-sound-3134860},
   lastchecked = {10-05-2017},
 }
+
+@MISC{audioformat,
+  title = {{AudioFormat}},
+  url = {https://developer.android.com/reference/android/media/AudioFormat.html},
+  lastchecked = {10-05-2017},
+}
+

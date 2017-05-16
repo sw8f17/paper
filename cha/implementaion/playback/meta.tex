@@ -3,7 +3,7 @@ The chapter includes our decisions, the reasons behind them, some of the complic
 Before we present the implementation and what that includes, we first present some audio data terminology, as well as the Android sound stack, as this is important to the implementation we have made.
 \begin{description}
     \item [Sample Rate] \cite{sample_rate_std} \hfill \\
-    Sample rate is the number of audio samples carried per second.
+    Sample rate is the number of audio samples per channel per second.
     The rate may vary from file to file with 44,100 Hz being the de facto sampling rate.
     \item [Bit Depth] \cite{bit_depth} \hfill \\
     Bit depth is largely dependant on the data encoding used, and if relevant also described alongside sample rate, e.g. a data rate of 44.1 kHz/16 translates to a sample rate of 44,100 and a bit depth of 16.
@@ -18,5 +18,9 @@ Before we present the implementation and what that includes, we first present so
     The number of channels also affects the bit rate.
     \item [Bit Rate] \cite{bit_rate} \hfill \\ 
     Bit rate, in respect to media, refers to the number of bits used per unit of playback time.
-    Bit rate depends on both sample rate, encoding in the sense of bit depth, and number of channels in that it is calculated by $sample rate$ \times $bit depth$ \times $channels$
+    Bit rate depends on both sample rate, encoding in the sense of bit depth, and number of channels in that it is calculated by $sample rate$ \times $bit depth$ \times $channels$.
+    \item [Frame Size] \cite{audioformat} \hfill \\
+    A frame is defined as all the data that belongs to one sampling interval, for PCM data this also means that the frame rate is equal to the sample rate.
+    A frame is a collection of samples for a given timestamp, meaning for mono one frame contains one sample, for stereo two etc., in android these are refered to as audio frames.
+    The size of a frame, for PCM, is equal to $sample rate$ \times $channels$.
 \end{description}

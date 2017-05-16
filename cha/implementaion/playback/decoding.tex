@@ -7,14 +7,15 @@ We replace the \texttt{android.media.MediaPlayer} API with our own implementatio
 
 We want more control in order to guarantee certain characteristics about the data and its handling, such that we have the required control to properly stream the data from one device to another and perform playback commands in sync.
 These guarantees are:\mnote[inline]{what are these guarantees}.
-With MP3 being a compressed format, certain data is lost, e.g. we cannot confirm the length of a single sample, unlike \ac{PCM} where we know the precise length and time it takes to play a single sample.
+MP3 is a compressed format, meaning certain data is lost, e.g. we cannot confirm the length of a single sample, unlike \ac{PCM} data where we know the precise length and time it takes to play a single sample.
 Furthermore \ac{PCM} samples are independent of each other unlike MP3 samples, this introduces complications when working with buffers, which may have different capabilities and requirements depending on the hardware.
 With these reasons in mind, it makes sense for us to decode the MP3 data to \ac{PCM} prior to distributing it, rather than distributing the file as MP3 and leaving both the decoding and playing of the files up to an already implemented media player.\mnote[inline]{Tis what i understood from what Jesper said, he might wanna fact check}
 \bigskip
-While figuring out how to decode, we came across several mentions that decoding MP3 to \ac{PCM} in Java libraries was slow, and that for this it would be beneficial to do native development\cite{slow_java_stackoverflow}\cite{slow_java_lib}.
+
+While figuring out how to decode, we came across several mentions that decoding MP3 to \ac{PCM} using Java libraries is slow, and that for this it would be beneficial to do native development\cite{slow_java_stackoverflow}\cite{slow_java_lib}.
 As such we have chosen to develop the decoding part of our application using \ac{JNI}.
-We already had knowledge of an available opensource MP3 decoding library, \textit{libmpg123}\mnote[inline]{Is this the proper way to address what we use, should i mention the mpg123 audio player?}, which we use in our implementation.
-\mote[inline]{issues, code examples, important mentions related to the implementation?}
+We already had knowledge of an available open source MP3 decoding library, \textit{libmpg123}\mnote[inline]{Is this the proper way to address what we use, should i mention the mpg123 audio player?}, which we use in our implementation.
+\mnote[inline]{issues, code examples, important mentions related to the implementation?}
 %opensource available in C, so we used that
 %
 
