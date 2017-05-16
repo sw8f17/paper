@@ -15,3 +15,12 @@
   url = {https://developers.google.com/protocol-buffers/docs/overview},
   lastchecked = {09-05-2017},
 }
+
+@MISC{json_slow,
+  author = {Bruno Krebs},
+  title = {{Beating JSON performance with Protobuf}},
+  month = {1},
+  year = {2017},
+  url = {https://auth0.com/blog/beating-json-performance-with-protobuf/},
+  lastchecked = {17-05-2017},
+}

@@ -26,14 +26,16 @@ This comes from among other things that protobuf is not human readable since it 
 There exist two supported versions of protobuf: proto2 and proto3, where proto3 is the newest.
 Proto3 have some changes from proto2, which makes it easier to implement in languages like Android Java, Objective C and Go.\cite{proto3}
 
-An alternative to Protobuf could be XML or JSON. 
+An alternative to Protobuf could be XML or JSON.
+XML and JSON are both human readable data formats and are both widely popular.
+In some cases Protobuf is up to six times faster than JSON, and as mentioned previously, Protobuf is up ten times faster than XML\cite{json_slow}.
 
 \begin{table}
     \begin{tabularx}{\textwidth}{XXX}\toprule
         Data format & Pros & Cons \\
-        Protobuf    & Small overhead, fast & Not human readable \\
-        JSON        & Human readable, fast & Not as fast as Protobuf\\
-        XML         & Human readable & Large overhead and slow, slower than Protobuf and JSON \\
+        Protobuf    & Small overhead, fast  & Not human readable \\
+        JSON        & Human readable, \newline fast compared to XML  & Not as fast as Protobuf\\
+        XML         & Human readable        & Large overhead and slow, slower than Protobuf and JSON \\
     \end{tabularx}
     \label{tab:asdf}
     \caption{Pros and cons of the different data formats.}
@@ -43,6 +45,7 @@ An alternative to Protobuf could be XML or JSON.
 Protobuf is a language and platform neutral mechanism for serialize structured data.
 It is lightweight and fast, compared to XML, which is what we seek to transmit data between the devices.
 It is easy to once define the data structure and then use it, which helps getting quick started with the development.
+We disregard XML and JSON, since the low overhead of Protobuf is important for our use case.
 Therefore we choose to use protobuf to transmit data between the devices.
 
 For our application we will be using proto3, since it is newer, less verbose and we expect it to be supported for longer.
