@@ -7,33 +7,62 @@ This section will explain how they inter-operate with our app.
 \subsection{Preparing the App}
 We have previous, in \cref{sec:foundation_of_our_android_app}, explained that we utilize a sample music player.
 Now we have the desire that not all devices should enter that app on start up, such that we can have a master-slave relation between the devices.
+On \cref{fig:connecting} we show the two new UIs made for connecting devices.
+On \cref{fig:mode_selection} is the UI the app starts with.
+Here one selects either being a server og being a client.
+On \cref{fig:group_selection} is the UI one sees when pressing the ``Client'' option.
+It contains a list of all nearby devices which are acting as a ``Server'', how this is achieved will be explained next.
 
-\begin{figure}[ht] 
-  \begin{subfigure}[b]{0.5\linewidth}
+\begin{figure}[ht]
+  \begin{subfigure}[b]{0.33\linewidth}
     \centering
-    %\includegraphics[width=0.75\linewidth]{example-image-a} 
-    \includegraphics[trim={0cm 0cm 0cm 0cm}, clip, height=10cm]{img/ui/mode_selection.png}
-    \caption{Mode Selection} 
-    \label{fig:mode_selection} 
+    %\includegraphics[width=0.75\linewidth]{example-image-a}
+    \includegraphics[trim={0cm 0cm 0cm 0cm}, clip, height=7cm]{img/ui/mode_selection.png}
+    \caption{Mode Selection}
+    \label{fig:mode_selection}
     \vspace{4ex}
-  \end{subfigure}%% 
-  \begin{subfigure}[b]{0.5\linewidth}
+  \end{subfigure}%%
+  \begin{subfigure}[b]{0.33\linewidth}
     \centering
-    \includegraphics[trim={0cm 0cm 0cm 0cm}, clip, height=10cm]{img/ui/group_selection.png}
-    \caption{Group Selection} 
-    \label{fig:group_selection} 
+    \includegraphics[trim={0cm 0cm 0cm 0cm}, clip, height=7cm]{img/ui/group_selection.png}
+    \caption{Group Selection}
+    \label{fig:group_selection}
     \vspace{4ex}
-  \end{subfigure} 
+  \end{subfigure}%%
+  \begin{subfigure}[b]{0.33\linewidth}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm}, clip, height=7cm]{img/ui/wifi_direct_invitation.png}
+    \caption{WiFi Direct invitation}
+    \label{fig:wifidirectinv}
+    \vspace{4ex}
+  \end{subfigure}
   \caption{The user interface relevant for connecting devices.}
-  \label{fig:connecting} 
+  \label{fig:connecting}
 \end{figure}
 
 \subsection{Service Discovery}
 
-The first problem which must be handled is discovering peers. 
+The first problem which must be handled in order to connect devices is: discovering peers.
+Fortunately a part of the WiFi Direct standard is the so called services.
+Part of the services is ``Service Discovery'', which is made for the exact purpose of discovering peers.
+In Android WiFi Direct is called: ``Wi-Fi peer-to-peer'' or ``Wi-Fi P2P'' for short.\footnote{\url{https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html}}.
 
+We experienced several issues implementing service discovery in our app, most notable is group negotiation.
+When devices connect using WiFi Direct, they negotiate about having the role of group owner.
+The group owner is the master of the network, and is responsible for granting new devices access etc.
+For our app we want the device which is the server, to also have the role of being the group owner of the WiFi Direct network.
+The root of our problem was the fact that the devices would keep a record of the last 32 WiFi Direct groups which the had been a part of, as well as who were the group owner.
+This would then become a problem, when one started a new session using the same devices as a previous one, but with a different master.
 
-% Service discovery
-% Initial connection
-% Persistent socket
-% Diagram ???
+In order to prevent this issue, we decided to erase the records of previous WiFi Direct networks, when we start discovering services.
+In addition to the server creating a new group, once it starts broadcasting its service.
+That means that the only preexisting group when a device connects is the one just created by the server.
+Since there is a preexisting group, then new devices will try to join it, when connecting.
+
+Connecting to a WiFi Direct network requires approval from the group owner.
+The UI shown is dependent on the Android version, and styling by the manufacturer.
+An example of it is shown on \cref{fig:wifidirectinv}.
+
+\subsection{Establishing a Persistent Socket}
+
+After the the client(s) have discovered the server, they will establish a persistent connection.
