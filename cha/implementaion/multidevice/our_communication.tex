@@ -63,6 +63,50 @@ Connecting to a WiFi Direct network requires approval from the group owner.
 The UI shown is dependent on the Android version, and styling by the manufacturer.
 An example of it is shown on \cref{fig:wifidirectinv}.
 
+To explain how this occurs we have constructed an slightly simplified UML sequence diagram, on \cref{fig:seq_server_client}.
+After the service discovery and the client joining the group, it gets the network info, that is an IP of the group owner.
+This is used in the next step, which is establishing a persistent socket.
+
+\begin{figure}[h]
+    \resizebox{!}{0.90\textwidth}{
+        \begin{sequencediagram}
+            \newthread{s}{Server}
+            \newinst{sn}{Server Network}
+            \newinst[2]{wd}{WiFi Direct}
+            \newinst[2]{cn}{Client Network}
+            \newthread{c}{Client}
+
+            \begin{messcall}{s}{Start}{sn}{}
+                \begin{messcall}{sn}{\shortstack{Announce \& \\\\Create Group}}{wd}{}
+                    \begin{messcall}{c}{Start}{cn}{}
+                        \begin{call}{cn}{Discover}{wd}{}
+                        \end{call}
+                        \begin{messcall}{cn}{Services}{c}{}
+                        \end{messcall}
+                        \begin{call}{c}{Connect}{cn}{Network Info}
+                            \begin{call}{cn}{Join Group}{wd}{Network Info}
+                                \begin{call}{wd}{Accept?}{sn}{Network Info}
+                                    \begin{call}{sn}{Accept?}{s}{ACK}
+                                    \end{call}
+                                \end{call}
+                            \end{call}
+                        \end{call}
+                        \begin{messcall}{cn}{\shortstack{Establish\\\\Socket Connection}}{wd}{}
+                            \begin{messcall}{wd}{\shortstack{Accept\\\\Socket Connection}}{sn}{}
+                            \end{messcall}
+                        \end{messcall}
+                    \end{messcall}
+                \end{messcall}
+            \end{messcall}
+        \end{sequencediagram}
+    }
+    \caption{Sequence diagram, depicting how our the server announces its service and clients connects.}\label{fig:seq_server_client}
+\end{figure}
+
+
 \subsection{Establishing a Persistent Socket}
 
 After the the client(s) have discovered the server, they will establish a persistent connection.
+They are at this point part of the same WiFi Direct network, and the client has just received the IP of the group owner.
+
+When the server first started, it 
