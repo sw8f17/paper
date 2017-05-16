@@ -1,0 +1,31 @@
+In this chapter we present certain aspects of the system design of our system, an Android application.
+We call the system \textit{Stream Me Up Scotty} or \textit{Scotty} for short.
+
+We firstly present the core ideas or issues, which should be solved in the design and development.
+These issues functions as the connection between the aforementioned requirements and future content in the design and implementation.
+The purpose is to identify and highlight the sub-problems which we need to resolve in order to solve the big problem.
+
+The primary problem we are dealing with is the ability to execute commands and play audio synchronously.
+That is, we need to have a way to execute a given action at once, on all devices.
+Since we cannot expect the clocks on each Android phone to be in-sync, we need to find a way of relating their clock to a master clock.
+
+The central concept of our idea to achieve synchronization of audio and control is for the devices to have a common clock, and issue all commands with a timestamp for when the action is supposed to occur.
+The transmission of audio and commands should be separate, such that the devices can buffer audio data to increase stability.
+
+This proposes several problems which would have to be resolved:
+\begin{itemize}
+    \item How should devices be organized?
+    \item How do we connect the devices?
+    \item How do we give the devices a common clock?
+    \item How do we transmit audio?
+    \begin{itemize}
+        \item Do we send the raw files to each device ahead of time?
+        \item Do we send parts of files to each devices, in a streaming manner?
+        \item Do we need to do some pre-computation on the audio before transmitting it?
+    \end{itemize}
+    \item How do we transmit commands?
+\end{itemize}
+
+\bigskip\noindent
+In the following part of this chapter, we will explore the architecture of the system.
+
