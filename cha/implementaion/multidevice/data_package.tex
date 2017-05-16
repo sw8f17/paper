@@ -26,6 +26,19 @@ This comes from among other things that protobuf is not human readable since it 
 There exist two supported versions of protobuf: proto2 and proto3, where proto3 is the newest.
 Proto3 have some changes from proto2, which makes it easier to implement in languages like Android Java, Objective C and Go.\cite{proto3}
 
+An alternative to Protobuf could be XML or JSON. 
+
+\begin{table}
+    \begin{tabularx}{\textwidth}{XXX}\toprule
+        Data format & Pros & Cons \\
+        Protobuf    & Small overhead, fast & Not human readable \\
+        JSON        & Human readable, fast & Not as fast as Protobuf\\
+        XML         & Human readable & Large overhead and slow, slower than Protobuf and JSON \\
+    \end{tabularx}
+    \label{tab:asdf}
+    \caption{Pros and cons of the different data formats.}
+\end{table}
+
 \subsection{Conclusion}
 Protobuf is a language and platform neutral mechanism for serialize structured data.
 It is lightweight and fast, compared to XML, which is what we seek to transmit data between the devices.
