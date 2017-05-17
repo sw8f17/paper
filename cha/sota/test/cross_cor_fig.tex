@@ -1,0 +1,46 @@
+\begin{figure}
+  \center
+  \begin{tikzpicture}
+      \begin{axis}[
+        domain=-3:12,
+        samples=25,
+        height=8cm,
+        width=12cm,
+        ytick=\empty,
+        xtick=\empty,
+        axis lines=none,
+        every axis plot/.append style={very thick,smooth}
+      ]
+
+      % Draw curves
+      \addplot [name path=g3, color=GoogleRed] {dnorm(3,1.5)};
+      \addplot [name path=g6, color=GoogleGreen] {dnorm(6,1.5)};
+
+
+      \addplot fill between[of=g3 and g6,
+          split,
+          every segment no 0/.style={white},
+          every segment no 1/.style={white},
+      ];
+
+      \path[name path=lower,
+          intersection segments={
+              of=g3 and g6,
+              sequence=B0 -- A1
+          }
+      ];
+      \path[name path=axis] (axis cs:-10,0) -- (axis cs:16,0);
+
+      \addplot[color=GoogleRed!20!GoogleGrey!40]
+      fill between[
+          of=axis and lower,
+          %soft clip={domain=-6:6}
+        ]
+      ;
+
+      \end{axis}
+  \end{tikzpicture}
+  \caption{Illustration of the shift between two waves.}
+  \label{fig:cross_cor}
+\end{figure}
+%https://tex.stackexchange.com/questions/162438/how-can-i-hatch-the-areas-delimited-by-two-intersecting-gaussian-distribution-cu/163652#163652
