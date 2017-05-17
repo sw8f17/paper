@@ -1,17 +1,26 @@
 \section{Playing \ac{PCM} Data}
-With the data decoded we also create a replacement for the mediaplayer.\mnote{why btw? could we not simply have used the one we alrdy had?}
-Preparing for the next part of development, enabling devices to connect to one another and create a multi-device system, we treat the data as an incoming stream.
+With the data decoded we also create a replacement for the mediaplayer.\mnote[inline]{why btw? could we not simply have used the one we alrdy had?}
+In preparation for the next part of development, enabling devices to connect to one another and create a multi-device system, we treat the data as an incoming stream rather than local data.
 To handle the \ac{PCM} data stream we use the android class \texttt{AudioTrack} which allows for streaming of PCM audio buffers to an audio sink.
 
+\mnote[inline]{the following is largely related to how AudioTrack works with the hardware, it would greatly benefit from some implementation related issues and observations}
 The \texttt{AudioTrack} class does impose a couple of requirements on how we handle the data stream, particularly impacting or playback commands.
 First off \texttt{AudioTrack} requires that we constantly write to it, if this does not happen it will pause in order to release system resources, this can never happen as it would introduce wake up lag upon the next write action.
 Secondly \texttt{AudioTrack} works with an internal buffer, this buffer has to be completely filled before it can be flushed to the audio sink, which means the data is send in small buffers at a time.\cite{audiotrack}
+\mnote[inline]{From my understanding the following were the issue experienced during development, were there more?}
 This caused issues with our playback control commands due to race conditions.
 In that we need to keep feed data from our decoder, or from another smartphone, to the audio track such that it does not halt, we do so asynchronously.
 This caused some unfortunate race conditions with our pause command, where the audiotrack buffer would flush its internal buffer to the audiosink, then start to refill its buffer at which point the pause command would occur.
 The buffer would not be full, meaning it cannot be flushed to the audiosink, yet the system would think it was full and waiting to be flushed, making the application unable to resume playing.
-It took us a while to locate and fully understand how this was happening, which prompted us to use Uppaal,
-\mnote[inline]{quick explanation of how uppaal was used and the yield of its use}
+It took us a while to locate and fully understand how this was happening, which prompted us to use the model checker tool, Uppaal.
+Our process for using Uppaal was as follows:
+\begin{enumberate}
+    \item Create/Adjust model to model \texttt{AudioTrack}.
+    \item Run the model through the modelchecker Uppaal.
+    \item Locate the error in the code.
+    \item If the error is not present in the code, it is an error in modelling, go to 1. If the error is also present in the code, fix it and go to 2.
+\end{enumberate}
+\mnote[inline]{From what i understood this was how uppaal was used, perhaps Jesper can expand on its yield}
 
 
 %Buffer talk
@@ -20,16 +29,16 @@ It took us a while to locate and fully understand how this was happening, which 
         %solved: semaphors, when play release double semaphor - buffer filled twice when calling play.
 
 
-        new AudioTrack.Builder()
-                 .setBufferSizeInBytes((int) (mediaInfo.frameSize*2))
+ %       new AudioTrack.Builder()
+ %                .setBufferSizeInBytes((int) (mediaInfo.frameSize*2))
 
 
-        public void resume() {
-         //The audiotrack will only play audio if the buffer is full at start -JJ 27/04-2017
-         //Apparently it's pretty common that the write goes though as 100%, but doesn't fill up
-         //The buffer. We ask it to write twice to circumvent this issue. We can do this because
-         //the audioThread implementation isn't actually required to run at the same speed as the
-         //audiotrack
+%        public void resume() {
+%         //The audiotrack will only play audio if the buffer is full at start -JJ 27/04-2017
+%         //Apparently it's pretty common that the write goes though as 100%, but doesn't fill up
+%         //The buffer. We ask it to write twice to circumvent this issue. We can do this because
+%         //the audioThread implementation isn't actually required to run at the same speed as the
+%         //audiotrack
 
 %Why do we need the new player and cant just use android anymore?(this is linked with decoder, so when we do one we need to do the other?)
 %Pause, next, skip issues?
