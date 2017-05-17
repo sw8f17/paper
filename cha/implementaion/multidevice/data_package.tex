@@ -3,7 +3,6 @@ In \cref{sec:communication_methods} it was decided to use WiFi Direct as communi
 In this section we will determine a way to structure the data for network transmission.
 
 \bigskip
-
 The main problem is to be able to transmit different types of data over the network with as little overhead as possible.
 We have two types of data to transmit between the devices: music data, and commands. 
 Music data is parts of the song itself which is streamed to the devices,
@@ -15,7 +14,7 @@ We do not want to make our own system to do it, we want to use well defined and 
 Furthermore the data do not need to be human readable.
 
 \subsection{Protocol Buffers}
-This lead us to Protocol Buffers, also called protobuf, made by Google, which is a language and platform neutral extensible mechanism for serialized structured data. 
+This lead us to Protocol Buffers, also called Protobuf, made by Google, which is a language and platform neutral extensible mechanism for serialized structured data. 
 Protobuf works by defining the way the data should be structured, this definition is then used to generate source code which can read and write the data to and from streams.\cite{protobuf}
 This makes it easy to define the data structure once, and then use it throughout the code.
 Google supports protobufs for C++, C\#, Go, Java and Python, but nothing stops usage in other languages\cite{protobuf}.
@@ -23,30 +22,29 @@ Google supports protobufs for C++, C\#, Go, Java and Python, but nothing stops u
 In regarding to speed and package size, Protobuf is, compared to XML, three to ten times smaller and 20 to 100 times faster.
 This comes from among other things that protobuf is not human readable since it is encoded in a binary format.\cite{protobuf} 
 
-There exist two supported versions of protobuf: proto2 and proto3, where proto3 is the newest.
+There exist two supported versions of Protobuf: proto2 and proto3, where proto3 is the newest.
 Proto3 have some changes from proto2, which makes it easier to implement in languages like Android Java, Objective C and Go.\cite{proto3}
 
-An alternative to Protobuf could be XML or JSON.
-XML and JSON are both human readable data formats and are both widely popular.
-In some cases Protobuf is up to six times faster than JSON, and as mentioned previously, Protobuf is up ten times faster than XML\cite{json_slow}.
+An alternative to Protobuf could be using XML or JSON.
+XML and JSON are both human readable data formats represented as text, and are both widely popular.
+In some cases Protobuf is up to six times faster than JSON, and as mentioned previously, and up ten times faster than XML\cite{json_slow}.
 In \cref{tab:format_pros_cons}, a pros and cons list of the different data formats can be seen.
 
 \begin{table}
     \begin{tabularx}{\textwidth}{XXX}\toprule
-        Data format & Pros & Cons \\
-        Protobuf    & Small overhead, fast  & Not human readable \\
-        JSON        & Human readable, \newline fast compared to XML  & Not as fast as Protobuf\\
-        XML         & Human readable        & Large overhead and slow, slower than Protobuf and JSON \\
+        Data format & Pros                                          & Cons \\
+        Protobuf    & Small overhead, fast                          & Not human readable \\
+        JSON        & Human readable, \newline fast compared to XML & Not as fast as Protobuf\\
+        XML         & Human readable                                & Large overhead and slow, slower than Protobuf and JSON \\
     \end{tabularx}
-    \caption{Pros and cons of the different data formats.}
-    \label{tab:format_pros_cons}
+    \caption{Pros and cons of the different data formats.}\label{tab:format_pros_cons}
 \end{table}
 
-\subsection{Conclusion}
-Protobuf is a language and platform neutral mechanism for serialize structured data.
-It is lightweight and fast, compared to XML, which is what we seek to transmit data between the devices.
-It is easy to once define the data structure and then use it, which helps getting quick started with the development.
+\subsection{Choosing Data Transmission Medium}
+Protobuf is a language and platform neutral mechanism for serializing structured data.
+It is lightweight and fast, compared to XML and JSON, which is a desired attribute when transmitting data between devices.
+It is easy to define Protobuf data structures and use them, which helps up getting quickly started with the development.
 We disregard XML and JSON, since the low overhead of Protobuf is important for our use case.
 Therefore we choose to use protobuf to transmit data between the devices.
 
-For our application we will be using proto3, since it is newer, less verbose and we expect it to be supported for longer.
+For our application we will be using proto3, since it is newer, less verbose and we expect it to be supported for a longer time period.
