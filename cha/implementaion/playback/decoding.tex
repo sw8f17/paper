@@ -1,24 +1,26 @@
 \section{Decoding MP3}
-In \cnameref{cha:initial_development} we presented our initial basis for development, namely Google samples' implementation of a media player.
-In that implementation an Android implementation, \texttt{android.media.MediaPlayer}, is used to control the playback of audio streams.
+In \cnameref{cha:initial_development} we presented our initial foundation for development, namely the Google sample implementation of a universal media player app.
+In that implementation an Android implementation, \code{android.media.MediaPlayer}, is used to control the playback of audio streams.
 
 The decoding from MP3 to \ac{PCM} is already handled by the base implementation from Google samples, however we have no guarantees when actions occur, as it is left up to this already implemented system and done in correlation with playing the \ac{PCM} data.
-We replace the \texttt{android.media.MediaPlayer} API with our own implementation in order to obtain more control over the playback and decoding.
+We replace the \code{android.media.MediaPlayer} class with our own implementation in order to obtain more control over the playback and decoding.
 
-We want more control in order to guarantee certain characteristics about the data, such that we have the required control to properly stream the data from one device to another and perform playback commands in sync.
+We want more control to be able to guarantee certain characteristics about the data, such that we have the required control to properly stream the data from one device to another and perform playback commands in sync.
 These guarantees are: \mnote[inline]{what are these guarantees and why do we need them? I assume i missed some}.
 \begin{eletterate*}
     \item Length of a sample, such that we can properly control the audio buffers.
     \item Exact time it takes to play a single, such that we can adjust for drift.\mnote{Explain this better Jesper, you mentioned master playback speed control?}
-    \item Audio characteristics, i.e. the domain knowledge introduced earlier in this chapter, such that we can manipulate the data, in particular channels to create a stereo or multichannel setup.
+    \item Audio characteristics, i.e.\ the domain knowledge introduced earlier in this chapter, such that we can manipulate the data, in particular channels to create a stereo or multichannel setup.
 \end{eletterate*}
-MP3 is a compressed format, meaning certain data is lost, e.g. we cannot confirm the length of a single sample, unlike \ac{PCM} data where we know the precise length and time it takes to play a single sample.
+
+MP3 is a compressed format, meaning certain data is lost, e.g.\ we cannot confirm the length of a single sample, unlike \ac{PCM} data where we know the precise length and time it takes to play a single sample.
 Furthermore \ac{PCM} samples are independent of each other unlike MP3 samples, this introduces complications when working with buffers, which may have different capabilities and requirements depending on the hardware.
 With these reasons in mind, it makes sense for us to decode the MP3 data to \ac{PCM} prior to distributing it, rather than distributing the file as MP3 and leaving both the decoding and playing of the files up to an already implemented media player.\mnote[inline]{Tis what i understood from what Jesper said, he might wanna fact check}
-\bigskip
 
+\bigskip
 While figuring out how to decode, we came across several mentions that decoding MP3 to \ac{PCM} using Java libraries is slow, and that for this it would be beneficial to do native development\cite{slow_java_stackoverflow}\cite{slow_java_lib}.
-As such we have chosen to develop the decoding part of our application using \ac{JNI}.
+As such we have chosen to develop the decoding part of our application using \ac{JNI}\@.
+
 We already had knowledge of an available open source MP3 decoding library, \textit{libmpg123}\mnote[inline]{Is this the proper way to address what we use, should i mention the mpg123 audio player?}, which we use in our implementation.
 \mnote[inline]{Please insert:issues of note or particular interest, code examples if any are interesting, important mentions related to the implementation as this is barely touched upon? Perhaps a lessons learned section/subsection as we talked about at supervisor meeting, this could include toolchain, crosscompile and perhaps our thoughts on our later discovery of mediacodec}
 

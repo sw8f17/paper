@@ -1,13 +1,14 @@
 \section{Playing \ac{PCM} Data}
 With the data decoded we also create a replacement for the mediaplayer.\mnote[inline]{why btw? could we not simply have used the one we alrdy had?}
 In preparation for the next part of development, enabling devices to connect to one another and create a multi-device system, we treat the data as an incoming stream rather than local data.
-To handle the \ac{PCM} data stream we use the android class \texttt{AudioTrack} which allows for streaming of PCM audio buffers to an audio sink.
+To handle the \ac{PCM} data stream we use the android class \code{AudioTrack} which allows for streaming of PCM audio buffers to an audio sink.
 
 \mnote[inline]{the following is largely related to how AudioTrack works with the hardware, it would greatly benefit from some implementation related issues and observations}
-The \texttt{AudioTrack} class does impose a couple of requirements on how we handle the data stream, particularly impacting or playback commands.
-First off \texttt{AudioTrack} requires that we constantly write to it, if this does not happen it will pause in order to release system resources, this can never happen as it would introduce wake up lag upon the next write action.
-Secondly \texttt{AudioTrack} works with an internal buffer, this buffer has to be completely filled before it can be flushed to the audio sink, which means the data is send in small buffers at a time.\cite{audiotrack}
+The \code{AudioTrack} class does impose a couple of requirements on how we handle the data stream, particularly impacting or playback commands.
+First off \code{AudioTrack} requires that we constantly write to it, if this does not happen it will pause in order to release system resources, this can never happen as it would introduce wake up lag upon the next write action.
+Secondly \code{AudioTrack} works with an internal buffer, this buffer has to be completely filled before it can be flushed to the audio sink, which means the data is send in small buffers at a time.\cite{audiotrack}
 \mnote[inline]{From my understanding the following were the issue experienced during development, were there more?}
+
 This caused issues with our playback control commands due to race conditions.
 In that we need to keep feed data from our decoder, or from another smartphone, to the audio track such that it does not halt, we do so asynchronously.
 This caused some unfortunate race conditions with our pause command, where the audiotrack buffer would flush its internal buffer to the audiosink, then start to refill its buffer at which point the pause command would occur.
@@ -15,7 +16,7 @@ The buffer would not be full, meaning it cannot be flushed to the audiosink, yet
 It took us a while to locate and fully understand how this was happening, which prompted us to use the model checker tool, Uppaal.
 Our process for using Uppaal was as follows:
 \begin{enumberate}
-    \item Create/Adjust model to model \texttt{AudioTrack}.
+    \item Create/Adjust model to model \code{AudioTrack}.
     \item Run the model through the modelchecker Uppaal.
     \item Locate the error in the code.
     \item If the error is not present in the code, it is an error in modelling, go to 1. If the error is also present in the code, fix it and go to 2.
