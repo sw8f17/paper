@@ -14,7 +14,7 @@ We will describe these concepts and choose the one most suitable for implementat
 
 \subsection*{\ref{itm:nearby_msg} Nearby Messages API}
 The Nearby Messages API is an API by Google which lets one pass small binary payloads between internet connected Android and iOS devices.
-It uses a combination of Bluetooth, Bluetooth Low Energy, WiFi, and near--ultrasonic audio to communicate between devices.
+It uses a combination of Bluetooth, Bluetooth Low Energy, WiFi, and near-ultrasonic audio to communicate between devices.
 The Nearby Messages API uses Google's servers to relay the payloads between devices, hence the internet requirement.\cite{nearby_messages}
 
 Since it has to connect to a Google server, we experienced delay between the messages when we tested it.
@@ -24,26 +24,26 @@ Therefore choosing the Nearby Messages API would have some serious drawbacks to 
 
 \subsection*{\ref{itm:nearby_conn} Nearby Connections API}
 The Nearby Connections API is an API by Google which lets one discover, connects and exchange messages with other devices on a network.
-It can exchange messages through WiFi in real--time.\cite{nearby_connection}
+It can exchange messages through WiFi in real-time.\cite{nearby_connection}
 The Nearby Connections API complies with the external architecture mentioned in \cnameref{sec:external_architectures},
 since no external hardware is required.
 Furthermore internet is not required which is preferred.
 
-When tried in a test environment, we used a WiFi ad--hoc network to test it,
+When tried in a test environment, we used a WiFi ad-hoc network to test it,
 since the network at Aalborg University is configured so devices can not connect to each other.
-Normal WiFi can be used, but when there is no access to WiFi, for instance outside, an ad--hoc WiFi network must be used.
-We found an ad--hoc network to be an annoyance to set up with having to connect each device to the network.
-When using the ad--hoc network hosted by a device, in this case a smartphone,
+Normal WiFi can be used, but when there is no access to WiFi, for instance outside, an ad-hoc WiFi network must be used.
+We found an ad-hoc network to be an annoyance to set up with having to connect each device to the network.
+When using the ad-hoc network hosted by a device, in this case a smartphone,
 the device which hosted the network could not be a part of the network, but only route traffic.
 The reason for this is that the Nearby Connections API uses multicast DNS to discover devices,
-and such packets is not received by the host of the ad--hoc network.
+and such packets is not received by the host of the ad-hoc network.
 This was a huge drawback and it would be hard to justify that one device would have to act as a router for the network.
 
 \subsection*{\ref{itm:wifi_direct} WiFi Direct}
 WiFi Direct is a technology which enables devices with WiFi capabilities to directly connect to one another;
 without having to use an access point, and it does not need internet to function.
 In Android this technology is called ``Wi-Fi Peer-to-Peer''\footnote{\url{https://developer.android.com/guide/topics/connectivity/wifip2p.html}}.
-WiFi Direct can be used to make one--to--one connection or to create a group of devices,
+WiFi Direct can be used to make one-to-one connection or to create a group of devices,
 which can connect to each other simultaneously.\cite{wifi_direct}
 WiFi Direct complies with the external architecture mentioned in \cnameref{sec:external_architectures}, and an internet connection is not required as well.
 
@@ -57,6 +57,6 @@ Furthermore is the ability to work without internet strongly preferred.
 We found three different ways of connecting devices: Nearby Messages API, Nearby Connections API, and WiFi Direct.
 
 The Nearby Messages API required internet and was slow, and therefore not being an ideal solution.
-The Nearby Connections API required a device to act as router when an ad--hoc network was used, also not being an ideal solution.
+The Nearby Connections API required a device to act as router when an ad-hoc network was used, also not being an ideal solution.
 The last, WiFi Direct, did not require internet or external hardware, and when tested it worked as expected.
 Therefore WiFi Direct is chosen to create the connection between the different devices.

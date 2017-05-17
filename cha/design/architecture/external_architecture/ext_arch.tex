@@ -1,0 +1,54 @@
+\subsection{External Architecture}\label{sec:external_architectures}
+%Intro to what it is - External, what makes it external contra internal
+    %The 3 ideas
+    %Pros and cons for each idea
+%Conclusion(Local Centralized)
+    %Why this, how does this fit our purpose better than the other two.
+This section presents our thoughts on the external architecture.
+External architecture refers to the architecture between devices, i.e.\ the network architecture.
+We consider three different external architectures namely remote centralized, local centralized and \ac{P2P}; before deciding upon the one we deem the best fit.
+\cref{tbl:external_comparison} presents some  noticeable differences between the proposed architectures.
+
+\subsubsection{Remote Centralized}
+Firstly we consider the option of using a remote centralized solution, i.e.\ having a server which propagates communication.
+This solution simplifies the communicative part of the problem by simply using the Internet and using a server as an intermediary between all devices.
+Using a server also provides the system with a powerful control device, the server, which would alleviate the Android devices from any significant computational needs as they would simply act as speakers and information providers.
+Furthermore the server would act as an authority, providing a clock to synchronize towards.
+
+This solution also relies on an internet connection being available and is affected by bandwidth, furthermore a server needs to be available, in the case of widespread use we would need enough hardware to support multiple users.
+Lastly the server would also provide a single point of failure; no server, no application.
+
+\subsubsection{Local Centralized}
+While having external hardware available and requiring an internet connection would limit the application use scenarios, this can be rectified by localizing the solution.
+To do so a device would act as the server, a master device.
+The session host would become the master, and any connecting devices would be slaves.
+A master device would, similarly to the server, provide an authority to synchronize towards.
+Slaves would retain the status which Android devices holds in the remote centralized solution, simply acting as information providers and speakers, whereas the master would manage computational requirements, LAN management and file distribution.
+
+In contrast to the remote centralized idea this would remove the need for external hardware and decrease latency however, we also produce the need for peer discovery and LAN management.
+We would still have the single point of failure in the master, but with no internet requirement.
+
+\subsubsection{\acl{P2P}}
+A common denominator between the two previous solutions is their single point of failure produced by their master-slave type relationship.
+A \ac{P2P} solution would remove this single point of failure, but not without adding its own complications.
+In a \ac{P2P} solution all devices would be equal, this in turn means that should a device fail or leave the session, it does not matter which device it was as the network of devices would be unaffected, given that no device is of higher authority.
+With all devices being equal it also means having to reach consensus to make decisions, simple decisions like playback control could be managed through a majority voting system, but the more complex underlying communication such as synchronization increases in complexity significantly due to not having an authority.
+
+This solution could be expanded to consider a rotating master which would help resolve possible consensus issues, but at that point it becomes overcomplicating the local centralized solution in order to reduce the chance of the master leaving or failing, however that would still be possible.
+
+\subsubsection{Conclusion}
+Ultimately the key challenge and the most important consideration for the external architecture, is clock synchronization.
+To properly manipulate the clock to achieve psychoacoustic effects, even a few milliseconds matter; as such with how the external architecture can affect this, it is a important choice.
+
+The three aforementioned proposals are all ``pure'' proposals, however reality is that they can be modified to resolve some of their weaknesses.
+An example would be \ac{P2P}, the particular difficulty with this architecture is the problem of consensus which drastically increases the complexity of clock synchronization, a way to rectify this issues could be having a rotating master.
+While still making synchronization more complex than the local centralized proposal, it would solve the issue of consensus, however it would also create a single point of failure.
+Despite some modifications being available, certain variables for each proposal can not be modified, such as the requirement of internet and external hardware for the remote centralized proposal.
+
+The remote centralized proposal holds the most restrictions on the users by requiring internet, and also requires a server to communicate with, which based on location could impose further issues.
+As such we prefer both \ac{P2P} and local centralized to this proposal.
+The pure \ac{P2P} proposal on the other hand imposes few requirements, but do complicate the clock synchronization a lot, as such we do not wish to use a pure \ac{P2P} implementation.
+This leaves us with local centralized or a modified version of \ac{P2P}, a particular issue with a rotating master however, would be how do we provide the music source, queue system etc.
+These issues are primarily \ac{UX} issues, which as mentioned in \cnameref{cha:requirement_elicitation} is not a priority, with this in mind both of these ideas will be considered when implementing the system and the final decision is made.
+\subimport{}{comparisontable.tex}
+
