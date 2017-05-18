@@ -48,11 +48,11 @@ Fortunately WiFi Direct has a number of helpful services.
 One of these services is ``Service Discovery'', which is made for the exact purpose of discovering peers.
 In Android WiFi Direct is called: ``Wi-Fi peer-to-peer'' or ``Wi-Fi P2P'' for short.\footnote{\url{https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html}}.
 
-We experienced several issues implementing Service Discovery in our app, most notable is group negotiation.
+We experienced several issues implementing Service Discovery in our app, the most notable being group negotiation.
 When devices connect using WiFi Direct, they negotiate about having the role of group owner.
 The group owner is the master of the network, and is responsible for granting new devices access etc.
 For our app we want the device which is the server, to also have the role of being the group owner of the WiFi Direct network.
-The root of our problem was the fact that the devices would keep a record of the last 32 WiFi Direct groups which the had been a part of, as well as who were the group owner.
+The root of the problem was caused by the devices keeping a record of the last 32 WiFi Direct groups which they had been a part of and who were the group owner.
 This would then become a problem, when one started a new session using the same devices as a previous one, but with a different master.
 
 In order to prevent this issue, we decided to erase the records of previous WiFi Direct networks, when we start discovering services.
