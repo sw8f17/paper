@@ -107,11 +107,11 @@ This is used in the next step, which is establishing a persistent socket.
 
 \subsection{Establishing a Persistent Socket}
 
-After the the client(s) have discovered the server, they will establish a persistent connection.
+After the client(s) have discovered the server, they establish a persistent connection.
 They are at this point part of the same WiFi Direct network, and the client has just received the IP of the group owner.
 
-When the server first started, it launches a separate thread which open a \code{ServerSocket} which accepts incoming socket connections.
-After accepting them it creates a MessageConnection which is our abstraction which is run on a separate thread for each connection from the server to the client, and vice versa.
+When a device first starts its server mode, it launches a separate thread which opens a \code{ServerSocket} to accept incoming socket connections.
+After accepting them it creates a MessageConnection, which is our abstraction, which is run on a separate thread for each connection from the server to the client, and vice versa.
 That thread then continuously tries to read on the socket, to accept messages sent to it.
 
 \subsubsection*{Creating our Protobufs}
