@@ -47,9 +47,10 @@ Measuring the offset between the two signals is a signal processing
 task. Within the field of signal processing, the specific measure is
 called cross correlation. 
 
-The cross correlation can be used to measure an offset, between two signals, in time, which is the $x$--axis in \cref{fig:cross_cor}.
-Having two identical signals, the blue line $g$, and the purple line $f$, the cross correlation can be used to calculate the offset between the two signals. 
-It turns out that that the correct offset maximizes the intersection between the two signal, depicted as $g * f$.
+To illustrate the principle of using cross correlation to measure the offset between two identical signals, we made \cref{fig:cross_cor}.
+In it the blue line $g$, and the purple line $f$, are two identical signals, but they are offset in time, which is the $x$-axis.
+Finding the offset can be done by shifting one of them in time, while maximizing the area of their intersection, depicted as $g \star f$.
+The shift where the area of the intersection is maximum, is the offset of the two signals.
 
 Cross correlation is normally
 a computationally intensive task, but due to the Convolution
