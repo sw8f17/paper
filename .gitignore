@@ -131,3 +131,8 @@ bibtex.bib
 # Minted
 _minted*/
 *.lox
+
+# TikZ Externalize
+*.dpth
+*.md5
+*.auxlock

@@ -1,3 +1,4 @@
+\tikzexternalenable{}
 \begin{figure}
   \center
   \begin{tikzpicture}
@@ -8,13 +9,16 @@
         width=12cm,
         ytick=\empty,
         xtick=\empty,
-        axis lines=none,
+        %axis lines=none,
+        hide y axis,
+        axis x line*=bottom,
+        ymin=0,
         every axis plot/.append style={very thick,smooth}
       ]
 
       % Draw curves
-      \addplot [name path=g3, color=GoogleRed] {dnorm(3,1.5)};
-      \addplot [name path=g6, color=GoogleGreen] {dnorm(6,1.5)};
+      \addplot [name path=g3, color=GoogleBlue] {dnorm(3,1.5)};
+      \addplot [name path=g6, color=GooglePurple] {dnorm(6,1.5)};
 
 
       \addplot fill between[of=g3 and g6,
@@ -37,10 +41,14 @@
           %soft clip={domain=-6:6}
         ]
       ;
-
+      \node[black] at (2,0.25) {$g$};
+      \node[black] at (7,0.25) {$f$};
+      \node[black] at (4.5,0.04) {$g*f$};
       \end{axis}
   \end{tikzpicture}
   \caption{Illustration of the shift between two waves.}
   \label{fig:cross_cor}
 \end{figure}
 %https://tex.stackexchange.com/questions/162438/how-can-i-hatch-the-areas-delimited-by-two-intersecting-gaussian-distribution-cu/163652#163652
+
+\tikzexternaldisable{}
