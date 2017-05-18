@@ -42,12 +42,13 @@ It contains a list of all nearby devices which are acting as a ``Server'', how t
 
 \subsection{Service Discovery}
 
-The first problem which must be handled in order to connect devices is: discovering peers.
+The first problem which must be addressed in order to connect devices is peer discovery.
 Fortunately a part of the WiFi Direct standard is the so called services.
-Part of the services is ``Service Discovery'', which is made for the exact purpose of discovering peers.
+Fortunately WiFi Direct has a number of helpful services.
+One of these services is ``Service Discovery'', which is made for the exact purpose of discovering peers.
 In Android WiFi Direct is called: ``Wi-Fi peer-to-peer'' or ``Wi-Fi P2P'' for short.\footnote{\url{https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html}}.
 
-We experienced several issues implementing service discovery in our app, most notable is group negotiation.
+We experienced several issues implementing Service Discovery in our app, most notable is group negotiation.
 When devices connect using WiFi Direct, they negotiate about having the role of group owner.
 The group owner is the master of the network, and is responsible for granting new devices access etc.
 For our app we want the device which is the server, to also have the role of being the group owner of the WiFi Direct network.
