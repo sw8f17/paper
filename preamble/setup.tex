@@ -145,11 +145,16 @@
     shapes.multipart,
     automata,
     shadows,
-    decorations.pathreplacing
+    decorations.pathreplacing,
+    external
 }
+\tikzexternalize[prefix=figures/]
+%\tikzexternaldisable{}
+\tikzexternalenable{}
 %Pgf plots is nice for making fancy plots
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.12}
+\usepgfplotslibrary{fillbetween}
 
 %Two uml packages. I love it
 \usepackage{packages/tikz-uml}
