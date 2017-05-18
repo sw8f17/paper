@@ -5,13 +5,13 @@ How we get these devices to discover each other, and how we establish a persiste
 Lastly we describe which protobufs we have, what they contain, and how we send and receive them.
 
 \subsection{Preparing the App}
-We have previous, in \cref{sec:foundation_of_our_android_app}, explained that we utilize a sample music player.
+We have previously, in \cref{sec:foundation_of_our_android_app}, explained that we utilize a sample music player.
 Now we have the desire that not all devices should enter that app on start up, such that we can have a master-slave relation between the devices.
-On \cref{fig:connecting} we show the two new UIs made for connecting devices.
-On \cref{fig:mode_selection} is the UI the app starts with.
-Here one selects either being a server og being a client.
-On \cref{fig:group_selection} is the UI one sees when pressing the ``Client'' option.
-It contains a list of all nearby devices which are acting as a ``Server'', how this is achieved will be explained next.
+\cref{fig:connecting} we show the two new UIs made for connecting devices.
+\cref{fig:mode_selection} is the UI the app starts with.
+When in this state the user chooses to be either a server or a client.
+\cref{fig:group_selection} presents the UI a user is shown when pressing the ``Client'' option.
+It contains a list of all nearby devices which are acting as a ``Server'', how this is achieved is explained next.
 
 \begin{figure}[ht]
   \begin{subfigure}[b]{0.33\linewidth}
