@@ -109,4 +109,53 @@ This is used in the next step, which is establishing a persistent socket.
 After the the client(s) have discovered the server, they will establish a persistent connection.
 They are at this point part of the same WiFi Direct network, and the client has just received the IP of the group owner.
 
-When the server first started, it 
+When the server first started, it lauches a seperate thread which open a \code{ServerSocket} which accepts incoming socket connections.
+After accepting them it creates a MessageConnection which is our abstraction which is run on a seperate thread for each connection from the server to the client, and vice versa.
+That thread then continuously tries to read on the socket, to accept messages sent to it.
+
+\subsubsection*{Using Protobufs}
+As previously mentioned we decided to use protobufs to serialize our messages.
+
+The protobufs we use can be separated into three groups: Meta-data, commands and data. \tnote{Tids ting går her under meta-data, er det fair?}
+\begin{description}
+    \item[Meta-data] \hfill \\
+        Meta-data is information about the data, the data in this case is the audio data.
+        The purpose of sending meta-data is twofold: We send it such that the clients can present it in their UI, and such that our audioplayer can be setup correctly.
+        Our meta-data contains the following:
+        \begin{itemize}
+            \item Artist name
+            \item Album name
+            \item Song name
+            \item Album art url (An optional url containing an image to be displayed)
+            \item Song duration
+            \item Media-info
+        \end{itemize}
+        Here the media-info contains the following information about the audio data (in the PCM format). \tnote{Ref til Marcs afsnit om playback med begreberne}
+        \begin{itemize}
+            \item Sample rate
+            \item Channels
+            \item Encoding (bit depth pr. channel)
+            \item Frame size
+        \end{itemize}
+    \item[Commands] \hfill \\
+        Commands are used to change the playback on other devices.
+        All commands contain a timestamp at which the given command should occur. \tnote{Evt. ref til core idea?}
+        In total we have the following commands:
+        \begin{description}
+            \item[PlayCommand]
+                Used to start audio playback.
+                Contains the location in the audio file to resume playback at, and the timestamp at which the playback should start.
+            \item[PauseCommand]
+                Used to pause audio playback.
+                Much like the PlayCommand, it contains the location in the audio file at which the playback is pause, and the timestamp for when the pause should occur.
+            \item[SeekCommand]
+                Used to seek in the audio file, i.e. change which part of the audio file should be played.
+                As the Play- and PauseCommands, it contains the location which the playback should change to, and the timestamp for when the change should occur.
+            \item[SongChangeCommand]
+                Used to change the audio file which should be played.
+                Contains the meta-data for the file which will be changed to, and the timestamp for when the change should occur.
+        \end{description}
+
+    \item[Data] \hfill \\
+
+\end{description}
