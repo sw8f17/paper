@@ -1,8 +1,8 @@
 \section{Connecting The Devices}
 In \cref{sec:communication_methods} and \cref{sec:transmit} we decided to use WiFi Direct and Protobufs accordingly.
-This section will explain how they inter-operate with our app.
-% Vi har valgt wifi direct
-% Vi har valgt at bruge protobufs
+This section will explain how we change parts of the app to accommodate multiple devices.
+How we get these devices to discover each other, and how we establish a persistent connection.
+Lastly we will describe which protobufs we have, what the contain, and how we sent and receive them.
 
 \subsection{Preparing the App}
 We have previous, in \cref{sec:foundation_of_our_android_app}, explained that we utilize a sample music player.
@@ -109,13 +109,15 @@ This is used in the next step, which is establishing a persistent socket.
 After the the client(s) have discovered the server, they will establish a persistent connection.
 They are at this point part of the same WiFi Direct network, and the client has just received the IP of the group owner.
 
-When the server first started, it lauches a seperate thread which open a \code{ServerSocket} which accepts incoming socket connections.
-After accepting them it creates a MessageConnection which is our abstraction which is run on a seperate thread for each connection from the server to the client, and vice versa.
+When the server first started, it launches a separate thread which open a \code{ServerSocket} which accepts incoming socket connections.
+After accepting them it creates a MessageConnection which is our abstraction which is run on a separate thread for each connection from the server to the client, and vice versa.
 That thread then continuously tries to read on the socket, to accept messages sent to it.
 
-\subsubsection*{Using Protobufs}
+\subsubsection*{Creating our Protobufs}
 As previously mentioned we decided to use protobufs to serialize our messages.
 
+We decided to use ``wire''\footnote{\url{https://github.com/square/wire}} made by ``square'' to generate Java classes corresponding to our protobufs.
+It is a mature library, and easily integrated into our app, it supports both proto2 and proto3, and generates builders for each of the classes it generates, making it easy to use.
 The protobufs we use can be separated into three groups: Meta-data, commands and data. \tnote{Tids ting går her under meta-data, er det fair?}
 \begin{description}
     \item[Meta-data] \hfill \\
@@ -157,5 +159,38 @@ The protobufs we use can be separated into three groups: Meta-data, commands and
         \end{description}
 
     \item[Data] \hfill \\
-
+        Lastly we have the data containing the audio itself, we call it: MusicData.
+        MusicData contains a byte array, which is the PCM audio data which will later be played, as explained in \tnote{ref til playback afsnittet}.
+        As with the other messages, the MusicData contains a timestamp for when the audio data should be played.
 \end{description}
+
+\subsubsection{Sending The Messages}
+When we designed the system we ran into a few issues, when it came to sending the messages.
+First was that we did not know which message we would be receiving next.
+Secondly was that we did not know what length the next message would have.
+This is a problem since, we would not know when to stop reading from the network connection, and start processing the data.
+Additionally we would not know how to process the data.
+
+To solve this issue, we add two bytes to each message we send.
+The first byte is an integer we have assigned to each of the protobufs such that the receiver knows which message this is.
+The second byte is the length of the protobuf part of the message.
+This is shown in \cref{fig:message_layout}.
+This allow us to continue reading for exactly the amount of bytes the protobuf is.
+
+Next the receiver can look up what decoder to use in order to deserialize the protobuf sent.
+After the protobuf have been deserialized, we call the method registered to handle the given protobuf. \tnote{Vi skal måske forklare lidt mere om hvad det her indebærer?}
+
+\begin{figure}[htb]
+    \centering
+    \begin{tikzpicture}[auto]
+        \path[draw] (0,0) -- (0,1) -- (7.5,1) -- (7.5,0) -- (0,0) % Border
+                        (1.5,0) -- (1.5,1) % Første streg (efter type)
+                        (3.0,0) -- (3.0,1); % Anden streg (efter Length)
+
+        \node[text width=2cm, align=center] at (0.75,0.5) {Type \\ 4 bytes};
+        \node[text width=2cm, align=center] at (2.25,0.5) {Length \\ 4 bytes};
+        \node[text width=4cm, align=center] at (5.0,0.5) {Any protobuf \\ ``Length'' bytes};
+    \end{tikzpicture}
+    \caption{The layout of any message we send.}
+    \label{fig:message_layout}
+\end{figure}
