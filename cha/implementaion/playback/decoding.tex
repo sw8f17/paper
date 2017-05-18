@@ -1,6 +1,100 @@
 \section{Decoding MP3}
-In \cnameref{cha:initial_development} we presented our initial foundation for development, namely the Google sample implementation of a universal media player app.
-In that implementation an Android implementation, \code{android.media.MediaPlayer}, is used to control the playback of audio streams.
+
+In \cnameref{cha:initial_development} we presented our initial
+foundation for development, namely the Google sample implementation of
+a universal media player app. In that implementation an Android
+component, namely the \code{android.media.MediaPlayer}, is used to
+control the playback of audio streams.
+
+The \code{MediaPlayer} is a high level Android framework component,
+which takes media files and plays them back using the standard android
+audio path. It also provides control over the playback functions, such
+as \code{seekTo}, \code{start} (commonly known as play), and
+\code{pause}. The mediaplayer is squarely aimed at fulfilling the
+requirements of most common usecases for most apps. Without providing
+guarantees about timing and accuracy.
+
+MP3 files aren't stored in a format directly relatable to time, and
+is neither directly playable, nor can they be sliced arbitrarily to make
+facilitate simple data transfer. In fact, even though MP3 files are
+naturally decomposed into chunks, you need multiple chunks to start the
+playback. These things together make it difficult to stream MP3 with the
+precision and control we desire.
+
+Instead we decide to transfer the sound data as raw \ac{PCM} encoded
+byte arrays. \ac{PCM} data is directly related to audio produced, making
+arbitrary slicing and complex mixing possible. Since the \ac{PCM}
+encoded data is what the soundcard accepts. We'd have to decode into it
+at some point, which makes transferring it directly over the network
+a simple choice.
+
+To reuse as much of the functionality already provided by the sample, we
+replace the android \code{MediaPlayer} with one that we design and
+control. Since the \code{MediaPlayer} is such a high level concept, we
+are able to interpret all the commands in a way that makes sense for
+synchronized playback.
+
+Conceptually the android \code{MediaPlayer} fulfills 3 separate
+responsibilities, with some ancillary responsibilities, that wont be
+touched on here: Decoding, playback control, and presentation. In our
+replacement we have structured them as can be seen on
+\cref{fig:mediaplayerParts}. The app interacts with the \code{PlayBack
+Control} which facilitates communication between the decoding and the
+presentation.
+
+\begin{figure}[ht]
+	\centering
+	\begin{tikzpicture}[
+			every node/.style = {%
+				draw,
+				rectangle,
+				rounded corners = 1mm,
+				line width = 0.2mm,
+				align = center,
+				minimum width = 3cm,
+				minimum height = 1.5cm,
+				text = black,
+			},
+			hide/.style = {%
+				draw = none,
+				minimum width = 0cm,
+				minimum height = 0cm,
+			},
+		]
+		\node (pc) at (0,0) {Playback Control};
+		\node[hide] (i) [above=1cm of pc] {};
+		\node (d) [below left=1cm and 1cm of pc] {Decoding};
+		\node (p) [below right=1cm and 1cm of pc] {Presentation};
+		\draw[->] (i) -- (pc);
+		\draw[->] (pc) -- (d);
+		\draw[->] (pc) -- (p);
+	\end{tikzpicture}
+	\caption{Overview of the \code{MediaPlayer}}\label{fig:mediaplayerParts}
+\end{figure}
+
+\subsection{Decoder}
+\label{subsec:decoder}
+
+The decoder takes the audio in a supported format and turns it into
+\ac{PCM} audio data. The \ac{PCM} data has some format, which the
+decoder reads when it first opens a file.
+
+Decoding an MP3 is a CPU bound task, mostly bottlenecked by CPU
+performance over filesystem performance, and often having very few I/O
+waits. For this reason Java, a high level language, doesn't fit the
+problem well, due to its high CPU overhead. For this reason, and because
+a free and complete library exists, we opted to go with the C library
+\code{libmpg123} to do the decoding. \code{libmpg123} includes many
+optimizations in hand coded assembly for many different architectures,
+with and without floating point processors, and a general purpose
+C implementation, where none of the hand optimized procedures apply. For
+this reason it's an excellent choice for a fragmented ecosystem like
+android, where many different cpu architectures and configurations have
+to be supported.
+
+As said, the library is written for use in C. Fortunately Java has
+support for calling binding native C and C++ libraries to Java objects,
+with something called the \ac{JNI}.
 
 The decoding from MP3 to \ac{PCM} is already handled by the base implementation from Google samples, however we have no guarantees when actions occur, as it is left up to this already implemented system and done in correlation with playing the \ac{PCM} data.
 We replace the \code{android.media.MediaPlayer} class with our own implementation in order to obtain more control over the playback and decoding.
