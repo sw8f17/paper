@@ -53,7 +53,7 @@ When devices connect using WiFi Direct, they negotiate about having the role of 
 The group owner is the master of the network, and is responsible for granting new devices access etc.
 For our app we want the device which is the server, to also have the role of being the group owner of the WiFi Direct network.
 The root of the problem was caused by the devices keeping a record of the last 32 WiFi Direct groups which they had been a part of and who were the group owner.
-This would then become a problem, when one started a new session using the same devices as a previous one, but with a different master.
+This becomes a problem, when a new session using the same devices as a previous one, but with a different master is started.
 
 In order to prevent this issue, we decided to erase the records of previous WiFi Direct networks, when we start discovering services.
 In addition to the server creating a new group, once it starts broadcasting its service.
