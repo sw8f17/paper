@@ -1,0 +1,23 @@
+\section{Implementing Synchronization}\label{sec:impl_sync}
+In this section we discuss how we implement the methods of synchronization we discussed in \cref{cha:sync}.
+
+In it we decided, in \cref{sec:sync_conclusion}, that NTP would suit us best.
+However for practical reason we decided to implement \ac{SNTP}, which as the name suggests is a simplified version of \ac{NTP}, but does not require storing the state over time.
+This solution requires each device to synchronize with an \ac{NTP}-server over the internet.
+
+Since a persistent internet connection is not an ideal requirement for our application we also implemented \ac{SNTP} over the local network, we create using WiFi Direct, with the master working as a timeserver.
+Doing this, would not synchronize each client to a precise global clock, but only the clock of the master device.
+However for our application this it not a worry, our goal is to synchronize audio accurately across devices in our network.
+This requires that the we have knowledge of the offsets between each client and the master, but it being accurate with any other device is irrelevant.
+
+We decided to implement both of these, that is \ac{SNTP} over the internet and \ac{SNTP} over the WiFi Direct.
+Then we will benchmark them to determine the solution which requires internet is better, and thusly justify the added requirement for the users.
+
+As a side note, it is not possible for non-rooted Android devices to change the clock of the device, except with manual input in the setting menu.
+For this reason we will not synchronize our clocks on the devices, but rather find the offset between the clock on a given device, and the clock of the \ac{NTP}-server.
+
+\subsection{\ac{SNTP} over the Internet}
+
+
+\subsection{\ac{SNTP} over WiFi Direct}
+
