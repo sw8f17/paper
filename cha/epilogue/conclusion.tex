@@ -1,20 +1,53 @@
 \chapter{Evaluation}\label{cha:conclusion}
-%Meta
-%Use Case 
-%Sota mentions perhaps?
+In order to evaluate the success or failure of our project we first summarize our initial goals, milestones and problem statement.
+We then discuss some of our choices and how it impacted our goals, and the situation of the application.
+We also reconsider the milestones with the new data in regard to what we believe is a realistic end.
+This is followed by a conclusion on the success of the application where we look at its capabilities in regard to our milestones, requirements and goals.
+Finally we consider some limitations of our application, and what the effect of these limitations are on the end result.
+
 \section{Summary}
+%init problem and effects
+Our initial problem was very broad and vague, encapsulating any system where synchronized sound streamed to multiple devices may be of use.
+In order to specify the problem we explored two very different use cases, and two very different psychoacoustic effects.
+The use case isolated playback felt underwhelming and compared to our other use case, increase volume and area, also seemed useful in a significantly lower number scenarios.
+The increase volume and area also tied in nicely with one of the presented psychoacoustic effects, the precedence effect.
+The other presented effect is 3D audio effect, this serves an entirely different purpose, and while the application may be able to support this effect the two effects cannot be used simultaneously. 
+The two effects fits entirely different goals, while both interesting we chose to focus increasing the volume and area of multiple devices, using the precedence effect if possible.
+
+%Sota
+Upon deciding on a use case, we chose to explore products related to said use case.
+We knew of some very successful multi-room audio speakers created by Sonos, which essentially we wanted to do, but with phones.
+In the case of using phones we managed to find two decent applications attempting to do what we wanted to, however our tests revealed that these two applications were lackluster.
+Using these applications as a benchmark, we wanted to produce an application which performed better.
+
+%Problem Statement
+With use case, related work and the precedence effect in mind we refined our problem to:
+\begin{problemstatement}
+    How can an Android application be used to achieve manipulated playback, wirelessly, across multiple smart phones, such that psychoacoustic effects can be utilized to enhance playback?
+\end{problemstatement}
+
+%Requirements
+Derived from our problem statement and analysis of similar applications on the market we derived a number of requirements, both technical and \ac{UX} related.
+These requirements concern features and thresholds made in regard to audible synchronization derived from the precedence effect.
+We also established a number of non-requirements, these are requirements which may be important for specific scenarios, but that we choose to refrain from prioritising such that we can use our times on reaching our other goals.
+In order to get a better sense of what needs to be done, and what we could possibly do with the information we gathered we made a set of milestones.
+These milestones include both realistic and unrealistic goals segmented in a way such that we can simply continue developing till me meet a deadline, when we close on a deadline the milestones in correlation with our development method will lead us to whether or not the next milestone is feasible.
+
 %Initial thoughts?
 %The Goal
+%Use Case 
+%Sota mentions perhaps?
 %Non-reqs, why dis? why deez?
 %Milestones, where did we expect to end up?
 
 \section{Discussion}
+%Architecture choice
 %Communications choice
 %Sync choice
 %Psychoacoustic choice
 %Manipulation, didn't meet this milestone - somehow use milestones
 %communication and sync effect on possible expansion of the project - make it short, refer to future work
-\section{Conclusion}
+\section{Conclusion}\mnote{test results are MIA, will need refactoring once I have them}
 %Manipulation, didnt make it
     %Is our offset even stable enough to support this?
 %Test result eval, we beat SoTA bitches, or so i pressume
