@@ -111,8 +111,8 @@ After the client(s) have discovered the server, they establish a persistent conn
 They are at this point part of the same WiFi Direct network, and the client has just received the IP of the group owner.
 
 When a device first starts its server mode, it launches a separate thread which opens a \code{ServerSocket} to accept incoming socket connections.
-After accepting them it creates a MessageConnection, which is our abstraction, which is run on a separate thread for each connection from the server to the client, and vice versa.
-That thread then continuously tries to read on the socket, to accept messages sent to it.
+After accepting a connection it creates a MessageConnection, which is our abstraction, which is run on a separate thread for each connection from the server to the client, and vice versa.
+The thread then continuously tries to read on the socket, to accept messages sent to it.
 
 \subsubsection*{Creating our Protobufs}
 As previously mentioned we decided to use protobufs to serialize our messages.
@@ -150,7 +150,7 @@ The protobufs we use can be separated into three groups: Meta-data, commands and
                 Contains the location in the audio file to resume playback at, and the timestamp at which the playback should start.
             \item[PauseCommand]
                 Used to pause audio playback.
-                Much like the PlayCommand, it contains the location in the audio file at which the playback is pause, and the timestamp for when the pause should occur.
+                Much like the PlayCommand, it contains the location in the audio file at which the playback should pause, and the timestamp for when the pause should occur.
             \item[SeekCommand]
                 Used to seek in the audio file, i.e. change which part of the audio file should be played.
                 As the Play- and PauseCommands, it contains the location which the playback should change to, and the timestamp for when the change should occur.
@@ -167,12 +167,12 @@ The protobufs we use can be separated into three groups: Meta-data, commands and
 
 \subsubsection{Sending The Messages}
 When we designed the system we ran into a few issues, when it came to sending the messages.
-First was that we did not know which message we would be receiving next.
-Secondly was that we did not know what length the next message would have.
+Firstly we did not know which message we would be receiving next.
+Secondly we did not know what length the next message would have.
 This is a problem since, we would not know when to stop reading from the network connection, and start processing the data.
 Additionally we would not know how to process the data.
 
-To solve this issue, we add two bytes to each message we send.
+To solve these issue, we add two bytes to each message we send.
 The first byte is an integer we have assigned to each of the protobufs such that the receiver knows which message this is.
 The second byte is the length of the protobuf part of the message.
 This is shown in \cref{fig:message_layout}.
