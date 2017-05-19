@@ -51,7 +51,8 @@ Fortunately WiFi Direct has a number of helpful services.
 One of these services is ``Service Discovery'', which is made for the exact purpose of discovering peers.
 In Android WiFi Direct is called: ``Wi-Fi peer-to-peer'' or ``Wi-Fi P2P'' for short\footnote{\url{https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html}}.
 
-We experienced several issues implementing Service Discovery in our app, the most notable being group negotiation.
+In WiFi Direct, devices form groups, which has a single owner, these groups also form the basis of our sessions.
+We experienced several issues implementing Service Discovery in our app, the most notable being group owner negotiation.
 When devices connect using WiFi Direct, they negotiate about having the role of group owner.
 The group owner is the master of the network, and is responsible for granting new devices access etc.
 For our app we want the device which is the server, to also have the role of being the group owner of the WiFi Direct network.
@@ -63,16 +64,15 @@ In order to prevent this issue, we decided to erase the records of previous WiFi
 That means that the only preexisting group when a device connects is the one just created by the server.
 Since there is a preexisting group, then new devices will try to join it, when connecting.
 
-Connecting to a WiFi Direct network requires approval from the group owner.
-The UI shown is dependent on the Android version, and styling by the manufacturer.
-An example of it is shown on \cref{fig:wifidirectinv}.
-
-To explain how the service discovery occurs we have constructed a slightly simplified UML sequence diagram on \cref{fig:seq_server_client}.
-Once a client has gone through the service discovery process and attempts to join a group, it receives the IP of the group owner.
-This is used in the next step, which is establishing a persistent socket.
+We have depicted the entire service discoverey as a sequence diagram on \cref{fig:seq_server_client}.
+First the server starts, then it creates a group, and announces its service to the network.
+Then a client will start and discover services on the network, and present them to the user, as shown in \cref{fig:group_selection}.
+The user will then decide what server to connect to.
+Then the server has to approve the client as shown in \cref{fig:wifidirectinv}.
+If the client is accepted, then they will join the network, and be sent the network info (e.g. IP of host).
 
 \begin{figure}[h]
-    \resizebox{!}{0.90\textwidth}{
+    \resizebox{!}{0.80\textwidth}{
         \begin{sequencediagram}
             \newthread{s}{Server}
             \newinst{sn}{Server Network}
@@ -95,10 +95,10 @@ This is used in the next step, which is establishing a persistent socket.
                                 \end{call}
                             \end{call}
                         \end{call}
-                        \begin{messcall}{cn}{\shortstack{Establish\\\\Socket Connection}}{wd}{}
-                            \begin{messcall}{wd}{\shortstack{Accept\\\\Socket Connection}}{sn}{}
-                            \end{messcall}
-                        \end{messcall}
+                        %\begin{messcall}{cn}{\shortstack{Establish\\\\Socket Connection}}{wd}{}
+                        %    \begin{messcall}{wd}{\shortstack{Accept\\\\Socket Connection}}{sn}{}
+                        %    \end{messcall}
+                        %\end{messcall}
                     \end{messcall}
                 \end{messcall}
             \end{messcall}
@@ -114,11 +114,12 @@ After the client(s) have discovered the server, they establish a persistent conn
 They are at this point part of the same WiFi Direct network, and the client has just received the IP of the group owner.
 
 When a device first starts its server mode, it launches a separate thread which opens a \code{ServerSocket} to accept incoming socket connections.
-After accepting a connection it creates a MessageConnection, which is our abstraction, which is run on a separate thread for each connection from the server to the client, and vice versa.
+After accepting a connection it creates a \code{MessageConnection}, which is an abstraction for sending messages, which is run on a separate thread for each connection from the server to the client, and vice versa.
 The thread then continuously tries to read on the socket, to accept messages sent to it.
 
 \subsubsection*{Creating our Protobufs}
 As previously mentioned we decided to use protobufs to serialize our messages.
+Just to be clear, a message is the entire payload sent from device to device, and the protobuf, is part of it.
 
 We decided to use Wire Protocol Buffers\footnote{\url{https://github.com/square/wire}} made by Square to generate Java classes corresponding to our protobufs.
 It is a mature library, and easily integrated into our app, it supports both proto2 and proto3, and generates builders for each of the classes it generates, making it easy to use.
@@ -175,9 +176,9 @@ Secondly we did not know what length the next message would have.
 This is a problem since, we would not know when to stop reading from the network connection, and start processing the data.
 Additionally we would not know how to process the data.
 
-To solve these issue, we add two bytes to each message we send.
-The first byte is an integer we have assigned to each of the protobufs such that the receiver knows which message this is.
-The second byte is the length of the protobuf part of the message.
+To solve these issue, we add two integers to each message we send.
+The first integer we have assigned to each of the protobufs such that the receiver knows which message this is.
+The second integer is the length of the protobuf part of the message.
 This is shown in \cref{fig:message_layout}.
 This allow us to continue reading for exactly the amount of bytes the protobuf is.
 
