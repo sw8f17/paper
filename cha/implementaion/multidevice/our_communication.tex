@@ -1,12 +1,12 @@
 \section{Connecting the Devices}
-In \cref{sec:communication_methods} and \cref{sec:transmit} we decided to use WiFi Direct and Protobufs.
+In \cref{sec:communication_methods} and \cref{sec:transmit} we decided to use WiFi Direct and protobufs.
 This section explains how we change parts of the app to accommodate multiple devices.
 How we get these devices to discover each other, and how we establish a persistent connection.
 Lastly we describe which protobufs we have, what they contain, and how we send and receive them.
 
 \subsection{Preparing the App}
 We have previously, in \cref{sec:foundation_of_our_android_app}, explained that we utilize a sample music player.
-Now we have the desire that not all devices should enter that app on start up, such that we can have a master-slave relation between the devices.
+Now we have the desire that not all devices should enter that app on startup, such that we can have a master-slave relation between the devices.
 How we choose to do this is by having a different UI for the master and the slaves, so when the app is opened, the user chooses a mode.
 When the master mode is chosen, the user should be able to choose what music should be played to the slaves.
 When the slave mode is chosen, the user should see a list of master devices, which the slave can connect to. 
@@ -55,30 +55,30 @@ In WiFi Direct, devices form groups, which has a single owner, these groups also
 We experienced several issues implementing Service Discovery in our app, the most notable being group owner negotiation.
 When devices connect using WiFi Direct, they negotiate about having the role of group owner.
 The group owner is the master of the network, and is responsible for granting new devices access etc.
-For our app we want the device which is the server, to also have the role of being the group owner of the WiFi Direct network.
+For our app we want the device which is the master, to also have the role of being the group owner of the WiFi Direct network.
 The root of the problem was caused by the devices keeping a record of the last 32 WiFi Direct groups which they had been a part of and who were the group owner.
 This becomes a problem, when a new session is created using the same devices as a previous session, but with a different master.
-For example, if a client was the group owner, then it would be responsible for accepting new devices into the network, and not the master which is the intention.
+For example, if a slave was the group owner, then it would be responsible for accepting new devices into the network, and not the master which is the intention.
 
 In order to prevent this issue, we decided to erase the records of previous WiFi Direct networks, when we start discovering services.
-That means that the only preexisting group when a device connects is the one just created by the server.
+That means that the only preexisting group when a device connects is the one just created by the master.
 Since there is a preexisting group, then new devices will try to join it, when connecting.
 
-We have depicted the entire service discoverey as a sequence diagram on \cref{fig:seq_server_client}.
-First the server starts, then it creates a group, and announces its service to the network.
-Then a client will start and discover services on the network, and present them to the user, as shown in \cref{fig:group_selection}.
-The user will then decide what server to connect to.
-Then the server has to approve the client as shown in \cref{fig:wifidirectinv}.
-If the client is accepted, then they will join the network, and be sent the network info (e.g. IP of host).
+We have depicted the entire service discovery as a sequence diagram on \cref{fig:seq_server_client}.
+First the master starts, then it creates a group, and announces its service to the network.
+Then a slave will start and discover services on the network, and present them to the user, as shown in \cref{fig:group_selection}.
+The user will then decide what master to connect to.
+Then the master has to approve the slave as shown in \cref{fig:wifidirectinv}.
+If the slave is accepted, then they will join the network, and be sent the network info (e.g. IP of host).
 
 \begin{figure}[h]
-    \resizebox{!}{0.80\textwidth}{
+    \resizebox{\linewidth}{!}{
         \begin{sequencediagram}
-            \newthread{s}{Server}
-            \newinst{sn}{Server Network}
+            \newthread{s}{Master}
+            \newinst{sn}{Master Network}
             \newinst[2]{wd}{WiFi Direct}
-            \newinst[2]{cn}{Client Network}
-            \newthread{c}{Client}
+            \newinst[2]{cn}{Slave Network}
+            \newthread{c}{Slave}
 
             \begin{messcall}{s}{Start}{sn}{}
                 \begin{messcall}{sn}{\shortstack{Announce \& \\\\Create Group}}{wd}{}
@@ -104,17 +104,17 @@ If the client is accepted, then they will join the network, and be sent the netw
             \end{messcall}
         \end{sequencediagram}
     }
-    \caption{Sequence diagram, depicting how our the server announces its service and clients connects.}\label{fig:seq_server_client}
+    \caption{Sequence diagram, depicting how our the master announces its service and slaves connects.}\label{fig:seq_server_client}
 \end{figure}
 
 
 \subsection{Establishing a Persistent Socket}
 
-After the client(s) have discovered the server, they establish a persistent connection.
-They are at this point part of the same WiFi Direct network, and the client has just received the IP of the group owner.
+After the slave(s) have discovered the master, they establish a persistent connection.
+They are at this point part of the same WiFi Direct network, and the slave has just received the IP of the group owner.
 
-When a device first starts its server mode, it launches a separate thread which opens a \code{ServerSocket} to accept incoming socket connections.
-After accepting a connection it creates a \code{MessageConnection}, which is an abstraction for sending messages, which is run on a separate thread for each connection from the server to the client, and vice versa.
+When a device first starts its master mode, it launches a separate thread which opens a \code{ServerSocket} to accept incoming socket connections.
+After accepting a connection it creates a \code{MessageConnection}, which is an abstraction for sending messages, which is run on a separate thread for each connection from the master to the slave, and vice versa.
 The thread then continuously tries to read on the socket, to accept messages sent to it.
 
 \subsubsection*{Creating our Protobufs}
@@ -176,8 +176,8 @@ Secondly we did not know what length the next message would have.
 This is a problem since, we would not know when to stop reading from the network connection, and start processing the data.
 Additionally we would not know how to process the data.
 
-To solve these issue, we add two integers to each message we send.
-The first integer we have assigned to each of the protobufs such that the receiver knows which message this is.
+To solve these issues, we add two integers to each message we send.
+The first integer are assigned to each of the protobufs, such that the receiver knows which message it is.
 The second integer is the length of the protobuf part of the message.
 This is shown in \cref{fig:message_layout}.
 This allow us to continue reading for exactly the amount of bytes the protobuf is.
