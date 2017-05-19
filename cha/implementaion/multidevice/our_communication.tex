@@ -70,7 +70,7 @@ Then a slave will start and discover services on the network, and present them t
 The user will then decide what master to connect to.
 Then the master has to approve the slave as shown in \cref{fig:wifidirectinv}.
 If the slave is accepted, then they will join the network, and be sent the network info (e.g. IP of host).
-
+\tikzexternaldisable{}
 \begin{figure}[h]
     \resizebox{\linewidth}{!}{
         \begin{sequencediagram}
@@ -106,7 +106,7 @@ If the slave is accepted, then they will join the network, and be sent the netwo
     }
     \caption{Sequence diagram, depicting how our the master announces its service and slaves connects.}\label{fig:seq_server_client}
 \end{figure}
-
+\tikzexternalenable{}
 
 \subsection{Establishing a Persistent Socket}
 
