@@ -33,6 +33,8 @@ We also established a number of non-requirements, these are requirements which m
 In order to get a better sense of what needs to be done, and what we could possibly do with the information we gathered we made a set of milestones.
 These milestones include both realistic and unrealistic goals segmented in a way such that we can simply continue developing till me meet a deadline, when we close on a deadline the milestones in correlation with our development method will lead us to whether or not the next milestone is feasible.
 
+
+%%%% Disposition
 %Initial thoughts?
 %The Goal
 %Use Case 
@@ -41,18 +43,70 @@ These milestones include both realistic and unrealistic goals segmented in a way
 %Milestones, where did we expect to end up?
 
 \section{Discussion}
+%What are we discussing
+While designing and developing the system we made certain choices for architecture, communication, clock synchronization etc.
+In order to evaluate the final application we consider the impact of these choices, possible alternatives whether we knew of them when developing or learned of them later, and consider how a different choice may have affected the end application.
+
+%External Architecture
+In \cnameref{cha:architecture} we defined two different kinds of architectures, external and internal, related to communication and the internal application structure.
+The internal architecture mostly affects our structure when developing and as such has a relatively low impact on the outcome of the application, therefore we focus on the external architecture.
+During the design phase we concluded that the local centralized architecture would be the best idea, however for comparison purposes we ended up developing both a modified version of our remote centralized idea, as well as the local centralized idea.
+The comparison relates closely to how we approach clock synchronization, so before going over the results let us have a look at how we approached synchronization.
+
+\bigskip
+%Clock Sync - highly coupled with the external architectures segment - TBH might wanna flip these as external hardware change is largely a result of us using SNTP and not NTP, if we were using and taking advantage of NTP, local SNTP would not be feasible
+In \cnameref{cha:sync} we evaluated a couple of different techniques with \ac{NTP} being the most promising.
+Any of the other solutions would have been largely experimental and more than likely resulted in an end result less accurate than what we have now.
+However, during development we ended up switching from \ac{NTP} to \ac{SNTP}.
+As the name suggests \ac{SNTP} is based upon \ac{NTP} but vastly simplified, \ac{SNTP} trades accuracy and drift alleviation for simplicity and resource requirements.
+\ac{SNTP} was developed as an \ac{NTP} alternative for small computers and micro-controllers, which happens to fit the description of smartphones.
+Furthermore we would not be taking full advantage of the utilities \ac{NTP} provides over \ac{SNTP} resulting i needless complexity.
+In reality, \ac{SNTP} is actually a better fit than \ac{NTP} considering how we want to use it, in order to understand why, first let us consider some of the major advantages which makes \ac{NTP} more accurate than \ac{SNTP} and why they are of little benefit to our case.\cite{sntp_ntp}
+\begin{description}
+    \item [Clock Skew] \hfill \\
+    Part of the algorithms \ac{NTP} incorporates are designed to alleviate clock skew.
+    While effective in real-time systems, where the device clock needs to be synchronized, it has no impact on our application due to us not sending real-time commands, but rather timestamps for when an event should occur.
+    \item [Drift Alleviation] \hfill \\
+    \ac{NTP} also alleviates by drift, it does this by speeding up or slowing down the clock, effectively introducing drift in the opposing direction such that it evens out.
+    As mentioned before, in order to adjust the clock through the application the device must be rooted, since we do not want to impose this requirement onto users, drift alleviation would be nullified as we cannot slow down or speed up the clock.
+    \item [Seamless Adjustments] \hfill \\
+    Similarly to how drift alleviation works, the same technique is used by \ac{NTP} for when the clock is only slightly out of sync, this way a step in time is not introduced, which is how \ac{SNTP} synchronizes the clock.
+    However once again, this would require a rooted device and as such is irrelevant for our case.
+    \item [Multiple Time References] \hfill \\
+    Lastly \ac{NTP} queries multiple time servers for the clock, and through its algorithms determines which ones to use, and then averages these to find the time, whereas \ac{SNTP} simply queries one server, is the server unavailable it asks another.
+    This is the part of \ac{NTP} which would have the largest impact on our specific use case.
+\end{description}
+\mnote{Perhaps we should move this per the no new info in conclusion convention}
+
+So with some of the major advantages of \ac{NTP} not being of value to us, we chose to implement \ac{SNTP}.
+This however also made us reconsider the fact that we were going for a modified centralized solution, since using \ac{NTP} would require internet.
+With \ac{SNTP} not taking advantage of multiple time references, the major benefit from \ac{NTP} in our use case, we wanted to see the how the performance would compare, if we simply removed \ac{NTP} time servers from the equation.
+
+As a result we altered our \ac{SNTP} implementation in order to accommodate the possibility of removing the internet requirement, by essentially using our local network master as the \ac{NTP} server.
+By having both solutions available it further cemented our decision that a local centralized solution would be better than a remote centralized solution, even if the remote server would only be involved in time synchronization.\mnote{Use refs/numbers once the tests have been run}
+
+\bigskip
+%Implementation sepcifics / android.MedioCodec
+
+
+%Milestone completion / no manipulation / psychoacoustic effect
+
+
+%%%% Disposition
 %Architecture choice
 %Communications choice
 %Sync choice
 %Psychoacoustic choice
 %Manipulation, didn't meet this milestone - somehow use milestones
-%communication and sync effect on possible expansion of the project - make it short, refer to future work
+
 \section{Conclusion}\mnote{test results are MIA, will need refactoring once I have them}
+%%%% Disposition
 %Manipulation, didnt make it
     %Is our offset even stable enough to support this?
 %Test result eval, we beat SoTA bitches, or so i pressume
 %Milestone considerations
 \section{Limitations}
+%%%% Disposition
 %Random ass crashes
     %Stability
     %Manual offset

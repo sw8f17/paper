@@ -1,0 +1,7 @@
+@MISC{sntp_ntp,
+  author = {Diane Shinton},
+  title = {{The Difference Between NTP and SNTP}},
+  year = {2013},
+  url = {http://www.timetools.co.uk/2013/07/23/the-difference-between-ntp-and-sntp-protocols/},
+  lastchecked = {19-05-2017},
+}
