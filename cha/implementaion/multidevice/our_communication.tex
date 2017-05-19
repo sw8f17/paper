@@ -1,4 +1,4 @@
-\section{Connecting The Devices}
+\section{Connecting the Devices}
 In \cref{sec:communication_methods} and \cref{sec:transmit} we decided to use WiFi Direct and Protobufs.
 This section explains how we change parts of the app to accommodate multiple devices.
 How we get these devices to discover each other, and how we establish a persistent connection.
@@ -7,9 +7,13 @@ Lastly we describe which protobufs we have, what they contain, and how we send a
 \subsection{Preparing the App}
 We have previously, in \cref{sec:foundation_of_our_android_app}, explained that we utilize a sample music player.
 Now we have the desire that not all devices should enter that app on start up, such that we can have a master-slave relation between the devices.
-\cref{fig:connecting} we show the two new UIs made for connecting devices.
+How we choose to do this is by having a different UI for the master and the slaves, so when the app is opened, the user chooses a mode.
+When the master mode is chosen, the user should be able to choose what music should be played to the slaves.
+When the slave mode is chosen, the user should see a list of master devices, which the slave can connect to. 
+
+In \cref{fig:connecting} we show the two new UIs made for connecting devices.
 \cref{fig:mode_selection} is the UI the app starts with.
-When in this state the user chooses to be either a server or a client.
+When in this state the user chooses to be either a master, in the UI called ``server'' or a slave, called ``client''.
 \cref{fig:group_selection} presents the UI a user is shown when pressing the ``Client'' option.
 It contains a list of all nearby devices which are acting as a ``Server'', how this is achieved is explained next.
 
@@ -43,17 +47,16 @@ It contains a list of all nearby devices which are acting as a ``Server'', how t
 \subsection{Service Discovery}
 
 The first problem which must be addressed in order to connect devices is peer discovery.
-Fortunately a part of the WiFi Direct standard is the so called services.
 Fortunately WiFi Direct has a number of helpful services.
 One of these services is ``Service Discovery'', which is made for the exact purpose of discovering peers.
-In Android WiFi Direct is called: ``Wi-Fi peer-to-peer'' or ``Wi-Fi P2P'' for short.\footnote{\url{https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html}}.
+In Android WiFi Direct is called: ``Wi-Fi peer-to-peer'' or ``Wi-Fi P2P'' for short\footnote{\url{https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html}}.
 
 We experienced several issues implementing Service Discovery in our app, the most notable being group negotiation.
 When devices connect using WiFi Direct, they negotiate about having the role of group owner.
 The group owner is the master of the network, and is responsible for granting new devices access etc.
 For our app we want the device which is the server, to also have the role of being the group owner of the WiFi Direct network.
 The root of the problem was caused by the devices keeping a record of the last 32 WiFi Direct groups which they had been a part of and who were the group owner.
-This becomes a problem, when a new session using the same devices as a previous one, but with a different master is started.
+This becomes a problem, when a new session is created using the same devices as a previous session, but with a different master.
 For example, if a client was the group owner, then it would be responsible for accepting new devices into the network, and not the master which is the intention.
 
 In order to prevent this issue, we decided to erase the records of previous WiFi Direct networks, when we start discovering services.
@@ -64,7 +67,7 @@ Connecting to a WiFi Direct network requires approval from the group owner.
 The UI shown is dependent on the Android version, and styling by the manufacturer.
 An example of it is shown on \cref{fig:wifidirectinv}.
 
-To explain how the service discovery occurs we have constructed an slightly simplified UML sequence diagram, on \cref{fig:seq_server_client}.
+To explain how the service discovery occurs we have constructed a slightly simplified UML sequence diagram on \cref{fig:seq_server_client}.
 Once a client has gone through the service discovery process and attempts to join a group, it receives the IP of the group owner.
 This is used in the next step, which is establishing a persistent socket.
 
@@ -117,32 +120,32 @@ The thread then continuously tries to read on the socket, to accept messages sen
 \subsubsection*{Creating our Protobufs}
 As previously mentioned we decided to use protobufs to serialize our messages.
 
-We decided to use ``wire''\footnote{\url{https://github.com/square/wire}} made by ``square'' to generate Java classes corresponding to our protobufs.
+We decided to use Wire Protocol Buffers\footnote{\url{https://github.com/square/wire}} made by Square to generate Java classes corresponding to our protobufs.
 It is a mature library, and easily integrated into our app, it supports both proto2 and proto3, and generates builders for each of the classes it generates, making it easy to use.
-The protobufs we use can be separated into three groups: Meta-data, commands and data. \tnote{Tids ting går her under meta-data, er det fair?}
+The protobufs we use can be separated into three groups: meta-data, commands and data. \tnote{Tids ting går her under meta-data, er det fair?}
 \begin{description}
     \item[Meta-data] \hfill \\
         Meta-data is information about the data, the data in this case is the audio data.
-        The purpose of sending meta-data is twofold: We send it such that the clients can present it in their UI, and such that our audioplayer can be setup correctly.
+        The purpose of sending meta-data is twofold: we send it such that the clients can present it in their UI, and such that our audio player can be set up correctly.
         Our meta-data contains the following:
         \begin{itemize}
             \item Artist name
             \item Album name
             \item Song name
-            \item Album art url (An optional url containing an image to be displayed)
+            \item Album art URL (An optional URL containing an image to be displayed)
             \item Song duration
             \item Media-info
         \end{itemize}
-        Here the media-info contains the following information about the audio data (in the PCM format). \tnote{Ref til Marcs afsnit om playback med begreberne}
+        Here the media-info contains the following information about the audio data (in the \ac{PCM} format). \tnote{Ref til Marcs afsnit om playback med begreberne}
         \begin{itemize}
             \item Sample rate
             \item Channels
-            \item Encoding (bit depth pr. channel)
+            \item Encoding (bit depth per channel)
             \item Frame size
         \end{itemize}
     \item[Commands] \hfill \\
         Commands are used to change the playback on other devices.
-        All commands contain a timestamp at which the given command should occur. \tnote{Evt. ref til core idea?}
+        All commands contain a timestamp at which the given command should occur. \tnote{Evt. ref til core idea?}\tnnote{Ja, det synes jeg er en god idé.}
         In total we have the following commands:
         \begin{description}
             \item[PlayCommand]
@@ -161,11 +164,11 @@ The protobufs we use can be separated into three groups: Meta-data, commands and
 
     \item[Data] \hfill \\
         Lastly we have the data containing the audio itself, we call it: MusicData.
-        MusicData contains a byte array, which is the PCM audio data which will later be played, as explained in \tnote{ref til playback afsnittet}.
+        MusicData contains a byte array, which is the \ac{PCM} audio data which will later be played, as explained in \tnote{ref til playback afsnittet}.
         As with the other messages, the MusicData contains a timestamp for when the audio data should be played.
 \end{description}
 
-\subsubsection{Sending The Messages}
+\subsubsection{Sending the Messages}
 When we designed the system we ran into a few issues, when it came to sending the messages.
 Firstly we did not know which message we would be receiving next.
 Secondly we did not know what length the next message would have.
