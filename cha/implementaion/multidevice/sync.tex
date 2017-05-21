@@ -3,22 +3,22 @@ In this section we discuss how we implement the methods of synchronization we di
 First we summarize what lead us to implementing synchronization the way we did.
 Then we will explain how each of the implemented synchronization methods work, and lastly we explain where we use the synchronization in the app.
 
-In it we decided, in \cref{sec:sync_conclusion}, that NTP would suit us best.
-However for practical reason we decided to implement \ac{SNTP}, which as the name suggests is a simplified version of \ac{NTP}, but does not require storing the state over time.
-This solution requires each device to synchronize with an \ac{NTP}-server over the internet.
+In \cref{sec:sync_conclusion}, we decided that NTP would suit us best.
+However for practical reasons we decided to implement \ac{SNTP}, which as the name suggests is a simplified version of \ac{NTP}, but does not require storing the state over time.
+This solution requires each device to synchronize with an \ac{NTP}-server over the Internet.
 
 Since a persistent internet connection is not an ideal requirement for our application we also implemented our own time-synchronization over the local network, we create using WiFi Direct.
-This method would not synchronize each client to a global clock, like \ac{NTP} and \ac{SNTP} does, but rather synchronize the clock of the clients to the clock of the server.
+This method would not synchronize each client to a global clock, like \ac{NTP} and \ac{SNTP}, but rather synchronize the clock of the clients to the clock of the server\tnnote{Er det ment son en generel ``server'', eller skal det være ``master''?}.
 However for our application this it not a worry, our goal is to synchronize audio accurately across devices in our network, which does not require each clock to be globally synchronized, only locally.
 
-We decided to implement both of these, that is \ac{SNTP} over the internet and time-synchronization over the WiFi Direct.
+We decided to implement both of these, that is \ac{SNTP} over the Internet and time-synchronization over WiFi Direct.
 Then we will benchmark them to determine the solution which requires internet is better, and thusly justify the added requirement for the users\tnwarning{We need to do this}.
 
 As a side note, it is not possible for non-rooted Android devices to change the clock of the device, except with manual input in the setting menu.
 For this reason we will not synchronize our clocks on the devices, but rather find the offset between the clock on a given device, and the clock of the \ac{NTP}-server or master.
 
 \subsection{\ac{SNTP} over the Internet}
-In this method, the goal is to get the offset of every device in the network, clients and server, relative to a 3rd party \ac{NTP}-server.
+In this method, the goal is to get the offset of every device in the network, clients and server, relative to a third-party \ac{NTP}-server.
 \ac{NTP} and \ac{SNTP} works by sending timestamped packages from the client to the server, and back.
 This is illustrated in \cref{fig:ntp_packets}\tnnote{Måske pile på figuren, så man ved at T0 går til T1 og T2 til T3}.
 
@@ -47,7 +47,7 @@ This is illustrated in \cref{fig:ntp_packets}\tnnote{Måske pile på figuren, s�
 
 Here $T_0$ is the timestamp, on the client, where the request was sent, $T_1$ is the timestamp, on the server, when the request was received.
 $T_2$ is the timestamp, on the server, when the response was sent, and $T_3$, is the timestamp, on the client, when the response was received.
-Given this one can calculate the offset, $\theta$, with the equation \ref{eq:ntp}.
+Given this, one can calculate the offset, $\theta$, with the equation \ref{eq:ntp}.
 
 \begin{equation}\label{eq:ntp}
     \theta = \frac{(t_1 - t_0)+(t_2 - t_3)}{2}
@@ -55,14 +55,14 @@ Given this one can calculate the offset, $\theta$, with the equation \ref{eq:ntp
 
 \ac{SNTP} only considers one of these offsets: the latest, where \ac{NTP} uses multiple and discards outliers.
 When using \ac{NTP} one also have to decide on what \ac{NTP}-server to use.
-We decided to use \url{0.dk.pool.ntp.org} which is an \ac{NTP}-pool, which is free to use, and its servers are located in Denmark
+We decided to use \url{0.dk.pool.ntp.org} which is a free to use \ac{NTP}-pool, and its servers are located in Denmark.
 Furthermore we get a very low latency to them, which can improve accuracy.
 
 \subsection{Time-synchronization over WiFi Direct}
 As we explained in the start of this section, we would consider it advantageous not to require our users to be connected to the Internet.
-Implementing time-synchronization over WiFi Direct, independently of any 3rd party server on this internet would remove this requirement.
+Implementing time-synchronization over WiFi Direct, independently of any third-party server on this internet would remove this requirement.
 
-Our way of time-synchronization over WiFi Direct, uses the same methods as the method we just explained about \ac{SNTP} over the internet, with the change that the master of the network would also act as an \ac{NTP}-server.
+Our way of time-synchronization over WiFi Direct, uses the same methods as the method we just explained about \ac{SNTP} over the Internet, with the change that the master of the network would also act as an \ac{NTP}-server.
 
 Implementing this requires us to add two protobufs, one for the request, and one for the response.
 The request contains a single timestamp: the timestamp of the client when it sent the request.
@@ -78,7 +78,7 @@ And like the server, it has to register a callback for when responses arrive, fr
 Any part of the system which needs the offset can then ask for it, and will receive the latest recorded offset.
 
 \subsection{Using the Synchronization in the App}
-Now that we have offsets, and can therefore convert local timestamps to be synchronized with the rest of the network.
+Now that we have offsets, we can therefore convert local timestamps to be synchronized with the rest of the network.
 For simplicity we decided to use the offset our synchronization gave us just before sending messages over the network, and just after receiving them.
 That is, when we send a message, the timestamp in it is of the master clock, and when we receive a message, it is converted to the local clock.
 This is illustrated in \ref{fig:sntp_example}.\tnnote{Jeg forstår ikke helt figuren og sammenhængen mellem figuren og teksten.}
@@ -141,7 +141,7 @@ The server should start its playback at $02s175ms - (-1s925ms) = 4s100ms.$
         \node[draw, thick, fill=GoogleLightGreen]   at (6,-1.6) {Slave};
         \node[]                                     at (6,-2.2) {$02s250ms$};
     \end{tikzpicture}
-    \caption{Example of \ac{SNTP} over the internet in action, only the second hand is shown.}
+    \caption{Example of \ac{SNTP} over the Internet in action, only the second hand is shown.}
     \label{fig:sntp_example}
 \end{figure}
 
