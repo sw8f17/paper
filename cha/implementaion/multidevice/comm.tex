@@ -1,10 +1,10 @@
 \section{Communication methods}\label{sec:communication_methods}
 In \cnameref{sec:external_architectures} we discussed which type of external architecture should be applied to the system.
 The conclusion of that discussion was to go with a local centralized architecture.
-This means that the method of communication have to connect the devices, without external hardware, to a chosen master device, as mentioned in \cnameref{sec:external_architectures}.
+This means that the method of communication have to connect the devices, without external hardware, to a chosen master device, as mentioned in \cref{sec:external_architectures}.
 Furthermore it is desired that an internet connection should not be a requirement, since multiple of the use cases from \cnameref{cha:establishing_use_cases} targets scenarios where such a connection is improbable.
 
-In the attempt to comply with the external architecture described in \cnameref{sec:external_architectures}, we found three methods:
+In the attempt to comply with the external architecture described in \cref{sec:external_architectures}, we found three methods:
 \begin{enumberate*}
 \item Nearby Messages API\footnote{\url{https://developers.google.com/nearby/messages/overview}}, \label{itm:nearby_msg}
 \item Nearby connections API\footnote{\url{https://developers.google.com/nearby/connections/overview}}, and \label{itm:nearby_conn}
@@ -18,18 +18,18 @@ It uses a combination of Bluetooth, Bluetooth Low Energy, WiFi, and near-ultraso
 The Nearby Messages API uses Google's servers to relay the payloads between devices, hence the internet requirement.\cite{nearby_messages}
 
 Since it has to connect to a Google server, we experienced delay between the messages when we tested it.
-This further delay will be impractical since it will give even further delay in the synchronization between the devices.
+This delay will be impractical since it will further increase the delay in the synchronization between the devices.
 Furthermore, the requirement for access to internet would be impractical in situations where there is no stable internet connection available.
 Therefore choosing the Nearby Messages API would have some serious drawbacks to it.
 
 \subsection*{\ref{itm:nearby_conn} Nearby Connections API}
-The Nearby Connections API is an API by Google which lets one discover, connects and exchange messages with other devices on a network.
+The Nearby Connections API is an API by Google which lets one discover, connect and exchange messages with other devices on a network.
 It can exchange messages through WiFi in real-time.\cite{nearby_connection}
 The Nearby Connections API complies with the external architecture mentioned in \cnameref{sec:external_architectures},
 since no external hardware is required.
-Furthermore internet is not required which is preferred.
+Furthermore internet is not required which is preferred.\msmnote{add ref to future req.}
 
-When tried in a test environment, we used a WiFi ad-hoc network to test it,
+When tried in a test environment, we used a WiFi ad-hoc network to test the Nearby Connections API,
 since the network at Aalborg University is configured so devices can not connect to each other.
 Normal WiFi can be used, but when there is no access to WiFi, for instance outside, an ad-hoc WiFi network must be used.
 We found an ad-hoc network to be an annoyance to set up with having to connect each device to the network.
@@ -56,7 +56,7 @@ The external architecture in \cnameref{sec:external_architectures} states that t
 Furthermore is the ability to work without internet strongly preferred.
 We found three different ways of connecting devices: Nearby Messages API, Nearby Connections API, and WiFi Direct.
 
-The Nearby Messages API required internet and was slow, and therefore not being an ideal solution.
+The Nearby Messages API required internet and was slow, and therefore it is not an ideal solution.
 The Nearby Connections API required a device to act as router when an ad-hoc network was used, also not being an ideal solution.
 The last, WiFi Direct, did not require internet or external hardware, and when tested it worked as expected.
 Therefore WiFi Direct is chosen to create the connection between the different devices.
