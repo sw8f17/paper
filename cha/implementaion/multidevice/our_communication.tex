@@ -1,0 +1,200 @@
+\section{Connecting the Devices}
+In \cref{sec:communication_methods} and \cref{sec:transmit} we decided to use WiFi Direct and protobufs.
+This section explains how we change parts of the app to accommodate multiple devices.
+How we get these devices to discover each other, and how we establish a persistent connection.
+Lastly we describe which protobufs we have, what they contain, and how we send and receive them.
+
+\subsection{Preparing the App}
+We have previously, in \cref{sec:foundation_of_our_android_app}, explained that we utilize a sample music player.
+Since the point of this chapter is to create a multi-device system, the users should have a way of choose whether they should be in master mode or in slave mode.
+When the master mode is chosen, the user should be able to choose what music should be played to the slaves.
+When the slave mode is chosen, the user should see a list of master devices, which the slave can connect to. 
+
+In \cref{fig:connecting} we show the two new UIs made for connecting devices.
+\cref{fig:mode_selection} is the UI the app starts with.
+When in this state the user chooses to be either a master, in the UI called ``server'' or a slave, called ``client''.
+\cref{fig:group_selection} presents the UI a user is shown when pressing the ``Client'' option.
+It contains a list of all nearby devices which are acting as a ``Server'', how this is achieved is explained next.
+
+\begin{figure}[ht]
+  \begin{subfigure}[b]{0.33\linewidth}
+    \centering
+    %\includegraphics[width=0.75\linewidth]{example-image-a}
+    \includegraphics[trim={0cm 0cm 0cm 0cm}, clip, height=7cm]{img/ui/mode_selection.png}
+    \caption{Mode Selection}
+    \label{fig:mode_selection}
+    \vspace{4ex}
+  \end{subfigure}%%
+  \begin{subfigure}[b]{0.33\linewidth}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm}, clip, height=7cm]{img/ui/group_selection.png}
+    \caption{Group Selection}
+    \label{fig:group_selection}
+    \vspace{4ex}
+  \end{subfigure}%%
+  \begin{subfigure}[b]{0.33\linewidth}
+    \centering
+    \includegraphics[trim={0cm 0cm 0cm 0cm}, clip, height=7cm]{img/ui/wifi_direct_invitation.png}
+    \caption{WiFi Direct invitation}
+    \label{fig:wifidirectinv}
+    \vspace{4ex}
+  \end{subfigure}
+  \caption{The user interface relevant for connecting devices.}
+  \label{fig:connecting}
+\end{figure}
+
+\subsection{Service Discovery}
+
+The first problem which must be addressed in order to connect devices is peer discovery.
+Fortunately WiFi Direct has a number of helpful services.
+One of these services is ``Service Discovery'', which is made for the exact purpose of discovering peers.
+In Android WiFi Direct is called: ``Wi-Fi peer-to-peer'' or ``Wi-Fi P2P'' for short\footnote{\url{https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html}}.
+
+In WiFi Direct, devices form groups, which has a single owner, these groups also form the basis of our sessions.
+We experienced several issues implementing Service Discovery in our app, the most notable being group owner negotiation.
+When devices connect using WiFi Direct, they negotiate about having the role of group owner.
+The group owner is the master of the network, and is responsible for granting new devices access etc.
+For our app we want the device which is the master, to also have the role of being the group owner of the WiFi Direct network.
+The root of the problem was caused by the devices keeping a record of the last 32 WiFi Direct groups which they had been a part of and who were the group owner.
+This becomes a problem, when a new session is created using the same devices as a previous session, but with a different master.
+For example, if a slave was the group owner, then it would be responsible for accepting new devices into the network, and not the master which is the intention.
+
+In order to prevent this issue, we decided to erase the records of previous WiFi Direct networks, when we start discovering services.
+That means that the only preexisting group when a device connects is the one just created by the master.
+Since there is a preexisting group, then new devices will try to join it, when connecting.
+
+We have depicted the entire service discovery as a sequence diagram on \cref{fig:seq_server_client}.
+First the master starts, then it creates a group, and announces its service to the network.
+Then a slave will start and discover services on the network, and present them to the user, as shown in \cref{fig:group_selection}.
+The user will then decide what master to connect to.
+Then the master has to approve the slave as shown in \cref{fig:wifidirectinv}.
+If the slave is accepted, then they will join the network, and be sent the network info (e.g. IP of host).
+\tikzexternaldisable{}
+\begin{figure}[h]
+    \resizebox{\linewidth}{!}{
+        \begin{sequencediagram}
+            \newthread{s}{Master}
+            \newinst{sn}{Master Network}
+            \newinst[2]{wd}{WiFi Direct}
+            \newinst[2]{cn}{Slave Network}
+            \newthread{c}{Slave}
+
+            \begin{messcall}{s}{Start}{sn}{}
+                \begin{messcall}{sn}{\shortstack{Announce \& \\\\Create Group}}{wd}{}
+                    \begin{messcall}{c}{Start}{cn}{}
+                        \begin{call}{cn}{Discover}{wd}{}
+                        \end{call}
+                        \begin{messcall}{cn}{Services}{c}{}
+                        \end{messcall}
+                        \begin{call}{c}{Connect}{cn}{Network Info}
+                            \begin{call}{cn}{Join Group}{wd}{Network Info}
+                                \begin{call}{wd}{Accept?}{sn}{Network Info}
+                                    \begin{call}{sn}{Accept?}{s}{ACK}
+                                    \end{call}
+                                \end{call}
+                            \end{call}
+                        \end{call}
+                        %\begin{messcall}{cn}{\shortstack{Establish\\\\Socket Connection}}{wd}{}
+                        %    \begin{messcall}{wd}{\shortstack{Accept\\\\Socket Connection}}{sn}{}
+                        %    \end{messcall}
+                        %\end{messcall}
+                    \end{messcall}
+                \end{messcall}
+            \end{messcall}
+        \end{sequencediagram}
+    }
+    \caption{Sequence diagram, depicting how our the master announces its service and slaves connects.}\label{fig:seq_server_client}
+\end{figure}
+\tikzexternalenable{}
+
+\subsection{Establishing a Persistent Socket}
+
+After the slave(s) have discovered the master, they establish a persistent connection.
+They are at this point part of the same WiFi Direct network, and the slave has just received the IP of the group owner.
+
+When a device first starts its master mode, it launches a separate thread which opens a \code{ServerSocket} to accept incoming socket connections.
+After accepting a connection it creates a \code{MessageConnection}, which is an abstraction for sending messages, which is run on a separate thread for each connection from the master to the slave, and vice versa.
+The thread then continuously tries to read on the socket, to accept messages sent to it.
+
+\subsubsection*{Creating our Protobufs}
+As previously mentioned we decided to use protobufs to serialize our messages.
+Just to be clear, a message is the entire payload sent from device to device, and the protobuf, is part of it.
+
+We decided to use Wire Protocol Buffers\footnote{\url{https://github.com/square/wire}} made by Square to generate Java classes corresponding to our protobufs.
+It is a mature library, and easily integrated into our app, it supports both proto2 and proto3, and generates builders for each of the classes it generates, making it easy to use.
+The protobufs we use can be separated into three groups: meta-data, commands and data. \tnote{Tids ting går her under meta-data, er det fair?}
+\begin{description}
+    \item[Meta-data] \hfill \\
+        Meta-data is information about the data, the data in this case is the audio data.
+        The purpose of sending meta-data is twofold: we send it such that the clients can present it in their UI, and such that our audio player can be set up correctly.
+        Our meta-data contains the following:
+        \begin{itemize}
+            \item Artist name
+            \item Album name
+            \item Song name
+            \item Album art URL (An optional URL containing an image to be displayed)
+            \item Song duration
+            \item Media-info
+        \end{itemize}
+        Here the media-info contains the following information about the audio data (in the \ac{PCM} format). \tnote{Ref til Marcs afsnit om playback med begreberne}
+        \begin{itemize}
+            \item Sample rate
+            \item Channels
+            \item Encoding (bit depth per channel)
+            \item Frame size
+        \end{itemize}
+    \item[Commands] \hfill \\
+        Commands are used to change the playback on other devices.
+        All commands contain a timestamp at which the given command should occur. \tnote{Evt. ref til core idea?}\tnnote{Ja, det synes jeg er en god idé.}
+        In total we have the following commands:
+        \begin{description}
+            \item[PlayCommand]
+                Used to start audio playback.
+                Contains the location in the audio file to resume playback at, and the timestamp at which the playback should start.
+            \item[PauseCommand]
+                Used to pause audio playback.
+                Much like the PlayCommand, it contains the location in the audio file at which the playback should pause, and the timestamp for when the pause should occur.
+            \item[SeekCommand]
+                Used to seek in the audio file, i.e. change which part of the audio file should be played.
+                As the Play- and PauseCommands, it contains the location which the playback should change to, and the timestamp for when the change should occur.
+            \item[SongChangeCommand]
+                Used to change the audio file which should be played.
+                Contains the meta-data for the file which will be changed to, and the timestamp for when the change should occur.
+        \end{description}
+
+    \item[Data] \hfill \\
+        Lastly we have the data containing the audio itself, we call it: MusicData.
+        MusicData contains a byte array, which is the \ac{PCM} audio data which will later be played, as explained in \tnote{ref til playback afsnittet}.
+        As with the other messages, the MusicData contains a timestamp for when the audio data should be played.
+\end{description}
+
+\subsubsection{Sending the Messages}
+When we designed the system we ran into a few issues, when it came to sending the messages.
+Firstly we did not know which message we would be receiving next.
+Secondly we did not know what length the next message would have.
+This is a problem since, we would not know when to stop reading from the network connection, and start processing the data.
+Additionally we would not know how to process the data.
+
+To solve these issues, we add two integers to each message we send.
+The first integer are assigned to each of the protobufs, such that the receiver knows which message it is.
+The second integer is the length of the protobuf part of the message.
+This is shown in \cref{fig:message_layout}.
+This allow us to continue reading for exactly the amount of bytes the protobuf is.
+
+Next the receiver can look up what decoder to use in order to deserialize the protobuf sent.
+After the protobuf have been deserialized, we call the method registered to handle the given protobuf. \tnote{Vi skal måske forklare lidt mere om hvad det her indebærer?}
+
+\begin{figure}[htb]
+    \centering
+    \begin{tikzpicture}[auto]
+        \path[draw] (0,0) -- (0,1) -- (7.5,1) -- (7.5,0) -- (0,0) % Border
+                        (1.5,0) -- (1.5,1) % Første streg (efter type)
+                        (3.0,0) -- (3.0,1); % Anden streg (efter Length)
+
+        \node[text width=2cm, align=center] at (0.75,0.5) {Type \\ 4 bytes};
+        \node[text width=2cm, align=center] at (2.25,0.5) {Length \\ 4 bytes};
+        \node[text width=4cm, align=center] at (5.0,0.5) {Any protobuf \\ ``Length'' bytes};
+    \end{tikzpicture}
+    \caption{The layout of any message we send.}
+    \label{fig:message_layout}
+\end{figure}

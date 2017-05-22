@@ -1,26 +1,26 @@
 \section{Multi-Room Audio Systems}
-A concept which closely relates to our problem is Multi-Room Audio.
+A concept which closely relates to our problem is multi-room audio.
 
-Multi-Room Audio is fairly self-descriptive, it provides audio to several rooms, this audio however is synchronized.
-While there are several ways of making a Multi-Room Audio solution for a home, predominately the technology is developed and provided by speaker manufacturers.
+Multi-room audio is fairly self-descriptive, it provides audio to several rooms, this audio however is synchronized.
+While there are several ways of making a multi-room audio solution for a home, predominately the technology is developed and provided by speaker manufacturers.
 Several manufacturers provide this service to a degree but one
-manufacturer in particular is leading the technology and build their entire brand around it, Sonos\footnote{\url{http://www.sonos.com/}}.
+manufacturer in particular is leading the technology and their entire brand is build around it --- Sonos\footnote{\url{http://www.sonos.com/}}.
 
-It is Sonos' proprietary network software alongside their hardware that have kept them at the top of the market.
-Sonos' own mesh network was developed due to WiFi not being sufficient
-at the time when Sonos started development, however that is no longer the case as can be seen my both their competitors such as Bose\footnote{\url{https://www.bose.com}}, and their own technology which now also supports standard WiFi, although their own network is still more reliable.\cite{sonos1}
+It is the proprietary network software of Sonos, alongside their hardware that have kept them at the top of the market.
+Sonos' mesh network technology was developed due to WiFi not being sufficient
+at the time when Sonos started development, however that is no longer the case as can be seen my both their competitors such as Bose\footnote{\url{https://www.bose.com}}, and their own technology which now also supports standard WiFi, although their own network still is more reliable.\cite{sonos1}
 The network they use is a proprietary peer-to-peer mesh network, aptly named SonosNet.\cite{sonosWiki}
 
 Sonos' speakers are wireless and stream the music directly from the Internet, as such they can run even if the device used to start them is turned off.
 To this end Sonos must support a range of services in order to be useful, and as a well-known brand they support a significant number of services.
 Their speakers can also play different songs in each room, or play the same songs in sync.
-SonosNet is also compatible with existing speakers and sound systems one may have through another Sonos device, the versatility and flexibility provided by Sonos alongside their technology being ahead, is what makes them top-of-the-line when it comes to Multi-Room Audio.\cite{sonos2}
-Multi-Room Audio is a competitive area and as such information on technologies and software used beyond knowing it is proprietary is scarce, as companies want to protect their trade secrets.
+SonosNet is also compatible with existing speakers and sound systems one may have through another Sonos device, the versatility and flexibility provided by Sonos alongside their technology being ahead, is what makes them top-of-the-line when it comes to multi-room audio.\cite{sonos2}
+Multi-room audio is a competitive area and as such information on technologies and software used beyond knowing it is proprietary is scarce, as companies want to protect their trade secrets.
 
-Multi-Room Audio is not exclusively a concept which is bought, hobbyists have created their own home Multi-Room Audio systems using open source projects such as PulseAudio.\cite{pulseAudioHobbyist}
+Multi-room audio is not exclusively a concept which is bought, hobbyists have created their own home multi-room audio systems using open source projects such as PulseAudio.\cite{pulseAudioHobbyist}
 PulseAudio is a sound-server program accepting sound from one or multiple sources and then redirecting it to one or more of sinks supporting several streaming protocols.\cite{pulseAudioModules}
 
-\section{Conclusion}
+\section{Conclusion and Summation}
 From the information gathered in this chapter we derive conclusions to help us formulate the problem and elicit requirements in order to solve said problem.
 
 \bigskip
@@ -28,7 +28,7 @@ The apps described in \cref{sec:sota_apps} provide insight into what such an app
 For each feature we can consider the reasoning behind adding that feature and from there determine possible problems we will need to address in our app.
 
 In our analysis we determined that Chorus did not meet the criteria to be state of the art having low ratings, occasionally stopped working, and poor support for devices and music sources.
-As such we do not gain much information from Chorus aside from knowing that for an app to be useful, it needs to support more than only local audio files.
+As such we do not gain much information from Chorus aside from knowing that for an app to be successful, it needs to support more than only local audio files.
 
 SoundSeeder and AmpMe both qualified as state of the art, this prompts us to consider their features, why they exist and why we might want to include some in our app.
 First off is the audio playback support, both SoundSeeder and AmpMe support various media sources, most important of all, audio streaming sources.
@@ -42,11 +42,11 @@ Having an arbitrary value gives no impression of the degree to which a delay is 
 While we can not disregard that such a feature may be necessary to reach a synchronized state, it is worth considering alternate ways of allowing manual synchronization if it is needed, or perhaps a resynchronization feature.
 
 \bigskip
-Our insight into Multi-Room Audio shows a competetive and saturated market, albeit they work exclusively in speakers, which provide a more static environment.
-We also know that with speakers, hobbyists have been able to obtain Multi-Room Audio using open source solutions without all the proprietary networks and protocols used commercially.
-Our insight into the applications we have selected, shows that the same system, is lackluster on a more mobile platform.
-As for how to do it, Sonos and their competetors gives us very little details into how it can be done, merely that it can be done with a variety of technologies.
-There is a variety of solutions, they include wifi, bluetooth, internet, proprietary network establishment and communication as well as common streaming protocols.
+Our insight into multi-room audio shows a competitive and saturated market, albeit they work exclusively in speakers, which provide a more static environment.
+We also know that with speakers, hobbyists have been able to obtain multi-room audio using open source solutions without all the proprietary networks and protocols used commercially.
+Our insight into the applications we have selected, shows that the same system, is inadequate on a mobile platform.
+As for how to do it, Sonos and their competitors gives us little details into how it can be done, merely that it can be done with a variety of technologies.
+There is a myriad of solutions, they include WiFi, Bluetooth, Internet, proprietary network establishment and communication as well as common streaming protocols.
 
-This leads us to believe that there are no significant differences in choosing network type or communication protocols, which would rule them out as possibilities, rather the differences are trade-offs to be considered depending on what the goal is.
-Furthermore this leads us to believe that developing an application to compete with the apps we have chosen as the best, is possible.
+This convinces us that there are no significant differences in choosing network type or communication protocols, which would rule them out as possibilities, rather the differences are trade-offs to be considered depending on what the goal is.
+Furthermore this inclines us to believe that developing an application to compete with the apps we have chosen as the best, is possible.

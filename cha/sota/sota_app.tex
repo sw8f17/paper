@@ -1,6 +1,6 @@
 %vim: fo-=t
 \section{Android Apps}\label{sec:sota_apps}
-In this section we investigate the state of the art for synchronized streaming of music between different wirelessly connected mobile devices.
+In this section we investigate the state of the art of synchronized streaming of music between different wirelessly connected mobile devices.
 We found three apps capable this:
 \begin{itemize}
     \item SoundSeeder
@@ -8,9 +8,9 @@ We found three apps capable this:
     \item Chorus
 \end{itemize}
 
-These apps are found by searching sources like Google\footnote{\url{https://www.google.dk} with search terms ``android sync music playback''}, YouTube\footnote{\url{https://www.youtube.com/}}, and Google Play Store\footnote{\url{https://play.google.com/store}} and from recommendations on forums.
+These apps are found by searching through sources like Google\footnote{\url{https://www.google.dk} with the search terms ``android sync music playback''}, YouTube\footnote{\url{https://www.youtube.com/}}, and Google Play Store\footnote{\url{https://play.google.com/store}} and from recommendations on various forums.
 An additional criteria for an app to be considered here is that the app must not be abandoned by the developers,
-which we defined as being without an update since, at least, 2013, and being incompatible with new devices.
+which we defined as being without an update since 2013, and being incompatible with new devices.
 
 To clarify, Google Play Store is the official place to install or buy apps for Android.
 
@@ -20,16 +20,16 @@ We call the device which selects the music and streams it, the master, and the d
 
 \subsection{SoundSeeder}\label{subsec:soundseeder}
 SoundSeeder\footnote{\url{http://soundseeder.com}} is an app made by JekApps.
-The  version as of \formatdate{9}{2}{2017} is 1.6.5.
+The version as of \formatdate{9}{2}{2017} is 1.6.5.
 
 It is compatible with Android 4.1 and above, for older versions of Android (2.2--4.0),
-another app called SoundSeeder Speaker makes it possible for a device to be used as a slave.
+another app called \textit{SoundSeeder Speaker} makes it possible for a device to be used as a slave.
 
 SoundSeeder also provides a Java application for compatibility with other platforms e.g. Windows, macOS and Linux, but does not support iOS and Windows Phone\cite{soundseeder_ios}.
 
 The app consists of a top menu and a burger menu at the left side, as seen on \cref{fig:soundseeder_screenshot}.
 In the burger menu, the user can choose the different playback possibilities and switch to slave mode.
-The main view of the app is a music player, where the music can be controlled as any other music player.
+The main view of the app is a music player, where the playback can be controlled.
 To play music to other devices as a master, press the ``add music button'' in the top menu,
 choose the source of the music and choose the preferred music, and press play.
 
@@ -39,11 +39,11 @@ It can take a bit of time for the slave device to find the master device, which 
 
 The process of joining, when the slave is given the time, is rather simple.
 The user interface is clotted with features and menus, which makes the app hard to navigate.
-The design of the app is old and not pretty.
+The user interface of the app looks and feels outdated, i.e.\ not following the same design guidelines as newer and more popular apps.
 
 SoundSeeder streams music via Wi-Fi,
 which means that all phones have to be on the same network\cite{soundseether_faq}, it is also possible to use an ad-hoc network (Android Hotspot).
-The master's music source can be Google Play Music, online radio stations, UPnP and DLNA devices, local media, and YouTube if using semperVidLinks\footnote{\url{https://play.google.com/store/apps/details?id=com.semperpax.sempervidlinksFree}}, an app for extracting video links.
+The music source of the master device can be Google Play Music, online radio stations, UPnP and DLNA devices, local media, and YouTube if using semperVidLinks\footnote{\url{https://play.google.com/store/apps/details?id=com.semperpax.sempervidlinksFree}}, an app for extracting video links.
 SoundSeeder also supports streams from external sources, e.g.\ a microphone or AUX device.
 The supported media formats further depend on the used master device and its Android version.\cite{soundseether_faq}
 
@@ -80,7 +80,7 @@ It supports Android 4.1 or newer and iOS 9.0 or newer.
 
 In AmpMe the group of devices is called ``a party''.
 When AmpMe is opened, it either displays the nearby parties or encourage you to create your own.
-If a party is found nearby, you can join it as a slave and play the master's music.
+If a party is found nearby, you can join it as a slave and play the music of the master.
 If no party is found, or you want to create your own, you can choose to start it by choosing between Spotify,
 YouTube, your local music library, or SoundCloud as music source, as shown on \cref{fig:ampme_screenshot}.
 When a source and music is chosen, a player appears with the music playing, and your device works as a master.
@@ -93,7 +93,7 @@ This means that the connected devices can be on WiFi, mobile data or another net
 
 In AmpMe, the music is automatically synchronized upon party creation, but if there is an offset, it can be synchronized manually at each individual slave.
 On \cref{fig:ampme_screenshot}, the slider to manually synchronize can be seen.
-The slider goes from an offset of $-15$ to $+15$ arbitrary offset units, in $1$ increments.
+The slider goes from an offset of $-15$ to $+15$ arbitrary offset units, in increments of $1$.
 
 AmpMe is free to use in both Google Play and the App Store.\cite{amp_faq, amp_play, amp_itunes}
 
@@ -163,6 +163,7 @@ To determine what makes these apps state of the art, we look at their vital char
 These vital characteristics are the user rating, last update date, supported devices, media sources, and connectivity options.
 In \cref{tab:sota_comp}, a comparison of the apps can be seen.
 
+\bigskip
 First let us start with Chorus, it supports the least devices, only supports local media, has the lowest rating with some explicitly bad reviews, and with the recent update being in 2015 it seems abandoned.
 Only its connectivity options seems on par with the other two mentioned apps, however reviews mention that it is incredibly slow, as such we see no reason to continue with this app, nor can we deem it state of the art.
 
@@ -184,9 +185,9 @@ In the case that the synchronization becomes skewed, both apps have the possibil
 The need for manual synchronization options could indicate that the automatic synchronization can at times be faulty, yet their creators find manual synchronization preferable to reconnecting.
 The actual performance of the synchronization, in SoundSeeder and AmpMe will be tested in \cnameref{sec:sota_test}.
 
+\begin{table}
 \renewcommand\tabularxcolumn[1]{m{#1}}
 \renewcommand{\arraystretch}{1.8}
-\begin{table}
     \small
     \begin{tabularx}{\textwidth}{XXXX}\toprule
                                     & SoundSeeder                   & AmpMe                                     & Chorus                        \\\midrule
