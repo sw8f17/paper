@@ -14,8 +14,8 @@ as \code{seekTo}, \code{start} (commonly known as play), and
 requirements of most common usecases for most apps. Without providing
 guarantees about timing and accuracy.
 
-MP3 files are not stored in a format directly relatable to time, and
-is neither directly playable, nor can they be sliced arbitrarily to make
+MP3 files aren't stored in a format directly relatable to time, and are
+neither directly playable, nor can they be sliced arbitrarily to make
 facilitate simple data transfer. In fact, even though MP3 files are
 naturally decomposed into chunks, you need multiple chunks to start the
 playback. These things together make it difficult to stream MP3 with the
@@ -23,10 +23,12 @@ precision and control we desire.
 
 Instead we decide to transfer the sound data as raw \ac{PCM} encoded
 byte arrays. \ac{PCM} data is directly related to audio produced, making
-arbitrary slicing and complex mixing possible. Since the \ac{PCM}
-encoded data is what the soundcard accepts. We would have to decode into it
-at some point, which makes transferring it directly over the network
-a simple choice.
+arbitrary slicing and complex mixing possible. Sending the decoded
+\ac{PCM} data over the wire makes it simple to slice it as we see fit,
+but also apply interesting effects, such as separating the left and
+right channel. Transferring a music file in standard CD quality
+(44100Hz---16bit---Stereo) requires a transfer-rate of 1.5Mbps, per
+client, which we deem reasonable for our network.
 
 To reuse as much of the functionality already provided by the sample, we
 replace the android \code{MediaPlayer} with one that we design and
