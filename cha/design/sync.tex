@@ -83,11 +83,11 @@ This expected accuracy is also with a cable connection, with wireless, which we 
         %using offsets can help
 %Perfect syncrhonization may actually cause problems, audible sync != clock sync
 
-\section{Conclusion}\label{sec:sync_conclusion}
+\section{Choosing Synchronization Method}\label{sec:sync_conclusion}
 While all the five presented solutions can be used to synchronize, some are simply superior and easier to work with than others, in this section we present our choice, as well as our reasoning for the choice we make.
 In \cref{tab:pros_cons_sync} the pros and cons of the different synchronization methods can be seen and compared.
 
-Unfortunately the GPS time features used in Android makes it such that GPS is not a feasible solution, since the precision is not expected to be able to fulfil requirement \ref{req:manipulate} from \cref{cha:requirement_elicitation}, which leaves us with four other possible solutions.
+Unfortunately the GPS time features used in Android makes it such that GPS is not a feasible solution, since the precision is not expected to be able to fulfill requirement \ref{req:manipulate} from \cref{cha:requirement_elicitation}, which leaves us with four other possible solutions.
 With light cues we feel that the precision issues, again not fulfilling requirement \ref{req:manipulate} from \cref{cha:requirement_elicitation}, combined with manual work required to make it work, i.e. facing the phones towards each other, makes this solution significantly inferior to the others, leaving us with three remaining possibilities.
 
 We believe that all of the last three solutions could solve the issue and provide sufficient clock synchronization, and fulfilling requirement \ref{req:manipulate} from \cref{cha:requirement_elicitation}.
@@ -103,10 +103,34 @@ While we have no proof of better or worse performance for the two, the maturity 
     \begin{tabularx}{\textwidth}{XXX}\toprule
         \textbf{Sync method} & \textbf{Pros} & \textbf{Cons} \\ \midrule
         GPS     & Precise clocks. & Limited to 1 Hz updates on Android. \\
-        Audio   & No external hardware requirements. & Very complicated with large number of devices, \newline large synchronization time, \newline audio lantency is different from device to device. \\
-        Light cues & No external hardware requirements. & Require cameras to face each other, \newline hardware limitations proces further complexity, \newline requires manual work. \\
-        \ac{NTP} & High-precition clocks, \newline mature protocol. & Requires internet. \\
+        Audio   & No external hardware requirements. & Very complicated with large number of devices, \newline large synchronization time, \newline audio latency is different from device to device. \\
+        Light cues & No external hardware requirements. & Require cameras to face each other, \newline hardware limitations process further complexity, \newline requires manual work. \\
+        \ac{NTP} & High-precision clocks, \newline mature protocol. & Requires internet. \\
         \ac{PTP} & Do not require internet, \newline accuracy in nanoseconds & Accuracy in nanoseconds only with cabled network \newline not very widespread among Android apps. \\ \bottomrule
     \end{tabularx}
     \caption{Pros and cons of the different synchronization methods.}\label{tab:pros_cons_sync}
 \end{table}
+
+
+
+\section{Refining Synchronization Method --- SNTP}
+With the choice of synchronization method landing upon \ac{NTP}, we take a closer look at it, specifically in regard to \ac{SNTP}.
+As the name suggests \ac{SNTP} is based upon \ac{NTP} but vastly simplified, \ac{SNTP} trades accuracy and drift alleviation for simplicity and reduced resource requirements.
+\ac{SNTP} was developed as an \ac{NTP} alternative for small computers and micro-controllers, which happens to fit the description of smartphones.
+Furthermore we would not be taking full advantage of the utilities \ac{NTP} provides over \ac{SNTP} resulting i needless complexity.
+In reality, \ac{SNTP} is actually a better fit than \ac{NTP} considering how we want to use it, in order to understand why, first let us consider some of the major advantages which makes \ac{NTP} more accurate than \ac{SNTP} and why they are of little benefit to our case.\cite{sntp_ntp}
+\begin{description}
+    \item [Clock Skew] \hfill \\
+    Part of the algorithms \ac{NTP} incorporates are designed to alleviate clock skew.
+    While effective in real-time systems, where the device clock needs to be synchronized, it has no impact on our application due to us not sending real-time commands, but rather timestamps for when an event should occur.
+    \item [Drift Alleviation] \hfill \\
+    \ac{NTP} also alleviates by drift, it does this by speeding up or slowing down the clock, effectively introducing drift in the opposing direction such that it evens out.
+    As mentioned before, in order to adjust the clock through the application the device must be rooted, since we do not want to impose this requirement onto users, drift alleviation would be nullified as we cannot slow down or speed up the clock.
+    \item [Seamless Adjustments] \hfill \\
+    Similarly to how drift alleviation works, the same technique is used by \ac{NTP} for when the clock is only slightly out of sync, this way a step in time is not introduced, which is how \ac{SNTP} synchronizes the clock.
+    However once again, this would require a rooted device and as such is irrelevant for our case.
+    \item [Multiple Time References] \hfill \\
+    Lastly \ac{NTP} queries multiple time servers for the clock, and through its algorithms determines which ones to use, and then averages these to find the time, whereas \ac{SNTP} simply queries one server, is the server unavailable it asks another.
+    This is the part of \ac{NTP} which would have the largest impact on our specific use case.
+\end{description}
+Due to the some of the major advantages of \ac{NTP} not being of value to us, we choose to move forward with the simplified version, \ac{SNTP}.
