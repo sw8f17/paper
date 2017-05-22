@@ -7,7 +7,7 @@ In \cref{sec:sync_conclusion}, we decided that \ac{NTP} would suit us best.
 However due to the complexities of \ac{NTP} we decided to implement \ac{SNTP}, which only considers the latest synchronization to the \ac{NTP}-server, and discards old results.
 
 Since a persistent internet connection is not an ideal requirement for our application we also implemented our own time-synchronization over the local wireless network, made using WiFi Direct.
-This method would not synchronize each client to a global clock, like \ac{NTP} and \ac{SNTP}, but rather synchronize the clock of the clients to the clock of the server\tnnote{Er det ment son en generel ``server'', eller skal det være ``master''?}.
+This method would not synchronize each slave to a global clock, like \ac{NTP} and \ac{SNTP}, but rather synchronize the clock of the slaves to the clock of the master.
 However for our application this it not a worry, our goal is to synchronize audio accurately across devices in our network, which does not require each clock to be globally synchronized, only locally.
 
 We decided to implement both of these, that is \ac{SNTP} over the Internet and time-synchronization over WiFi Direct.
@@ -17,9 +17,9 @@ As a side note, it is not possible for non-rooted Android devices to change the 
 For this reason we will not synchronize our clocks on the devices, but rather find the offset between the clock on a given device, and the clock of the \ac{NTP}-server or master.
 
 \subsection{\ac{SNTP} over the Internet}
-In this method, the goal is to get the offset of every device in the network, clients and server, relative to a third-party \ac{NTP}-server.
-\ac{NTP} and \ac{SNTP} works by sending timestamped packages from the client to the server, and back.
-This is illustrated in \cref{fig:ntp_packets}\tnnote{Måske pile på figuren, så man ved at T0 går til T1 og T2 til T3}.
+When using \ac{SNTP} over the Internet, the goal is to get the offset of every device in the network, master and slave, relative to a third-party \ac{NTP}-server.
+\ac{NTP} and \ac{SNTP} works by sending timestamped packages from the slave to the \ac{NTP}-server, and back.
+This is illustrated in \cref{fig:ntp_packets}
 
 \begin{figure}[htb]
     \centering
@@ -27,13 +27,13 @@ This is illustrated in \cref{fig:ntp_packets}\tnnote{Måske pile på figuren, s�
         \draw[->] (0, 0) -- (4.5, 0);
         \draw[->] (0,-2) -- (4.5,-2);
 
-        \draw (0.5, -2) -- (2, 0);
-        \draw (4.0, -2) -- (2.5, 0);
+        \draw[->] (0.5, -2) -- (2, 0);
+        \draw[->] (4.0, -2) -- (2.5, 0);
 
         \draw (2.25, -3) node {$Time$} node[above=3pt] {$   $};
 
         \draw (0,  0) node[left=3pt] {$NTP-server$};
-        \draw (0, -2) node[left=3pt] {$Client$};
+        \draw (0, -2) node[left=3pt] {$Device$};
 
         \draw (0.5, -2) node[below=3pt] {$T_0$};
         \draw (4.0, -2) node[below=3pt] {$T_3$};
@@ -44,15 +44,14 @@ This is illustrated in \cref{fig:ntp_packets}\tnnote{Måske pile på figuren, s�
     \label{fig:ntp_packets}
 \end{figure}
 
-Here $T_0$ is the timestamp, on the client, where the request was sent, $T_1$ is the timestamp, on the server, when the request was received.
-$T_2$ is the timestamp, on the server, when the response was sent, and $T_3$, is the timestamp, on the client, when the response was received.
+Here $T_0$ is the timestamp, on the device, where the request was sent, $T_1$ is the timestamp, on the \ac{server}, when the request was received.
+$T_2$ is the timestamp, on the \ac{server}, when the response was sent, and $T_3$, is the timestamp, on the device, when the response was received.
 Given this, one can calculate the offset, $\theta$, with the equation \ref{eq:ntp}.
 
 \begin{equation}\label{eq:ntp}
     \theta = \frac{(t_1 - t_0)+(t_2 - t_3)}{2}
 \end{equation}
 
-\ac{SNTP} only considers one of these offsets: the latest, where \ac{NTP} uses multiple and discards outliers.
 When using \ac{NTP} one also have to decide on what \ac{NTP}-server to use.
 We decided to use \url{0.dk.pool.ntp.org} which is a free to use \ac{NTP}-pool, and its servers are located in Denmark, furthermore we get a very low latency to them, which can improve the accuracy of the synchronization.
 
@@ -63,16 +62,16 @@ Implementing time-synchronization over WiFi Direct, independently of any third-p
 Our way of time-synchronization over WiFi Direct, uses the same methods as the method we just explained about \ac{SNTP} over the Internet, with the change that the master of the network would also act as an \ac{NTP}-server.
 
 Implementing this requires us to add two protobufs, one for the request, and one for the response.
-The request contains a single timestamp: the timestamp of the client when it sent the request.
-The response contains three timestamps: it sends the initial timestamp which it received from the client, the timestamp for when it received it, and the timestamp for when it sends the response.
-From this the client can note the timestamp when it receives the response, and thus it has all four timestamps, and can calculate its clock offset, $\theta$, relative to the master clock.
+The request contains a single timestamp: the timestamp of the slave when it sent the request.
+The response contains three timestamps: it sends the initial timestamp which it received from the slave, the timestamp for when it received it, and the timestamp for when it sends the response.
+From this the slave can note the timestamp when it receives the response, and thus it has all four timestamps, and can calculate its clock offset, $\theta$, relative to the master clock.
 
-Implementing this on the server side is really simple, since it now is the master clock, the offset of it to the master clock is by definition zero.
+Implementing this on the master is really simple, since it now is the master clock, the offset of it to the master clock is by definition zero.
 Additionally it has to receive the requests and respond to them.
 This is done by registering a callback which will be called whenever a request comes in, then record the two timestamps, build the response, and send it back.
 
-The client side has to send the requests periodically, in order to avoid clock drift.
-And like the server, it has to register a callback for when responses arrive, from which is can calculate the offset and save it.
+The slave has to send the requests periodically, in order to avoid clock drift.
+And like the master, it has to register a callback for when responses arrive, from which is can calculate the offset and save it.
 Any part of the system which needs the offset can then ask for it, and will receive the latest recorded offset.
 
 \subsection{Using the Synchronization in the App}
@@ -80,13 +79,13 @@ Now that we have offsets, we can therefore convert local timestamps to be synchr
 For simplicity we decided to use the offset our synchronization gave us just before sending messages over the network, and just after receiving them.
 That is, when we send a message, the timestamp in it is of the master clock, and when we receive a message, it is converted to the local clock.
 This is illustrated in \ref{fig:sntp_example}.\tnnote{Jeg forstår ikke helt figuren og sammenhængen mellem figuren og teksten.}
-Given this setup, the offsets are $-1s925ms$ for the server relative to the \ac{NTP}-server, and $-0s937.5ms$ for the client relative to the \ac{NTP}-server.
+Given this setup, the offsets are $-1s925ms$ for the master relative to the \ac{NTP}-server, and $-0s937.5ms$ for the slave relative to the \ac{NTP}-server.
 
-Say for example that we want to start playback in one second, $02s175ms$ (\ac{NTP} time), then the server would give that as the timestamp for the PlayCommand.
+Say for example that we want to start playback in one second, $02s175ms$ (\ac{NTP} time), then the master would give that as the timestamp for the PlayCommand.
 When the slave receives the message it will then translate the timestamp to its local time, by subtracting its offset:
 $-0s937.5ms$ from the timestamp $02s175ms$: $02s175ms - (-0s937.5ms) = 3s112.5ms$.
-That means that the client should start the playback at $3s112.5ms$ on its own clock.
-The server should start its playback at $02s175ms - (-1s925ms) = 4s100ms.$
+That means that the slave should start the playback at $3s112.5ms$ on its own clock.
+The master should start its playback at $02s175ms - (-1s925ms) = 4s100ms.$
 
 \begin{figure}[bth]
     \centering
