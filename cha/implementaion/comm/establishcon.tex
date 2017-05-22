@@ -1,4 +1,4 @@
-\section{Connecting the Devices}
+\section{Establishing a Connection}\label{sec:establishing_a_connection}
 In \cref{sec:communication_methods} and \cref{sec:transmit} we decided to use WiFi Direct and protobufs.
 This section explains how we change parts of the app to accommodate multiple devices.
 How we get these devices to discover each other, and how we establish a persistent connection.
@@ -8,7 +8,7 @@ Lastly we describe which protobufs we have, what they contain, and how we send a
 We have previously, in \cref{sec:foundation_of_our_android_app}, explained that we utilize a sample music player.
 Since the point of this chapter is to create a multi-device system, the users should have a way of choose whether they should be in master mode or in slave mode.
 When the master mode is chosen, the user should be able to choose what music should be played to the slaves.
-When the slave mode is chosen, the user should see a list of master devices, which the slave can connect to. 
+When the slave mode is chosen, the user should see a list of master devices, which the slave can connect to.
 
 In \cref{fig:connecting} we show the two new UIs made for connecting devices.
 \cref{fig:mode_selection} is the UI the app starts with.
@@ -106,95 +106,3 @@ If the slave is accepted, then they will join the network, and be sent the netwo
     \caption{Sequence diagram, depicting how our the master announces its service and slaves connects.}\label{fig:seq_server_client}
 \end{figure}
 \tikzexternalenable{}
-
-\subsection{Establishing a Persistent Socket}
-
-After the slave(s) have discovered the master, they establish a persistent connection.
-They are at this point part of the same WiFi Direct network, and the slave has just received the IP of the group owner.
-
-When a device first starts its master mode, it launches a separate thread which opens a \code{ServerSocket} to accept incoming socket connections.
-After accepting a connection it creates a \code{MessageConnection}, which is an abstraction for sending messages, which is run on a separate thread for each connection from the master to the slave, and vice versa.
-The thread then continuously tries to read on the socket, to accept messages sent to it.
-
-\subsubsection*{Creating our Protobufs}
-As previously mentioned we decided to use protobufs to serialize our messages.
-Just to be clear, a message is the entire payload sent from device to device, and the protobuf, is part of it.
-
-We decided to use Wire Protocol Buffers\footnote{\url{https://github.com/square/wire}} made by Square to generate Java classes corresponding to our protobufs.
-It is a mature library, and easily integrated into our app, it supports both proto2 and proto3, and generates builders for each of the classes it generates, making it easy to use.
-The protobufs we use can be separated into three groups: meta-data, commands and data. \tnote{Tids ting går her under meta-data, er det fair?}
-\begin{description}
-    \item[Meta-data] \hfill \\
-        Meta-data is information about the data, the data in this case is the audio data.
-        The purpose of sending meta-data is twofold: we send it such that the clients can present it in their UI, and such that our audio player can be set up correctly.
-        Our meta-data contains the following:
-        \begin{itemize}
-            \item Artist name
-            \item Album name
-            \item Song name
-            \item Album art URL (An optional URL containing an image to be displayed)
-            \item Song duration
-            \item Media-info
-        \end{itemize}
-        Here the media-info contains the following information about the audio data (in the \ac{PCM} format). \tnote{Ref til Marcs afsnit om playback med begreberne}
-        \begin{itemize}
-            \item Sample rate
-            \item Channels
-            \item Encoding (bit depth per channel)
-            \item Frame size
-        \end{itemize}
-    \item[Commands] \hfill \\
-        Commands are used to change the playback on other devices.
-        All commands contain a timestamp at which the given command should occur. \tnote{Evt. ref til core idea?}\tnnote{Ja, det synes jeg er en god idé.}
-        In total we have the following commands:
-        \begin{description}
-            \item[PlayCommand]
-                Used to start audio playback.
-                Contains the location in the audio file to resume playback at, and the timestamp at which the playback should start.
-            \item[PauseCommand]
-                Used to pause audio playback.
-                Much like the PlayCommand, it contains the location in the audio file at which the playback should pause, and the timestamp for when the pause should occur.
-            \item[SeekCommand]
-                Used to seek in the audio file, i.e. change which part of the audio file should be played.
-                As the Play- and PauseCommands, it contains the location which the playback should change to, and the timestamp for when the change should occur.
-            \item[SongChangeCommand]
-                Used to change the audio file which should be played.
-                Contains the meta-data for the file which will be changed to, and the timestamp for when the change should occur.
-        \end{description}
-
-    \item[Data] \hfill \\
-        Lastly we have the data containing the audio itself, we call it: MusicData.
-        MusicData contains a byte array, which is the \ac{PCM} audio data which will later be played, as explained in \tnote{ref til playback afsnittet}.
-        As with the other messages, the MusicData contains a timestamp for when the audio data should be played.
-\end{description}
-
-\subsubsection{Sending the Messages}
-When we designed the system we ran into a few issues, when it came to sending the messages.
-Firstly we did not know which message we would be receiving next.
-Secondly we did not know what length the next message would have.
-This is a problem since, we would not know when to stop reading from the network connection, and start processing the data.
-Additionally we would not know how to process the data.
-
-To solve these issues, we add two integers to each message we send.
-The first integer are assigned to each of the protobufs, such that the receiver knows which message it is.
-The second integer is the length of the protobuf part of the message.
-This is shown in \cref{fig:message_layout}.
-This allow us to continue reading for exactly the amount of bytes the protobuf is.
-
-Next the receiver can look up what decoder to use in order to deserialize the protobuf sent.
-After the protobuf have been deserialized, we call the method registered to handle the given protobuf. \tnote{Vi skal måske forklare lidt mere om hvad det her indebærer?}
-
-\begin{figure}[htb]
-    \centering
-    \begin{tikzpicture}[auto]
-        \path[draw] (0,0) -- (0,1) -- (7.5,1) -- (7.5,0) -- (0,0) % Border
-                        (1.5,0) -- (1.5,1) % Første streg (efter type)
-                        (3.0,0) -- (3.0,1); % Anden streg (efter Length)
-
-        \node[text width=2cm, align=center] at (0.75,0.5) {Type \\ 4 bytes};
-        \node[text width=2cm, align=center] at (2.25,0.5) {Length \\ 4 bytes};
-        \node[text width=4cm, align=center] at (5.0,0.5) {Any protobuf \\ ``Length'' bytes};
-    \end{tikzpicture}
-    \caption{The layout of any message we send.}
-    \label{fig:message_layout}
-\end{figure}

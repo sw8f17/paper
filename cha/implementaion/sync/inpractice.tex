@@ -1,0 +1,75 @@
+\section{Using the Synchronization in the App}
+Now that we have offsets, we can therefore convert local timestamps to be synchronized with the rest of the network.
+For simplicity we decided to use the offset our synchronization gave us just before sending messages over the network, and just after receiving them.
+That is, when we send a message, the timestamp in it is of the master clock, and when we receive a message, it is converted to the local clock.
+This is illustrated in \ref{fig:sntp_example}.\tnnote{Jeg forstår ikke helt figuren og sammenhængen mellem figuren og teksten.}
+Given this setup, the offsets are $-1s925ms$ for the master relative to the \ac{NTP}-server, and $-0s937.5ms$ for the slave relative to the \ac{NTP}-server.
+
+Say for example that we want to start playback in one second, $02s175ms$ (\ac{NTP} time), then the master would give that as the timestamp for the PlayCommand.
+When the slave receives the message it will then translate the timestamp to its local time, by subtracting its offset:
+$-0s937.5ms$ from the timestamp $02s175ms$: $02s175ms - (-0s937.5ms) = 3s112.5ms$.
+That means that the slave should start the playback at $3s112.5ms$ on its own clock.
+The master should start its playback at $02s175ms - (-1s925ms) = 4s100ms.$
+
+\begin{figure}[bth]
+    \centering
+    \begin{tikzpicture}[auto, line cap=rect,line width=1pt]
+        % Baggrund
+        \filldraw [fill=GoogleLightBlue] (0,0) circle [radius=1cm];
+        % Tick hver 3. time
+        \foreach \angle in {0,90,180,270}
+          \draw[line width=2pt] (0,0) -- ++(\angle:0.975cm);
+
+        \foreach \angle in {0,90,180,270}
+          \draw[line width=3pt, color=GoogleLightBlue] (0,0) -- ++(\angle:0.80cm);
+        % Time viser
+        %\draw[line width=1.8pt] (0,0) -- ++(150:0.5cm);
+        % Minut viser
+        \draw[line width=1.2pt] (0,0) -- ++(70:0.7cm);
+
+
+        % Baggrund
+        \filldraw [fill=GoogleAmber] (3,0) circle [radius=1cm];
+        % Tick hver 3. time
+        \foreach \angle in {0,90,180,270}
+          \draw[line width=2pt] (3,0) -- ++(\angle:0.975cm);
+
+        \foreach \angle in {0,90,180,270}
+          \draw[line width=3pt, color=GoogleAmber] (3,0) -- ++(\angle:0.80cm);
+        % Time viser
+        %\draw[line width=1.8pt] (3,0) -- ++(150:0.5cm);
+        % Minut viser
+        \draw[line width=1.2pt] (3,0) -- ++(85:0.7cm);
+
+
+        % Baggrund
+        \filldraw [fill=GoogleLightGreen] (6,0) circle [radius=1cm];
+        % Tick hver 3. time
+        \foreach \angle in {0,90,180,270}
+          \draw[line width=2pt] (6,0) -- ++(\angle:0.975cm);
+
+        \foreach \angle in {0,90,180,270}
+          \draw[line width=3pt, color=GoogleLightGreen] (6,0) -- ++(\angle:0.80cm);
+        % Time viser
+        %\draw[line width=1.8pt] (6,0) -- ++(150:0.5cm);
+        % Minut viser
+        \draw[line width=1.2pt] (6,0) -- ++(80:0.7cm);
+
+        \node[draw, thick, fill=GoogleLightBlue]    at (0,-1.6) {Master};
+        \node[]                                     at (0,-2.2) {$03s050ms$};
+        \node[draw, thick, fill=GoogleAmber]        at (3,-1.6) {NTP-server};
+        \node[]                                     at (3,-2.2) {$01s175ms$};
+        \node[draw, thick, fill=GoogleLightGreen]   at (6,-1.6) {Slave};
+        \node[]                                     at (6,-2.2) {$02s250ms$};
+    \end{tikzpicture}
+    \caption{Example of \ac{SNTP} over the Internet in action, only the second hand is shown.}
+    \label{fig:sntp_example}
+\end{figure}
+
+This approach has some advantages and disadvantages\tnnote{Pros and cons table}, the biggest advantage is simplicity, it allows us to only think about time synchronization in one place, and not in the player itself.
+However the disadvantage is that the longer we buffer data, the more outdated it gets.
+
+
+% Hvor ofte skal vi synkronisere!?!
+
+% eksempel på begge ?!?

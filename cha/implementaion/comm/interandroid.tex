@@ -1,4 +1,4 @@
-\section{Communication methods}\label{sec:communication_methods}
+\section{Inter-Android Communication}\label{sec:communication_methods}
 In \cnameref{sec:external_architectures} we discussed which type of external architecture should be applied to the system.
 The conclusion of that discussion was to go with a local centralized architecture.
 This means that the method of communication have to connect the devices, without external hardware, to a chosen master device, as mentioned in \cref{sec:external_architectures}.
@@ -6,9 +6,9 @@ Furthermore it is desired that an internet connection should not be a requiremen
 
 In the attempt to comply with the external architecture described in \cref{sec:external_architectures}, we found three methods:
 \begin{enumberate*}
-\item Nearby Messages API\footnote{\url{https://developers.google.com/nearby/messages/overview}}, \label{itm:nearby_msg}
-\item Nearby connections API\footnote{\url{https://developers.google.com/nearby/connections/overview}}, and \label{itm:nearby_conn}
-\item WiFi Direct\footnote{\url{http://www.wi-fi.org/discover-wi-fi/wi-fi-direct}}. \label{itm:wifi_direct}
+\item Nearby Messages API\footnote{\url{https://developers.google.com/nearby/messages/overview}},\label{itm:nearby_msg}
+\item Nearby connections API\footnote{\url{https://developers.google.com/nearby/connections/overview}}, and\label{itm:nearby_conn}
+\item WiFi Direct\footnote{\url{http://www.wi-fi.org/discover-wi-fi/wi-fi-direct}}.\label{itm:wifi_direct}
 \end{enumberate*}
 We will describe these concepts and choose the one most suitable for implementation in the following sections.
 
