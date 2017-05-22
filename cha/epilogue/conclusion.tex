@@ -8,17 +8,13 @@ Finally we consider some limitations of our application, and what the effect of 
 \section{Summary}
 %init problem and effects
 Our initial problem was very broad and vague, encapsulating any system where synchronized sound streamed to multiple devices may be of use.
-In order to specify the problem we explored two very different use cases, and two very different psychoacoustic effects.
-The use case isolated playback felt underwhelming and compared to our other use case, increase volume and area, also seemed useful in a significantly lower number scenarios.
-The increase volume and area also tied in nicely with one of the presented psychoacoustic effects, the precedence effect.
-The other presented effect is 3D audio effect, this serves an entirely different purpose, and while the application may be able to support this effect the two effects cannot be used simultaneously. 
-The two effects fits entirely different goals, while both interesting we chose to focus increasing the volume and area of multiple devices, using the precedence effect if possible.
-\tnote{I think we should change this paragraph to: ``We considered many use cases, and we continued with x, y and z.''}
+In order to specify the problem we explored a couple of use cases, and respective psychoacoustic effects which could be relevant.
+We chose to continue with the use case focused on increasing volume in and area, while utilizing the precedence effect to our advantage.
 
 %Sota
 Upon deciding on a use case, we chose to explore products related to said use case.
 We knew of some very successful multi-room audio speakers created by Sonos, which essentially we wanted to do, but with phones.
-In the case of using phones we managed to find two decent applications attempting to do what we wanted to, however our tests revealed that these two applications were lackluster. \tnote{Syntes vi kunne putte lidt emphasis på at de krævede manuel synkronisering.}
+In the case of using phones we managed to find two decent applications attempting to do what we wanted to, however our tests revealed that these two applications were lackluster, requiring manual trial and error input to get a satisfactory result.
 Using these applications as a benchmark, we wanted to produce an application which performed better.
 
 %Problem Statement
@@ -30,7 +26,7 @@ With use case, related work and the precedence effect in mind we refined our pro
 %Requirements
 Derived from our problem statement and analysis of similar applications on the market we derived a number of requirements, both technical and \ac{UX} related.
 These requirements concern features and thresholds made in regard to audible synchronization derived from the precedence effect.
-We also established a number of non-requirements, these are requirements which may be important for specific scenarios, but that we choose to refrain from prioritising such that we can use our times on reaching our other goals.\tnote{Måske vi skulle sige at vores mål, var at opnå noget teknisk godt (altså lav offset), og ikke en god UI/UX}
+We wanted to prove that we could produce and application with better performance than those available, as such our goal became a technical challenge, leaving usability concerns behind us.
 In order to get a better sense of what needs to be done, and what we could possibly do with the information we gathered we made a set of milestones.
 These milestones include both realistic and unrealistic goals segmented in a way such that we can simply continue developing till me meet a deadline, when we close on a deadline the milestones in correlation with our development method will lead us to whether or not the next milestone is feasible.
 
