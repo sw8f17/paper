@@ -52,7 +52,7 @@ Furthermore adding more devices to the network introduces more complexity as eac
 While this may not have an effect on humans given only a few milliseconds of variance, due to psychoacoustic effects, it complicates the synchronization of the devices and our possible manipulation.
 Additionally the audio stack on Android will not act in the same way with regard to timing on every device, which we will explain in further detain in \cnameref{sec:androidaudiostack}.
 
-\subsubsection{Light Cues}
+\subsubsection{Light Cues}\tnote{I think we should remove light cues all together. How is it realistic in relation to Android?}
 Alternatively we can use light rather than audio to synchronize.
 This would also allow devices to respond as to achieve synchronization better.
 The idea would be that a device uses the flashlight, once observed by another device it flashes back.
@@ -83,8 +83,7 @@ This expected accuracy is also with a cable connection, with wireless, which we 
         %using offsets can help
 %Perfect syncrhonization may actually cause problems, audible sync != clock sync
 
-\section{Choosing Synchronization Method}\label{sec:sync_conclusion}
-While all the five presented solutions can be used to synchronize, some are simply superior and easier to work with than others, in this section we present our choice, as well as our reasoning for the choice we make.
+eWhile all the five presented solutions can be used to synchronize, some are simply superior and easier to work with than others, in this section we present our choice, as well as our reasoning for the choice we make.
 In \cref{tab:pros_cons_sync} the pros and cons of the different synchronization methods can be seen and compared.
 
 Unfortunately the GPS time features used in Android makes it such that GPS is not a feasible solution, since the precision is not expected to be able to fulfill requirement \ref{req:manipulate} from \cref{cha:requirement_elicitation}, which leaves us with four other possible solutions.
@@ -99,9 +98,9 @@ This leaves us with the two protocols we found for synchronization, \ac{NTP} and
 \ac{NTP} is both a more mature and widespread protocol, furthermore we were also able to find examples of it being used on Android whereas we could find no Android apps using \ac{PTP}.
 While we have no proof of better or worse performance for the two, the maturity of \ac{NTP} and lackluster use of \ac{PTP} on Android leads us to choose \ac{NTP} as the synchronization method for our basic synchronization milestone.
 
-\begin{table}
-    \begin{tabularx}{\textwidth}{XXX}\toprule
-        \textbf{Sync method} & \textbf{Pros} & \textbf{Cons} \\ \midrule
+\begin{table}[ht]
+    \begin{tabularx}{\textwidth}{lXX}\toprule
+        \textbf{Method} & \textbf{Pros} & \textbf{Cons} \\ \midrule
         GPS     & Precise clocks. & Limited to 1 Hz updates on Android. \\
         Audio   & No external hardware requirements. & Very complicated with large number of devices, \newline large synchronization time, \newline audio latency is different from device to device. \\
         Light cues & No external hardware requirements. & Require cameras to face each other, \newline hardware limitations process further complexity, \newline requires manual work. \\
@@ -113,7 +112,7 @@ While we have no proof of better or worse performance for the two, the maturity 
 
 
 
-\section{Refining Synchronization Method --- SNTP}
+\section{Refining the Synchronization Method --- SNTP}
 With the choice of synchronization method landing upon \ac{NTP}, we take a closer look at it, specifically in regard to \ac{SNTP}.
 As the name suggests \ac{SNTP} is based upon \ac{NTP} but vastly simplified, \ac{SNTP} trades accuracy and drift alleviation for simplicity and reduced resource requirements.
 \ac{SNTP} was developed as an \ac{NTP} alternative for small computers and micro-controllers, which happens to fit the description of smartphones.
