@@ -1,0 +1,11 @@
+@MISC{audiotrack_blog,
+  title = {{Fun with AudioTrack}},
+  url = {http://www.badlogicgames.com/wordpress/?p=228},
+  lastchecked = {10-05-2017},
+}
+
+@MISC{audiotrack,
+  title = {{AudioTrack}},
+  url = {https://developer.android.com/reference/android/media/AudioTrack.html},
+  lastchecked = {10-05-2017},
+}

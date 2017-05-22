@@ -1,0 +1,30 @@
+@MISC{sample_rate_std,
+  title = {{44,100 Hz}},
+  url = {https://en.wikipedia.org/wiki/44,100_Hz},
+  lastchecked = {10-05-2017},
+}
+
+@MISC{bit_depth,
+  title = {{Audio bit depth}},
+  url = {https://en.wikipedia.org/wiki/Audio_bit_depth},
+  lastchecked = {10-05-2017},
+}
+
+@MISC{bit_rate,
+  title = {{Bit rate}},
+  url = {https://en.wikipedia.org/wiki/Bit_rate},
+  lastchecked = {10-05-2017},
+}
+
+@MISC{channels,
+  title = {{What is Monaural, Stereo, Multichannel and Surround Sound?}},
+  url = {https://www.lifewire.com/monaural-stereo-multichannel-surround-sound-3134860},
+  lastchecked = {10-05-2017},
+}
+
+@MISC{audioformat,
+  title = {{AudioFormat}},
+  url = {https://developer.android.com/reference/android/media/AudioFormat.html},
+  lastchecked = {10-05-2017},
+}
+

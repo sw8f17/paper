@@ -1,0 +1,11 @@
+@MISC{slow_java_stackoverflow,
+  title = {{question: android fastest way to decode mp3 to pcm data?}},
+  url = {http://stackoverflow.com/questions/15741701/android-fastest-way-to-decode-mp3-to-pcm-data},
+  lastchecked = {10-05-2017},
+}
+
+@MISC{slow_java_lib,
+  title = {{Libmpg123 on Android}},
+  url = {http://www.badlogicgames.com/wordpress/?p=446},
+  lastchecked = {10-05-2017},
+}

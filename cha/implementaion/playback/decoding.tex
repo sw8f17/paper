@@ -1,0 +1,416 @@
+\section{Decoding MP3}
+
+In \cnameref{cha:initial_development} we presented our initial
+foundation for development, namely the Google sample implementation of
+a universal media player app. In that implementation an Android
+component, namely the \code{android.media.MediaPlayer}, is used to
+control the playback of audio streams.
+
+The \code{MediaPlayer} is a high level Android framework component,
+which takes media files and plays them back using the standard android
+audio path. It also provides control over the playback functions, such
+as \code{seekTo}, \code{start} (commonly known as play), and
+\code{pause}. The mediaplayer is squarely aimed at fulfilling the
+requirements of most common usecases for most apps. Without providing
+guarantees about timing and accuracy.
+
+MP3 files aren't stored in a format directly relatable to time, and
+is neither directly playable, nor can they be sliced arbitrarily to make
+facilitate simple data transfer. In fact, even though MP3 files are
+naturally decomposed into chunks, you need multiple chunks to start the
+playback. These things together make it difficult to stream MP3 with the
+precision and control we desire.
+
+Instead we decide to transfer the sound data as raw \ac{PCM} encoded
+byte arrays. \ac{PCM} data is directly related to audio produced, making
+arbitrary slicing and complex mixing possible. Since the \ac{PCM}
+encoded data is what the soundcard accepts. We'd have to decode into it
+at some point, which makes transferring it directly over the network
+a simple choice.
+
+To reuse as much of the functionality already provided by the sample, we
+replace the android \code{MediaPlayer} with one that we design and
+control. Since the \code{MediaPlayer} is such a high level concept, we
+are able to interpret all the commands in a way that makes sense for
+synchronized playback.
+
+Conceptually the android \code{MediaPlayer} fulfills 3 separate
+responsibilities, with some ancillary responsibilities, that wont be
+touched on here: Decoding, playback control, and presentation. In our
+replacement we have structured them as can be seen on
+\cref{fig:mediaplayerParts}. The app interacts with the \code{PlayBack
+Control} which facilitates communication between the decoding and the
+presentation.
+
+\begin{figure}[ht]
+	\centering
+	\begin{tikzpicture}[
+			every node/.style = {%
+				draw,
+				rectangle,
+				rounded corners = 1mm,
+				line width = 0.2mm,
+				align = center,
+				minimum width = 3cm,
+				minimum height = 1.5cm,
+				text = black,
+			},
+			hide/.style = {%
+				draw = none,
+				minimum width = 0cm,
+				minimum height = 0cm,
+			},
+		]
+		\node (pc) at (0,0) {Playback Control};
+		\node[hide] (i) [above=1cm of pc] {};
+		\node (d) [below left=1cm and 1cm of pc] {Decoding};
+		\node (p) [below right=1cm and 1cm of pc] {Presentation};
+		\draw[-] (i) -- (pc);
+		\draw[-] (pc) -- (d);
+		\draw[-] (pc) -- (p);
+	\end{tikzpicture}
+	\caption{Overview of the \code{MediaPlayer}}\label{fig:mediaplayerParts}
+\end{figure}
+
+\subsection{Decoder}
+\label{subsec:decoder}
+
+The decoder takes the audio in a supported format and turns it into
+\ac{PCM} audio data. The \ac{PCM} data has some format, which the
+decoder reads when it first opens a file.
+
+Decoding an MP3 is a CPU bound task, mostly bottlenecked by CPU
+performance over filesystem performance, and often having very few I/O
+waits. For this reason Java, a high level language, doesn't fit the
+problem well, due to its high CPU overhead. For this reason, and because
+a free and complete library exists, we opted to go with the C library
+libmpg123 to do the decoding.\ libmpg123 includes many optimizations in
+hand coded assembly for many different architectures, with and without
+floating point processors, and a general purpose C implementation, where
+none of the hand optimized procedures apply. For this reason it's an
+excellent choice for a fragmented ecosystem like android, where many
+different CPU architectures and configurations have to be supported.
+
+As said, the library is written for use in C. Fortunately Java has
+support for calling native C and C++ libraries to Java objects, with
+something called the \ac{JNI}. To connect libmpg123 we write a thin
+layer which converts the data from Java methods and object parameters,
+and passes it to the appropriate libmpg123 methods, with the expected
+datatypes. Since libmpg123 has support for opening and processing
+multiple files simultaneously, we create a separate object to hold the
+file instance. This leaves us with two classes, the \code{MP3Decoder}
+and the \code{MP3File}.\jjnote{I don't like how this turned out. Maybe
+there's something better?} The \code{MP3Decoder} has the responsibility
+of resolving android content URLs into file descriptors, opening them
+with libmpg123, and filling out an object containing the media
+information of the file. When a mp3file is opened a \code{MP3File}
+object is returned, which has methods for reading from the MP3 file one
+frame at a time. To keep the decoding snappy, we've opted to keep as
+much of the data as possible in native C structs, which is associated
+with the \code{MP3File} object though a pointer stored as a Java long.
+Expanding the diagram shown in \cref{fig:mediaplayerParts}, with the
+decoding just discussed creates a diagram as shown in
+\cref{fig:mediaplayerPartsdecoding}.
+
+\begin{figure}[ht]
+	\centering
+	\resizebox{\linewidth}{!}{%
+		\begin{tikzpicture}[
+				every node/.style = {%
+					draw,
+					rectangle,
+					rounded corners = 1mm,
+					line width = 0.2mm,
+					align = center,
+					minimum width = 3cm,
+					minimum height = 1.5cm,
+					text = black,
+				},
+				hide/.style = {%
+					draw = none,
+					minimum width = 0cm,
+					minimum height = 0cm,
+					rounded corners = 0mm,
+				},
+				textonly/.style = {%
+					draw = none,
+					minimum width = 0cm,
+					minimum height = 0cm,
+				},
+				container/.style = {%
+					inner sep=20pt,
+					minimum width = 0cm,
+					minimum height = 0cm,
+					fit = #1,
+				},
+			]
+			\node (pc) at (0,0) {Playback Control};
+			\node[hide] (i) [above=1cm of pc] {};
+			\node (p) [below right=1cm and 1cm of pc] {Presentation};
+			\draw[-] (i) -- (pc);
+			\draw[-] (pc) -- (p);
+
+
+			\node (mf) [below left=1cm and 1cm of pc] {MP3File};
+			\node (md) [left=0.5cm of mf] {MP3Decoder};
+
+			\path (mf) -- coordinate[midway] (mm) (md);
+			\node (ml) [below=1.5cm of mm] {libmpg123};
+
+			\node (d) [container={(mf) (md) (ml)}] {};
+			\node[textonly] () [above left] at (d.south east) {Decoder};
+
+			\coordinate (dhit) at (mf |- d.north);
+
+			\draw[-] (pc) -- (dhit);
+			\draw[-] (dhit) -- (mf);
+			\draw[-] (dhit) -- (md);
+			\draw[-] (md) -- (ml);
+			\draw[-] (mf) -- (ml);
+		\end{tikzpicture}
+	}
+	\caption{Overview of the \code{MediaPlayer}, with detailed decoding}\label{fig:mediaplayerPartsdecoding}
+\end{figure}
+
+\subsection{Playback Control}\label{subsec:playbackcontrol}
+
+The decoder is a passive component. It's only active while
+processing a request from the active component owning it. In other
+words, it doesn't run if no method is invoked. That means it requires
+something else to drive the decoding. To better facilitate the
+disconnected nature of playback required for the multiple playback
+milestone, discussed in \jjnote{Ref til troels}, we want to establish an
+ideal virtual player, which wont be tied up to the playback speed of the
+underlying presentation component, but will instead schedule audio to
+play based on the time to play a single MP3 frame worth of bytes, which
+is given by the formula~\ref{eq:ntpb}.\ sampleSize in this equation is
+the number of bytes in a single \ac{PCM} sample, in stereo with 16-bit
+encoded \ac{PCM} data, this value is $4$.
+
+\begin{equation}\label{eq:ntpb}
+	\begin{split}
+		nanosToPlayBytes(bytes, sampleSize, sampleRate) :=\\
+		(bytes * 1,000,000,000) / (sampleSize * sampleRate)
+	\end{split}
+\end{equation}
+
+By calculating the time to play the bytes, instead of relying on the
+presentation component, we get an authoritative player, which we can
+reliably control and tweak to fit the network, even if the master
+devices presentation component has faults, such as playing too quickly
+or too slowly.
+
+This active proxy component, which we call the virtual player, has the
+authority of the playback, meaning it is the place to ask where in the
+audio stream the playhead is, how much is left, and it's the component
+which decides what should be played next. Adding the virtual player to
+the recurring figure creates \cref{fig:mediaplayerPartsvp}. Keep in mind
+that the figure shows ownership, not communication. Even though the
+virtual player only has an edge going to playback control, it's actually
+a direct communicator between the decoder and the presentation.
+
+The virtual player works by running a periodic task every calculated
+frame time. At that time it calculates the current ``correct'' playhead
+position, and schedules frame into the presentation component, until
+preload condition if filled. One possible preload condition could be
+that we must have scheduled 3 MP3 frames ahead of the current playback
+position.
+
+\begin{figure}[ht]
+	\centering
+	\resizebox{\linewidth}{!}{%
+		\begin{tikzpicture}[
+				every node/.style = {%
+					draw,
+					rectangle,
+					rounded corners = 1mm,
+					line width = 0.2mm,
+					align = center,
+					minimum width = 3cm,
+					minimum height = 1.5cm,
+					text = black,
+				},
+				hide/.style = {%
+					draw = none,
+					minimum width = 0cm,
+					minimum height = 0cm,
+					rounded corners = 0mm,
+				},
+				textonly/.style = {%
+					draw = none,
+					minimum width = 0cm,
+					minimum height = 0cm,
+				},
+				container/.style = {%
+					inner sep=20pt,
+					minimum width = 0cm,
+					minimum height = 0cm,
+					fit = #1,
+				},
+			]
+			\node (pc) at (0,0) {Playback Control};
+			\node[hide] (i) [above=1cm of pc] {};
+			\node (p) [below right=1cm and 1cm of pc] {Presentation};
+			\draw[-] (i) -- (pc);
+			\draw[-] (pc) -- (p);
+
+
+			\node (mf) [below left=1cm and 1cm of pc] {MP3File};
+			\node (md) [left=0.5cm of mf] {MP3Decoder};
+
+			\path (mf) -- coordinate[midway] (mm) (md);
+			\node (ml) [below=1.5cm of mm] {libmpg123};
+
+			\node (d) [container={(mf) (md) (ml)}] {};
+			\node[textonly] () [above left] at (d.south east) {Decoder};
+
+			\coordinate (dhit) at (mf |- d.north);
+
+			\draw[-] (pc) -- (dhit);
+			\draw[-] (dhit) -- (mf);
+			\draw[-] (dhit) -- (md);
+			\draw[-] (md) -- (ml);
+			\draw[-] (mf) -- (ml);
+
+			\node (vp) [below=1cm of pc] {Virtual Player};
+
+			\draw[-] (pc) -- (vp);
+		\end{tikzpicture}
+	}
+	\caption{Overview of the \code{MediaPlayer}, with Virtual Player}\label{fig:mediaplayerPartsvp}
+\end{figure}
+
+\subsection{Presentation}\label{subsec:presentation}
+
+The presentation component is where the audio is scheduled for playback
+at a specific time, and then eventually presented to the listener at the
+correct time.
+
+\subsubsection{Audio Sink}\label{subsubsec:audiotrack}
+
+The \code{AudioTrack}, an android framework component, accepts audio
+written into a limited buffer and plays it at a steady, configurable
+rate. Although for it's actively pushing data from its internal buffer
+to the native soundcard buffer, the api that faces user apps is passive.
+To add data the app has to call a write method, which will write the
+buffer to the internal \code{AudioTrack} buffer. This means that the app
+will have to keep track of when the audiotrack buffer is missing data,
+and fill it back up, to avoid a buffer underflow, which manifests itself
+as a pop in the audio for the listener. Since the underlying
+\code{AudioTrack} and the virtual player might not be in sync, we can't
+feed it with the data directly from that. We'd much rather have an
+active interface that can query for new data, we call that interface
+Audio Sink. The Audio Sink component is a thin wrapper around the
+\code{AudioTrack} which converts the passive write api into an active
+read based api which will ask for new data when necessary, specifying
+with it the precise time that the new audio will be presented.
+
+To help keep track of the playback position the \code{AudioTrack}
+component includes functionality for periodic callback. We configure
+that to fire every half buffer size, to effectively get double buffering
+in the audio buffer. When around half of the buffer is gone, since it's
+asynchronous we can't be sure, we calculate the available space in the
+buffer. We want to queue more audio into that free space, but because we
+are double buffering we also have to take into account the time it takes
+to play the remaining buffer data when we determine what to queue up.
+\code{AudioTrack} provides a convenient \code{getTimestamp} method which
+gives you the \code{nanoTime} a specific frame was presented. From those
+datapoints, the time we want to get audio for and how many samples we
+want, we can determine which of the queued up samples from the virtual
+player we need write right now.
+
+\subsubsection{Audio Mixer}\label{subsubsec:audiomixer}
+
+Now that we have two active components a passive component to
+facilitate communication between the two is needed. In this case, such
+a component is in charge of accepting the audio to schedule, for
+a specific time, and giving it to the audio sink when needed. This
+component is called the Audio Mixer.
+
+Internally the audio mixer keeps an array of set size, which it mixes
+the scheduled audio data into as needed, making sure it knows when it
+has to be played. Since the \ac{PCM} coded audio has a fixed bitrate, it
+can be encoded as a simple linear array, big enough to store the data
+provided by the virtual player. The mixer knows what time the start of
+the array represents, and can therefore calculate the point in time any
+sample in the array corresponds to. It does the reverse operation in
+order to determine the sample to start at for a given time. Adding the
+audiomixer into the diagram we get what can be seen in
+\cref{fig:mediaplayerPartspresenter}
+
+\begin{figure}[ht]
+	\centering
+	\resizebox{\linewidth}{!}{%
+		\begin{tikzpicture}[
+				every node/.style = {%
+					draw,
+					rectangle,
+					rounded corners = 1mm,
+					line width = 0.2mm,
+					align = center,
+					minimum width = 3cm,
+					minimum height = 1.5cm,
+					text = black,
+				},
+				hide/.style = {%
+					draw = none,
+					minimum width = 0cm,
+					minimum height = 0cm,
+					rounded corners = 0mm,
+				},
+				textonly/.style = {%
+					draw = none,
+					minimum width = 0cm,
+					minimum height = 0cm,
+				},
+				container/.style = {%
+					inner sep=20pt,
+					minimum width = 0cm,
+					minimum height = 0cm,
+					fit = #1,
+				},
+			]
+			\node (pc) at (0,0) {Playback Control};
+			\node[hide] (i) [above=1cm of pc] {};
+			\draw[-] (i) -- (pc);
+
+
+			\node (mf) [below left=1cm and 1cm of pc] {MP3File};
+			\node (md) [left=0.5cm of mf] {MP3Decoder};
+
+			\path (mf) -- coordinate[midway] (mm) (md);
+			\node (ml) [below=1.5cm of mm] {libmpg123};
+
+			\node (d) [container={(mf) (md) (ml)}] {};
+			\node[textonly] () [above left] at (d.south east) {Decoder};
+
+			\coordinate (dhit) at (mf |- d.north);
+
+			\draw[-] (pc) -- (dhit);
+			\draw[-] (dhit) -- (mf);
+			\draw[-] (dhit) -- (md);
+			\draw[-] (md) -- (ml);
+			\draw[-] (mf) -- (ml);
+
+			\node (vp) [below=1cm of pc] {Virtual Player};
+
+			\draw[-] (pc) -- (vp);
+
+			\node (pm) [below right=1cm and 1cm of pc] {AudioMixer};
+			\node (ps) [right=0.5cm of pm] {AudioSink};
+
+			\node (pl) at (ml -| ps) {AudioTrack};
+
+			\node (p) [container={(pm) (ps) (pl)}] {};
+			\node[textonly] () [above left] at (p.south east) {Presenter};
+
+			\coordinate (phit) at (pm |- p.north);
+
+			\draw[-] (pc) -- (phit);
+			\draw[-] (phit) -- (pm);
+			\draw[-] (phit) -- (ps);
+			\draw[-] (ps) -- (pl);
+		\end{tikzpicture}
+	}
+	\caption{Overview of the \code{MediaPlayer}, with detailed presenter.}\label{fig:mediaplayerPartspresenter}
+\end{figure}
