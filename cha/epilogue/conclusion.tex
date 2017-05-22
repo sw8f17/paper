@@ -76,7 +76,7 @@ In reality, \ac{SNTP} is actually a better fit than \ac{NTP} considering how we 
     Lastly \ac{NTP} queries multiple time servers for the clock, and through its algorithms determines which ones to use, and then averages these to find the time, whereas \ac{SNTP} simply queries one server, is the server unavailable it asks another.
     This is the part of \ac{NTP} which would have the largest impact on our specific use case.
 \end{description}
-\mnote{Perhaps we should move this per the no new info in conclusion convention}
+\mnote{This needs to be moved to the synchronization chapter and simply referred, as such the NTP vs SNTP and Architecture discussion will need a rewrite}
 
 So with some of the major advantages of \ac{NTP} not being of value to us, we chose to implement \ac{SNTP}.
 This however also made us reconsider the fact that we were going for a modified centralized solution, since using \ac{NTP} would require internet.
@@ -87,10 +87,17 @@ By having both solutions available it further cemented our decision that a local
 
 \bigskip
 %Implementation sepcifics / android.MedioCodec
-
+The application itself was build upon an example from Google samples on how to make a media player.
+We replaced the android media player implementation which was used, in place of our own, for which we used \ac{JNI}.
+In doing so we swapped focus to decode MP3 data, and play this data while streaming it to multiple devices.
+Doing this through the \ac{JNI} may have been a hasty decision as we later came across an android API, \code{android.MediaCodec}, which is a low level access to the android multimedia infrastructure.
+While we have performed no tests to see whether it would have been sufficient, it is an avenue we did not explore, which possibly could have saved us some \ac{JNI} trouble.
 
 %Milestone completion / no manipulation / psychoacoustic effect
-
+The unexpected time we had to spend developing a decoder and a media player, also withdrew from the from our milestones, as this proved to be a significantly more involved task than we had anticipated.
+Specifically the milestones related to manual offset manipulation and psychoacoustic effects suffered from this.
+While we still make use of the precedence effect, this is due to its nature, and not an explicit attempt from our side to hit a specific delay range, rather we simply attempt to be below the echo threshold of 40 ms.
+As for manual manipulation, this milestone has been left completely untouched, as users have no way to affect the synchronization process.
 
 %%%% Disposition
 %Architecture choice
