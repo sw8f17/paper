@@ -28,12 +28,12 @@ This is illustrated in \cref{fig:ntp_packets}
         \draw[->] (0,-2) -- (4.5,-2);
 
         \draw[->] (0.5, -2) -- (2, 0);
-        \draw[->] (4.0, -2) -- (2.5, 0);
+        \draw[->] (2.5, 0) -- (4.0, -2);
 
-        \draw (2.25, -3) node {$Time$} node[above=3pt] {$   $};
+        \draw (2.25, -3) node {Time} node[above=3pt] {$   $};
 
-        \draw (0,  0) node[left=3pt] {$NTP-server$};
-        \draw (0, -2) node[left=3pt] {$Device$};
+        \draw (0,  0) node[left=3pt] {NTP-server};
+        \draw (0, -2) node[left=3pt] {Device};
 
         \draw (0.5, -2) node[below=3pt] {$T_0$};
         \draw (4.0, -2) node[below=3pt] {$T_3$};
@@ -44,8 +44,8 @@ This is illustrated in \cref{fig:ntp_packets}
     \label{fig:ntp_packets}
 \end{figure}
 
-Here $T_0$ is the timestamp, on the device, where the request was sent, $T_1$ is the timestamp, on the \ac{server}, when the request was received.
-$T_2$ is the timestamp, on the \ac{server}, when the response was sent, and $T_3$, is the timestamp, on the device, when the response was received.
+Here $T_0$ is the timestamp, on the device, where the request was sent, $T_1$ is the timestamp, on the \ac{NTP}-server, when the request was received.
+$T_2$ is the timestamp, on the \ac{NTP}-server, when the response was sent, and $T_3$, is the timestamp, on the device, when the response was received.
 Given this, one can calculate the offset, $\theta$, with the equation \ref{eq:ntp}.
 
 \begin{equation}\label{eq:ntp}
