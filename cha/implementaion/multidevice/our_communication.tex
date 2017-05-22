@@ -6,8 +6,7 @@ Lastly we describe which protobufs we have, what they contain, and how we send a
 
 \subsection{Preparing the App}
 We have previously, in \cref{sec:foundation_of_our_android_app}, explained that we utilize a sample music player.
-Now we have the desire that not all devices should enter that app on startup, such that we can have a master-slave relation between the devices.
-How we choose to do this is by having a different UI for the master and the slaves, so when the app is opened, the user chooses a mode.
+Since the point of this chapter is to create a multi-device system, the users should have a way of choose whether they should be in master mode or in slave mode.
 When the master mode is chosen, the user should be able to choose what music should be played to the slaves.
 When the slave mode is chosen, the user should see a list of master devices, which the slave can connect to. 
 
