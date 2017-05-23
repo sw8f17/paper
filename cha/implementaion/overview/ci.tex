@@ -38,10 +38,7 @@ This ensures that code, to be merged into the master branch and hereby the curre
 The workflow of our Jenkins server can be seen on \cref{fig:jenkins_workflow}, where we have simplified the process for illustration purposes; e.g.~the three last steps are executed for each processing, i.e.~both the clean run and the one merged with the master branch.
 Moreover, the step which includes testing, linting, and generating documentation, should be seen as a parallel process, where the subcomponents are executed in parallel on the server.
 
-\begin{figure}[tb]
-    \includegraphics[width=1\textwidth]{./jenkins_workflow.png}
-    \caption{Depiction of the workflow of our automated build system}\label{fig:jenkins_workflow}
-\end{figure}
+\input{jenkins_workflow}
 
 A consequence of the automated build system, is then that when a developer reviews new or changed code in pull request, they are assisted by the linting and tests reports, and are furthermore able to quickly try out the application by downloading and installing the packaged apk on their own device.
 
