@@ -34,7 +34,7 @@ SoundSeeder and AmpMe both qualified as state of the art, this prompts us to con
 First off is the audio playback support, both SoundSeeder and AmpMe support various media sources, most important of all, audio streaming sources.
 The two apps use their own respective solutions for device connectivity, SoundSeeder uses WiFi/ad-hoc Android hotspots where AmpMe uses any Internet connection.
 This implies that either solution is capable of solving the problem, tests in \cref{sec:sota_test} evaluate just how good these solutions are and determines whether one solution performs better than the other.
-Both apps also support the feature of manual synchronization, the need for such a feature implies that to some extend the automatic synchronization is not enough.
+Both apps also support the feature of manual synchronization, the need for such a feature implies that to some extend the automatic synchronization is not enough.\tnote{This sentence is basis for our requirement (and later milestone), which implies the need for a manual adjustment for synchronization to be sufficiently accurate, this is a problem, as we dont need it to sound good. Removing this could be part of removing/modifieing a requirement and milestone.}
 It can be quite difficult to assert exactly how desynchronized two devices are.
 SoundSeeder allows the user to change at intervals of $10 ms$ between $-400 ms$ and $+400 ms$ whereas AmpMe uses an arbitrary value from $-15$ to $+15$.
 

@@ -4,6 +4,7 @@ For each requirement, we first state the requirement and then we elaborate, thus
 We have grouped the requirements in three categories: \textbf{technical requirements}, \textbf{\ac{UX} requirements}, and \textbf{non-requirements}.
 
 \paragraph{Technical Requirements} \hfill\\
+\tnote{Should we change these paragraphs to subsections? It's strange to just have 3 paragraphs as "meta text", and one section in the chapter.}
 The technical requirements are concerned with features relevant for how the devices can interact with one another, they are as follows:
 \begin{eletterate}
     \item\label{req:wireless} \textbf{At least two devices must be able to communicate wirelessly with one another.} \hfill\\
@@ -18,10 +19,6 @@ The technical requirements are concerned with features relevant for how the devi
 
         Under normal circumstances each individual device in a session should have control of their own volume and whether they are playing or not, however if the volume affects the desired psychoacoustic effect then the session host may assume control of volume on any device in the session.
 
-    \item\label{req:manipulate} \textbf{It should be possible to manipulate the playback on each device separately.} \hfill\\
-        As mentioned in the problem statement in \cref{cha:problem_statement}, the application must be able to manipulate the playback of the audio.
-        The manipulation refers to applying an offset to the playback on the respective devices such that the playback, can be adjusted to deal with device placement and to help achieving psychoacoustic effects.
-        Furthermore the manipulation may help acquire audible sync.
 
     \item\label{req:sync} \textbf{The application must have the ability to perform an automatic synchronization.} \hfill\\
         To be able to use our system for the use cases we identified in \cnameref{sec:category_increase_volume_and_area},
@@ -45,6 +42,12 @@ The technical requirements are concerned with features relevant for how the devi
         \item \textbf{The drift must not exceed $z$ ms over $n$ seconds.} \hfill\\
             When the media have been playing for $n$ seconds, the drift must not exceed $z$ ms.
     \end{eletterate}
+
+    \item\label{req:manipulate} \textbf{It should be possible to manipulate the playback on each device separately.} \hfill\\
+        \tnote{Here I disagree, it is unclear as to whom should do this manipulation.}
+        As mentioned in the problem statement in \cref{cha:problem_statement}, the application must be able to manipulate the playback of the audio.
+        The manipulation refers to applying an offset to the playback on the respective devices such that the playback, can be adjusted to deal with device placement and to help achieving psychoacoustic effects.
+        Furthermore the manipulation may help acquire audible sync.
 \end{eletterate}
 
 \paragraph{\ac{UX} Requirements} \hfill\\
@@ -76,7 +79,7 @@ The \ac{UX} requirements are concerned with features that should be available in
         where users having a social gathering must have access to music which is not local on the device.
 \end{eletterate}
 
-\paragraph{Non-Requirements} \hfill\\
+\paragraph{Non-Requirements}\label{par:non_requirements} \hfill\\
 The non-requirements are areas of the application where we do not wish to invest our time, our focus is on synchronization and psychoacoustics, as such the following areas have been down-prioritized:
 \begin{eromanrate}
     \item \textbf{Security} \hfill\\
