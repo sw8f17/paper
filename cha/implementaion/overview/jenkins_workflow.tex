@@ -1,41 +1,45 @@
-\begin{figure}
-    \begin{tikzpicture}[auto, node distance=1.5cm,
-            stage/.style={rectangle, minimum width=1.5cm, minimum height=1cm,text centered, fill=black!10, draw, align=center, font=\scriptsize
-},
-            preDefProc/.style={draw,rectangle split, rectangle split horizontal, rectangle split parts=3, fill=black!10, minimum width=1.5cm, minimum height=1cm, font=\scriptsize, inner sep=1},
-            sharp/.style={rectangle, minimum width=9.0cm, minimum height=1cm,text centered, fill=diagramLight, draw, align=center},
-            server/.style={rectangle, rounded corners, minimum width=1.5cm, minimum height=1cm,text centered, fill=diagramLight, rectangle split, rectangle split parts=2, draw},
-            flow/.style={draw, ->},
-            reverse_flow/.style={draw, <-},
-            double_flow/.style={draw, <->},
-            create/.style={draw, ->},
-            use/.style={draw, dotted, ->}
-        ]
+\begin{figure}\pgfdeclarelayer{background}
+    \pgfsetlayers{background,main}
+    \tikzstyle{bgbox}=[fill=green!20, rounded corners, draw=GoogleGreen, dashed]
+    \resizebox{\linewidth}{!}{%
+        \begin{tikzpicture}[auto, node distance=1.5cm,
+                stage/.style={rectangle, minimum width=2.5cm, minimum height=1cm,text centered, fill=black!10, draw, align=center, font=\scriptsize},
+                preDefProc/.style={draw,rectangle split, rectangle split horizontal, rectangle split parts=3, fill=black!10, minimum width=1.5cm, minimum height=1cm, font=\scriptsize, inner sep=1},
+                sharp/.style={rectangle, minimum width=9.0cm, minimum height=1cm,text centered, fill=diagramLight, draw, align=center},
+                server/.style={rectangle, rounded corners, minimum width=1.5cm, minimum height=1cm,text centered, fill=diagramLight, rectangle split, rectangle split parts=2, draw},
+                flow/.style={draw, ->},
+                reverse_flow/.style={draw, <-},
+                double_flow/.style={draw, <->},
+                create/.style={draw, ->},
+                use/.style={draw, dotted, ->}
+            ]
 
-        \node (github) at (0,0) [preDefProc] {\nodepart{two}{\begin{tabular}{c}Github \vspace{-0.15cm} \\ registers new \vspace{-0.15cm} \\ Pull Request\end{tabular}}};
-        \node (ghost) [draw=none, right=1.5cm of github] {};
-        \node (checkout) [stage, above=0.4cm of ghost] {Checkout branch \\ with pull request};
-        \node (merge) [stage, below=0.4cm of ghost] {Merge pull request \\ with master \\ branch};
-        \node (build) [stage, right=1.5cm of ghost] {Build application \\ and dependencies};
-        \node (testing) [stage, right=1.0cm of build] {Testing, \\ Linting, \\ Generate \\ documentation};
-        \node (package) [stage, right=1.0cm of testing] {Package \\ application};
+            \node (github) at (0,0) [preDefProc] {\nodepart{two}{\begin{tabular}{c}Pull Request \vspace{-0.15cm} \\ made on \vspace{-0.15cm} \\ Github \end{tabular}}};
+            \node (ghost) [draw=none, right=1.75cm of github] {};
+            \node (checkout) [stage, above=0.4cm of ghost] {Checkout branch \\ with pull request};
+            \node (merge) [stage, below=0.4cm of ghost] {Merge pull request \\ with master \\ branch};
+            \node (build) [stage, right=0.75cm of checkout] {Build application \\ and dependencies};
+            \node (testing) [stage, right=0.75cm of build] {Testing, \\ Linting, \\ Generate \\ documentation};
+            \node (package) [stage, right=0.75cm of testing] {Package \\ application};
+            \node (status) [stage, below=0.75cm of package] {Report status};
 
-        \coordinate (package_below) at (merge.south -| package.east);
+            \coordinate (package_below) at (merge.south -| package.east);
 
-        \draw [flow] (github) |- (checkout);
-        \draw [flow] (github) |- (merge);
-        \draw [flow] (merge) -| (build);
-        \draw [flow] (checkout) -| (build);
-        \draw [flow] (build) -- (testing);
-        \draw [flow] (testing) -- (package);
+            \draw [flow] (github) |- (checkout);
+            \draw [flow] (github) |- (merge);
+            \draw [flow] (merge) -| (build);
+            \draw [flow] (checkout) -- (build);
+            \draw [flow] (build) -- (testing);
+            \draw [flow] (testing) -- (package);
+            \draw [flow] (package) -- (status);
 
-
-
-    \draw [decoration={brace, mirror, amplitude=+20pt}, decorate]
-        (merge.south west) -- (package_below.south east) node [black,midway,below=+21pt] 
-        {Jenkins};
-
-    \end{tikzpicture}
-    
+            \begin{pgfonlayer}{background}
+                \path (checkout.west |- checkout.north)+(-0.3,+0.7) node (huh_a) {};
+                \path (package.east |- merge.south)+(+0.3,-0.3) node (huh_b) {};
+                \path [bgbox] (huh_a) rectangle (huh_b);
+                \node [below = 0.5em of huh_a, anchor = west, inner sep = 0.5em]{Jenkins};
+            \end{pgfonlayer}
+        \end{tikzpicture}
+    }
     \caption{Depiction of the workflow of our automated build system}\label{fig:jenkins_workflow}
 \end{figure}
