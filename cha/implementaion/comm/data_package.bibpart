@@ -24,3 +24,32 @@
   url = {https://auth0.com/blog/beating-json-performance-with-protobuf/},
   lastchecked = {17-05-2017},
 }
+
+@MISC{capnproto,
+  author = {Kenton Varda},
+  title = {{Introduction}},
+  url = {https://capnproto.org/index.html},
+  lastchecked = {23-05-2017},
+}
+
+@MISC{capnproto_schema,
+  author = {Kenton Varda},
+  title = {{Schema Language}},
+  url = {https://capnproto.org/language.html},
+  lastchecked = {23-05-2017},
+}
+
+@MISC{capnproto_langs,
+  author = {Kenton Varda},
+  title = {{Other Languages}},
+  url = {https://capnproto.org/otherlang.html},
+  lastchecked = {23-05-2017},
+}
+
+@MISC{capnproto_roadmap,
+  author = {Kenton Varda},
+  title = {{Road Map}},
+  url = {https://capnproto.org/roadmap.html},
+  lastchecked = {23-05-2017},
+}
+
