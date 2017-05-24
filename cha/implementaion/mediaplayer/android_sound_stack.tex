@@ -11,7 +11,7 @@ On \cref{fig:sound_stack} the full sound stack can be seen for a standard Androi
 
 \subsubsection*{Application Framework}
 On the top of the stack is the application framework.
-This is the framework an app, coded in Java, use for sound.
+This is the framework an app, coded in Java, uses for sound.
 For instance the \code{android.media.*} frameworks, which are a part of the application framework.
 When using the application framework, the Android \ac{SDK} is used.
 
@@ -47,7 +47,7 @@ The sound server implementation on Android is called AudioFlinger, and runs with
 It is possible to change the media server,
 for instance an example is given where changing from AudioFlinger, to a media server called Superpowered Media Server for Android\footnote{\url{http://superpowered.com/}}, saved $8 ms$ on the round-trip latency on a HTC Nexus 9\cite{superpowered_8ms}.
 The round-trip latency is the time it takes sound to be recorded by the microphone,
-travel through the audio stack to the user application and then back through the stack to the speakers\cite{superpowered_8ms}.
+travel through the audio stack to the user application and then back through the stack to the speakers~\cite{superpowered_8ms}.
 Since audio latency can be reduced by making changes to the media server,
 then it should be taken into account when designing an app to solve the problem statement.
 
@@ -72,9 +72,9 @@ Therefore the sound driver in the Linux kernel should be considered as well, in 
 \end{figure}
 
 \subsection{Summary}
-The sound stack on Android have several layers, which sound have to go through,
+The sound stack on Android has several layers, which sound have to go through,
 where each layer can potentially add latency to the sound.
-Some of these layers are more relevant for this project than others,
+Some of these layers are more relevant for this project than others, since we can affect them,
 especially the application framework, native framework, media server and Linux kernel.
 These layers should be considered when an app to solve the problem statement is designed.
 
