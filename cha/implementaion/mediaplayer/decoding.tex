@@ -14,7 +14,7 @@ as \code{seekTo}, \code{start} (commonly known as play), and
 requirements of most common usecases for most apps. Without providing
 guarantees about timing and accuracy.
 
-MP3 files aren't stored in a format directly relatable to time, and
+MP3 files are not stored in a format directly relatable to time, and
 is neither directly playable, nor can they be sliced arbitrarily to make
 facilitate simple data transfer. In fact, even though MP3 files are
 naturally decomposed into chunks, you need multiple chunks to start the
@@ -24,7 +24,7 @@ precision and control we desire.
 Instead we decide to transfer the sound data as raw \ac{PCM} encoded
 byte arrays. \ac{PCM} data is directly related to audio produced, making
 arbitrary slicing and complex mixing possible. Since the \ac{PCM}
-encoded data is what the soundcard accepts. We'd have to decode into it
+encoded data is what the soundcard accepts. We would have to decode into it
 at some point, which makes transferring it directly over the network
 a simple choice.
 
@@ -81,13 +81,13 @@ decoder reads when it first opens a file.
 
 Decoding an MP3 is a CPU bound task, mostly bottlenecked by CPU
 performance over filesystem performance, and often having very few I/O
-waits. For this reason Java, a high level language, doesn't fit the
+waits. For this reason Java, a high level language, does not fit the
 problem well, due to its high CPU overhead. For this reason, and because
 a free and complete library exists, we opted to go with the C library
 libmpg123 to do the decoding.\ libmpg123 includes many optimizations in
 hand coded assembly for many different architectures, with and without
 floating point processors, and a general purpose C implementation, where
-none of the hand optimized procedures apply. For this reason it's an
+none of the hand optimized procedures apply. For this reason it is an
 excellent choice for a fragmented ecosystem like android, where many
 different CPU architectures and configurations have to be supported.
 
@@ -105,7 +105,7 @@ of resolving android content URLs into file descriptors, opening them
 with libmpg123, and filling out an object containing the media
 information of the file. When a mp3file is opened a \code{MP3File}
 object is returned, which has methods for reading from the MP3 file one
-frame at a time. To keep the decoding snappy, we've opted to keep as
+frame at a time. To keep the decoding snappy, we have opted to keep as
 much of the data as possible in native C structs, which is associated
 with the \code{MP3File} object though a pointer stored as a Java long.
 Expanding the diagram shown in \cref{fig:mediaplayerParts}, with the
@@ -174,9 +174,9 @@ decoding just discussed creates a diagram as shown in
 
 \subsection{Playback Control}\label{subsec:playbackcontrol}
 
-The decoder is a passive component. It's only active while
+The decoder is a passive component. It is only active while
 processing a request from the active component owning it. In other
-words, it doesn't run if no method is invoked. That means it requires
+words, it does not run if no method is invoked. That means it requires
 something else to drive the decoding. To better facilitate the
 disconnected nature of playback required for the multiple playback
 milestone, discussed in \jjnote{Ref til troels}, we want to establish an
@@ -202,11 +202,11 @@ or too slowly.
 
 This active proxy component, which we call the virtual player, has the
 authority of the playback, meaning it is the place to ask where in the
-audio stream the playhead is, how much is left, and it's the component
+audio stream the playhead is, how much is left, and it is the component
 which decides what should be played next. Adding the virtual player to
 the recurring figure creates \cref{fig:mediaplayerPartsvp}. Keep in mind
 that the figure shows ownership, not communication. Even though the
-virtual player only has an edge going to playback control, it's actually
+virtual player only has an edge going to playback control, it is actually
 a direct communicator between the decoder and the presentation.
 
 The virtual player works by running a periodic task every calculated
@@ -290,15 +290,15 @@ correct time.
 
 The \code{AudioTrack}, an android framework component, accepts audio
 written into a limited buffer and plays it at a steady, configurable
-rate. Although for it's actively pushing data from its internal buffer
+rate. Although for it is actively pushing data from its internal buffer
 to the native soundcard buffer, the api that faces user apps is passive.
 To add data the app has to call a write method, which will write the
 buffer to the internal \code{AudioTrack} buffer. This means that the app
 will have to keep track of when the audiotrack buffer is missing data,
 and fill it back up, to avoid a buffer underflow, which manifests itself
 as a pop in the audio for the listener. Since the underlying
-\code{AudioTrack} and the virtual player might not be in sync, we can't
-feed it with the data directly from that. We'd much rather have an
+\code{AudioTrack} and the virtual player might not be in sync, we can not
+feed it with the data directly from that. We would much rather have an
 active interface that can query for new data, we call that interface
 Audio Sink. The Audio Sink component is a thin wrapper around the
 \code{AudioTrack} which converts the passive write api into an active
@@ -308,8 +308,8 @@ with it the precise time that the new audio will be presented.
 To help keep track of the playback position the \code{AudioTrack}
 component includes functionality for periodic callback. We configure
 that to fire every half buffer size, to effectively get double buffering
-in the audio buffer. When around half of the buffer is gone, since it's
-asynchronous we can't be sure, we calculate the available space in the
+in the audio buffer. When around half of the buffer is gone, since it is
+asynchronous we can not be sure, we calculate the available space in the
 buffer. We want to queue more audio into that free space, but because we
 are double buffering we also have to take into account the time it takes
 to play the remaining buffer data when we determine what to queue up.
