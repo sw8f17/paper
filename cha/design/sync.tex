@@ -1,4 +1,4 @@
-\chapter{Synchronization}\label{cha:sync}
+\chapter{Synchronization Approaches}\label{cha:sync}
 %What is the importance of synchronization to us
     %hope for the best is not feasable
     %To make psychoacoustic effects reality we need farily accurate manipulation depending on effect
@@ -96,12 +96,12 @@ With the choice of synchronization method landing upon \ac{NTP}, we take a close
 As the name suggests \ac{SNTP} is based upon \ac{NTP} but vastly simplified, \ac{SNTP} trades accuracy and drift alleviation for simplicity and reduced resource requirements.
 \ac{SNTP} was developed as an \ac{NTP} alternative for small computers and micro-controllers, where smartphones happens to fit that description.
 Furthermore we would not be taking full advantage of the utilities \ac{NTP} provides over \ac{SNTP} resulting i needless complexity.
-In reality, \ac{SNTP} is actually a better fit than \ac{NTP} considering how we want to use it. 
+In reality, \ac{SNTP} is actually a better fit than \ac{NTP} considering how we want to use it.
 In order to understand why, first let us consider some of the major advantages which makes \ac{NTP} more accurate than \ac{SNTP} and why they are of little benefit to our use case.\cite{sntp_ntp}
 \begin{description}
     \item [Clock Skew] \hfill \\
     Part of the algorithms \ac{NTP} incorporates are designed to alleviate clock skew.
-    While effective in real-time systems, where the device clock needs to be synchronized, 
+    While effective in real-time systems, where the device clock needs to be synchronized,
     clock skew has less of an effect on our application as we are not sending real-time commands, but rather future timestamps for when an event should occur.
     \item [Drift Alleviation] \hfill \\
     \ac{NTP} also alleviates drift, it does this by speeding up or slowing down the clock, effectively introducing drift in the opposing direction such that it evens out.
