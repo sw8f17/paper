@@ -25,13 +25,23 @@ This could not only improve the offset in the best case, but also ensure that it
 
 \section{Psychoacoustic Effects}
 In the beginning we put a lot of emphasis on psychoacoustic effects, first explained in \cref{sec:psychoacoustic_effects}.
-We also made it one of the late milestones of our app, however we did not get the time to explicitly utilize it in the app.
+Despite making use of the psychoacoustic effect known as the precedence effect, this is an implicit rather than explicit use of the effect.
+In reality we never got about to explicitly implementing and controlling psychoacoustic effects.
 Our vision was to utilize precise synchronization of audio, and the ability to manipulate it, stemming from the milestone \ref{milestone:manipulating_playback_offset}, to achieve psychoacoustic effects.
-Additionally one would also need control of what audio is sent to, and played from, each device.
-The simplest version of this is making a stereo system using a master and a slave, with stereo audio, one could play back the left channel on the master, and the right channel of the slave.
-That way one could achieve a stereo effect.
-However doing this automatically with many devices increases the complexity greatly.
-This would require the app to have knowledge of the location of each device related to other devices, and possible information about the space around them.
+In order to truly make use of the psychoacoustic effects, a greater control of audio than we currently have in the system is required.
+This control includes the successful implementation of the \ref{milestone:manipulating_playback_offset}, alongside explicit control of what channels are played and/or sent to each device.
+Beyond those requirement very precise synchronization is required, more so than what we have currently.
+
+Having all these things available, explicit utilization and implementation of various psychoacoustic effects could be implemented.
+The effect we currently use, the precedence effect, has certain threshold values, currently our level of synchronization attempts to stay under the echo threshold, thus removing the perception of an echo for any listener.
+With more precise control of the offset, we could better target a threshold, putting us in a sweet spot where the effect is truly utilized, and does not simply remove an echo.
+
+Alternatively other psychoacoustic effects could be implemented to fit a wider range of use cases.
+An example would be attempting 3D effects, the master here could act as the target, creating no sound, the remaining devices would then attempt to make it sound like the masters position is where the sound originates from.
+This would require the implementation of various sound localization and sound masking techniques, a rather complex extension to the application.
+A variety of psychoacoustic effects could possibly be implemented, and their use cases are endless, in essence the application could use multiple effects and let users play around with settings to create different modes and use for the application.
+An idea such as 3D effects would also require that the devices have some positional knowledge.
+
 
 \section{Commercialization of the App}
 As previously mentioned we made explicit non-requirements in \cref{par:non_requirements} in order to focus on the core issue.
@@ -85,3 +95,6 @@ That means that it should be possible to use other ways of communicating, the on
         %Support Spotify (implicitly provides playlists, queue, etc.)
             %Request songs from master through spotify??(I have no idea how this would work but it would be neat)
     %TK: UI improvements!!!
+
+
+%\mnote{Stereo isnt really a psychacoustic effect tho. For digital surround sound headsets sound localization(a psychoacoustic effect) is utilized to fake the 5.1/7.1 experience. However for stereo, and surround sounds with the proper tools and setup, surround sound/stereo sound is simply achieved, without psychoacoustic faking it.}
