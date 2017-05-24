@@ -1,44 +1,43 @@
 \chapter{Development Method}\label{cha:development_method}
-\mnote[inline]{Tried something new by adding a few comments about ``report'' dev specifically, usually we just group it all together and say development even tho it in reality is different for app and ``report''.
-Also i have made this significantly shorter than last semester(was like 200 lines) such that it is very to the point, we did this, this is why, end of story}
-We have chosen to use agile developing, to do so we have used certain tools, techniques and methods.
+We have chosen to take an agile approach to the development process, which we facilitate by using certain tools, techniques and methods.
 In this chapter we describe our development method.
-This includes our use of Scrum, the milestones we created in \cnameref{sec:milestones} and how those two were used together.
-We also mention our review structure as well as our approach to testing.
+This includes our use of Scrum, the milestones we created in \cnameref{sec:milestones}, and how those two were used together.
+Moreover, we mention our review structure as well as our approach to testing.
 In \cnameref{sec:ci} our \ac{CI} was described, as such we only mention this briefly without going into details in this chapter.
 
 % Scrum Stuff %
 %Could do sections? \section{Scrum & Milestones}
 \section{Our Method}\mnote{Such title, very meta, much bad}
-Throughout our development we have used elements of Scrum to structure our development.
-From Scrum we attempted to make use of daily Scrum, sprints, user stories, Scrum Master and Product Owner.
+Throughout our development we used elements of Scrum to structure our development.
+From Scrum we attempted to make use of daily Scrum, Sprints, user stories, and the Scrum Master and Product Owner roles.
 Each of the elements from Scrum served a specific purpose in our development:
 \begin{description}
     \item [Scrum Master] \hfill \\
     The purpose for our designated Scrum Master was to ensure the execution of Daily Scrum.
-    The Scrum Master has also been in charge of running our planning poker to estimate tasks.
+    The Scrum Master was also in charge of facilitating the estimation of tasks.
     \item [Daily Scrum] \hfill \\
     We made use of Daily Scrum in order to achieve a level of information sharing, to instill a feeling of daily progress towards a goal and as a way to reduce group members getting stuck with a task.
     \item [Sprints] \hfill \\
     Sprints served as the primary function used to obtain an agile environment and enforcing the incremental progress of our report and application.
-    Contrary to classical sprints, the sprint length throughout the project has not been consistent, rather it has been dependent on the sprint goal, as decided by the Product Owner.
-    We also split our sprints, one sprint for development for the application and one sprint for writing the report.
-    Unfortunately with the system we developed we often encountered blocking tasks greatly reducing our parallel development abilities.
-    This resulted in us not following the sprint technique, and rather just using sprints as a smaller backlog with the currently highest prioritised tasks from the backlog.\mnote{perhaps reformulate so it sounds better but that is the jist of it}
-    While our development sprints were unsuccessfully executed, the report sprints were more successful.\mnote{all this sprint stuff is pretty darn weird when we didn't actually execute it well, also stopped estimating halfway through etc.}
+    Contrary to classical Sprints, the Sprint length throughout the project has not been consistent, rather it has been dependent on the Sprint goal, as decided by the Product Owner.
+    We also split our Sprints: one Sprint for development for the application, and one Sprint for writing the report.
+    Unfortunately with the system we developed we often encountered blocking tasks greatly reducing our ability to develop in parallel.
+    This resulted in us not following the Sprint technique, and rather just using Sprints as a smaller backlog with the currently highest prioritised tasks from the backlog.\mnote{perhaps reformulate so it sounds better but that is the gist of it}
+    While our development Sprints were unsuccessfully executed, the report Sprints were more successful.\mnote{all this Sprint stuff is pretty darn weird when we didn't actually execute it well, also stopped estimating halfway through etc.}
     \item [User Stories] \hfill \\
     In order to describe what work had to be done, we used user stories.
-    Each user story was then derived into smaller tasks in order give a better understanding of what was necessary to complete a user story.
-    These effort required to complete a task was estimated through planning poker.
+    Each user story was then derived into smaller tasks in order give a better understanding of what was necessary to complete a given user story.
+    The effort required to complete a task was estimated by the whole group.
     \item [Product Owner] \hfill \\
-    The Product Owner was in charge of prioritising user stories and tasks, and defining the sprint goal and including the appropriate user stories and tasks required to meet said goal.
-    The Product Owner was also in charge of creating said user stories.
+    The Product Owner was in charge of prioritising user stories and tasks, and defining the Sprint goal and including the appropriate user stories and tasks required to meet said goal.
+    The Product Owner was also in charge of creating said user stories, but with input from the remaining group members.
 \end{description}
+
 % Binding with Milestones %
-In \cnameref{sec:milestones} we introduced what we called milestones, a concept of our own devise, to mark incremental steps throughout development which could be considered a minimal working system.
-The milestones encompass a multiple of features that could possibly be developed, a subset of which would produce a solution to the problem statement, whereas all of them together would produce a system which would supersede the requirements.
+In \cnameref{sec:milestones} we introduced what we called milestones, a concept of our own devise loosely related to Scrum Epics, to mark incremental steps throughout development which could be considered a minimal working system.
+The milestones encompass a multiple of features that could be developed, a subset of which would produce a solution to the problem statement, whereas all of them together would produce a system which would supersede the requirements.
 The milestones served as an overview of possible features to aim for, other than that they had no real effect on our development.
-Had we successfully executed development sprints, perhaps those sprints could have been influenced by milestones, but in reality we did not utilize them for anything else than an early overview of features.
+Had we successfully executed development Sprints, perhaps those Sprints could have been influenced by milestones, but in reality we did not utilize them for anything else than an early overview of features.
 
 % CI & Review %
 %Could do sections? \section{CI & Reviews}
@@ -47,8 +46,8 @@ As covered in \cnameref{sec:ci} we make use of a \ac{CI} system to ensure that w
 This system builds the application ensuring that it can build, compile, is up-to-date and can run on our an Android phone.
 A similar although vastly simpler system is also used for any additions to the report, although these automated systems are not the only checks required for new content to be added.
 
-Alongside our \ac{CI} system we work in branches, once the content within a branch is ready to be added to our master branch a Github pull request is made.
-Beyond this triggering the \ac{CI} process a formal review by another member is also required.
+Alongside our \ac{CI} system we work in branches, once the content within a branch is ready to be added to our master branch a GitHub pull request is made.
+Beyond this triggering the \ac{CI} process a formal review by another member is also required, before the pull request can be closed and the new content can be merged into the master branch.
 The review serves both as a way of sharing information and ensuring the quality of what is being added.
 Ensuring the quality encompasses checking for things that the \ac{CI} system does not, as such it is a more qualitative review considering alternate ways to develop or describe something, perhaps using different techniques or libraries which would provide other qualities, whether this be less overhead, more performance or for the report being more descriptive.
 
@@ -58,34 +57,37 @@ Those exceptions are in accordance with the iterative nature of our development,
 % Testing %
 %Could do sections? \section{Testing}
 \bigskip
-For any system tests are of importance, and our system is no different.
-For our application specifically a variety of features are worth testing, particularly in order to ensure that we are competitive with AmpMe and SoundSeeder.
+For any system testing is important, as it is for our system.
+For our app specifically a variety of features are worth testing, particularly in order to ensure that we are competitive with AmpMe and SoundSeeder.
 These features include:
+\begin{multicols}{3}
 \begin{itemize}
     \item Synchronization
     \item Psychoacoustic Effects
     \item Internal Methods
 \end{itemize}
+\end{multicols}
+
 The difficulty in testing not only a distributed system, but a system reliant on human perception, is that many test cases cannot be automated in the same fashion as unit tests.
-For this particular reason we have not made use of extensive unit tests, we do have some for features where it is relevant, e.g. our time conversion methods, however the majority of our tests are qualitative.
-Rather than performing constant qualitative after each new feature is added, we have been performing smokes tests throughout development.
-This way we only had to perform extensive qualitative tests twice, once for the apps on the market, AmpMe and SoundSeeder, and one for our application.
-The difficulties of automated testing for our particular case is also what led us to utilize the model checking tool Uppaal for debugging, described in \cnameref{sec:playing}\mnote{ref does not yet exist}, as we had no tests, nor could we produce any, to catch this particular bug.
+For this particular reason we have not made use of extensive unit tests, we do have some for features where it is relevant, e.g.\ our time conversion methods, however the majority of our tests are qualitative.
+Rather than performing constant qualitative testing after each new feature is added, we have been performing smoke testing throughout development.
+This way we only had to perform extensive quantitative tests twice, once for the apps on the market, AmpMe and SoundSeeder, and one for our application.
+The difficulties of automated testing in our particular case is also what led us to utilize the model checking tool Uppaal for debugging, described in \cnameref{sec:playing}\mnote{ref does not yet exist}, as we had no tests, nor could we produce any, to catch this particular bug.
 
 \section{Reflecting On Our Method}\mnote{Such title, very meta, much bad}
-In spite our less than successful execution of sprints, we have still managed to work with an iterative work flow, successfully executing the other techniques from Scrum we wanted to utilize.
+In spite our less than successful execution of Sprints, we have still managed to work with an iterative work flow, successfully executing the other techniques from Scrum we intended to utilize.
 The most significant gain from our use of Scrum have been our use of user stories and Daily Scrum.
 These two tools in particular have brought information sharing, and a daily recap of the progress made the previous day.
-This daily recap also ensured that any misconceptions or misunderstandings quickly were rooted out, and ensured that the group was on the same page in regards to priorities and goals.
-As such we consider our Scrum tools to have been a worthwhile implementation, even if they were executed without a structured use of sprints.
-In a similar fashion as sprints, the milestones provided an early structure in regard to development and overview of the project, however in the end its impact on our development has been negligible.
+This daily recap also ensured that any misconceptions or misunderstandings quickly were rooted out, and ensured that the group was in agreement when it came to priorities and goals.
+As such we consider our Scrum tools to have been a worthwhile implementation, even if they were executed without a structured use of Sprints.
+In a similar fashion as Sprints, the milestones provided an early structure for the development and overview of the project, however in the end its impact on our development has been negligible.
 
-The remaining techniques and tools we have utilized for quality assurance, is also something we have been actively utilizing, with \ac{CI} being a very passive as it is automated.
-Reviews have been a consistent, and beneficial, requirement throughout the development of our project.
-It has provided a more in-depth information sharing than Daily Scrum, and ensured that every aspect of our application have had multiple points of views, ascertaining whether a solution to a problem, is the right solution.
+The remaining techniques and tools we have utilized for quality assurance, is also something we have been actively utilizing, with \ac{CI} being very passive as it is automated.
+Reviews have been a consistent and beneficial requirement throughout the development of our project.
+It has provided a more in-depth information sharing than Daily Scrum, and ensured that every aspect of our app have had multiple points of views, ascertaining whether a solution to a problem, is the right solution.
 
 Lastly our testing, while mostly informal and manual, have also been beneficial.
-In particular due to our qualitative tests providing us not only with requirements, but also lets us evaluate on our performance in comparison to applications on the market.
+In particular due to our quantitative tests providing us not only with requirements, but also lets us evaluate on our performance in comparison to applications on the market.
 The few automated tests we have, also lets us know that some of our integral methods work as intended, this in particular encompasses our time conversion methods.
 %%%% Disposition %%%%
 
@@ -96,7 +98,7 @@ The few automated tests we have, also lets us know that some of our integral met
 
 %Milestones and how they work with SCRUM
     %Provided an early overview of the major steps required to reach our goal, and also provided goals out of our reach to show where the project could potentially go given enough time.
-    %Not equivelant with sprints
+    %Not equivelant with Sprints
     %Not really utilized that much in the end.
 
 %CI & Review structure
