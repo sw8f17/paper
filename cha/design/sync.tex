@@ -121,15 +121,14 @@ In reality, \ac{SNTP} is actually a better fit than \ac{NTP} considering how we 
 \begin{description}
     \item [Clock Skew] \hfill \\
     Part of the algorithms \ac{NTP} incorporates are designed to alleviate clock skew.
-    While effective in real-time systems, where the device clock needs to be synchronized, it has no impact on our application due to us not sending real-time commands, but rather timestamps for when an event should occur.
+    While effective in real-time systems, where the device clock needs to be synchronized, it has no impact on our application due to us not sending real-time commands, but rather timestamps for when an event should occur.\tnote{I don't understand this.}
     \item [Drift Alleviation] \hfill \\
     \ac{NTP} also alleviates by drift, it does this by speeding up or slowing down the clock, effectively introducing drift in the opposing direction such that it evens out.
-    As mentioned before, in order to adjust the clock through the application the device must be rooted, since we do not want to impose this requirement onto users, drift alleviation would be nullified as we cannot slow down or speed up the clock.
     \item [Seamless Adjustments] \hfill \\
     Similarly to how drift alleviation works, the same technique is used by \ac{NTP} for when the clock is only slightly out of sync, this way a step in time is not introduced, which is how \ac{SNTP} synchronizes the clock.
-    However once again, this would require a rooted device and as such is irrelevant for our case.
     \item [Multiple Time References] \hfill \\
     Lastly \ac{NTP} queries multiple time servers for the clock, and through its algorithms determines which ones to use, and then averages these to find the time, whereas \ac{SNTP} simply queries one server, is the server unavailable it asks another.
     This is the part of \ac{NTP} which would have the largest impact on our specific use case.
 \end{description}
-Due to the some of the major advantages of \ac{NTP} not being of value to us, we choose to move forward with the simplified version, \ac{SNTP}.
+
+While it is likely that using \ac{NTP} could improve the time synchronization in the app, we deem that the complexity of implementation would not be worth the improvement over time simplicity of \ac{SNTP}.
