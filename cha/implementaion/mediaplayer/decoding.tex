@@ -11,7 +11,7 @@ which takes media files and plays them back using the standard Android
 audio path. It also provides control over the playback functions, such
 as \code{seekTo}, \code{start} (commonly known as play), and
 \code{pause}. The mediaplayer is squarely aimed at fulfilling the
-requirements of most common usecases for most apps. Without providing
+requirements of most common use cases for most apps, without providing
 guarantees about timing and accuracy.
 
 The MP3 format is not directly relateable to time, and are
@@ -38,9 +38,9 @@ control. Since the \code{MediaPlayer} is such a high level concept, we
 are able to interpret all the commands in a way that makes sense for
 synchronized playback.
 
-Conceptually the Android \code{MediaPlayer} fulfills 3 separate
+Conceptually the Android \code{MediaPlayer} fulfills three separate
 responsibilities, with some ancillary responsibilities, that wont be
-touched on here: Decoding, playback control, and presentation. In our
+touched on here: decoding, playback control, and presentation. In our
 replacement we have structured them as can be seen on
 \cref{fig:mediaplayerParts}. The rest of the app interacts with the \code{PlayBack
 Control} which facilitates communication between the decoding and the
@@ -243,7 +243,7 @@ The virtual player works by running a periodic task every calculated
 frame time. At that time it calculates the current ``correct'' playhead
 position, and schedules frames into the presentation component, until
 a preload condition is fulfilled. One possible preload condition could be
-that we must have scheduled 3 MP3 frames ahead of the current playback
+that we must have scheduled three MP3 frames ahead of the current playback
 position. However many other possible preload conditions could be used.
 
 \begin{figure}[ht]
@@ -330,7 +330,7 @@ buffer to the internal \code{AudioTrack} buffer. This means that the app
 will have to keep track of when the \code{AudioTrack} buffer is missing data,
 and fill it back up, to avoid a buffer underflow, which manifests itself
 as a pop in the audio for the listener. Since the underlying
-\code{AudioTrack} and the virtual player might not be in sync, we can not
+\code{AudioTrack} and the virtual player might not be in sync, we cannot
 feed it with the data directly from that. We would much rather have an
 active interface that can query for new data, we call that interface
 Audio Sink. The Audio Sink component is a thin wrapper around the
@@ -342,7 +342,7 @@ To help keep track of the playback position the \code{AudioTrack}
 component includes functionality for periodic callback. We configure
 that to fire every half buffer size, to effectively get double buffering
 in the audio buffer. When around half of the buffer is gone, since it is
-asynchronous we can not be sure, we calculate the available space in the
+asynchronous we cannot be sure, we calculate the available space in the
 buffer. We want to queue more audio into that free space, but because we
 are double buffering we also have to take into account the time it takes
 to play the remaining buffer data when we determine what to queue up.\tnote{Vi kunne evt. lave en figur til at forklare dette?}
