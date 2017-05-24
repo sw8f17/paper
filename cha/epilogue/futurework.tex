@@ -1,1 +1,105 @@
 \chapter{Future Work}\label{cha:future_work}
+During the idea generation, design, implementation, and testing of our app, we got a lot of ideas for future work related to the project.
+This chapter aims to highlight the ideas for the future work we find most interesting.
+
+Many of these are derived from \cnameref{cha:establishing_use_cases}, where we identified the use case we decided to work with: simultaneous playback to increase volume.
+Later we defined milestones in \cnameref{sec:milestones}, which included more features and ideas than we could develop in the given time frame of the project, we present these milestones as candidates for future work.
+One of the milestones, psychoacoustic effects, has a wide range of interesting opportunities and is described separately from the other milestones.
+In \cref{par:non_requirements} we made explicit non-requirements to focus our development, we deem these a necessity to make the product viable for publication on the Google Play Store.
+
+\section{The Remaining Milestones}
+The milestone~\ref{milestone:advanced_audio_player} is concerned with adding more advanced but also common features to the app.
+These are playlists, a play queue, and support for external audio sources, such as Spotify.
+Supporting external sources could prove a complicated task, since decoding from arbitrary sources to \ac{PCM} data could be a challenge, as such this would require a significant research into various external sources and how data is received from these.
+
+Currently, we only support usage of MP3 files located on the master device.
+It could also be useful in some use cases to allow slaves to add songs to a queue.
+If such a feature was to be implemented with the current application, a way to achieve this could be the slave sending the entire file to the master ahead of playback, when added to the queue; the master could then decode it to \ac{PCM} and distribute it to all devices.
+Such a solution would be clunky, which is why the priority of solving this milestone, should be on adding external sources.
+Spotify supports a queue system, so does YouTube and many other audio sources, perhaps using their API and utilizing their respective queue systems would be possible, if not, an alternate way of including both the external source and developing a queue and playlist system would be required.
+
+\bigskip
+The milestone~\ref{milestone:manipulating_playback_offset} is concerned with manipulating the audio offset separately from the synchronization, the intention of this milestone was that it would be usable for achieving a variety of psychoacoustic effects.
+A way of implementing this would be to change the \code{MusicData} messages sent to each device, with manipulated timestamps.
+This would also have to support the opportunity to send different offsets to different devices.
+
+\bigskip
+Lastly, while we achieve a better synchronization, and thus achieve the milestone~\ref{milestone:advanced_sync}, it is still possible to improve the precision of the synchronization.
+The most straightforward would be to use some or all of the corrective measures, see \tnote{ref til ntp vs sntp}, from \ac{NTP} in our time synchronization.
+This could not only improve the offset in the best case, but also ensure that it is more stable over time.
+Another more complicated, but arguably more fruitful improvement, would be to consider device hardware; in particular the latency from the devices commands to the actual hardware execution.
+If the application could retrieve data for each device hardware and its latency, this could be utilized to achieve better audible synchronization.
+We know that device hardware and manufacturer matters from our tests in \cnameref{}\mnote{Jesper is working on dese tests atm}, as they show better performance when the hardware is the same, rather than when using different hardware.
+
+\section{Psychoacoustic Effects}
+In the beginning, we put a lot of emphasis on psychoacoustic effects, first explained in \cref{sec:psychoacoustic_effects}.
+Despite making use of the psychoacoustic effect known as the precedence effect, this is an implicit use of the effect.
+In reality we never prioritized to explicitly implement controlling psychoacoustic effects.
+Our vision was to utilize precise synchronization of audio, and the ability to manipulate it, stemming from the milestone~\ref{milestone:manipulating_playback_offset}, to achieve psychoacoustic effects.
+In order to truly make use of the psychoacoustic effects, a greater control of audio than we currently have in the system, is required.
+This control includes the successful implementation of the milestone~\ref{milestone:manipulating_playback_offset}, alongside explicit control of what channels are played and/or transmitted to each device.
+Beyond those requirements, precise synchronization is required, more so than what we currently have.
+
+\bigskip
+The effect we currently use, the precedence effect, has certain threshold values.
+Currently our level of synchronization attempts to stay under the echo threshold, thus removing the perception of an echo for any listener.
+With more precise control of the offset, we could better target a specific delay, allowing us to truly utilize the increased volume effect, rather than just removing an echo.
+
+Alternatively other psychoacoustic effects could be implemented to fit a wider range of use cases.
+An example would be attempting to create 3D effects; e.g.~the network of devices could position the perceived origin of the sound in the space between them.
+This would require the implementation of various sound localization and sound masking techniques, a rather complex extension to the application.
+A variety of psychoacoustic effects could be implemented, and their use cases are nearly endless, in essence the application could use multiple effects and let users play around with settings to create different modes and use for the application.
+An idea such as 3D effects would also require that the devices have some positional and directional knowledge of all devices to be used.
+
+\section{Commercialization of the App}
+As previously mentioned in \cref{par:non_requirements}, we specified a set of non-requirements in order to focus our efforts on the technical issues.
+However, if we wanted to make the app production ready, and release it in the Google Play Store, we should make some improvements.
+
+Firstly, the UI we have is primitive, and there is little information given to the user, this could be greatly improved.
+Currently the slaves simply receive a toast when they connect to a network, they are unaware of which song is playing, etc.
+We are already sending the meta data to the slaves, but we are not showing it.
+As for the master, the UI does not show if any slaves connect, other than a prompt to give slaves permission, and it does not have an overview over all the slaves connected.
+
+Secondly, the stability of the app could be improved in several ways.
+For example we currently only allow slaves to connect prior to starting playback, they should be able to connect at any time as long as the network exists.
+
+Thirdly as previously mentioned, supporting some external sources of music, for example Spotify, would also greatly improve the usability of the app.
+
+\section{Using an Alternative to WiFi Direct}
+In a WiFi Direct network, there is an upper limit on the maximum number of connected devices, theoretically the limit is 254 devices in a group.
+However in practice it is up to the implementation and hardware limitation on the devices in question, realistically the limit is in the six to ten devices range\footnote{\url{http://www.wi-fi.org/knowledge-center/faq/how-many-devices-can-connect}}.
+We purposely built the application to depend little as possible on WiFi Direct, such that it could be changed in the future if required.
+That means that it should be possible to use other ways of communicating, the only element that is not readily changeable is the use of a persistent socket connection.
+
+%%%% Disposition %%%%
+
+%Remaining Milestones
+    %While we havnt really used milestones we still managed to come up with some good goals
+    %Advanced sync & Offset manipulation
+        %How would we obtain better sync?
+            %^Explore avenues which we didn't look at
+                %Audio?
+                %Any NTP algorithms of value we could utilise? Cache for validation to at least avoid the occasional huge offset? %TK: Replacing SNTP with NTP would be an obvious future work
+    %Psychoacoustics could be under this section as well, would make sense per the milestones.
+
+
+%More Psychoacoustics
+    %Many of the effects can only be used one at a time
+        %Multiple modes
+            %3D sound
+                %Master as 3D target, wont play
+            %Other effects of interest??
+                %Just use 3D as main example and mention a bunch of others
+            %TK: Stereo (2.0) or even 5 speaker setup ?
+
+%Commercialising the Application
+    %We are beating the market, lets commercialise
+    %Stability
+        %Crashes, join an existing session without crashing etc.
+    %Scalability
+        %Wi-Fi direct only supoports up to 8 devices.
+            %May be fine for most cases but an increase would cover the festival use case scenario better, lots of people.
+    %Usability - add as requirement rather than nonrequirement
+        %Support Spotify (implicitly provides playlists, queue, etc.)
+            %Request songs from master through spotify??(I have no idea how this would work but it would be neat)
+    %TK: UI improvements!!!
