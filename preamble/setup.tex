@@ -22,7 +22,7 @@
 \usepackage{csquotes}
 %Cool options for the includegraphics command
 \usepackage{graphicx}
-
+\usepackage{lastpage}
 \usepackage{rotating}
 %Commands with multiple optional args
 \usepackage{xargs}
@@ -226,40 +226,11 @@
 %Listing & Minted
 \usepackage{shellesc}
 \usepackage{listings}
-\lstset{%
-    backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
-    basicstyle=\footnotesize\ttfamily,        % the size of the fonts that are used for the code
-    breakatwhitespace=true,         % sets if automatic breaks should only happen at whitespace
-    breaklines=true,                 % sets automatic line breaking
-    captionpos=b,                    % sets the caption-position to bottom
-    commentstyle=\color{greencomments},    % comment style
-    deletekeywords={},            % if you want to delete keywords from the given language
-    escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
-    extendedchars=false,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
-    frame=single,                    % adds a frame around the code
-    keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
-    keywordstyle=\bfseries\color{bluekeywords},       % keyword style
-    morekeywords={},            % if you want to add more keywords to the set
-    numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
-    numbersep=5pt,                   % how far the line-numbers are from the code
-    numberstyle=\tiny\color{gray}, % the style that is used for the line-numbers
-    rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
-    showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
-    showstringspaces=false,          % underline spaces within strings only
-    showtabs=false,                  % show tabs within strings adding particular underscores
-    stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
-    stringstyle=\bfseries\color{redstrings},     % string literal style
-    tabsize=2,                       % sets default tabsize to 2 spaces
-    columns=fullflexible,
-    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}
-}
 
 %Minted makes nice looking code listings, but requires listings
 \usepackage{minted}
 \newminted[java2]{java}{frame=leftline, framesep=2mm, linenos, fontsize=\footnotesize, baselinestretch=1.1, autogobble}
 \newminted[python]{python}{frame=leftline, framesep=2mm, linenos, fontsize=\footnotesize, baselinestretch=1.1, autogobble}
-\newminted[xmlblock]{xml}{frame=leftline, framesep=2mm, linenos, fontsize=\footnotesize, baselinestretch=1.1, autogobble}
-\newminted[bashblock]{shell}{frame=leftline, framesep=2mm, linenos, fontsize=\footnotesize, baselinestretch=1.1, autogobble, breaklines, breakanywhere}
 \newmintedfile{java}{frame=leftline, framesep=2mm, linenos, fontsize=\footnotesize, baselinestretch=1.1}
 \usemintedstyle{tango}
 \usepackage{tcolorbox}
@@ -272,10 +243,10 @@
 %Fixme for configurable notes
 \usepackage{fixme}
 \fxsetup{%
-	layout={footnote, index},
-	innerlayout={inline, index},
-	theme=colorsig,
-	mode=multiuser,
+    layout={footnote, index},
+    innerlayout={inline, index},
+    theme=colorsig,
+    mode=multiuser,
 }
 
 \FXRegisterAuthor{jj}{jje}{Jesper}
@@ -292,15 +263,6 @@
 
 %Outlines, apparently nice for nestes lists
 \usepackage{outlines}
-
-%Frames for the problemstatements env
-\usepackage{mdframed}
-\mdfsetup{%
-    topline=false,
-    rightline=false,
-    leftline=false,
-    bottomline=false
-}
 
 %Tables with fixed widths
 \usepackage{tabu}

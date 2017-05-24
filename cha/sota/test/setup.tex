@@ -1,4 +1,4 @@
-\section{Test Setup}\label{sec:test_setup}
+\section{Setup of Test Environment}\label{sec:test_setup}
 In order to perform tests for these criteria, we need to have a setup to do so.
 
 Testing the offset between two audio sources is a signal processing
@@ -18,8 +18,7 @@ An illustration of the test setup together with the jack cable can be seen on \c
 \begin{figure}[!bht]
     \centering
     \includegraphics[width=0.8\textwidth]{img/test_setup.png}
-    \caption{An illustration of the test setup with the three phones and the jack cable.}
-    \label{fig:test_setup}
+    \caption{An illustration of the test setup with the three phones and the jack cable.}\label{fig:test_setup}
 \end{figure}
 
 % Troels additions below
@@ -36,7 +35,7 @@ In the tests we use three Android phones:
 	\item[Slave 2]OnePlus Two (Android 6.0.1, Kernel 3.10.84-perf+)
 \end{dankscription}
 
-\subsection{Test Scripts}
+\subsection{Automating Testing With Scripts}
 We automate the mechanical part of the testing, such as doing the
 analysis and controlling the variables. To do so we use scripts written
 in Python, which use the \ac{ADB} interface to control the Android
@@ -45,7 +44,7 @@ consistency and minimize the chances of error caused by humans.
 
 Measuring the offset between the two signals is a signal processing
 task. Within the field of signal processing, the specific measure is
-called cross correlation. 
+called cross correlation.
 
 To illustrate the principle of using cross correlation to measure the offset between two identical signals, we made \cref{fig:cross_cor}.
 In it the blue line $g$, and the purple line $f$, are two identical signals, but they are offset in time, which is the $x$-axis.
@@ -67,7 +66,7 @@ millisecond offset between the two audio tracks.
 
 
 %optimere a * b, cross corrolation, lave figur med overlap
-%forskyder over tid. 
+%forskyder over tid.
 
 \subimport{}{cross_cor_fig}
 
@@ -85,8 +84,8 @@ between the left and right channel. In our equipment the delay is 0 ms
 consistently, which means the results wont be tainted by inter-stereo
 delay.
 
-\subsection{Test sample}
-We use the song \textit{Goodness Gracious} by \textit{Ellie Goulding}.  We did not
+\subsection{Audio Test Artifact}
+We use the song \textit{Goodness Gracious} by \textit{Ellie Goulding}. We did not
 want the apps to change song, possibly causing a resync, while testing.
 To avoid that possibility we loop the song for 2 hours within
 a single mp3 file.
@@ -100,7 +99,8 @@ three devices to test, one is the ``master'' while the others are
 with the dual mono to stereo cable described earlier, and where we are
 measuring the offset.
 
-\paragraph{AmpMe}
+\begin{description}
+    \item[AmpMe] \hfill\\
 AmpMe allows the devices to connect over the public Internet. We test
 them on the AAU internal network, where they are technically connected,
 but the internal network topology makes them unable to connect directly.
@@ -109,13 +109,14 @@ thereby starting a ``party'' and allowing the slave devices to
 connect. Once the slaves have connected we restart the song on the
 master and wait for the app to resume playback.
 
-\paragraph{SoundSeeder}
+    \item[SoundSeeder] \hfill\\
 SoundSeeder does require the devices to be able to connect directly. We
 fulfilled that requirement by having the master serve a ad-hoc hotspot,
 which allowed the devices to connect, while keeping the slaves
 similarly configured. SoundSeeder does not require a song to be playing
 for it to connect. For the tests we connect the slaves to the master,
 and only after they are connected begin playback.
+\end{description}
 
 \subsection{Volume}
 The volume of the devices should not be particularly important, since

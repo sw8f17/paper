@@ -3,19 +3,6 @@
 \hyphenation{Amp-Me}
 \hyphenation{You-Tube}
 
-\newcommand{\giraf}[1]{\texttt{#1}\xspace}
-\newcommand{\android}[1]{\texttt{#1}\xspace}
-
-\newcommand{\method}[1]{%
-    \textbf{#1}\xspace
-}
-
-\newcommand{\name}[1]{%
-    \textit{#1}\xspace
-}
-
-\newcommand{\rendpoint}[1]{\texttt{#1}\xspace}
-
 \newcommand{\hsp}{\hspace{20pt}}
 
 \makeatletter
@@ -32,8 +19,6 @@
     extrude by=2pt
 }
 \makeatother
-
-\def\checkmark{\tikz\fill[scale=0.4, color=smartdiagram2](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
 
 %Make \Chaptername return print the name of the chapter
 \let\Chaptermark\chaptermark
@@ -55,7 +40,6 @@
 \setlist[eromanrate,1]{label=\itshape \roman*\upshape)}
 \setlist[eromanrate,2]{label=\itshape \roman{eromanratei}.\roman*\upshape)}
 
-
 \newlist{enumberate*}{enumerate*}{1}
 \setlist[enumberate*]{label=\itshape \arabic*\upshape)}
 \newlist{eletterate*}{enumerate*}{1}
@@ -68,28 +52,22 @@
 \newenvironment{dankscription}[2]{\begin{description}[labelindent=\parindent, labelwidth=\widthof{#1#2}, align=parright, font=\normalfont#1]}{\end{description}}
 
 \newcommandx{\cnameref}[1]{%
-\cref{#1} \emph{\nameref{#1}}}
+\Cref{#1} \emph{\nameref{#1}}}
+
+\newcommandx{\myref}[2][1=]{%
+\IfStrEq{#1}{name}{\Cref{#2} \emph{\nameref{#2}} \vpageref{#2}}{\Cref{#2} \vpageref{#2}}%
+}
 
 \newcommand{\tblgrpsep}{\noalign{\vspace{.75em}}}
 
-%@Temporary: Style to be determined
 \newenvironment{problemstatement}
-{%
-	\begin{mdframed}[
-		% outermargin=-11pt,
-		linewidth=1pt,
-		linecolor=Highlight,
-		leftline=true,
-	]
-}
-{%
-	\end{mdframed}
-}
-
-\makeatletter
-\def\relativepath{\import@path}
-\makeatother
+    {\begin{mdframed}[
+        linewidth=1pt,
+        linecolor=Highlight,
+        leftline=true]}
+    {\end{mdframed}}
 
 \pgfmathdeclarefunction{dnorm}{2}{%
   \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
 }
+
