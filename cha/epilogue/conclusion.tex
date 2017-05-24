@@ -9,26 +9,26 @@ Finally we consider some limitations of our application, and what the effect of 
 %init problem and effects
 Our initial problem was very broad and vague, encapsulating any system where synchronized sound streamed to multiple devices may be of use.
 In order to specify the problem we explored a couple of use cases, and respective psychoacoustic effects which could be relevant.
-We chose to continue with the use case focused on increasing volume in and area, while utilizing the precedence effect to our advantage.
+We chose to continue with the use case focused on increasing volume in an area, while utilizing the precedence effect to our advantage.
 
 %Sota
 Upon deciding on a use case, we chose to explore products related to said use case.
-We knew of some very successful multi-room audio speakers created by Sonos, which essentially we wanted to do, but with phones.
-In the case of using phones we managed to find two decent applications attempting to do what we wanted to, however our tests revealed that these two applications were lackluster, requiring manual trial and error input to get a satisfactory result.
+We knew of some very successful multi-room audio speakers created by Sonos, which we essentially wanted to do, but with phones.
+In the case of using phones we managed to find two decent applications attempting to do what we wanted, however our tests revealed that these two applications were lackluster, requiring manual trial and error input to get a satisfactory result.
 Using these applications as a benchmark, we wanted to produce an application which performed better.
 
 %Problem Statement
 With use case, related work and the precedence effect in mind we refined our problem to:
 \begin{problemstatement}
-    How can an Android application be used to achieve manipulated playback, wirelessly, across multiple smart phones, such that psychoacoustic effects can be utilized to enhance playback?
+    How can an Android application be used to achieve manipulated playback, wirelessly, across multiple smartphones, such that psychoacoustic effects can be utilized to enhance playback?
 \end{problemstatement}
 
 %Requirements
 Derived from our problem statement and analysis of similar applications on the market we derived a number of requirements, both technical and \ac{UX} related.
 These requirements concern features and thresholds made in regard to audible synchronization derived from the precedence effect.
-We wanted to prove that we could produce and application with better performance than those available, as such our goal became a technical challenge, leaving usability concerns behind us.
-In order to get a better sense of what needs to be done, and what we could possibly do with the information we gathered we made a set of milestones.
-These milestones include both realistic and unrealistic goals segmented in a way such that we can simply continue developing till me meet a deadline, when we close on a deadline the milestones in correlation with our development method will lead us to whether or not the next milestone is feasible.
+We wanted to prove that we could produce an application with better performance than those available, as such our goal became a technical challenge, leaving usability concerns behind us.
+In order to get a better sense of what needed to be done, and what we could possibly do with the information we gathered we made a set of milestones.
+These milestones include both realistic and unrealistic goals segmented in a way such that we can simply continue developing till we meet a deadline, when we close on a deadline the milestones in correlation with our development method will lead us to whether or not the next milestone is feasible.
 
 
 %%%% Disposition
@@ -50,7 +50,7 @@ The internal architecture mostly affects our structure when developing and as su
 During the design phase we concluded that the local centralized architecture would be the best idea, however for comparison purposes we ended up developing both a modified version of our remote centralized idea, as well as the local centralized idea.
 This comparison sprouted from our choice to use \ac{SNTP} rather than \ac{NTP}.
 
-Initially we chose to implement \ac{SNTP}, as it requires internet this led us to use a modified remote centralized architecture, contrary to our original design idea.
+Initially we chose to implement \ac{SNTP}, as it requires internet which led us to use a modified remote centralized architecture, contrary to our original design idea.
 This choice imposed the requirement of internet upon the user, whereas this was one of the reasons we preferred the local centralized architecture over the remote centralized architecture.
 To rectify this, we altered our use of \ac{SNTP} for synchronization.
 Rather than simply using \ac{SNTP} we have implemented the same time synchronization methods, and use the master as the virtual clock, in doing so we shed the internet requirement.
@@ -60,15 +60,15 @@ While our tests show that \mnote[inline]{that one solution is better than the ot
 \bigskip
 %Implementation sepcifics / android.MedioCodec
 The application itself was build upon an example from Google samples on how to make a media player.
-We replaced the android media player implementation which was used, in place of our own, for which we used \ac{JNI}.
+We replaced the Android media player implementation which was used, in place of our own, for which we used \ac{JNI}.
 In doing so we swapped focus to decode MP3 data, and play this data while streaming it to multiple devices.
-Doing this through the \ac{JNI} may have been a hasty decision as we later came across an android API, \code{android.MediaCodec}, which is a low level access to the android multimedia infrastructure.
+Doing this through the \ac{JNI} may have been a hasty decision as we later came across an Android API, \code{android.MediaCodec}, which is a low level access to the Android multimedia infrastructure.
 While we have performed no tests to see whether it would have been sufficient, it is an avenue we did not explore, which possibly could have saved us some \ac{JNI} trouble.
 
 %Milestone completion / no manipulation / psychoacoustic effect
-The unexpected time we had to spend developing a decoder and a media player, also withdrew from the from our milestones, as this proved to be a significantly more involved task than we had anticipated.
+The unexpected time we had to spend developing a decoder and a media player, also withdrew focus from our milestones, as this proved to be a significantly more involved task than we had anticipated.
 Specifically the milestones related to manual offset manipulation and psychoacoustic effects suffered from this.
-While we still make use of the precedence effect, this is due to its nature, and not an explicit attempt from our side to hit a specific delay range, rather we simply attempt to be below the echo threshold of 40 ms.
+While we still make use of the precedence effect, this is due to its nature\tnnote{Synes at ``this is due to its nature'' virker til ikke at passe ind i sætningen}, and not an explicit attempt from our side to hit a specific delay range, rather we simply attempt to be below the echo threshold of 40 ms.
 As for manual manipulation, this milestone has been left completely untouched, as users have no way to affect the synchronization process.
 
 %%%% Disposition
