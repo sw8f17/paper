@@ -42,6 +42,27 @@ replacement we have structured them as can be seen on
 Control} which facilitates communication between the decoding and the
 presentation.
 
+\tikzset{%
+	presentationNode/.style = {%
+		fill=GoogleYellow,
+	},
+	playbackNode/.style = {%
+		fill=GoogleOrange,
+	},
+	decodingNode/.style = {%
+		fill=GoogleLightGreen,
+	},
+	presentationNodebg/.style = {%
+		fill=GoogleYellow!40,
+	},
+	playbackNodebg/.style = {%
+		fill=GoogleOrange!40,
+	},
+	decodingNodebg/.style = {%
+		fill=GoogleLightGreen!40,
+	},
+}
+
 \begin{figure}[ht]
 	\centering
 	\begin{tikzpicture}[
@@ -61,10 +82,10 @@ presentation.
 				minimum height = 0cm,
 			},
 		]
-		\node (pc) at (0,0) {Playback Control};
+		\node[playbackNode] (pc) at (0,0) {Playback Control};
 		\node[hide] (i) [above=1cm of pc] {};
-		\node (d) [below left=1cm and 1cm of pc] {Decoding};
-		\node (p) [below right=1cm and 1cm of pc] {Presentation};
+		\node[decodingNode] (d) [below left=1cm and 1cm of pc] {Decoding};
+		\node[presentationNode] (p) [below right=1cm and 1cm of pc] {Presentation};
 		\draw[-] (i) -- (pc);
 		\draw[-] (pc) -- (d);
 		\draw[-] (pc) -- (p);
@@ -144,21 +165,23 @@ decoding just discussed creates a diagram as shown in
 					fit = #1,
 				},
 			]
-			\node (pc) at (0,0) {Playback Control};
+			\node[playbackNode] (pc) at (0,0) {Playback Control};
 			\node[hide] (i) [above=1cm of pc] {};
-			\node (p) [below right=1cm and 1cm of pc] {Presentation};
+			\node[presentationNode] (p) [below right=1cm and 1cm of pc] {Presentation};
 			\draw[-] (i) -- (pc);
 			\draw[-] (pc) -- (p);
 
 
-			\node (mf) [below left=1cm and 1cm of pc] {MP3File};
-			\node (md) [left=0.5cm of mf] {MP3Decoder};
+			\node[decodingNode] (mf) [below left=1cm and 1cm of pc] {MP3File};
+			\node[decodingNode] (md) [left=0.5cm of mf] {MP3Decoder};
 
 			\path (mf) -- coordinate[midway] (mm) (md);
-			\node (ml) [below=1.5cm of mm] {libmpg123};
+			\node[decodingNode] (ml) [below=1.5cm of mm] {libmpg123};
 
-			\node (d) [container={(mf) (md) (ml)}] {};
-			\node[textonly] () [above left] at (d.south east) {Decoder};
+			\begin{pgfonlayer}{background}
+				\node[decodingNodebg] (d) [container={(mf) (md) (ml)}] {};
+				\node[textonly] () [above left] at (d.south east) {Decoder};
+			\end{pgfonlayer}
 
 			\coordinate (dhit) at (mf |- d.north);
 
@@ -248,21 +271,24 @@ position.
 					fit = #1,
 				},
 			]
-			\node (pc) at (0,0) {Playback Control};
+			\node[playbackNode] (pc) at (0,0) {Playback Control};
 			\node[hide] (i) [above=1cm of pc] {};
-			\node (p) [below right=1cm and 1cm of pc] {Presentation};
+			\node[presentationNode] (p) [below right=1cm and 1cm of pc] {Presentation};
 			\draw[-] (i) -- (pc);
 			\draw[-] (pc) -- (p);
 
 
-			\node (mf) [below left=1cm and 1cm of pc] {MP3File};
-			\node (md) [left=0.5cm of mf] {MP3Decoder};
+			\node[decodingNode] (mf) [below left=1cm and 1cm of pc] {MP3File};
+			\node[decodingNode] (md) [left=0.5cm of mf] {MP3Decoder};
 
 			\path (mf) -- coordinate[midway] (mm) (md);
-			\node (ml) [below=1.5cm of mm] {libmpg123};
+			\node[decodingNode] (ml) [below=1.5cm of mm] {libmpg123};
 
-			\node (d) [container={(mf) (md) (ml)}] {};
-			\node[textonly] () [above left] at (d.south east) {Decoder};
+
+			\begin{pgfonlayer}{background}
+				\node[decodingNodebg] (d) [container={(mf) (md) (ml)}] {};
+				\node[textonly] () [above left] at (d.south east) {Decoder};
+			\end{pgfonlayer}
 
 			\coordinate (dhit) at (mf |- d.north);
 
@@ -272,7 +298,7 @@ position.
 			\draw[-] (md) -- (ml);
 			\draw[-] (mf) -- (ml);
 
-			\node (vp) [below=1cm of pc] {Virtual Player};
+			\node[playbackNode] (vp) [below=1cm of pc] {Virtual Player};
 
 			\draw[-] (pc) -- (vp);
 		\end{tikzpicture}
@@ -370,19 +396,21 @@ audiomixer into the diagram we get what can be seen in
 					fit = #1,
 				},
 			]
-			\node (pc) at (0,0) {Playback Control};
+			\node[playbackNode] (pc) at (0,0) {Playback Control};
 			\node[hide] (i) [above=1cm of pc] {};
 			\draw[-] (i) -- (pc);
 
 
-			\node (mf) [below left=1cm and 1cm of pc] {MP3File};
-			\node (md) [left=0.5cm of mf] {MP3Decoder};
+			\node[decodingNode] (mf) [below left=1cm and 1cm of pc] {MP3File};
+			\node[decodingNode] (md) [left=0.5cm of mf] {MP3Decoder};
 
 			\path (mf) -- coordinate[midway] (mm) (md);
-			\node (ml) [below=1.5cm of mm] {libmpg123};
+			\node[decodingNode] (ml) [below=1.5cm of mm] {libmpg123};
 
-			\node (d) [container={(mf) (md) (ml)}] {};
-			\node[textonly] () [above left] at (d.south east) {Decoder};
+			\begin{pgfonlayer}{background}
+				\node[decodingNodebg] (d) [container={(mf) (md) (ml)}] {};
+				\node[textonly] () [above left] at (d.south east) {Decoder};
+			\end{pgfonlayer}
 
 			\coordinate (dhit) at (mf |- d.north);
 
@@ -392,17 +420,19 @@ audiomixer into the diagram we get what can be seen in
 			\draw[-] (md) -- (ml);
 			\draw[-] (mf) -- (ml);
 
-			\node (vp) [below=1cm of pc] {Virtual Player};
+			\node[playbackNode] (vp) [below=1cm of pc] {Virtual Player};
 
 			\draw[-] (pc) -- (vp);
 
-			\node (pm) [below right=1cm and 1cm of pc] {AudioMixer};
-			\node (ps) [right=0.5cm of pm] {AudioSink};
+			\node[presentationNode] (pm) [below right=1cm and 1cm of pc] {AudioMixer};
+			\node[presentationNode] (ps) [right=0.5cm of pm] {AudioSink};
 
-			\node (pl) at (ml -| ps) {AudioTrack};
+			\node[presentationNode] (pl) at (ml -| ps) {AudioTrack};
 
-			\node (p) [container={(pm) (ps) (pl)}] {};
-			\node[textonly] () [above left] at (p.south east) {Presenter};
+			\begin{pgfonlayer}{background}
+				\node[presentationNodebg] (p) [container={(pm) (ps) (pl)}] {};
+				\node[textonly] () [above left] at (p.south east) {Presenter};
+			\end{pgfonlayer}
 
 			\coordinate (phit) at (pm |- p.north);
 
