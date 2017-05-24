@@ -1,0 +1,44 @@
+\begin{figure}\pgfdeclarelayer{background}
+    \pgfsetlayers{background,main}
+    \tikzstyle{bgbox}=[fill=green!20, rounded corners, draw=GoogleGreen, dashed]
+    \resizebox{\linewidth}{!}{%
+        \begin{tikzpicture}[auto, node distance=1.5cm,
+                stage/.style={rectangle, minimum width=2.5cm, minimum height=1cm,text centered, fill=black!10, draw, align=center, font=\scriptsize},
+                start/.style={draw, rounded rectangle, fill=red!20, minimum height=1cm, minimum width=2cm, font=\scriptsize},
+                preDefProc/.style={draw,rectangle split, rectangle split horizontal, rectangle split parts=3, fill=black!10, minimum width=1.5cm, minimum height=1cm, font=\scriptsize, inner sep=1},
+                flow/.style={draw, ->}
+            ]
+
+            \node (github) at (0,0) [preDefProc] {\nodepart{two}{\begin{tabular}{c}Pull Request \vspace{-0.15cm} \\ made on \vspace{-0.15cm} \\ Github \end{tabular}}};
+            \node (ghost) [draw=none, right=1.75cm of github] {};
+            \node (checkout) [stage, above=0.4cm of ghost] {Checkout branch \\ with pull request};
+            \node (merge) [stage, below=0.4cm of ghost] {Merge pull request \\ with master \\ branch};
+            \node (build) [stage, right=0.75cm of checkout] {Build application \\ and dependencies};
+            \node (testing) [stage, right=0.75cm of build] {Testing, \\ Linting, \\ Generate \\ documentation};
+            \node (package) [stage, below=0.75cm of testing] {Package \\ application};
+            \node (status) [stage, below=0.75cm of package] {Report status};
+
+            \draw [flow] (github) |- (checkout);
+            \draw [flow] (github) |- (merge);
+            \draw [flow] (merge) -| (build);
+            \draw [flow] (checkout) -- (build);
+            \draw [flow] (build) -- (testing);
+            \draw [flow] (testing) -- (package);
+            \draw [flow] (package) -- (status);
+
+            \begin{pgfonlayer}{background}
+                \path (checkout.west |- checkout.north)+(-0.3,+0.7) node (huh_a) {};
+                \path (package.east |- status.south)+(+0.3,-0.3) node (huh_b) {};
+                \path [bgbox] (huh_a) rectangle (huh_b);
+                \node [below = 0.5em of huh_a, anchor = west, inner sep = 0.5em]{Jenkins};
+            \end{pgfonlayer}
+
+            \node (start) [start, above left=0.30cm and 0.00cm of github] {Start};
+            \node (stop) [start, below=0.75cm of status] {End};
+
+            \draw [flow] (start) |- (github);
+            \draw [flow] (status) -- (stop);
+        \end{tikzpicture}
+    }
+    \caption{Depiction of the workflow of our automated build system}\label{fig:jenkins_workflow}
+\end{figure}

@@ -1,0 +1,23 @@
+\begin{figure}
+    \center
+    \begin{tikzpicture}
+        \umlclass[x=0, y=0]{MusicPlayerActivity}
+        {
+        }{
+        }
+
+        \umlclass[x=4, y=0]{MusicService}
+        {
+        }{
+        }
+
+        \umlclass[x=0, y=-2.5, type=abstract]{BaseActivity}
+        {
+        }{
+        }
+
+        \umlinherit[]{MusicPlayerActivity}{BaseActivity}
+    \end{tikzpicture}
+    \caption{A simple diagram of the essential functionality from the example app.}
+    \label{fig:simple_class_diagram}
+\end{figure}
