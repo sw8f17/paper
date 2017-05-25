@@ -60,12 +60,15 @@ The next part of this section will dive into how these parts work, we will expan
 	},
 	presentationNodebg/.style = {%
 		fill=GoogleYellow!40,
+		dashed,
 	},
 	playbackNodebg/.style = {%
 		fill=GoogleOrange!40,
+		dashed,
 	},
 	decodingNodebg/.style = {%
 		fill=GoogleLightGreen!40,
+		dashed,
 	},
 }
 
@@ -371,6 +374,30 @@ order to determine the sample to start at for a given time. Adding the
 audio mixer into the diagram we get what can be seen in
 \cref{fig:mediaplayerPartspresenter}
 
+\subsubsection{Playback Control Back-end}
+
+For streaming to other devices we want to share as much code as
+possible. From the design we observe that the presentation is what needs
+to be replicated on multiple devices. In other words, a loose coupling
+between the playback controller and the presentation layer can
+facilitate code reuse between the master and the slaves. To loosen the
+coupling we split the Playback Control into a intent parsing part, and
+an action executing part. The intent parsing, or the front-end, only
+needs to operate on the server and coverts the intention of the user
+into concrete distinct actions. The executing part, or the back-end,
+takes these actions and schedules them for execution at the appropriate
+time, specified by the front-end. As long as we can serialize the
+actions between the front-end and the back-end we can send the actions
+directly to the slaves, and allow their back-end to execute them using
+their own strategy.
+
+The specific actions we have identified are as follows: Play, Pause,
+MediaChange, PlayFrame. PlayFrame is the only different action, since
+it's not handled by the same code-path as the other actions. Instead the
+PlayFrame command is handed off to the AudioMixer, where the frame of
+sound gets scheduled. The back-end has also been added to
+\cref{fig:mediaplayerPartspresenter}
+
 \begin{figure}[ht]
 	\centering
 	\resizebox{\linewidth}{!}{%
@@ -431,21 +458,23 @@ audio mixer into the diagram we get what can be seen in
 
 			\draw[-] (pc) -- (vp);
 
-			\node[presentationNode] (pm) [below right=1cm and 1cm of pc] {AudioMixer};
-			\node[presentationNode] (ps) [right=0.5cm of pm] {AudioSink};
+			\node[presentationNode] (pb) [below right=1cm and 1cm of pc] {PC Back-end};
+			\node[presentationNode] (pm) at (ml -| pb) {AudioMixer};
+			\node[presentationNode] (ps) [right=0.5cm of pb] {AudioSink};
 
 			\node[presentationNode] (pl) at (ml -| ps) {AudioTrack};
 
 			\begin{pgfonlayer}{background}
-				\node[presentationNodebg] (p) [container={(pm) (ps) (pl)}] {};
+				\node[presentationNodebg] (p) [container={(pb) (pm) (ps) (pl)}] {};
 				\node[textonly] () [above left] at (p.south east) {Presenter};
 			\end{pgfonlayer}
 
 			\coordinate (phit) at (pm |- p.north);
 
 			\draw[-] (pc) -- (phit);
-			\draw[-] (phit) -- (pm);
-			\draw[-] (phit) -- (ps);
+			\draw[-] (phit) -- (pb);
+			\draw[-] (pb) -- (ps);
+			\draw[-] (pb) -- (pm);
 			\draw[-] (ps) -- (pl);
 		\end{tikzpicture}
 	}
