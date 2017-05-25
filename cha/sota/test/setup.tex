@@ -41,6 +41,7 @@ analysis and controlling the variables. To do so we use scripts written
 in Python, which use the \ac{ADB} interface to control the Android
 phones. The tests are executed by a Python script to ensure
 consistency and minimize the chances of error caused by humans.
+These scripts used for testing can be seen in \cnameref{magicscripts}.
 
 Measuring the offset between the two signals is a signal processing
 task. Within the field of signal processing, the specific measure is
@@ -70,8 +71,6 @@ millisecond offset between the two audio tracks.
 
 \subimport{}{cross_cor_fig}
 
-The scripts used for testing can be seen in \cnameref{magicscripts}.
-
 To determine the accuracy and reliability of the tests, we do what we
 call an assurance test. The variable we need to assure
 ourselves of, is inter-stereo delay of the microphone input on the
@@ -88,7 +87,7 @@ delay.
 We use the song \textit{Goodness Gracious} by \textit{Ellie Goulding}. We did not
 want the apps to change song, possibly causing a resync, while testing.
 To avoid that possibility we loop the song for 2 hours within
-a single mp3 file.
+a single MP3 file.
 
 \subsection{Connecting}
 Since the apps being tested are network connected systems, we have to
@@ -114,7 +113,7 @@ SoundSeeder does require the devices to be able to connect directly. We
 fulfilled that requirement by having the master serve a ad-hoc hotspot,
 which allowed the devices to connect, while keeping the slaves
 similarly configured. SoundSeeder does not require a song to be playing
-for it to connect. For the tests we connect the slaves to the master,
+for the slaves to connect. For the tests we connect the slaves to the master,
 and only after they are connected begin playback.
 \end{description}
 
