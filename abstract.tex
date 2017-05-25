@@ -16,20 +16,22 @@ We present an application which allows a network of smartphones to play audio in
     %psychoacoustics -interesting application areas - use cases
     %unsaturated market with dissatisfactory apps
 %Without Use Case
-To initiate our project we decided to investigate the scientific field related human auditory perception, psychoacoustics, and any apps currently on the market.
-Our research into psychoacoustics gave us a rough indication of a useful effect, the precedence effect, which amplifies perceived audio by utilizing multiple speakers; this effect also informed us of the echo tolerance for complex sounds.
-
-With this knowledge at hand 
-
+To initiate our project we investigate the scientific field related human auditory perception, psychoacoustics, and any apps currently on the market.
+Our research into psychoacoustics gave us a rough indication of a useful effect, the precedence effect, which amplifies perceived audio by utilizing multiple speakers; this effect also informs us of the echo threshold for complex sound to stay under.
+Testing the apps currently on the market also reveals them as unsatisfactory, being audibly out of sync and requiring manual trial and error efforts to achieve audible sync. 
 
 %With Use Case
 
 \bigskip \noindent
-%Dev Stuff : Decoder, Player, Native
+%Dev Stuff : Decoder, Player, Native, Sync, Comms
+In order to prove it possible to make an application which performs better than those on the market, we propose and implement our own application.
+For this application we focus purely on the technical aspects, making our own decoder and player using native the Java native interface, and our own implementation of the Simple Network Time Protocol to achieve clock synchronization.
+With the clocks amply synchronized, we utilize timestamps to send commands across devices, such that communication latency has no effect.
 
 \bigskip \noindent
 %Test Stuff : We are BiS because our test said so
-
+Finally we test our application, going through the same setup as we used on the apps currently on the market.
+These tests reveal that we have indeed succeeded in creating an application which performs better than those currently on the market.
 
 %                                        Abstract Examples>
 %Vehicular transport is a widespread phenomenon, as such the use of fleet management systems are relied on by companies all over the globe.
