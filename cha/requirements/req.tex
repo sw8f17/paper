@@ -1,10 +1,9 @@
 \chapter{Requirement Elicitation}\label{cha:requirement_elicitation}
 To elicit requirements for the design and development process of a solution, we gather on the loose requirements posed in \cnameref{part:introduction}.
 For each requirement, we first state the requirement and then we elaborate, thus giving it context and where it came from.
-We have grouped the requirements in three categories: \textbf{technical requirements}, \textbf{\ac{UX} requirements}, and \textbf{non-requirements}.
+We have grouped the requirements in three categories: technical requirements, \ac{UX} requirements, and non-requirements.
 
-\paragraph{Technical Requirements} \hfill\\
-\tnote{Should we change these paragraphs to subsections? It's strange to just have 3 paragraphs as "meta text", and one section in the chapter.}
+\subsection*{Technical Requirements}
 The technical requirements are concerned with features relevant for how the devices can interact with one another, they are as follows:
 \begin{eletterate}
     \item\label{req:wireless} \textbf{At least two devices must be able to communicate wirelessly with one another.} \hfill\\
@@ -43,14 +42,13 @@ The technical requirements are concerned with features relevant for how the devi
             When the media have been playing for $n$ seconds, the drift must not exceed $z$ ms.
     \end{eletterate}
 
-    \item\label{req:manipulate} \textbf{It should be possible to manipulate the playback on each device separately.} \hfill\\
-        \tnote{Here I disagree, it is unclear as to whom should do this manipulation.}
+    \item\label{req:manipulate} \textbf{The application should be able to manipulate the playback on each device separately.} \hfill\\
         As mentioned in the problem statement in \cref{cha:problem_statement}, the application must be able to manipulate the playback of the audio.
         The manipulation refers to applying an offset to the playback on the respective devices such that the playback, can be adjusted to deal with device placement and to help achieving psychoacoustic effects.
         Furthermore the manipulation may help acquire audible sync.
 \end{eletterate}
 
-\paragraph{\ac{UX} Requirements} \hfill\\
+\subsection*{\ac{UX} Requirements}
 The \ac{UX} requirements are concerned with features that should be available in the application from the users point of view in order for the application to be usable.
 
 \begin{eletterate}[resume]
@@ -79,7 +77,7 @@ The \ac{UX} requirements are concerned with features that should be available in
         where users having a social gathering must have access to music which is not local on the device.
 \end{eletterate}
 
-\paragraph{Non-Requirements}\label{par:non_requirements} \hfill\\
+\subsection*{Non-Requirements}\label{par:non_requirements}
 The non-requirements are areas of the application where we do not wish to invest our time, our focus is on synchronization and psychoacoustics, as such the following areas have been down-prioritized:
 \begin{eromanrate}
     \item \textbf{Security} \hfill\\
