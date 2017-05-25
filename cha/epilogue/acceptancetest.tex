@@ -10,47 +10,39 @@ Therefore the setup and procedure of this test will be the same as the one in \v
 AmpMe and SoundSeeder both have manual sliders to adjust the synchronization on each device, however we do not have this as we rely on doing this automatically, therefor we cannot repeat the previous test for our app.
 We will compare our automatic synchronization to the synchronization they do initially.
 
+In total we will test the following questions from \vref{sec:sota_test} about our app:
+\begin{itemize}
+    \item Is the audio synchronized without any manual adjustment?
+    \item Is the synchronization stable over time?
+    \item Is the delay consistent between playbacks?
+\end{itemize}
+
 \section{Results}
 
+\vref{fig:smus_pause_resume} shows the results of the next song test for our app.\tnote{Vi har jo ikke samm}
+\subimport{figures/}{smus_pauseplay.tex}
 
-%\begin{figure}[pht]%
-%    \subimport{figures/}{ampme_drift.tex}%
-%    \subimport{figures/}{soundseeder_drift.tex}%
-%    \caption{Drift Tests}%
-%    \label{fig:test}%
-%\end{figure}
-
-%\\[3ex]%
-%\subimport{figures/}{smus_drift.tex}%
-%\begin{figure}[p]
-%    \begin{tikzpicture}
-%        \begin{axis}[legend pos={outer north east},
-%            scatter/classes={%
-%                c={mark=o,draw=black,fill=black}
-%            },
-%            axis lines=center,
-%            axis line style={-},
-%            x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
-%            y label style={at={(axis description cs:-0.1,0.55)},rotate=90,anchor=south},
-%            minor tick num=3,
-%            major grid style={line width=.5pt,draw=gray!40},
-%            grid=both,
-%            grid style={line width=.2pt, draw=gray!40},
-%            xmin=0,
-%            xmax=510,
-%            ymin=0,
-%            ymax=60,
-%            xlabel={Time in seconds},
-%            ylabel={Actual Delay in ms}]
-%            \addplot table [col sep=comma, only marks] {ampme_long_norm.csv};
-%            \addplot table [col sep=comma, only marks] {ss_long_norm.csv};
-%            \addplot table [col sep=comma, only marks] {smus_long_norm.csv};
-%
-%            %\addplot[domain=-15:15, samples=100,red]{(23.211)*x+131.26};
-%            \legend{AmpMe, SoundSeeder, Stream Me Up Scotty}
-%        \end{axis}
-%    \end{tikzpicture}
-%\end{figure}
+\vref{fig:smus_drift_test} shows the results of the drift test for our app.
+\subimport{figures/}{smus_drift.tex}
 
 \section{Discussion}
 
+\begin{description}
+    \item[Is the audio synchronized without any manual adjustment?] \hfill \\
+        This question should be considered in relation to to the requirement \vref{req:auto_off}, which states that the offset should be lower than 40 ms between the devices.
+        During our tests, as shown in \vref{fig:smus_drift_test} offset is generally much lower than that.
+        The figure \vref{fig:smus_drift_test_nofilter} contains all the datapoints, there there are 6 data points which are clear outliers.
+        They outliers in the results are likely due to glitches in our time synchronization and TCP congestion.
+        In order to better shown the general synchronization over time we have \vref{fig:smus_drift_test_filtered}, where we show the points in the [50;-30] ms range.
+        Here most the data points are within $20$ ms of perfect synchronization.
+
+        Preventing the glitches will be part of our future work in \vref{cha:future_work}.
+
+    \item[Is the delay consistent between playbacks?] \hfill \\
+        To test this 
+
+    \item[Is the synchronization stable over time?] \hfill \\
+
+
+
+\end{description}
