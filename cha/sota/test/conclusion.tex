@@ -41,10 +41,20 @@ We will go through each of them, and try to answer them.
 \subsection*{Drift:}
 \begin{description}
     \item[Is the synchronization stable over time?] \hfill \\
-    THIS TEST IS NOT COMPLETED YET. \mnote{how did this land in master but was never made?}
+    To test this we played the two hour long remix as mentioned in \vref{subsec:audiotestartifact}.
+    In the test we test five times, each five seconds apart, then wait 20 seconds and repeat.
+
+    For SoundSeeder the graph is very linear with a slight change out of sync, more specifically $0.0021$ ms pr. second.
+    This is a very low change over time, and the synchronization is considered stable.
+    For AmpMe the graph appears to be two distinct lines, interestingly they are approximately $23.211$ ms apart.
+    This is the same number which we observed earlier as the amount of time their manual synchronization slider changes the observed offset.
+    If one looks at the two parts of the data seperately then they drift $-0.0034$ ms pr. second and $-0.0033$ ms pr. second.
+    That is they both get closer to synchronization by a very small change, however it is bigger than SoundSeeder.
+
+    Both applications drift a very small amount of time, and the synchronization they have is considered stable over time.
 \end{description}
 
 \section{Test Conclusion}\label{sec:sota_test_conclusion}
 These test shows the shortcomings of the apps.
 Neither of them are able to synchronize the audio without manual adjustment, and moreover they can not preserve a synchronization when the song is changed.
-Thus neither of them answers our initial problem statement.
+Even though both of them were had a low amount of drift, neither of them answers our initial problem statement due to the shortcomings we have shown here.
