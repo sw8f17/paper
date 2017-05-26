@@ -1,7 +1,22 @@
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae leo maximus, facilisis turpis id, pellentesque libero. Curabitur blandit diam eget rutrum fringilla. Quisque vestibulum quam sed ligula viverra sagittis.
+%Intro 2
+The ambiance of social events is often filled with background music.
+It is often difficult to achieve desired quality of such music at outdoor ad hoc events.
+Smartphones, while widespread, lack the hardware to play audio at high volumes, without distortion.
+Solutions such as wireless battery powered Bluetooth speakers do exist, but are far less common to have on your person.
+We present an application allowing a network of smartphones to play audio synchronously, effectively increasing volume without degrading quality.
 
-Proin at tellus a elit aliquam bibendum ac nec ipsum. Nulla vitae posuere sem, sit amet dapibus eros. Maecenas pellentesque, velit eu luctus iaculis, ipsum lectus rutrum nisi, eu cursus sapien augue in dui. Fusce eu ligula suscipit, efficitur enim eget, tincidunt velit. Maecenas hendrerit arcu et elit tempus blandit. Duis nec lorem eleifend, faucibus augue vitae, pharetra ligula. Aenean faucibus auctor fermentum.
+\bigskip \noindent
+We investigate the scientific field related to human auditory perception, psychoacoustics.
+Our research into psychoacoustics reveals a useful effect, the precedence effect, which amplifies perceived audio by manipulating playback of audio sources.
+We also prove the existing solutions on the Play Store to be unsatisfactory, requiring manual trial and error efforts to achieve audible synchronization. 
 
-Curabitur pharetra, mi nec pulvinar auctor, elit risus dapibus arcu, sed pulvinar sem sapien nec ex. Sed lectus quam, aliquam vel iaculis sit amet, finibus eu quam. Vestibulum ullamcorper, augue quis auctor posuere, quam diam convallis lacus, vitae porttitor mi dolor nec libero. Aliquam et rutrum elit. Nulla dictum ligula a sem efficitur vulputate a sed enim. In eu libero feugiat, placerat erat rhoncus, sagittis orci.
+\bigskip \noindent
+To outperform existing solutions on the Play Store, we implement our own Android app.
+We use a sample app as a framework to build upon, allowing us to disregard UI and focus on core technical aspects.
+We replace the Android decoder and media player with our own, and implement a communication system using protobufs for efficient data transfer.
+We utilize a global wall time and timestamped commands to synchronously execute commands.
 
-Nunc eleifend placerat nunc at condimentum. Duis efficitur ligula nec elit luctus, et cursus ligula molestie. Nam at venenatis urna. Vivamus pretium tincidunt fringilla. Vivamus semper enim nisl, sed efficitur turpis dapibus vitae. Phasellus bibendum luctus eros, et imperdiet ligula.
+\bigskip \noindent
+We test our app, under the same circumstances as the apps on the Play Store.
+The tests reveal that we have succeeded; our app outperforms those on the Play Store in regard to audible synchronization.
+The app remains unpublished, due to need of usability polish.
