@@ -201,8 +201,8 @@ The decoder is a passive component. It is only active while
 processing a request from the active component owning it. In other
 words, it does not run if no method is invoked. That means it requires
 something else to drive the decoding. To better facilitate the
-disconnected nature of playback required for the multiple playback
-milestone, discussed in \jjnote{Ref til troels}, we want to establish an
+disconnected nature of playback required for multiple devices which will be discussed later in \cref{cha:communication}, 
+we want to establish an
 ideal virtual player, which wont be tied up to the playback speed of the
 underlying presentation component, but will instead schedule audio to
 play based on the time to play a single MP3 frame worth of bytes, which
