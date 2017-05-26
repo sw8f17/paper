@@ -27,8 +27,7 @@ arbitrary slicing and complex mixing possible. This control comes with the cost 
 as raw \ac{PCM} data is uncompressed. Sending the decoded
 \ac{PCM} data over the wire makes it simple to slice it as we see fit,
 but also apply interesting effects, such as separating the left and
-right channel.\tnote{Skal vi måske forklare bytelayoutet her, altså at det typisk i stereo PCM er left channel, så right channel og så gentag for hver sample? Så det er klart for læseren hvorfor dette er muligt?}
-Transferring a music file in standard CD quality
+right channel. Transferring a music file in standard CD quality
 ($44,100$ Hz/$16$ bit/Stereo) requires a transfer-rate of 1.5Mbps, per
 client, which we deem reasonable for our network.
 
@@ -42,9 +41,9 @@ Conceptually the Android \code{MediaPlayer} fulfills three separate
 responsibilities, with some ancillary responsibilities, that wont be
 touched on here: decoding, playback control, and presentation. In our
 replacement we have structured them as can be seen on
-\cref{fig:mediaplayerParts}. The rest of the app interacts with the \code{PlayBack
-Control} which facilitates communication between the decoding and the
-presentation.
+\cref{fig:mediaplayerParts}. The rest of the app interacts with the
+\code{PlayBack Control} which facilitates communication between the
+decoding and the presentation.
 
 The next part of this section will dive into how these parts work, we will expand this figure, \cref{fig:mediaplayerParts}, to clearly show the changes.
 
@@ -348,12 +347,52 @@ in the audio buffer. When around half of the buffer is gone, since it is
 asynchronous we cannot be sure, we calculate the available space in the
 buffer. We want to queue more audio into that free space, but because we
 are double buffering we also have to take into account the time it takes
-to play the remaining buffer data when we determine what to queue up.
-\code{AudioTrack} provides a convenient \code{getTimestamp} method which
-gives you the \code{nanoTime} a specific frame was presented. From those
-datapoints, the time we want to get audio for and how many samples we
-want, we can determine which of the queued up samples from the virtual
-player we need write right now.
+to play the remaining buffer data when we determine what to queue up. In
+the diagram seen in \cref{fig:bufferShow} the border between buffered
+data and free space lies ahead of the playback position. Since the next
+data loaded will be filled into free space, the time of the edge must be
+determined. \code{AudioTrack} provides a convenient \code{getTimestamp}
+method which gives you the \code{nanoTime} a specific frame was
+presented. From those datapoints, the time we want to get audio for and
+how many samples we want, we can determine which of the queued up
+samples from the virtual player we need write right now.
+
+\begin{figure}[ht]
+	\centering
+	\begin{tikzpicture}[%
+			node distance=0,
+			every node/.style = {%
+				inner sep=0,
+				outer sep=0,
+			},
+			timeline/.style = {%
+				minimum height = 10mm,
+				minimum width = #1,
+			},
+			occurance/.style = {%
+				minimum height = 12mm,
+				minimum width = 0.5mm,
+				fill=black,
+			},
+			textlabel/.style = {%
+			}
+		]
+		\node[timeline = 60mm, fill=black!20] (br) [] {};
+		\node[timeline = 20mm, fill=black!10] (bf) [right=of br] {};
+		\node[occurance] (ph) [right =-15mm of br] {};
+		\node[fit={(br) (bf)}, draw=black] (bc) {};
+
+		\node[textlabel] (phl) [below left = 5mm and 15mm of ph] {Playhead position};
+		\node[textlabel] (brl) [above = 5mm of br] {Buffered data};
+		\node[textlabel] (bfl) [above = 5mm of bf] {Free space};
+
+		\draw[-] (phl) -| (ph);
+		\draw[-] (brl) -- (br);
+		\draw[-] (bfl) -- (bf);
+	\end{tikzpicture}
+	\caption{Illustration of audio buffer}
+	\label{fig:bufferShow}
+\end{figure}
 
 \subsubsection{Audio Mixer}\label{subsubsec:audiomixer}
 
