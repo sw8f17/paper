@@ -1,6 +1,6 @@
 \section{Transmitting the Data}\label{sec:transmitting_the_data}
 This section explains how we prepare data for transmission between devces, and how we will send them.
-First we decide and what interchange format we will use.
+First we decide what interchange format we will use.
 Then we will discuss how we establisha persisten connection, and list all the types of message we want to transmit.
 Lastly we will discuss how the message is sent and received.
 
@@ -79,7 +79,7 @@ The protobufs we use can be separated into three groups: meta-data, commands and
 \begin{description}
     \item[Meta-data] \hfill \\
         Meta-data is information about the data, the data in this case is the audio data.
-        The purpose of sending meta-data is twofold: we send it such that the clients can present it in their UI, and such that our audio player can be set up correctly.
+        The purpose of sending meta-data is twofold: We send it such that the clients can present it in their UI, and such that our audio player can be set up correctly.
         Our meta-data contains the following:
         \begin{itemize}
             \item Artist name
@@ -134,7 +134,7 @@ The second integer is the length of the protobuf part of the message.
 This is shown in \cref{fig:message_layout}.
 This allow us to continue reading for exactly the amount of bytes the protobuf is.
 
-Next the receiver can look up what decoder to use in order to deserialize the protobuf sent.
+Next the receiver can look up what decoder to use in order to deserialize the sent protobuf.
 After the protobuf have been deserialized, we call the method registered to handle the given protobuf. \tnote{Vi skal måske forklare lidt mere om hvad det her indebærer?}
 
 \begin{figure}[htb]

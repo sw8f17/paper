@@ -1,4 +1,4 @@
-\section{Multi-Room Audio Systems}\tnnote{Denne sektion er nok lidt tynd på ting vi tager videre.}
+\section{Multi-Room Audio Systems}
 A concept which closely relates to our problem is multi-room audio.
 
 Multi-room audio is fairly self-descriptive, it provides audio to several rooms, however, this audio is synchronized and fits perfectly for the use case, multi-room setup described in \cnameref{sec:category_increase_volume_and_area}.
@@ -31,12 +31,14 @@ SoundSeeder and AmpMe both qualified as state of the art, this prompts us to con
 First off is the audio playback support, both SoundSeeder and AmpMe support various media sources, most important of all, audio streaming sources.
 The two apps use their own respective solutions for device connectivity, SoundSeeder uses WiFi/ad-hoc Android hotspots where AmpMe uses any Internet connection.
 This implies that either solution is capable of solving the problem, tests in \cref{sec:sota_test} evaluate just how good these solutions are and determines whether one solution performs better than the other.
-Both apps also support the feature of manual synchronization, the need for such a feature implies that to some extend the automatic synchronization is not enough.\tnote{This sentence is basis for our requirement (and later milestone), which implies the need for a manual adjustment for synchronization to be sufficiently accurate, this is a problem, as we dont need it to sound good. Removing this could be part of removing/modifieing a requirement and milestone.}
+While both solutions may be suffucient, due to the use case presented, it would be preferred if a solution without internet requirement is possible, although we do not wish to impose this as a strict requirement.
+Both apps also support the feature of manual synchronization, the need for such a feature implies that to some extend the automatic synchronization is not enough.
 It can be quite difficult to assert exactly how desynchronized two devices are.
 SoundSeeder allows the user to change at intervals of $10 ms$ between $-400 ms$ and $+400 ms$ whereas AmpMe uses an arbitrary value from $-15$ to $+15$.
 
 Having an arbitrary value gives no impression of the degree to which a delay is added, and being able to hear that the devices are playing at an exact $70ms$ discrepancy is impossible to pinpoint simply by listening; as such the manual synchronization feature is largely a trial and error effort to reach synchronization.
 While we can not disregard that such a feature may be necessary to reach a synchronized state, it is worth considering alternate ways of allowing manual synchronization if it is needed, or perhaps a resynchronization feature.
+Alternatively, given suffucient automatic synchronization this feature is worthless.
 
 \bigskip
 Our insight into multi-room audio shows a competitive and saturated market, albeit they work exclusively in speakers, which provide a more static environment.

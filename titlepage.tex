@@ -1,50 +1,49 @@
 %!TEX root = main.tex
+\newgeometry{margin=1in}
 \begin{titlepage}
-    \setlength{\textwidth}{15cm}
-    \noindent
-    \begin{nopagebreak}
-        \begin{minipage}{0.4\textwidth}
-            \centering
-            \includegraphics[width=\textwidth]{img/aau_logo_en.pdf}
-        \end{minipage} \hfill
-        \begin{minipage}{0.4\textwidth}
-            \flushright
-            \textbf{Aalborg University}\\
-            \textbf{Department of Computer Science}\\
-            Selma Lagerløfs Vej 300\\
-            DK-9220 Aalborg\\
-            \url{http://www.cs.aau.dk}
-        \end{minipage}\\
-        \vspace{1cm}\\
-        \begin{minipage}[t]{0.4\textwidth}
-            \begin{description}
-                \item[Title:] \hfill\\
-                    Mobile Systems
-                \item[Theme:] \hfill\\
-                    Mobile Systems
-                \item[Project Period:] \hfill\\
-                    8\textsuperscript{th} Semester
-                \item[Projectgroup:] \hfill\\
-                    SW806F17
-                \item[Group Members:] \hfill\\
-                    Jesper Jensen \\
-                    Marc Tom Thorgersen \\
-                    Mathias Sass Michno \\
-                    Thomas Pilgaard Nielsen \\
-                    Troels Bech Krøgh
-                \item[Supervisor:] \hfill\\
-                    Stefan Schmid
-                \item[Number of Pages:] \hfill\\
-                    \pageref{LastPage}
-                \item[Ended:] \hfill\\
-                    \today
-            \end{description}
-        \end{minipage} \hfill
-        \begin{minipage}[t]{0.5\textwidth}
-            \textbf{Abstract:}\\
-            \begin{problemstatement}
-                \subimport{}{abstract.tex}
-            \end{problemstatement}
-        \end{minipage}
-    \end{nopagebreak}
+    \begin{minipage}{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/aau_logo_en.pdf}
+    \end{minipage} \hfill
+    \begin{minipage}{0.4\textwidth}
+        \flushright
+        \textbf{Aalborg University}\\
+        \textbf{Department of Computer Science}\\
+        Selma Lagerløfs Vej 300\\
+        DK-9220 Aalborg\\
+        \url{http://www.cs.aau.dk}
+    \end{minipage}\\
+    \vspace{1cm}\\
+    \begin{minipage}[t]{0.35\textwidth}
+        \begin{description}
+            \item[Title:] \hfill\\
+                Mobile Systems
+            \item[Theme:] \hfill\\
+                Mobile Systems
+            \item[Project Period:] \hfill\\
+                8\textsuperscript{th} Semester
+            \item[Projectgroup:] \hfill\\
+                SW806F17
+            \item[Group Members:] \hfill\\
+                Jesper Jensen \\
+                Marc Tom Thorgersen \\
+                Mathias Sass Michno \\
+                Thomas Pilgaard Nielsen \\
+                Troels Beck Krøgh
+            \item[Supervisor:] \hfill\\
+                Stefan Schmid
+            \item[Number of Pages:] \hfill\\
+                \pageref{LastPage}
+            \item[Ended:] \hfill\\
+                \today
+        \end{description}
+    \end{minipage} \hfill
+    \begin{minipage}[t]{0.55\textwidth}
+        \textbf{Abstract:}\\
+        \vspace{-1em}
+        \begin{problemstatement}
+            \subimport{}{abstract.tex}
+        \end{problemstatement}
+    \end{minipage}
 \end{titlepage}
+\restoregeometry

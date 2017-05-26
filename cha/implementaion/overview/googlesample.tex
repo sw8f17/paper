@@ -11,10 +11,10 @@ An \code{Activity} is the primary point of interaction between an application an
 Each different screen presented to the user is considered a different activity in the application, the media player we use have a fairly limited amount of activities, with \code{MusicPlayerActivity} being the main activity.
 
 The \code{MusicPlayerActivity} holds a instance of \code{MediaController} and \code{MediaBrowser}, which facilitate browsing media and basic playback control features.
-All activities in our app uses various views, i.e.~layouts and such. These are \ac{UI} elements and definition, which describes how the app should look.
+All activities in our app uses various views, i.e.~layouts and such. These are \ac{UI} elements and definitions, which describes how the app should look.
 Most activities inherit from the \code{BaseActivity}, which also includes a \ac{UI} fragment embodying basic playback controls, thereby giving consistency during usage of different activities in the app.
 A media player is rarely an application for which an activity is kept active.
-An activity has three states, foreground, visible and background.
+An activity has three states, foreground, visible, and background.
 Having an application run, without its activity visible would be considered a background activity, however these are killable, and by extension so is the process.
 For simplicity we will consider leaving an app having no activity in the visible or foreground state.
 As such, we need some other way to keep the application alive, such that the application can be allowed to play music, without an activity being either in the state foreground or visible.
@@ -37,6 +37,6 @@ It creates a \code{MediaSession}, in doing so it allows the client to create a \
 In \cref{fig:simple_class_diagram}, it is shown how the aforementioned classes belong together.
 As previously mentioned, \code{MusicPlayerActivity} inherits from \code{BaseActivity}, which is shown in \cref{fig:simple_class_diagram}.
 This is a very simple and minimalistic representation of the app, there are other classes, but these are not relevant in this context.
-It is only \code{MusicPlayerActivity}, \code{BaseActivity}, and \code{MusicService} that is shown, since the rest of the mentioned classes are a part of the Android library.
+It is only \code{MusicPlayerActivity}, \code{BaseActivity}, and \code{MusicService} that is shown, since the rest of the mentioned classes are a part of the Android library.\tnnote{Er klassediagrammet relevant? Det er der kun fordi Stefan ville have en figur over ``det''.}
 
 \input{class_diagram}
