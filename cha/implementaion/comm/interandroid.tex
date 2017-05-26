@@ -15,7 +15,7 @@ We will describe these concepts and choose the one most suitable for implementat
 \subsection*{\ref{itm:nearby_msg} Nearby Messages API}
 The Nearby Messages API is an API by Google which lets one pass small binary payloads between internet connected Android and iOS devices.
 It uses a combination of Bluetooth, Bluetooth Low Energy, WiFi, and near-ultrasonic audio to communicate between devices.
-The Nearby Messages API uses Google's servers to relay the payloads between devices, hence the internet requirement.\cite{nearby_messages}
+The Nearby Messages API uses Google's servers to relay the payloads between devices, hence the Internet requirement.\cite{nearby_messages}
 
 Since it has to connect to a Google server, we experienced delay between the messages when we tested it.
 This delay will be impractical since it will further increase the delay in the synchronization between the devices.
@@ -27,7 +27,7 @@ The Nearby Connections API is an API by Google which lets one discover, connect 
 It can exchange messages through WiFi in real-time.\cite{nearby_connection}
 The Nearby Connections API complies with the external architecture mentioned in \cnameref{sec:external_architectures},
 since no external hardware is required.
-Furthermore internet is not required which is preferred.\msmnote{add ref to future req.}
+Furthermore internet is not required which is preferred.
 
 When tried in a test environment, we used a WiFi ad-hoc network to test the Nearby Connections API,
 since the network at Aalborg University is configured so devices can not connect to each other.

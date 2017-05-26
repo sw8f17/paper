@@ -9,7 +9,7 @@
                 flow/.style={draw, ->}
             ]
 
-            \node (github) at (0,0) [preDefProc] {\nodepart{two}{\begin{tabular}{c}Pull Request \vspace{-0.15cm} \\ made on \vspace{-0.15cm} \\ Github \end{tabular}}};
+            \node (github) at (0,0) [preDefProc] {\nodepart{two}{\begin{tabular}{c}Pull Request \vspace{-0.20cm} \\ made on \vspace{-0.20cm} \\ Github \end{tabular}}};
             \node (ghost) [draw=none, right=1.75cm of github] {};
             \node (checkout) [stage, above=0.4cm of ghost] {Checkout branch \\ with pull request};
             \node (merge) [stage, below=0.4cm of ghost] {Merge pull request \\ with master \\ branch};
@@ -40,5 +40,5 @@
             \draw [flow] (status) -- (stop);
         \end{tikzpicture}
     }
-    \caption{Depiction of the workflow of our automated build system}\label{fig:jenkins_workflow}
+    \caption{Depiction of the workflow of our automated build system.}\label{fig:jenkins_workflow}
 \end{figure}
