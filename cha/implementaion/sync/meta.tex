@@ -2,7 +2,7 @@ In this chapter we discuss how we implement the methods of synchronization we di
 First we summarize what lead us to implementing synchronization the way we did.
 Then we will explain how each of the implemented synchronization methods work, and lastly we explain where we use the synchronization in the app.
 
-In \cref{sec:sync_methods}, we decided that \ac{NTP} would suit us best.
+In \namecref{sec:sync_methods}, we decided that \ac{NTP} would suit us best.
 However due to the complexities of \ac{NTP} we decided to implement \ac{SNTP}, which only considers the latest synchronization to the \ac{NTP}-server, and discards old results.
 
 Since a persistent internet connection is not an ideal requirement for our application we also implemented our own time-synchronization over the local wireless network, made using WiFi Direct.
