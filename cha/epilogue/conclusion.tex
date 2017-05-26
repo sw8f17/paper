@@ -1,5 +1,93 @@
 \chapter{Evaluation}\label{cha:conclusion}
-\section{summary}
-\section{discussion}
-\section{conclusion}
-\section{limitations}
+In order to evaluate the success or failure of our project we first summarize our initial goals, milestones and problem statement.
+We then discuss some of our choices and how it impacted our goals, and the situation of the application.
+We also reconsider the milestones with the new data in regard to what we believe is a realistic end.
+This is followed by a conclusion on the success of the application where we look at its capabilities in regard to our milestones, requirements and goals.
+Finally we consider some limitations of our application, and what the effect of these limitations are on the end result.
+
+\section{Summary}
+%init problem and effects
+Our initial problem was very broad and vague, encapsulating any system where synchronized sound streamed to multiple devices may be of use.
+In order to specify the problem we explored a couple of use cases, and respective psychoacoustic effects which could be relevant.
+We chose to continue with the use case focused on increasing volume in an area, while utilizing the precedence effect to our advantage.
+
+%Sota
+Upon deciding on a use case, we chose to explore products related to said use case.
+We knew of some very successful multi-room audio speakers created by Sonos, which we essentially wanted to do, but with phones.
+In the case of using phones we managed to find two decent applications attempting to do what we wanted, however our tests revealed that these two applications were lackluster, requiring manual trial and error input to get a satisfactory result.
+Using these applications as a benchmark, we wanted to produce an application which performed better.
+
+%Problem Statement
+With use case, related work and the precedence effect in mind we refined our problem to:
+\begin{problemstatement}
+    How can an Android application be used to achieve manipulated playback, wirelessly, across multiple smartphones, such that psychoacoustic effects can be utilized to enhance playback?
+\end{problemstatement}
+
+%Requirements
+Derived from our problem statement and analysis of similar applications on the market we derived a number of requirements, both technical and \ac{UX} related.
+These requirements concern features and thresholds made in regard to audible synchronization derived from the precedence effect.
+We wanted to prove that we could produce an application with better performance than those available, as such our goal became a technical challenge, leaving usability concerns behind us.
+In order to get a better sense of what needs to be done, and what we could possibly do with the information we gathered we made a set of milestones.
+These milestones include both realistic and unrealistic goals segmented in a way such that we can simply continue developing till we meet a deadline, when we close on a deadline the milestones in correlation with our development method will lead us to whether or not the next milestone is feasible.
+
+
+%%%% Disposition
+%Initial thoughts?
+%The Goal
+%Use Case 
+%Sota mentions perhaps?
+%Non-reqs, why dis? why deez?
+%Milestones, where did we expect to end up?
+
+\section{Discussion}
+%What are we discussing
+While designing and developing the system we made certain choices for architecture, communication, clock synchronization etc.
+In order to evaluate the final application we consider the impact of these choices, possible alternatives whether we knew of them when developing or learned of them later, and consider how a different choice may have affected the end application.
+
+%External Architecture & Clock Sync -- these are written together as they from a discussion point of view have become very intertwined.
+In \cnameref{cha:architecture} we defined two different kinds of architectures, external and internal, related to communication and the internal application structure.
+The internal architecture mostly affects our structure when developing and as such has a relatively low impact on the outcome of the application, therefore we focus on the external architecture.
+During the design phase we concluded that the local centralized architecture would be the best idea, however for comparison purposes we ended up developing both a modified version of our remote centralized idea, as well as the local centralized idea.
+This comparison sprouted from our choice to use \ac{SNTP} rather than \ac{NTP}.
+
+Initially we chose to implement \ac{SNTP}, as it requires internet which led us to use a modified remote centralized architecture, contrary to our original design idea.
+This choice imposed the requirement of internet upon the user, whereas this was one of the reasons we preferred the local centralized architecture over the remote centralized architecture.
+To rectify this, we altered our use of \ac{SNTP} for synchronization.
+Rather than simply using \ac{SNTP} we have implemented the same time synchronization methods, and use the master as the virtual clock, in doing so we shed the internet requirement.
+
+While our tests show that \mnote[inline]{that one solution is better than the other which one?}, this choice lets us follow our original design, in which no internet is required.\mnote{if internet is better add a couple of sentances about how they are easily replaced, and supporting both would be possinle, making the application adjust to wether internet is available or not}
+
+\bigskip
+%Implementation sepcifics / android.MedioCodec
+The application itself was build upon an example from Google samples on how to make a media player.
+We replaced the Android media player implementation which was used, in place of our own, for which we used \ac{JNI}.
+In doing so we swapped focus to decode MP3 data, and play this data while streaming it to multiple devices.
+Doing this through the \ac{JNI} may have been a hasty decision as we later came across an Android API, \code{android.MediaCodec}, which is a low level access to the Android multimedia infrastructure.
+While we have performed no tests to see whether it would have been sufficient, it is an avenue we did not explore, which possibly could have saved us some \ac{JNI} trouble.
+
+%Milestone completion / no manipulation / psychoacoustic effect
+The unexpected time we had to spend developing a decoder and a media player, also withdrew focus from our milestones, as this proved to be a significantly more involved task than we had anticipated.
+Specifically the milestones related to manual offset manipulation and psychoacoustic effects suffered from this.
+While we still make use of the precedence effect, this is due to its nature\tnnote{Synes at ``this is due to its nature'' virker til ikke at passe ind i sætningen}, and not an explicit attempt from our side to hit a specific delay range, rather we simply attempt to be below the echo threshold of 40 ms.
+As for manual manipulation, this milestone has been left completely untouched, as users have no way to affect the synchronization process.
+
+%%%% Disposition
+%Architecture choice
+%Communications choice
+%Sync choice
+%Psychoacoustic choice
+%Manipulation, didn't meet this milestone - somehow use milestones
+
+\section{Conclusion}\mnote{test results are MIA, will need refactoring once I have them}
+In order to evaluate whether or not we consider our application a success, we consider the requirements we made in \cnameref{cha:requirements_elicitation}.
+We also put significant weight on whether our technical ability to synchronize audio, is better than that of AmpMe and SoundSeeder, as we chose to focus in particular on the technical challenges in creating such an application.
+Despite mentioning multiple \ac{UX} requirements in \cref{cha:requirements_elicitation}, these were not made a priority due to us classifying usability as a non-requirement.
+For this reason, we do not consider the application ready to be published on the Play Store.
+However, as our test results revealed in \cnameref{cha:test}\mnote{this chapter does not exist in my branch, Troels is working on it}, we did successfully produce an application, able to synchronize not just competitively with AmpMe and SoundSeeder, but better.\mnote{This needs to be specified in regards to best case, avg case, worst case}
+This leads us to a conflicting conclusion, while we have not managed to develop a fully functioning and stable application ready for the play store, we managed to succeed in our technical requirement, which has been the main focus throughout our development.
+As such we consider the project to be successful as it proves it possible to produce an application which wirelessly, across multiple smart phones, use the precedence effect to enhance playback in regards to area and volume, and in doing so proves the problem statement solvable.
+%%%% Disposition
+%Manipulation, didnt make it
+    %Is our offset even stable enough to support this?
+%Test result eva l, we beat SoTA bitches, or so i pressume
+%Milestone considerations

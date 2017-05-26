@@ -49,6 +49,6 @@ The remote centralized proposal holds the most restrictions on the users by requ
 As such we prefer both \ac{P2P} and local centralized to this proposal.
 The pure \ac{P2P} proposal on the other hand imposes few requirements, but do complicate the clock synchronization a lot, as such we do not wish to use a pure \ac{P2P} implementation.
 This leaves us with local centralized or a modified version of \ac{P2P}, a particular issue with a rotating master however, would be how do we provide the music source, queue system etc.
-These issues are primarily \ac{UX} issues, which as mentioned in \cnameref{cha:requirement_elicitation} is not a priority, with this in mind both of these ideas will be considered when implementing the system and the final decision is made.
+A solution could be to have a session host, the device which creates the network, which would be in control of the playback and have a rotating master managing the network itself.
+These are all needless complications to the application, even though they mostly affect the usability of the system which we have put as a non-requirement, it also complicates the basic workings of the system.
 \subimport{}{comparisontable.tex}
-
