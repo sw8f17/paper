@@ -23,7 +23,7 @@ Before we present the implementation and what that entails, we firstly present s
     Bit rate depends on both sample rate, encoding in the sense of bit depth, and number of channels in that it is calculated by $sample rate \times bit depth \times channels$.
     \item [Frame Size]\cite{audioformat} \hfill \\
     A frame is defined as all the data that belongs to one sampling interval, for \ac{PCM} data this also means that the frame rate is equal to the sample rate.
-    A frame is a collection of samples for a given time stamp, meaning for mono one frame contains one sample, for stereo two etc., in Android these are referred to as audio frames.
+    A frame is a collection of samples for a given timestamp, meaning for mono one frame contains one sample, for stereo two etc., in Android these are referred to as audio frames.
     The size of a frame, for \ac{PCM}, is equal to $sample rate \times channels$.
 \end{description}
 
