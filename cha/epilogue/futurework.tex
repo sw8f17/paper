@@ -25,7 +25,7 @@ This would also have to support the opportunity to send different offsets to dif
 
 \bigskip
 Lastly, while we achieve a better synchronization, and thus achieve the milestone~\ref{milestone:advanced_sync}, it is still possible to improve the precision of the synchronization.
-The most straightforward would be to use some or all of the corrective measures, see \tnote{ref til ntp vs sntp}, from \ac{NTP} in our time synchronization.
+The most straightforward would be to use some or all of the corrective measures, see \cnameref{sec:sntp}, from \ac{NTP} in our time synchronization.
 This could not only improve the offset in the best case, but also ensure that it is more stable over time.
 Another more complicated, but arguably more fruitful improvement, would be to consider device hardware; in particular the latency from the devices commands to the actual hardware execution.
 If the application could retrieve data for each device hardware and its latency, this could be utilized to achieve better audible synchronization.
