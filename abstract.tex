@@ -1,65 +1,26 @@
-%Intro 1
-In recent years multi-room audio systems have become increasingly popular.
-These systems are developed by speaker manufacturers and thus very static systems.
-We present an attempt to bring this technology to a more movable environment, namely smartphones.
-Enabling the use of multiple smartphones to produce synchronized audio at a higher volume, without distortion affecting quality.
-
 %Intro 2
 For social events background music often brings a desired ambiance.
-Events held outside of ones home, in particular outdoor events often lack a qualitative way to play audio.
-Despite the widespread use of smartphones, phones often lack the hardware to play audio at a higher volume without distorting the audio. 
-While solutions such as wireless battery powered Bluetooth speakers do exist, these are far less common to have on your person than a smartphone.
-We present an application which allows a network of smartphones to play audio in sync, such that there is no need for other hardware than the smartphones.
+Events held outside of ones home, in particular outdoor events, often lack a qualitative way to play audio.
+Smartphones, while widespread lack the hardware to play audio at higher volumes, without distortion affecting the quality.
+Solutions such as wireless battery powered Bluetooth speakers do exist, but are far less common to have on your person than a smartphone.
+We present an application allowing a network of smartphones to play audio in sync, effectively increasing volume without affecting quality.
 
 \bigskip \noindent
-%Theory stuff : (Use cases) : Psycho acoustics : Current Apps(target)
+%Theory stuff : Psycho acoustics : Current Apps(target)
     %psychoacoustics -interesting application areas - use cases
-    %unsaturated market with dissatisfactory apps
-%Without Use Case
-To initiate our project we investigate the scientific field related human auditory perception, psychoacoustics, and any apps currently on the market.
-Our research into psychoacoustics gave us a rough indication of a useful effect, the precedence effect, which amplifies perceived audio by utilizing multiple speakers; this effect also informs us of the echo threshold for complex sound to stay under.
-Testing the apps currently on the market also reveals them as unsatisfactory, being audibly out of sync and requiring manual trial and error efforts to achieve audible sync. 
-
-%With Use Case
+    %unsaturated Play Store with dissatisfactory apps
+To initiate our project we investigate the scientific field related human auditory perception, psychoacoustics, and any apps on the Play Store.
+Our research into psychoacoustics reveals a useful effect, the precedence effect, which amplifies perceived audio by using multiple slightly out of sync audio sources.
+We also prove the apps on the Play Store to be unsatisfactory, requiring manual trial and error efforts to achieve audible sync. 
 
 \bigskip \noindent
 %Dev Stuff : Decoder, Player, Native, Sync, Comms
-In order to prove it possible to make an application which performs better than those on the market, we propose and implement our own application.
-For this application we focus purely on the technical aspects, making our own decoder and player using native the Java native interface, and our own implementation of the Simple Network Time Protocol to achieve clock synchronization.
-With the clocks amply synchronized, we utilize timestamps to send commands across devices, such that communication latency has no effect.
+To prove it possible to make an application that outperforms those on the Play Store, we implement our own application.
+We use a sample app as a framework to build upon, to reduce the amount of UI we have to concern ourselves with.
+Building atop this framework, we replace the Android decoder and player with our own, and implement a communications system using the Simple Network Time Protocol to achieve clock synchronization.
+We utilize timestamps to communicate between devices, nullifying any communication latency effects.
 
 \bigskip \noindent
 %Test Stuff : We are BiS because our test said so
-Finally we test our application, going through the same setup as we used on the apps currently on the market.
-These tests reveal that we have indeed succeeded in creating an application which performs better than those currently on the market.
-
-%                                        Abstract Examples>
-%Vehicular transport is a widespread phenomenon, as such the use of fleet management systems are relied on by companies all over the globe.
-%We present the development of a server intended for use as a back--end for a fleet management systems.
-%
-%\bigskip \noindent
-%While an entire fleet management system encompasses a data provider and a front--client aside from its back--end, we produce a back--end which provides a REST API such than an arbitrary corporation may develop %their own front--end and potentially data provider to suit their unique needs.
-%
-%\bigskip \noindent
-%The back--end is developed with quality, scalability and reliability in mind, from these qualities emerges a heavy focus on testing, both internally and externally.
-%The emphasis on testing culminates a development environment excellent for expansion due to the heavy presence of regression tests.
-%The advantages obtained through this are strengthened even further with a focus on modularity allowing us to adapt the API in accordance with client requirements.
-%
-%\bigskip \noindent
-%In the process of this development we utilise numerous mature and well--tested technologies such that we can focus on design aspects particular to a fleet management back--end.
-%
-%
-%
-%
-%We present the process of developing software as a large team of 34 in relation to the app suite of GIRAF, a suite aimed at citizens with Autism Spectrum Disorder that aims to ease their life as well as their %caregivers.
-%
-%\bigskip
-%The project consists of nine groups with 3--4 students in each group and is organised using Scrum of Scrums.
-%The system is not started from scratch, an inherited code base exists from five previous semesters.
-%
-%\bigskip
-%Having no specific area of responsibility for the app suite we explore, improve and develop for several parts of the app suite before focusing on laying the ground work for the development of a REST API.
-%Despite its lifespan GIRAF has no way to synchronise across devices, we lay the groundwork for this to be a reality, by creating a few of the endpoints required to achieve this.
-%
-%\bigskip
-%In this effort we explore the use of several helpful tools and technologies, thus establishing a build environment and a code base following a number of guidelines, to ensure it is organised for the following semester to continue with.
+Finally we test our application, under the same circumstances as the apps on the Play Store.
+The tests reveal that we have indeed succeeded, our application outperforms those on the Play Store in regard to audible synchronization.
