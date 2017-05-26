@@ -2,8 +2,10 @@
 Now that we have offsets, we can therefore convert local timestamps to be synchronized with the rest of the network.
 For simplicity we decided to use the offset our synchronization gave us just before sending messages over the network, and just after receiving them.
 That is, when we send a message, the timestamp in it is of the master clock, and when we receive a message, it is converted to the local clock.
-This is illustrated in \ref{fig:sntp_example}.\tnnote{Jeg forstår ikke helt figuren og sammenhængen mellem figuren og teksten.}
-Given this setup, the offsets are $-1s925ms$ for the master relative to the \ac{NTP}-server, and $-0s937.5ms$ for the slave relative to the \ac{NTP}-server.
+This is illustrated in \ref{fig:sntp_example}.
+Using the calculations for \ac{SNTP} offset calculation we get the following offsets:
+$-1s925ms$ for the master (the blue clock) relative to the \ac{NTP}-servers time, and
+$-0s937.5ms$ for the slave (the green clock) relative to the \ac{NTP}-server.
 
 Say for example that we want to start playback in one second, $02s175ms$ (\ac{NTP} time), then the master would give that as the timestamp for the PlayCommand.
 When the slave receives the message it will then translate the timestamp to its local time, by subtracting its offset:
