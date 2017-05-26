@@ -1,26 +1,27 @@
 %Intro 2
-For social events background music often brings a desired ambiance.
-Events held outside of ones home, in particular outdoor events, often lack a qualitative way to play audio.
-Smartphones, while widespread lack the hardware to play audio at higher volumes, without distortion affecting the quality.
-Solutions such as wireless battery powered Bluetooth speakers do exist, but are far less common to have on your person than a smartphone.
-We present an application allowing a network of smartphones to play audio in sync, effectively increasing volume without affecting quality.
+The ambiance of social events is often filled with backgroud music.
+It is often difficult to achieve desired quality of such music at outdoor ad-hoc events.
+Smartphones, while widespread, lack the hardware to play audio at higher volumes, without distortion.
+Solutions such as wireless battery powered Bluetooth speakers do exist, but are far less common to have on your person.
+We present an application allowing a network of smartphones to play audio synchronously, effectively increasing volume without degrading quality.
 
 \bigskip \noindent
 %Theory stuff : Psycho acoustics : Current Apps(target)
     %psychoacoustics -interesting application areas - use cases
     %unsaturated Play Store with dissatisfactory apps
-To initiate our project we investigate the scientific field related human auditory perception, psychoacoustics, and any apps on the Play Store.
-Our research into psychoacoustics reveals a useful effect, the precedence effect, which amplifies perceived audio by using multiple slightly out of sync audio sources.
-We also prove the apps on the Play Store to be unsatisfactory, requiring manual trial and error efforts to achieve audible sync. 
+We investigate the scientific field related to human auditory perception, psychoacoustic effects.
+Our research into psychoacoustics reveals a useful effect, the precedence effect, which amplifies perceived audio by manipulating playback of audio sources.
+We also prove the exsisting solutions on the Play Store to be unsatisfactory, requiring manual trial and error efforts to achieve audible sync. 
 
 \bigskip \noindent
 %Dev Stuff : Decoder, Player, Native, Sync, Comms
-To prove it possible to make an application that outperforms those on the Play Store, we implement our own application.
-We use a sample app as a framework to build upon, to reduce the amount of UI we have to concern ourselves with.
-Building atop this framework, we replace the Android decoder and player with our own, and implement a communications system using the Simple Network Time Protocol to achieve clock synchronization.
-We utilize timestamps to communicate between devices, nullifying any communication latency effects.
+To outperform existing solutions on the Play Store, we implement our own Android app.
+We use a sample app as a framework to build upon, allowing us to disregard UI and focus on core technical aspects.
+We replace the Android decoder and media player with our own, and implement a communications system using protobufs for efficient data transfer.
+We utilize a global wall time and timestamped commands to synchronously execute commands.
 
 \bigskip \noindent
 %Test Stuff : We are BiS because our test said so
-Finally we test our application, under the same circumstances as the apps on the Play Store.
-The tests reveal that we have indeed succeeded, our application outperforms those on the Play Store in regard to audible synchronization.
+Finally we test our app, under the same circumstances as the apps on the Play Store.
+The tests reveal that we have succeeded; our app outperforms those on the Play Store in regard to audible synchronization.
+The app remains unpublished, due to need of usability polish.
