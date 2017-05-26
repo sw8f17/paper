@@ -19,7 +19,8 @@ In total we will test the following questions from \vref{sec:sota_test} about ou
 
 \section{Results}
 
-\vref{fig:smus_pause_resume} shows the results of the next song test for our app.\tnote{Vi har jo ikke samm}
+\vref{fig:smus_pause_resume} shows the results of the next song test for our app.
+Here we measure five data points, and take their average for each data point.
 \subimport{figures/}{smus_pauseplay.tex}
 
 \vref{fig:smus_drift_test} shows the results of the drift test for our app.
@@ -33,16 +34,22 @@ In total we will test the following questions from \vref{sec:sota_test} about ou
         During our tests, as shown in \vref{fig:smus_drift_test} offset is generally much lower than that.
         The figure \vref{fig:smus_drift_test_nofilter} contains all the datapoints, there there are 6 data points which are clear outliers.
         They outliers in the results are likely due to glitches in our time synchronization and TCP congestion.
-        In order to better shown the general synchronization over time we have \vref{fig:smus_drift_test_filtered}, where we show the points in the [50;-30] ms range.
-        Here most the data points are within $20$ ms of perfect synchronization.
-
         Preventing the glitches will be part of our future work in \vref{cha:future_work}.
+        In order to better shown the general synchronization over time we have \vref{fig:smus_drift_test_filtered}, where we show the points in the [50;-30] ms range.
+        If we do a linear regression on the filtered data (removing the 6 outliers), then the formula is: $f(x) = 0.0017x + 7.1149$, however the $R^2$ value is very low at $0.0013$.
+        This is caused by the fact that we often resynchronize between the devices.
+        Each time synchronization is completely independent, and we expect each of them to be close to correct, however we do not expect two time synchronizations in a row to be close.
+        We imagine that it is possible to decrease the span of the offset by utilizing some or all of the techniques from \ac{NTP}, however we will explain this more in \vref{cha:future_work}.
+
+        In total for our app the audio synchronization is close to $7$ ms on average, and non of the regular data is more than $40$ ms out of synchronization.
+        This is well within the requirement we had which was $40$ ms in \vref{req:auto_off}.
 
     \item[Is the delay consistent between playbacks?] \hfill \\
-        To test this 
+        To test this we paused the playback, and resumed it, in our app this causes all devices to discard the buffer they previously had and rebuffer.
+        However since the time synchronization in our app is independent of the playback, we did not expect that the offset would change any more than it would during playback.
+        In \vref{fig:smus_drift_test} we show the results of 
 
     \item[Is the synchronization stable over time?] \hfill \\
-
-
-
+        As discussed earlier our synchronization is close to perfect on average, but jumps around more than both AmpMe and SoundSeeder.
+        Since we resynchronize often, we expect our synchronization to be stable, as was observed in the test.
 \end{description}
