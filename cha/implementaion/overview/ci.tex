@@ -3,7 +3,7 @@
 %Also, automate tests (dev env / target) and docs
 %Android APK availability
 %Hand in hand with agile
-While implementing our Android application, it is important that we do not get disconnected from the end product, albeit an unfinished one; meaning that we do not want to be in a situation, where developers are disjoint from both each others work and thereby the combined product.
+While implementing our Android application, it is important that we do not get disconnected from the end product, albeit an unfinished one; meaning that we do not want to be in a situation, where developers are disjoint from each other's work and thereby the combined product.
 This means that we need some way of continuously integrating new features, bug-fixes, and other changes into the code base, whilst also reflecting them in the product.
 However, we still want to have some assurance of our product working as intended, which means that we also need to perform some form of testing.
 
@@ -40,7 +40,7 @@ Moreover, the step which includes testing, linting, and generating documentation
 
 \input{jenkins_workflow}
 
-A consequence of the automated build system, is then that when a developer reviews new or changed code in pull request, they are assisted by the linting and tests reports, and are furthermore able to quickly try out the application by downloading and installing the packaged apk on their own device.
+A consequence of the automated build system, is that when a developer reviews new or changed code in pull request, they are assisted by the linting and tests reports, and are furthermore able to quickly try out the application by downloading and installing the packaged apk on their own device.
 
 \bigskip
 Another benefit to the \acl{CI} and automated build system, we set up, is that it also supports an agile development process, especially since all updated to the master branch, are presented as a ready-to-use product in the form of a downloadable apk.

@@ -25,15 +25,15 @@ In this section we will describe, discuss, and compare the following methods of 
     \end{itemize}
 \end{multicols}
 In order to change the actual clock on Android, the phone either requires user interaction to do so manually, or it must be rooted such that an application can do so.
-While we placed usability as a non-requirement, we can not expect users to root their device as, depending on country, it may violate copyright, warranty, and/or terms on service on the phone.
-As such we will strictly speaking not be synchronizing the clocks, rather we will keep track of each devices offset to the source we want to synchronize with.
+While we placed usability as a non-requirement, we cannot expect users to root their device as, depending on country, it may violate copyright, warranty, and/or terms on service on the phone.
+As such we will strictly speaking not be synchronizing the clocks, rather we will keep track of the offset of each device to the source we want to synchronize with.
 
 \subsubsection{GPS}
 %https://spectracom.com/resources/essential-education/gps-clock-synchronization
 GPS satellites contain multiple atomic clocks.
 These clocks are monitored and controlled to keep them synchronized with the UTC standard.
 This provides us with an accurate clock to synchronize towards.\cite{gpsclock}
-After testing this, by developing an application to retrieve time from GPS, it was clear to us that the GPS hardware in our phones are limited to 1 Hz updates and do not provide millisecond precision, which makes us unable to use GPS as a solution.
+After testing this, by developing an application to retrieve time from GPS, it was clear to us that the GPS hardware in our phones is limited to 1 Hz updates and do not provide millisecond precision, which makes us unable to use GPS as a solution.
 
 \subsubsection{Audio}
 Another possible method is to use the audio to synchronize.
@@ -63,7 +63,7 @@ This expected accuracy is also with a cable connection, with wireless, which we 
     %msg delay
         %using offsets can help
 %Perfect syncrhonization may actually cause problems, audible sync != clock sync
-
+\bigskip
 While all the five presented solutions can be used to synchronize, some are simply superior and easier to work with than others, in this section we present our choice, as well as our reasoning for the choice we make.
 In \cref{tab:pros_cons_sync} the pros and cons of the different synchronization methods can be seen and compared.
 
@@ -75,7 +75,7 @@ With our initial milestone being basic synchronization, we do not wish to overly
 Despite us not using it initially, it may be worth reconsidering or perhaps looking into a hybrid solution for the advanced synchronization milestone, in the case that we get so far in the development process.
 
 This leaves us with the two protocols we found for synchronization, \ac{NTP} and \ac{PTP}.
-\ac{NTP} is both a more mature and widespread protocol, furthermore we were also able to find examples of it being used on Android whereas we could find no Android apps using \ac{PTP}.
+\ac{NTP} is a more mature and widespread protocol, furthermore we were also able to find examples of it being used on Android whereas we could not find any Android apps using \ac{PTP}.
 While we have no proof of better or worse performance for the two, the maturity of \ac{NTP} and lackluster use of \ac{PTP} on Android leads us to choose \ac{NTP} as the synchronization method for our basic synchronization milestone.
 
 \begin{table}[ht]

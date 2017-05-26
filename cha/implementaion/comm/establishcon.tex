@@ -1,5 +1,5 @@
 \section{Establishing a Connection}\label{sec:establishing_a_connection}
-In \cref{sec:communication_methods} and \cref{sec:transmit} we decided to use WiFi Direct and protobufs.
+In \cref{sec:communication_methods} and \cref{sec:transmit} we decided to use WiFi Direct and protobufs\tnnote{Protobuf bliver nævnt her før det bliver beskrevet}.
 This section explains how we change parts of the app to accommodate multiple devices.
 How we get these devices to discover each other, and how we establish a persistent connection.
 Lastly we describe which protobufs we have, what they contain, and how we send and receive them.
@@ -14,7 +14,7 @@ In \cref{fig:connecting} we show the two new UIs made for connecting devices.
 \cref{fig:mode_selection} is the UI the app starts with.
 When in this state the user chooses to be either a master, in the UI called ``server'' or a slave, called ``client''.
 \cref{fig:group_selection} presents the UI a user is shown when pressing the ``Client'' option.
-It contains a list of all nearby devices which are acting as a ``Server'', how this is achieved is explained next.
+It contains a list of all nearby devices which are acting as a master, how this is achieved is explained next.
 
 \begin{figure}[ht]
   \begin{subfigure}[b]{0.33\linewidth}
@@ -48,19 +48,18 @@ It contains a list of all nearby devices which are acting as a ``Server'', how t
 The first problem which must be addressed in order to connect devices is peer discovery.
 Fortunately WiFi Direct has a number of helpful services.
 One of these services is ``Service Discovery'', which is made for the exact purpose of discovering peers.
-In Android WiFi Direct is called: ``Wi-Fi peer-to-peer'' or ``Wi-Fi P2P'' for short\footnote{\url{https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html}}.
 
 In WiFi Direct, devices form groups, which has a single owner, these groups also form the basis of our sessions.
 We experienced several issues implementing Service Discovery in our app, the most notable being group owner negotiation.
 When devices connect using WiFi Direct, they negotiate about having the role of group owner.
-The group owner is the master of the network, and is responsible for granting new devices access etc.
+The group owner is in charge of the network, and is responsible for granting new devices access etc.
 For our app we want the device which is the master, to also have the role of being the group owner of the WiFi Direct network.
 The root of the problem was caused by the devices keeping a record of the last 32 WiFi Direct groups which they had been a part of and who were the group owner.
 This becomes a problem, when a new session is created using the same devices as a previous session, but with a different master.
 For example, if a slave was the group owner, then it would be responsible for accepting new devices into the network, and not the master which is the intention.
 
 In order to prevent this issue, we decided to erase the records of previous WiFi Direct networks, when we start discovering services.
-That means that the only preexisting group when a device connects is the one just created by the master.
+This means that the only preexisting group, when a device connects, is the one just created by the master.
 Since there is a preexisting group, then new devices will try to join it, when connecting.
 
 We have depicted the entire service discovery as a sequence diagram on \cref{fig:seq_server_client}.
