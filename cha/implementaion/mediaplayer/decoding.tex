@@ -348,7 +348,7 @@ in the audio buffer. When around half of the buffer is gone, since it is
 asynchronous we cannot be sure, we calculate the available space in the
 buffer. We want to queue more audio into that free space, but because we
 are double buffering we also have to take into account the time it takes
-to play the remaining buffer data when we determine what to queue up.\tnote{Vi kunne evt. lave en figur til at forklare dette?}
+to play the remaining buffer data when we determine what to queue up.
 \code{AudioTrack} provides a convenient \code{getTimestamp} method which
 gives you the \code{nanoTime} a specific frame was presented. From those
 datapoints, the time we want to get audio for and how many samples we
