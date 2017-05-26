@@ -392,11 +392,11 @@ directly to the slaves, and allow their back-end to execute them using
 their own strategy.
 
 The specific actions we have identified are as follows: Play, Pause,
-MediaChange, PlayFrame. PlayFrame is the only different action, since
-it's not handled by the same code-path as the other actions. Instead the
+MediaChange, and PlayFrame. PlayFrame is the only different action, since
+it is not handled by the same code-path as the other actions. Instead the
 PlayFrame command is handed off to the AudioMixer, where the frame of
 sound gets scheduled. The back-end has also been added to
-\cref{fig:mediaplayerPartspresenter}
+\cref{fig:mediaplayerPartspresenter}.
 
 \begin{figure}[ht]
 	\centering
