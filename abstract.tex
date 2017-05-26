@@ -1,27 +1,22 @@
 %Intro 2
-The ambiance of social events is often filled with backgroud music.
-It is often difficult to achieve desired quality of such music at outdoor ad-hoc events.
-Smartphones, while widespread, lack the hardware to play audio at higher volumes, without distortion.
+The ambiance of social events is often filled with background music.
+It is often difficult to achieve desired quality of such music at outdoor ad hoc events.
+Smartphones, while widespread, lack the hardware to play audio at high volumes, without distortion.
 Solutions such as wireless battery powered Bluetooth speakers do exist, but are far less common to have on your person.
 We present an application allowing a network of smartphones to play audio synchronously, effectively increasing volume without degrading quality.
 
 \bigskip \noindent
-%Theory stuff : Psycho acoustics : Current Apps(target)
-    %psychoacoustics -interesting application areas - use cases
-    %unsaturated Play Store with dissatisfactory apps
-We investigate the scientific field related to human auditory perception, psychoacoustic effects.
+We investigate the scientific field related to human auditory perception, psychoacoustics.
 Our research into psychoacoustics reveals a useful effect, the precedence effect, which amplifies perceived audio by manipulating playback of audio sources.
-We also prove the exsisting solutions on the Play Store to be unsatisfactory, requiring manual trial and error efforts to achieve audible sync. 
+We also prove the existing solutions on the Play Store to be unsatisfactory, requiring manual trial and error efforts to achieve audible synchronization. 
 
 \bigskip \noindent
-%Dev Stuff : Decoder, Player, Native, Sync, Comms
 To outperform existing solutions on the Play Store, we implement our own Android app.
 We use a sample app as a framework to build upon, allowing us to disregard UI and focus on core technical aspects.
-We replace the Android decoder and media player with our own, and implement a communications system using protobufs for efficient data transfer.
+We replace the Android decoder and media player with our own, and implement a communication system using protobufs for efficient data transfer.
 We utilize a global wall time and timestamped commands to synchronously execute commands.
 
 \bigskip \noindent
-%Test Stuff : We are BiS because our test said so
-Finally we test our app, under the same circumstances as the apps on the Play Store.
+We test our app, under the same circumstances as the apps on the Play Store.
 The tests reveal that we have succeeded; our app outperforms those on the Play Store in regard to audible synchronization.
 The app remains unpublished, due to need of usability polish.
