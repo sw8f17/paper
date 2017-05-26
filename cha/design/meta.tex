@@ -1,5 +1,5 @@
 In this chapter we present certain aspects of the system design of our system, an Android application.
-We call the system \textit{Stream Me Up Scotty} or \textit{Scotty} for short.
+We call the system \textit{Stream Me Up Scotty} or \textit{Scotty} for short\tnnote{Bliver dette brugt senere?}.
 
 We firstly present the core ideas or issues, which should be solved in the design and development.
 These issues functions as the connection between the aforementioned requirements and future content in the design and implementation.
@@ -9,7 +9,7 @@ The primary problem we are dealing with is the ability to execute commands and p
 That is, we need to have a way to execute a given action at once, on all devices.
 Since we cannot expect the clocks on each Android phone to be in-sync, we need to find a way of relating their clock to a master clock.
 
-The central concept of our idea to achieve synchronization of audio and control is for the devices to have a common clock, and issue all commands with a timestamp for when the action is supposed to occur.
+The central concept of our idea to achieve synchronization of audio and control is for the devices to have a common clock, and issue all commands with a timestamp for when the action is supposed to occur\tnnote{¿Que?}.
 The transmission of audio and commands should be separate, such that the devices can buffer audio data to increase stability.
 
 This proposes several problems which would have to be resolved:
