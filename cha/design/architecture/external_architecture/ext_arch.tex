@@ -37,13 +37,13 @@ With all devices being equal it also means having to reach consensus to make dec
 This solution could be expanded to consider a rotating master which would help resolve possible consensus issues, but at that point it becomes overcomplicating the local centralized solution in order to reduce the chance of the master leaving or failing, however that would still be possible.
 
 \subsubsection{Conclusion}
-Ultimately the key challenge and the most important consideration for the external architecture, is clock synchronization.
-To properly manipulate the clock to achieve psychoacoustic effects, even a few milliseconds matter; as such with how the external architecture can affect this, it is a important choice.
+Ultimately the key challenge and the most important consideration for the external architecture is clock synchronization.
+To properly manipulate the clock to achieve psychoacoustic effects, even a few milliseconds matter; as such with how the external architecture can affect this, it is an important choice.
 
 The three aforementioned proposals are all ``pure'' proposals, however reality is that they can be modified to resolve some of their weaknesses.
 An example would be \ac{P2P}, the particular difficulty with this architecture is the problem of consensus which drastically increases the complexity of clock synchronization, a way to rectify this issues could be having a rotating master.
 While still making synchronization more complex than the local centralized proposal, it would solve the issue of consensus, however it would also create a single point of failure.
-Despite some modifications being available, certain variables for each proposal can not be modified, such as the requirement of internet and external hardware for the remote centralized proposal.
+Despite some modifications being available, certain variables for each proposal cannot be modified, such as the requirement of internet and external hardware for the remote centralized proposal.
 
 The remote centralized proposal holds the most restrictions on the users by requiring internet, and also requires a server to communicate with, which based on location could impose further issues.
 As such we prefer both \ac{P2P} and local centralized to this proposal.

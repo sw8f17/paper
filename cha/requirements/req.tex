@@ -11,12 +11,12 @@ The technical requirements are concerned with features relevant for how the devi
         then two or more devices have to be able to communicate wirelessly.
         Active use of the application, i.e.~when devices are communicating in order to play audio, is referred to as a ``session''.
 
-    \item\label{req:host_control} \textbf{The device which starts the session, i.e.~session host, must be able to assume playback control of all devices in the session, i.e.~volume control, pause, resume, change media, seek} \hfill\\
+    \item\label{req:host_control} \textbf{The device which starts the session, i.e.~session master, must be able to assume playback control of all devices in the session, i.e.~volume control, pause, resume, change media, seek.} \hfill\\
         This requirements relates to both psychoacoustic effects and \cnameref{sec:category_increase_volume_and_area}.
-        The session host should be able to control playback to ensure that devices are playing the same media, and obtain the desired psychoacoustic effects.
+        The session master should be able to control playback to ensure that devices are playing the same media, and obtain the desired psychoacoustic effects.
         Furthermore some psychoacoustic effects may require that one device controls the volume across any connected devices as the relative volume affects the psychoacoustic effects.
 
-        Under normal circumstances each individual device in a session should have control of their own volume and whether they are playing or not, however if the volume affects the desired psychoacoustic effect then the session host may assume control of volume on any device in the session.
+        Under normal circumstances each individual device in a session should have control of their own volume and whether they are playing or not, however if the volume affects the desired psychoacoustic effect then the session master may assume control of volume on any device in the session.
 
 
     \item\label{req:sync} \textbf{The application must have the ability to perform an automatic synchronization.} \hfill\\
@@ -28,14 +28,14 @@ The technical requirements are concerned with features relevant for how the devi
     \begin{eletterate}
         \item \textbf{Following an automatic synchronization, the audio offset between any two devices must not exceed $40$ ms.} \hfill\\
             With the ability to synchronize automatically, the audio offset between any two devices must not exceed $40$ ms.
-            $40$ is the maximum desynchronization that will not be noticed by a listener.\tnwarning{x, y, z and n must be specified.}
+            $40 ms$ is the maximum desynchronization that will not be noticed by a listener.\tnwarning{x, y, z and n must be specified.}
 
         \item \textbf{The change in offset following a change in media must not exceed $y$ ms.} \hfill\\
             When the media is changed, for instance a change in song, the offset change must not exceed $y$ ms.
             This means that the media change must be consistent to the extent of $y$ ms.\mnote{fill in y, also what is important is that the change does not push the first statement over 40 ms, which makes it dependent on the current delay, if the delay is +2 every time this also creates a max limit on number of songs you can play}
 
         \item \textbf{The change in offset after pausing, and resuming playback of any media must not exceed $y$ ms.} \hfill\\
-            When the media is paused and resumed by the session host, the offset change must not exceed $y$ ms.
+            When the media is paused and resumed by the session master, the offset change must not exceed $y$ ms.
             This means that the pause and subsequently resuming must be consistent to the extend of $y$ ms.\mnote{fill in y, also what is important is that the change does not push the first statement over 40 ms, which makes it dependent on the current delay, if the delay is +2 every time this also creates a max limit on number of pauses u can do}
 
         \item \textbf{The drift must not exceed $z$ ms over $n$ seconds.} \hfill\\
@@ -52,9 +52,9 @@ The technical requirements are concerned with features relevant for how the devi
 The \ac{UX} requirements are concerned with features that should be available in the application from the users point of view in order for the application to be usable.
 
 \begin{eletterate}[resume]
-    \item\label{req:basic} \textbf{A session should have support for basic audio player functions, e.g.~pause, resume, seek and change media} \hfill\\
-        In order for the application to be useful, simple audio player features are required such that users can pause, play, seek and change media.
-        The change media feature should be reserved for the session host, this limiting of control helps to let songs play out for the use cases mentioned in \cnameref{sec:category_increase_volume_and_area}.
+    \item\label{req:basic} \textbf{A session should have support for basic audio player functions, e.g.~pause, resume, seek, and change media} \hfill\\
+        In order for the application to be useful, simple audio player features are required such that users can pause, play, seek, and change media.
+        The change media feature should be reserved for the session master, this limitation of control helps to let songs play out for the use cases mentioned in \cnameref{sec:category_increase_volume_and_area}.
 
     \item\label{req:info} \textbf{Display song information} \hfill\\
         When users use the application in according to the use cases mentioned in \cnameref{sec:category_increase_volume_and_area},
@@ -65,14 +65,14 @@ The \ac{UX} requirements are concerned with features that should be available in
         The application should support a queue feature such that a play queue can be developed by the devices in the session.
         Any device in the session should be able to add audio to the queue.
 
-    \item\label{req:mp3} \textbf{Play mp3 audio files from the session host's local storage.} \hfill\\
-        The application must be able to play audio files of the format mp3 from the local storage on the devicea.
-        Mp3 is chosen since it is in widespread use, Android supports the file format and because mp3 is a compressed file format,
-        resulting in a smaller file size\cite{android_mp3_support}\cite{mp3_compression}.
+    \item\label{req:mp3} \textbf{Play MP3 audio files from the session master's local storage.} \hfill\\
+        The application must be able to play audio files of the format MP3 from the local storage on the device.
+        MP3 is chosen since it is in widespread use, Android supports the file format and because MP3 is a compressed file format,
+        resulting in a smaller file size\cite{android_mp3_support, mp3_compression}.
 
     \item\label{req:spotify} \textbf{Support Spotify as an audio source.} \hfill\\
         The application must be able to use audio from Spotify as source,
-        which means that a session host device must be able to stream Spotify audio to the connected slaves.
+        which means that a session master device must be able to stream Spotify audio to the connected slaves.
         This requirement is related to the use cases mentioned in \cnameref{sec:category_increase_volume_and_area},
         where users having a social gathering must have access to music which is not local on the device.
 \end{eletterate}
@@ -89,9 +89,9 @@ The non-requirements are areas of the application where we do not wish to invest
     Optimizations in resource usage might improve the quality of the application, but is trifling in order to find a solution to our problem statement.
     \item \textbf{Usability} \hfill\\
     While we have \ac{UX} requirements this varies from usability.
-    The \ac{UX} features necessary for the application to be used, when speaking of usability we consider features like robustness, learnability etc.~and we choose not to focus on these elements.
+    The \ac{UX} features necessary for the application to be used, when speaking of usability we consider features like robustness, learnability etc.~and we choose not to focus on these elements.\tnnote{IMO så er dette ikke så godt skrevet.}
     \item \textbf{Scalability} \hfill\\
-    When mentioning scalability we consider both number of devices and type of devices.
+    When mentioning scalability we consider both the number and type of the devices.
     We only work with Android devices and will not concern ourselves on how to include iPhone or Windows Phone devices.
-    As for number of devices, we will be working with four phones, expanding beyond this and testing when the system breaks is not something we prioritize.
+    As for the number of devices, we will be working with four phones, expanding beyond this and testing when the system breaks is not something we prioritize.
 \end{eromanrate}

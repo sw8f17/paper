@@ -1,20 +1,19 @@
 %vim: fo-=t
 \section{Android Apps}\label{sec:sota_apps}
 In this section we investigate the state of the art of synchronized streaming of music between different wirelessly connected mobile devices.
-We found three apps capable this:
+We found two apps capable this:
 \begin{itemize}
     \item SoundSeeder
     \item AmpMe
-    \item Chorus
 \end{itemize}
 
-These apps are found by searching through sources like Google\footnote{\url{https://www.google.dk} with the search terms ``android sync music playback''}, YouTube\footnote{\url{https://www.youtube.com/}}, and Google Play Store\footnote{\url{https://play.google.com/store}} and from recommendations on various forums.
+These apps are found by searching through sources like Google\footnote{\url{https://www.google.dk} with the search terms ``android sync music playback''}, YouTube\footnote{\url{https://www.youtube.com/} with same search terms as on Google}, and Google Play Store\footnote{\url{https://play.google.com/store}} and from recommendations on various forums.
 An additional criteria for an app to be considered here is that the app must not be abandoned by the developers,
 which we defined as being without an update since 2013, and being incompatible with new devices.
 
 To clarify, Google Play Store is the official place to install or buy apps for Android.
 
-The three apps all use a master/slave connection and use different terms for their setup.
+Both of the apps use a master/slave connection and use different terms for their setup.
 For clarification we generalize these terms.
 We call the device which selects the music and streams it, the master, and the devices which connects to the master (SoundSeeder calls it ``Speaker''), are referred to as slaves.
 
@@ -115,59 +114,14 @@ AmpMe is free to use in both Google Play and the App Store.\cite{amp_faq, amp_pl
     \caption{Screenshots from AmpMe}\label{fig:ampme_screenshots}
 \end{figure}
 
-\subsection{Chorus}\label{subsec:chorus}
-The final app is called Chorus\footnote{\url{https://play.google.com/store/apps/details?id=com.avrapps.chorus}} and is made by AVR APPS\@.
-The version is 2.1, as of \formatdate{13}{2}{2017}.
-It supports Android 4.0 or newer, AVR APPS mention an iOS app, but the App Store page returns that the app is not available in our region\footnote{\url{https://itunes.apple.com/app/chorus/id894014439}}.
-
-To share music between devices, all devices have to be on the same network.
-Which means WiFi or a mobile hotspot is required.
-Chorus only supports playback of local media on the master device.
-
-When the app is opened, it looks like a regular music player, as seen on \cref{fig:chorus_screenshot}.
-Music is added by pressing the small plus sign in the right bottom corner.
-Which Chorus then streams to connected slave devices.
-To connect to a master device playing music, you press the menu button in the right top corner, and press join.
-Here a menu pops up with devices playing on the network, and if you select the device shown, it connects as a slave and starts playing.
-We encountered a scenario where the app kept loading when attempting to join an active network, after a restart of the app it worked.
-
-It is intuitive to use the app, it is minimalistic hence easy to navigate.
-The design is minimalistic, and seems to follow the new ``Material Design''\footnote{\url{https://material.io/guidelines/}} guidelines set out by Google.
-
-Chorus supports manual and automatic synchronization.
-On \cref{fig:chorus_screenshot} the synchronization slider can be seen,
-it slides from $-400ms$ to $+400ms$, in steps of $10 ms$.
-
-The app is free to download and use without any ads.\cite{chrous_play}.
-
-\begin{figure}[h!]
-    \centering
-    \begin{subfigure}[b]{0.45\textwidth}
-        \footnotesize
-        \centering
-        \frame{\includegraphics[width=0.65\textwidth]{img/sota/chorus.png}}
-        \caption{When the app is opened.}\label{fig:chorus_screenshot}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.45\textwidth}
-        \footnotesize
-        \centering
-        \frame{\includegraphics[width=0.65\textwidth]{img/sota/chorus_slider.png}}
-        \caption{The synchronization slider.}\label{fig:chorus_slider}
-    \end{subfigure}
-    \caption{Screenshots from Chorus}\label{fig:chorus_screenshots}
-\end{figure}
-
 \subsection{App Comparison}\label{ssec:app_comparison}
 To determine what makes these apps state of the art, we look at their vital characteristics.
 These vital characteristics are the user rating, last update date, supported devices, media sources, and connectivity options.
 In \cref{tab:sota_comp}, a comparison of the apps can be seen.
 
 \bigskip
-First let us start with Chorus, it supports the least devices, only supports local media, has the lowest rating with some explicitly bad reviews, and with the recent update being in 2015 it seems abandoned.
-Only its connectivity options seems on par with the other two mentioned apps, however reviews mention that it is incredibly slow, as such we see no reason to continue with this app, nor can we deem it state of the art.
 
-As for SoundSeeder and AmpMe, they have their app ratings, Android support, YouTube and local media support in common.
+SoundSeeder and AmpMe have their app ratings, Android support, YouTube and local media support in common.
 AmpMe goes slightly beyond SoundSeeder when it comes to media support, by also supporting Spotify and SoundCloud.
 Spotify has around 100 million users, which makes it an important source to support\cite{spotify_subscribers}.
 SoundSeeder supports Google Music, and while they have not released any official user numbers it is expected to be lower than Spotify~\cite{googlem_subscribers}.
@@ -189,14 +143,14 @@ The actual performance of the synchronization, in SoundSeeder and AmpMe will be 
 \renewcommand\tabularxcolumn[1]{m{#1}}
 \renewcommand{\arraystretch}{1.8}
     \small
-    \begin{tabularx}{\textwidth}{XXXX}\toprule
-                                    & SoundSeeder                   & AmpMe                                     & Chorus                        \\\midrule
-        Rating (Out of 5)           & 3.9 Play Store                & 4.2 Play Store \newline 4.0 App Store     & 3.3 Play Store                \\
-        Latest update               & 11/11 2016                    & 30/1 2017                                 & 11/5 2015                     \\
-        Supported \newline devices  & Android 4.1+ \newline Java Devices & Android 4.1+ \newline iOS 9.0+       & Android 4.0+                  \\
-        Media source                & Google Music \newline YouTube \newline External devices \newline UPnP, DLNA \newline Online radio \newline Local media & Spotify \newline SoundCloud \newline YouTube \newline Local media & Local media \\
-        Connectivity                & WiFi \newline Android Hotspot & Internet                                  & WiFi \newline Android Hotspot \\
-        Pricing                     & 39.90 DKK                     & Free                                      & Free                          \\\bottomrule
+    \begin{tabularx}{\textwidth}{XXX}\toprule
+                                    & SoundSeeder                   & AmpMe                                                                     \\\midrule
+        Rating (Out of 5)           & 3.9 Play Store                & 4.2 Play Store \newline 4.0 App Store                                     \\
+        Latest update               & 11/11 2016                    & 30/1 2017                                                                 \\
+        Supported \newline devices  & Android 4.1+ \newline Java Devices & Android 4.1+ \newline iOS 9.0+                                       \\
+        Media source                & Google Music \newline YouTube \newline External devices \newline UPnP, DLNA \newline Online radio \newline Local media & Spotify \newline SoundCloud \newline YouTube \newline Local media  \\
+        Connectivity                & WiFi \newline Android Hotspot & Internet                                                                  \\
+        Pricing                     & 39.90 DKK                     & Free                                                                      \\\bottomrule
     \end{tabularx}
     \caption{Comparison between the apps as of the 13\textsuperscript{th} of February 2017.}\label{tab:sota_comp}
 \end{table}
