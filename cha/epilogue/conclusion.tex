@@ -55,8 +55,6 @@ This choice imposed the requirement of internet upon the user, whereas this was 
 To rectify this, we altered our use of \ac{SNTP} for synchronization.
 Rather than simply using \ac{SNTP} we have implemented the same time synchronization methods, and use the master as the virtual clock, in doing so we shed the internet requirement.
 
-While our tests show that \mnote[inline]{that one solution is better than the other which one?}, this choice lets us follow our original design, in which no internet is required.\mnote{if internet is better add a couple of sentances about how they are easily replaced, and supporting both would be possinle, making the application adjust to wether internet is available or not}
-
 \bigskip
 %Implementation sepcifics / android.MedioCodec
 The application itself was build upon an example from Google samples on how to make a media player.
@@ -68,7 +66,7 @@ While we have performed no tests to see whether it would have been sufficient, i
 %Milestone completion / no manipulation / psychoacoustic effect
 The unexpected time we had to spend developing a decoder and a media player, also withdrew focus from our milestones, as this proved to be a significantly more involved task than we had anticipated.
 Specifically the milestones related to manual offset manipulation and psychoacoustic effects suffered from this.
-While we still make use of the precedence effect, this is due to its nature\tnnote{Synes at ``this is due to its nature'' virker til ikke at passe ind i sætningen}, and not an explicit attempt from our side to hit a specific delay range, rather we simply attempt to be below the echo threshold of 40 ms.
+While we make use of the precedence effect, this is due to its nature and not an explicit attempt from our side to hit a specific delay range, rather we simply attempt to be below the echo threshold of 40 ms.
 As for manual manipulation, this milestone has been left completely untouched, as users have no way to affect the synchronization process.
 
 %%%% Disposition
@@ -78,12 +76,12 @@ As for manual manipulation, this milestone has been left completely untouched, a
 %Psychoacoustic choice
 %Manipulation, didn't meet this milestone - somehow use milestones
 
-\section{Conclusion}\mnote{test results are MIA, will need refactoring once I have them}
+\section{Conclusion}
 In order to evaluate whether or not we consider our application a success, we consider the requirements we made in \myref[name]{cha:requirement_elicitation}.
 We also put significant weight on whether our technical ability to synchronize audio, is better than that of AmpMe and SoundSeeder, as we chose to focus in particular on the technical challenges in creating such an application.
 Despite mentioning multiple \ac{UX} requirements in \cref{cha:requirement_elicitation}, these were not made a priority due to us classifying usability as a non-requirement.
 For this reason, we do not consider the application ready to be published on the Play Store.
-However, as our test results revealed in \myref[name]{cha:acctest}, we did successfully produce an application, able to synchronize not just competitively with AmpMe and SoundSeeder, but better.\mnote{This needs to be specified in regards to best case, avg case, worst case}
+However, as our test results revealed in \myref[name]{cha:acctest}, we did successfully produce an application, able to synchronize not just competitively with AmpMe and SoundSeeder, but better.
 This leads us to a conflicting conclusion, while we have not managed to develop a fully functioning and stable application ready for the play store, we managed to succeed in our technical requirement, which has been the main focus throughout our development.
 As such we consider the project to be successful as it proves it possible to produce an application which wirelessly, across multiple smart phones, use the precedence effect to enhance playback in regards to area and volume, and in doing so proves the problem statement solvable.
 %%%% Disposition
