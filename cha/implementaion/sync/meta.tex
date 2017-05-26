@@ -10,7 +10,7 @@ This method would not synchronize each slave to a global clock, like \ac{NTP} an
 However for our application this it not a worry, our goal is to synchronize audio accurately across devices in our network, which does not require each clock to be globally synchronized, only locally.
 
 We decided to implement both of these, that is \ac{SNTP} over the Internet and time-synchronization over WiFi Direct.
-In order to determine which is best, we will test them against each-other.\tnwarning{We need to do this}.
+This allows the application to work in scenarios where internet is not availabel, should it prove superior to have Internet, this could be a default setting, but still support working without Internet available.
 
 As a side note, it is not possible for non-rooted Android devices to change the clock of the device, except with manual input in the setting menu.
 For this reason we will not synchronize our clocks on the devices, but rather find the offset between the clock on a given device, and the clock of the \ac{NTP}-server or master.

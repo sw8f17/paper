@@ -3,7 +3,7 @@
     %hope for the best is not feasable
     %To make psychoacoustic effects reality we need farily accurate manipulation depending on effect
     %Audible sync is not the same as clock synchronization, a slight desync in clocks may actually cause psychoacoustic effects (precedence effect), essentially providing us with an acceptable threshold for desynchronization.
-Simply sending playback commands between devices and hoping they are received fast enough to not disrupt the audible synchronization, is not a reliable solution and as such synchronization is important to the application.\mnote{What a sentence}
+Simply sending playback commands between devices and hoping they are received fast enough to not disrupt the audible synchronization, is not a reliable solution and as such synchronization is important to the application.
 An important distinction to make when discussing synchronization for our application is the difference between audible synchronization and clock synchronization.
 In order to control multiple devices at the same time, they should be able to execute commands simultaneously.
 Since the commands sent are not instantaneous, and other complications can delay their retrieval, one can send the command, and a time-stamp in the future for when it should be executed.
