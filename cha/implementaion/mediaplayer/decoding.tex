@@ -23,6 +23,7 @@ precision and control we desire.
 
 Instead we decide to transfer the sound data as raw \ac{PCM} encoded
 byte arrays. \ac{PCM} data is directly related to audio produced, making
+<<<<<<< HEAD
 arbitrary slicing and complex mixing possible. This control comes with the cost of space,
 as raw \ac{PCM} data is uncompressed. Sending the decoded
 \ac{PCM} data over the wire makes it simple to slice it as we see fit,
@@ -99,7 +100,7 @@ The next part of this section will dive into how these parts work, we will expan
 		\draw[-] (pc) -- (d);
 		\draw[-] (pc) -- (p);
 	\end{tikzpicture}
-	\caption{Overview of the \code{MediaPlayer}}\label{fig:mediaplayerParts}
+	\caption{Overview of the \code{MediaPlayer}.}\label{fig:mediaplayerParts}
 \end{figure}
 
 \subsection{Decoder}
@@ -202,7 +203,7 @@ decoding just discussed creates a diagram as shown in
 			\draw[-] (mf) -- (ml);
 		\end{tikzpicture}
 	}
-	\caption{Overview of the \code{MediaPlayer}, with detailed decoding}\label{fig:mediaplayerPartsdecoding}
+	\caption{Overview of the \code{MediaPlayer}, with detailed decoding.}\label{fig:mediaplayerPartsdecoding}
 \end{figure}
 
 \subsection{Playback Control}\label{subsec:playbackcontrol}
