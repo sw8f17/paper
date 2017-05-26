@@ -1,29 +1,29 @@
 In this chapter we explore some key elements in the development of our application related to the playback of audio data.
 The chapter includes our decisions, the reasoning behind them, some of the complications we encountered and how we dealt with them.
-Before we present the implementation and what that entails, we firstly present some audio data terminology, as well as the Android sound stack, as this domain knowledge is used in our implementation.
+Before we present the implementation and what that entails, we firstly present some audio terminology, as well as the Android sound stack, as this domain knowledge is used in our implementation.
 
 \section{Audio Terminology}
 \begin{description}
     \item [Sample Rate]\cite{sample_rate_std} \hfill \\
     Sample rate is the number of audio samples per channel per second.
-    The rate may vary from file to file with $44,100\ Hz$ being the de facto and most supported sampling rate.
+    The rate may vary from file to file with $44,100$ Hz being the de facto and most supported sample rate.
     \item [Bit Depth]\cite{bit_depth} \hfill \\
-    Bit depth is largely dependant on the data encoding used, and if relevant also described alongside sample rate, e.g.\ a data rate of 44.1 kHz/16 translates to a sample rate of 44,100 and a bit depth of 16.
-    Bit depth is the numbr of bits used per sample.
-    In our project we work with MP3 and PCM encoding, and as such we are only concerned with these two formats.
+    Bit depth is the number of bits used per sample.
+    Bit depth is largely dependant on the data encoding used, and if relevant also described alongside sample rate, e.g.\ a data rate of $44.1$ kHz/$16$ translates to a sample rate of $44,100$ Hz and a bit depth of $16$ bit.
+    In our project we work with MP3 and \ac{PCM} encoding, and as such we are only concerned with these two formats.
     MP3 does not encode any bit depth in its data, as such the bit depth for the \ac{PCM} data depends on the decoder settings.
-    As for PCM, this does contain bit depth data, and once again this may differ for each file with 16 and 24 bit both being common with 16-bit being the standard for CD, both Blu-ray and DVD also supports 24-bit.
+    As for \ac{PCM}, this does contain bit depth data, and once again this may differ for each file with 16 and 24 bit both being common with 16-bit being the standard for CD, both Blu-ray and DVD also supports 24-bit.
     \item [Channels]\cite{channels} \hfill \\
-    Channels refer to the number of audio tracks a file contains, this can be divided into three classes: Monaural Sound (Mono), Stereophonic Sound (Stereo) and Surround/Multichannel Sound.
-    Mono contains a single audio track, stereo contains two audio tracks, and anything beyond that can be considered multichannel.
+    Channels refer to the number of audio tracks a file contains, this can be divided into three classes: Monophonic Sound (Mono), Stereophonic Sound (Stereo) and Surround/Multichannel Sound.
+    Mono contains a single audio track, stereo contains two audio tracks, and anything beyond that are considered multichannel.
     Stereo is the most common of the aforementioned classes.
     The number of channels also affects the bit rate.
     \item [Bit Rate]\cite{bit_rate} \hfill \\
     Bit rate, in respect to media, refers to the number of bits used per unit of playback time.
     Bit rate depends on both sample rate, encoding in the sense of bit depth, and number of channels in that it is calculated by $sample rate \times bit depth \times channels$.
     \item [Frame Size]\cite{audioformat} \hfill \\
-    A frame is defined as all the data that belongs to one sampling interval, for PCM data this also means that the frame rate is equal to the sample rate.
-    A frame is a collection of samples for a given time stamp, meaning for mono one frame contains one sample, for stereo two etc., in android these are referred to as audio frames.
-    The size of a frame, for PCM, is equal to $sample rate \times channels$.
+    A frame is defined as all the data that belongs to one sampling interval, for \ac{PCM} data this also means that the frame rate is equal to the sample rate.
+    A frame is a collection of samples for a given time stamp, meaning for mono one frame contains one sample, for stereo two etc., in Android these are referred to as audio frames.
+    The size of a frame, for \ac{PCM}, is equal to $sample rate \times channels$.
 \end{description}
 

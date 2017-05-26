@@ -7,15 +7,15 @@ component, namely the \code{android.media.MediaPlayer}, is used to
 control the playback of audio streams.
 
 The \code{MediaPlayer} is a high level Android framework component,
-which takes media files and plays them back using the standard android
+which takes media files and plays them back using the standard Android
 audio path. It also provides control over the playback functions, such
 as \code{seekTo}, \code{start} (commonly known as play), and
 \code{pause}. The mediaplayer is squarely aimed at fulfilling the
-requirements of most common usecases for most apps. Without providing
+requirements of most common use cases for most apps, without providing
 guarantees about timing and accuracy.
 
-MP3 files are not stored in a format directly relatable to time, and
-is neither directly playable, nor can they be sliced arbitrarily to make
+The MP3 format is not directly relateable to time, and are
+neither directly playable, nor can they be sliced arbitrarily to
 facilitate simple data transfer. In fact, even though MP3 files are
 naturally decomposed into chunks, you need multiple chunks to start the
 playback. These things together make it difficult to stream MP3 with the
@@ -23,24 +23,30 @@ precision and control we desire.
 
 Instead we decide to transfer the sound data as raw \ac{PCM} encoded
 byte arrays. \ac{PCM} data is directly related to audio produced, making
-arbitrary slicing and complex mixing possible. Since the \ac{PCM}
-encoded data is what the soundcard accepts. We would have to decode into it
-at some point, which makes transferring it directly over the network
-a simple choice.
+arbitrary slicing and complex mixing possible. This control comes with the cost of space,
+as raw \ac{PCM} data is uncompressed. Sending the decoded
+\ac{PCM} data over the wire makes it simple to slice it as we see fit,
+but also apply interesting effects, such as separating the left and
+right channel.\tnote{Skal vi måske forklare bytelayoutet her, altså at det typisk i stereo PCM er left channel, så right channel og så gentag for hver sample? Så det er klart for læseren hvorfor dette er muligt?}
+Transferring a music file in standard CD quality
+($44,100$ Hz/$16$ bit/Stereo) requires a transfer-rate of 1.5Mbps, per
+client, which we deem reasonable for our network.
 
-To reuse as much of the functionality already provided by the sample, we
-replace the android \code{MediaPlayer} with one that we design and
+To reuse as much of the functionality already provided by the Google sample implementation described earlier, we
+replace the Android \code{MediaPlayer} with one that we design and
 control. Since the \code{MediaPlayer} is such a high level concept, we
 are able to interpret all the commands in a way that makes sense for
 synchronized playback.
 
-Conceptually the android \code{MediaPlayer} fulfills 3 separate
+Conceptually the Android \code{MediaPlayer} fulfills three separate
 responsibilities, with some ancillary responsibilities, that wont be
-touched on here: Decoding, playback control, and presentation. In our
+touched on here: decoding, playback control, and presentation. In our
 replacement we have structured them as can be seen on
-\cref{fig:mediaplayerParts}. The app interacts with the \code{PlayBack
+\cref{fig:mediaplayerParts}. The rest of the app interacts with the \code{PlayBack
 Control} which facilitates communication between the decoding and the
 presentation.
+
+The next part of this section will dive into how these parts work, we will expand this figure, \cref{fig:mediaplayerParts}, to clearly show the changes.
 
 \tikzset{%
 	presentationNode/.style = {%
@@ -54,12 +60,15 @@ presentation.
 	},
 	presentationNodebg/.style = {%
 		fill=GoogleYellow!40,
+		dashed,
 	},
 	playbackNodebg/.style = {%
 		fill=GoogleOrange!40,
+		dashed,
 	},
 	decodingNodebg/.style = {%
 		fill=GoogleLightGreen!40,
+		dashed,
 	},
 }
 
@@ -106,25 +115,26 @@ waits. For this reason Java, a high level language, does not fit the
 problem well, due to its high CPU overhead. For this reason, and because
 a free and complete library exists, we opted to go with the C library
 libmpg123 to do the decoding.\ libmpg123 includes many optimizations in
-hand coded assembly for many different architectures, with and without
+hand coded assembly for many different processor architectures, with and without
 floating point processors, and a general purpose C implementation, where
 none of the hand optimized procedures apply. For this reason it is an
-excellent choice for a fragmented ecosystem like android, where many
+excellent choice for a fragmented ecosystem like Android, where many
 different CPU architectures and configurations have to be supported.
 
 As said, the library is written for use in C. Fortunately Java has
 support for calling native C and C++ libraries to Java objects, with
-something called the \ac{JNI}. To connect libmpg123 we write a thin
+something called the \ac{JNI}, which we mentioned previously in how it relates to the Android audio stack in \cref{sec:androidaudiostack}.
+To use libmpg123 we write a thin
 layer which converts the data from Java methods and object parameters,
 and passes it to the appropriate libmpg123 methods, with the expected
 datatypes. Since libmpg123 has support for opening and processing
 multiple files simultaneously, we create a separate object to hold the
-file instance. This leaves us with two classes, the \code{MP3Decoder}
-and the \code{MP3File}.\jjnote{I don't like how this turned out. Maybe
-there's something better?} The \code{MP3Decoder} has the responsibility
-of resolving android content URLs into file descriptors, opening them
+file instance. In our Java code we create a handle to the decoder called, \code{MP3Decoder}, 
+and a handle to each MP3 file called \code{MP3File}.
+The \code{MP3Decoder} has the responsibility
+of resolving Android content URLs into file descriptors, opening them
 with libmpg123, and filling out an object containing the media
-information of the file. When a mp3file is opened a \code{MP3File}
+information of the file. When a MP3 file is opened a \code{MP3File}
 object is returned, which has methods for reading from the MP3 file one
 frame at a time. To keep the decoding snappy, we have opted to keep as
 much of the data as possible in native C structs, which is associated
@@ -201,9 +211,9 @@ The decoder is a passive component. It is only active while
 processing a request from the active component owning it. In other
 words, it does not run if no method is invoked. That means it requires
 something else to drive the decoding. To better facilitate the
-disconnected nature of playback required for multiple devices which will be discussed later in \cref{cha:communication}, 
-we want to establish an
-ideal virtual player, which wont be tied up to the playback speed of the
+disconnected nature of playback required for the multiple playback
+milestone, discussed later in \cref{cha:communication}, we want to establish an
+ideal virtual player, which will not be tied up to the playback speed of the
 underlying presentation component, but will instead schedule audio to
 play based on the time to play a single MP3 frame worth of bytes, which
 is given by the formula~\ref{eq:ntpb}.\ sampleSize in this equation is
@@ -217,7 +227,7 @@ encoded \ac{PCM} data, this value is $4$.
 	\end{split}
 \end{equation}
 
-By calculating the time to play the bytes, instead of relying on the
+By calculating the time it takes to play an amount of bytes, instead of relying on the
 presentation component, we get an authoritative player, which we can
 reliably control and tweak to fit the network, even if the master
 devices presentation component has faults, such as playing too quickly
@@ -234,10 +244,10 @@ a direct communicator between the decoder and the presentation.
 
 The virtual player works by running a periodic task every calculated
 frame time. At that time it calculates the current ``correct'' playhead
-position, and schedules frame into the presentation component, until
-preload condition if filled. One possible preload condition could be
-that we must have scheduled 3 MP3 frames ahead of the current playback
-position.
+position, and schedules frames into the presentation component, until
+a preload condition is fulfilled. One possible preload condition could be
+that we must have scheduled three MP3 frames ahead of the current playback
+position. However many other possible preload conditions could be used.
 
 \begin{figure}[ht]
 	\centering
@@ -310,35 +320,35 @@ position.
 
 The presentation component is where the audio is scheduled for playback
 at a specific time, and then eventually presented to the listener at the
-correct time.
+correct time. It primarily consists of two parts: The Audio Sink, and The Audio Mixer.
 
 \subsubsection{Audio Sink}\label{subsubsec:audiotrack}
 
-The \code{AudioTrack}, an android framework component, accepts audio
+The \code{AudioTrack}, an Android framework component, accepts audio
 written into a limited buffer and plays it at a steady, configurable
-rate. Although for it is actively pushing data from its internal buffer
-to the native soundcard buffer, the api that faces user apps is passive.
+rate. Even though it is actively pushing data from its internal buffer
+to the native soundcard buffer, the API that faces user apps is passive.
 To add data the app has to call a write method, which will write the
 buffer to the internal \code{AudioTrack} buffer. This means that the app
-will have to keep track of when the audiotrack buffer is missing data,
+will have to keep track of when the \code{AudioTrack} buffer is missing data,
 and fill it back up, to avoid a buffer underflow, which manifests itself
 as a pop in the audio for the listener. Since the underlying
-\code{AudioTrack} and the virtual player might not be in sync, we can not
+\code{AudioTrack} and the virtual player might not be in sync, we cannot
 feed it with the data directly from that. We would much rather have an
 active interface that can query for new data, we call that interface
 Audio Sink. The Audio Sink component is a thin wrapper around the
-\code{AudioTrack} which converts the passive write api into an active
-read based api which will ask for new data when necessary, specifying
+\code{AudioTrack} which converts the passive write API into an active
+read based API which will ask for new data when necessary, specifying
 with it the precise time that the new audio will be presented.
 
 To help keep track of the playback position the \code{AudioTrack}
 component includes functionality for periodic callback. We configure
 that to fire every half buffer size, to effectively get double buffering
 in the audio buffer. When around half of the buffer is gone, since it is
-asynchronous we can not be sure, we calculate the available space in the
+asynchronous we cannot be sure, we calculate the available space in the
 buffer. We want to queue more audio into that free space, but because we
 are double buffering we also have to take into account the time it takes
-to play the remaining buffer data when we determine what to queue up.
+to play the remaining buffer data when we determine what to queue up.\tnote{Vi kunne evt. lave en figur til at forklare dette?}
 \code{AudioTrack} provides a convenient \code{getTimestamp} method which
 gives you the \code{nanoTime} a specific frame was presented. From those
 datapoints, the time we want to get audio for and how many samples we
@@ -361,8 +371,32 @@ provided by the virtual player. The mixer knows what time the start of
 the array represents, and can therefore calculate the point in time any
 sample in the array corresponds to. It does the reverse operation in
 order to determine the sample to start at for a given time. Adding the
-audiomixer into the diagram we get what can be seen in
+audio mixer into the diagram we get what can be seen in
 \cref{fig:mediaplayerPartspresenter}
+
+\subsubsection{Playback Control Back-end}
+
+For streaming to other devices we want to share as much code as
+possible. From the design we observe that the presentation is what needs
+to be replicated on multiple devices. In other words, a loose coupling
+between the playback controller and the presentation layer can
+facilitate code reuse between the master and the slaves. To loosen the
+coupling we split the Playback Control into a intent parsing part, and
+an action executing part. The intent parsing, or the front-end, only
+needs to operate on the server and coverts the intention of the user
+into concrete distinct actions. The executing part, or the back-end,
+takes these actions and schedules them for execution at the appropriate
+time, specified by the front-end. As long as we can serialize the
+actions between the front-end and the back-end we can send the actions
+directly to the slaves, and allow their back-end to execute them using
+their own strategy.
+
+The specific actions we have identified are as follows: Play, Pause,
+MediaChange, and PlayFrame. PlayFrame is the only different action, since
+it is not handled by the same code-path as the other actions. Instead the
+PlayFrame command is handed off to the AudioMixer, where the frame of
+sound gets scheduled. The back-end has also been added to
+\cref{fig:mediaplayerPartspresenter}.
 
 \begin{figure}[ht]
 	\centering
@@ -424,21 +458,23 @@ audiomixer into the diagram we get what can be seen in
 
 			\draw[-] (pc) -- (vp);
 
-			\node[presentationNode] (pm) [below right=1cm and 1cm of pc] {AudioMixer};
-			\node[presentationNode] (ps) [right=0.5cm of pm] {AudioSink};
+			\node[presentationNode] (pb) [below right=1cm and 1cm of pc] {PC Back-end};
+			\node[presentationNode] (pm) at (ml -| pb) {AudioMixer};
+			\node[presentationNode] (ps) [right=0.5cm of pb] {AudioSink};
 
 			\node[presentationNode] (pl) at (ml -| ps) {AudioTrack};
 
 			\begin{pgfonlayer}{background}
-				\node[presentationNodebg] (p) [container={(pm) (ps) (pl)}] {};
+				\node[presentationNodebg] (p) [container={(pb) (pm) (ps) (pl)}] {};
 				\node[textonly] () [above left] at (p.south east) {Presenter};
 			\end{pgfonlayer}
 
 			\coordinate (phit) at (pm |- p.north);
 
 			\draw[-] (pc) -- (phit);
-			\draw[-] (phit) -- (pm);
-			\draw[-] (phit) -- (ps);
+			\draw[-] (phit) -- (pb);
+			\draw[-] (pb) -- (ps);
+			\draw[-] (pb) -- (pm);
 			\draw[-] (ps) -- (pl);
 		\end{tikzpicture}
 	}
