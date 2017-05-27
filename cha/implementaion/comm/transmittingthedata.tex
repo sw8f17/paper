@@ -14,11 +14,11 @@ The goal is for data transmission of various data types to have the least amount
 We have two types of data to transmit between the devices: music data, and commands.
 Music data is parts of the song itself which is transmitted to the devices,
 and the commands are the play, pause, stop, etc.\ commands sent from the master device to the slaves.
-We need a method to send these two kinds of data between the devices in an efficient way,
+We need a method to efficiently send these two kinds of data between the devices,
 to limit the amount of data transferred between the devices.
 We desire to minimize two kinds of overhead: The size of the data, and the processing power used for serializing and deserializing.
-To do this we want to use a well defined, mature, and well supported technology to do it.
-Furthermore the data does not need to be human readable.
+To do this we want to use a well-defined, mature, and well-supported technology to do it.
+Furthermore, the data does not need to be human readable.
 
 \bigskip
 To fulfill the requirements stated above, we have found two interchange formats: Protocol Buffers and Cap'n Proto.
@@ -27,7 +27,7 @@ To fulfill the requirements stated above, we have found two interchange formats:
 
     \item[Protocol Buffers] \hfill\\
 Protocol Buffers, also called protobuf, are made by Google, and is a language and platform neutral interchange format.
-protobuf works by us defining the way the data should be structured in their format, this definition is then used to generate source code which can read and write the data to and from streams.\cite{protobuf}
+Protobuf works by us defining the way the data should be structured in their format, this definition is then used to generate source code which can read and write the data to and from streams.\cite{protobuf}
 Google supports protobufs for C++, C\#, Go, Java and Python, but nothing stops usage in other languages\cite{protobuf}.
 
 \item[Cap'n Proto] \hfill\\
@@ -55,9 +55,9 @@ According to the roadmap of Cap'n Proto, there is still testing needed to be don
 Protobuf and Cap'n Proto are both language and platform neutral interchange formats.
 Cap'n Proto is a bit faster than protobuf, but protobuf is more mature and official supports many languages.
 We value maturity high, since we need stability but speed is also important.
-protobuf is still fast, and we estimate that the extra speed we could get with Cap'n Proto would not make a big difference of the performance of the app.
+Protobuf is still fast, and we estimate that the extra speed we could get with Cap'n Proto would not make a big difference of the performance of the app.
 
-We deem that Cap'n Proto still need some development, so therefore we choose to use protobuf.
+We deem that Cap'n Proto still need some development, so we choose to use protobuf.
 
 \subsection{Establishing a Persistent Socket}
 
@@ -99,7 +99,7 @@ The protobufs we use can be separated into three groups: meta-data, commands and
     \item[Commands] \hfill \\
         Commands are used to change the playback on other devices.
         All commands contain a timestamp at which the given command should occur.
-        In total we have the following commands:
+        In total, we have the following commands:
         \begin{description}
             \item[PlayCommand] \hfill\\
                 Used to start audio playback.
@@ -126,7 +126,7 @@ When we designed the system we ran into a few issues, when it came to sending th
 Firstly we did not know which message we would be receiving next.
 Secondly we did not know what length the next message would have.
 This is a problem since, we would not know when to stop reading from the network connection, and start processing the data.
-Additionally we would not know how to process the data.
+Additionally, we would not know how to process the data.
 
 To solve these issues, we add two integers to each message we send.
 The first integer are assigned to each of the protobufs, such that the receiver knows which message it is.

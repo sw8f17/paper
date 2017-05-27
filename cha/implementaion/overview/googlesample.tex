@@ -10,19 +10,20 @@ These basic building blocks of an Android application are: activities and servic
 An \code{Activity} is the primary point of interaction between an application and user.
 Each different screen presented to the user is considered a different activity in the application, the media player we use have a fairly limited amount of activities, with \code{MusicPlayerActivity} being the main activity.
 
-The \code{MusicPlayerActivity} holds a instance of \code{MediaController} and \code{MediaBrowser}, which facilitate browsing media and basic playback control features.
+The \code{MusicPlayerActivity} holds an instance of \code{MediaController} and \code{MediaBrowser}, which facilitate browsing media and basic playback control features.
 All activities in our app uses various views, i.e.~layouts and such. These are \ac{UI} elements and definitions, which describes how the app should look.
 Most activities inherit from the \code{BaseActivity}, which also includes a \ac{UI} fragment embodying basic playback controls, thereby giving consistency during usage of different activities in the app.
 A media player is rarely an application for which an activity is kept active.
 An activity has three states, foreground, visible, and background.
 Having an application run, without its activity visible would be considered a background activity, however these are killable, and by extension so is the process.
-For simplicity we will consider leaving an app having no activity in the visible or foreground state.
+For simplicity, we will consider leaving an app having no activity in the visible or foreground state.
 As such, we need some other way to keep the application alive, such that the application can be allowed to play music, without an activity being either in the state foreground or visible.
 To do so we use a service.
 
 
 \subsubsection{Service}\label{subsec:services}
 A service is used to keep an app running in the background for any reason.
+E.g.~to keep a persistent connection with a server, or to play music without the need for the screen to be active.
 They serve to allow apps to perform long-running operations, which happens to be exactly what a media player does.
 
 There are two primary distinctions between services, started services and bound services.

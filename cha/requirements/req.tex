@@ -12,9 +12,9 @@ The technical requirements are concerned with features relevant for how the devi
         Active use of the application, i.e.~when devices are communicating in order to play audio, is referred to as a ``session''.
 
     \item\label{req:host_control} \textbf{The device which starts the session, i.e.~session master, must be able to assume playback control of all devices in the session, i.e.~volume control, pause, resume, change media, seek.} \hfill\\
-        This requirements relates to both psychoacoustic effects and \cnameref{sec:category_increase_volume_and_area}.
+        These requirements relates to both psychoacoustic effects and \cnameref{sec:category_increase_volume_and_area}.
         The session master should be able to control playback to ensure that devices are playing the same media, and obtain the desired psychoacoustic effects.
-        Furthermore some psychoacoustic effects may require that one device controls the volume across any connected devices as the relative volume affects the psychoacoustic effects.
+        Furthermore, some psychoacoustic effects may require that one device controls the volume across any connected devices as the relative volume affects the psychoacoustic effects.
 
         Under normal circumstances each individual device in a session should have control of their own volume and whether they are playing or not, however if the volume affects the desired psychoacoustic effect then the session master may assume control of volume on any device in the session.
 
@@ -45,8 +45,8 @@ The technical requirements are concerned with features relevant for how the devi
 
     \item\label{req:manipulate} \textbf{The application should be able to manipulate the playback on each device separately.} \hfill\\
         As mentioned in the problem statement in \cref{cha:problem_statement}, the application must be able to manipulate the playback of the audio.
-        The manipulation refers to applying an offset to the playback on the respective devices such that the playback, can be adjusted to deal with device placement and to help achieving psychoacoustic effects.
-        Furthermore the manipulation may help acquire audible sync.
+        The manipulation refers to applying an offset to the playback on the respective devices such that the playback, can be adjusted to deal with device placement and to help achieve psychoacoustic effects.
+        Furthermore, the manipulation may help acquire audible sync.
 \end{eletterate}
 
 \subsection*{\ac{UX} Requirements}
@@ -83,13 +83,13 @@ The non-requirements are areas of the application where we do not wish to invest
 \begin{eromanrate}
     \item \textbf{Security} \hfill\\
     Security is one area in which we will not be focusing our efforts.
-    Within a session we choose to trust those that we connect with.
-    As such we will not be putting effort into security concerns.
+    Within a session we choose to trust those that we connect with,
+    as such we will not be putting effort into security concerns.
     \item \textbf{Resource Efficiency} \hfill\\
     Efficient use of resources, e.g.~energy and network, is not something we will be focusing on this project.
     Optimizations in resource usage might improve the quality of the application, but is trifling in order to find a solution to our problem statement.
     \item \textbf{Usability} \hfill\\
-    While we have some \ac{UX} requirements, these requirements relate to what is required if the application is to be published on the Play Store and be competetive with AmpMe and SoundSeeder.
+    While we have some \ac{UX} requirements, these requirements relate to what is required if the application is to be published on the Play Store and be competitive with AmpMe and SoundSeeder.
     Despite what that would require, we place usability as a non-requirement, as we would like to focus on the technical aspect, that is the synchronization of audio, rather than ensuring the support of multiple audio sources and other usability features.
     \item \textbf{Scalability} \hfill\\
     When mentioning scalability we consider both the number and type of the devices.

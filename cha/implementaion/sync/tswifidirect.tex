@@ -10,7 +10,7 @@ The response contains three timestamps: it sends the initial timestamp which it 
 From this the slave can note the timestamp when it receives the response, and thus it has all four timestamps, and can calculate its clock offset, $\theta$, relative to the master clock.
 
 Implementing this on the master is really simple, since it now is the master clock, the offset of it to the master clock is by definition zero.
-Additionally it has to receive the requests and respond to them.
+Additionally, it has to receive the requests and respond to them.
 This is done by registering a callback which will be called whenever a request comes in, then record the two timestamps, build the response, and send it back.
 
 The slave has to send the requests periodically, in order to avoid clock drift.

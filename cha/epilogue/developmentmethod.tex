@@ -9,7 +9,7 @@ In \cnameref{sec:ci} our \ac{CI} was described, as such we only mention this bri
 %Could do sections? \section{Scrum & Milestones}
 \section{Cherry Picking from Scrum}
 Throughout our development we used elements of Scrum to structure our development.
-From Scrum we attempted to make use of daily Scrum, Sprints, User Stories, and the Scrum Master and Product Owner roles.
+From Scrum, we attempted to make use of daily Scrum, Sprints, User Stories, and the Scrum Master and Product Owner roles.
 Each of the elements from Scrum served a specific purpose in our development:
 \begin{description}
     \item [Scrum Master] \hfill \\
@@ -81,7 +81,7 @@ The most significant gain from our use of Scrum have been our use of User Storie
 These two tools in particular have brought information sharing, and a daily recap of the progress made the previous day.
 This daily recap also ensured that any misconceptions or misunderstandings quickly were rooted out, and ensured that the group was in agreement when it came to priorities and goals.
 As such we consider our Scrum tools to have been worthwhile, even if they were executed without a structured use of Sprints.
-In a similar fashion as Sprints, the milestones provided an early structure for the development and overview of the project, however in the end its impact on our development has been negligible.
+Similary to Sprints, the milestones provided an early structure for the development and overview of the project, however in the end its impact on our development has been negligible.
 
 The remaining techniques and tools we have utilized for quality assurance, is also something we have been actively utilizing, with \ac{CI} being passive as it is automated.
 Reviews have been a consistent and beneficial requirement throughout the development of our project.
@@ -90,34 +90,3 @@ It has provided a more in-depth information sharing than Daily Scrum, and ensure
 Lastly our testing, while mostly informal and manual, have also been beneficial.
 In particular due to our quantitative tests providing us not only with requirements, but also lets us evaluate on our performance in comparison to applications on the market.
 The few automated tests we have, also lets us know that some of our integral methods work as intended, this in particular encompasses our time conversion methods.
-%%%% Disposition %%%%
-
-%How we use SCRUM
-    %Roles
-    %Sprints
-    %PlanningPoker
-
-%Milestones and how they work with SCRUM
-    %Provided an early overview of the major steps required to reach our goal, and also provided goals out of our reach to show where the project could potentially go given enough time.
-    %Not equivelant with Sprints
-    %Not really utilized that much in the end.
-
-%CI & Review structure
-    %Ref CI chapter and focus on review structure
-    %The use of github pull requests for review
-    %Review requirements
-        %we did not formalize any requirements this time, many pull requiests have only 1 reviewer, particularly in the application repo.
-
-%Our Approach to testing
-    %SOTA testing
-        %Python Scripts
-    %Testing our application
-        %Smoke tests untill finished product essentially
-        %Using the same tests as for SOTA to evaluate the our app vs sota apps
-    %Testing during development
-        %Can it build? pretty much it %TK: Nærmere, lyder det ok? Så accept.
-        %Barely any tests during development afaik?
-            %Time conversion math has been tested %TK: Vi har (måske) ikke beskrevet dette, så hvis du vil skrive ang. at teste det så skal du også forklare det.
-            %Not really any testing beyond that other than smoke tets
-                %Communication tests between two devices can not really be performed in the same style as unit tests
-        %Uppaal used to solve an issue, could unit tests have helped here? %TK: No, the problem was in threaded programming, unit tests are also only a single run (not testing ALL posibilites).

@@ -3,7 +3,7 @@ In order to perform tests for these criteria, we need to have a setup to do so.
 
 Testing the offset between two audio sources is a signal processing
 task. To make the signal processing easy and effective, a clear signal is
-needed. Additionally the signal needs to be synchronized between the
+needed. Additionally, the signal needs to be synchronized between the
 channels at recording time, since otherwise the analysis would be
 mislead by desync in the recording. Luckily most computers include
 a port for doing just that, a stereo microphone port.
@@ -22,13 +22,13 @@ An illustration of the test setup together with the jack cable can be seen on \c
 \end{figure}
 
 % Troels additions below
-Furthermore we limit our tests to a Master/Slave/Slave setup, that is;
+Furthermore we limit our tests to a master/slave/slave setup, that is;
 one phone acts as a master, and we perform the tests on two slaves
 connected to it. This makes the two devices under test as similar as
 possible, since neither has the reference sound.
-Ideally we would also record the reference, the Master, but since we only have two input channels that is not possible.
+Ideally we would also record the reference, the Master, but since we only have two input channels that is not possible.\msmnote{Did we though? Two slaves? Not with Scotty, I guarantee it.}
 
-In the tests we use three Android phones:
+In the tests we use three Android phones:\msmnote{Right phones?}
 \begin{dankscription}{\bfseries}{Master}
 	\item[Master]OnePlus One (Android 6.0.1, Kernel 3.4.112-cyanogenmod-g62d75e8)
 	\item[Slave 1]Moto X Style (Android 6.0.1, Kernel 3.10.84-perf-gb67345b)
@@ -57,7 +57,7 @@ a computationally intensive task, but due to the Convolution
 Theorem\cite{conv_theo}, it can be solved rather quickly with \ac{FFT}.
 The algorithm to calculate the \ac{FFT} of the audio offset thus becomes
 doing a \ac{FFT} on one of the signals, and multiplying the results with
-a time reversed \ac{FFT} of the other. Finally we do an inverse \ac{FFT}
+a time reversed \ac{FFT} of the other. Finally, we do an inverse \ac{FFT}
 to get the actual correlation value. The index of the maximum value is
 the sample offset which gives the best correlation.
 By multiplying the
@@ -80,7 +80,7 @@ compromised, or at least in need of adjustment. We use the delay
 measuring script above, along with a standard AUX cable,
 and the test song in mono, to detect the delay
 between the left and right channel. In our equipment the delay is 0 ms
-consistently, which means the results wont be tainted by inter-stereo
+consistently, which means the results will not be tainted by inter-stereo
 delay.
 
 \subsection{Audio Test Artifact}\label{subsec:audiotestartifact}
@@ -110,7 +110,7 @@ master and wait for the app to resume playback.
 
     \item[SoundSeeder] \hfill\\
 SoundSeeder does require the devices to be able to connect directly. We
-fulfilled that requirement by having the master serve a ad-hoc hotspot,
+fulfilled that requirement by having the master serve an ad-hoc hotspot,
 which allowed the devices to connect, while keeping the slaves
 similarly configured. SoundSeeder does not require a song to be playing
 for the slaves to connect. For the tests we connect the slaves to the master,

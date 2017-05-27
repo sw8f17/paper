@@ -1,9 +1,4 @@
 \chapter{Synchronization Approaches}\label{cha:sync}
-%What is the importance of synchronization to us
-    %hope for the best is not feasable
-    %To make psychoacoustic effects reality we need farily accurate manipulation depending on effect
-    %Audible sync is not the same as clock synchronization, a slight desync in clocks may actually cause psychoacoustic effects (precedence effect), essentially providing us with an acceptable threshold for desynchronization.
-
 Hoping to achieve synchronization by just sending music data and a command to play is naïve, and we do not expect it to work.
 Since synchronization is central to our app, we must perform some kind of synchronization.
 An important distinction to make when discussing synchronization for our application is the difference between audible synchronization and clock synchronization.
@@ -12,7 +7,6 @@ Since the commands sent are not instantaneous, and other complications can delay
 This however requires the devices to either have their clocks synchronized or at least know the relative difference.
 The accuracy of the clock synchronization will also determine the degree to which we can manipulate playback to achieve psychoacoustic effects should we reach this milestone.
 This chapter explores and evaluates the methods we have considered using.
-%Why is sync of such importance?
 
 In that audible synchronization is the goal for the application, this also means that precision in the range of milliseconds is sufficient, furthermore solving clock synchronization is also in accordance with requirement \ref{req:sync} in \cnameref{cha:requirement_elicitation}.
 
@@ -28,7 +22,7 @@ In this section we will describe, discuss, and compare the following methods of 
 \end{multicols}
 In order to change the actual clock on Android, the phone either requires user interaction to do so manually, or it must be rooted such that an application can do so.
 While we placed usability as a non-requirement, we cannot expect users to root their device as, depending on country, it may violate copyright, warranty, and/or terms on service on the phone.
-As such we will strictly speaking not be synchronizing the clocks, rather we will keep track of the offset of each device to the source we want to synchronize with.
+As such we will technically not be synchronizing the clocks, but rather keep track of the offset of each device to the source we want to synchronize with.
 
 \subsubsection{GPS}
 %https://spectracom.com/resources/essential-education/gps-clock-synchronization
@@ -41,9 +35,9 @@ After testing this, by developing an application to retrieve time from GPS, it w
 Another possible method is to use the audio to synchronize.
 This would have every device attempt to synchronize based on their perception.
 This method introduces several issues to be addressed, first there would be a ramp up time for the devices to figure out synchronization.
-Furthermore adding more devices to the network introduces more complexity as each introduces a new audio source, and with each device figuring out their own synchronization it is unlikely that the devices are synchronizing towards the same source.
+Furthermore, adding more devices to the network introduces more complexity as each introduces a new audio source, and with each device figuring out their own synchronization it is unlikely that the devices are synchronizing towards the same source.
 While this may not have an effect on humans given only a few milliseconds of variance, due to psychoacoustic effects, it complicates the synchronization of the devices and our possible manipulation.
-Additionally the audio stack on Android will not act in the same way with regard to timing on every device, which we will explain in further detain in \cnameref{sec:androidaudiostack}.
+Additionally, the audio stack on Android will not act in the same way with regard to timing on every device, which we will explain in further detain in \cnameref{sec:androidaudiostack}.
 
 \subsubsection{\acl{NTP}}
 The last two options we are considering are to use existing protocols used for synchronization, one of which is \ac{NTP}.
@@ -57,7 +51,7 @@ The idea here would be for each device to keep track of their own offset relativ
 \subsubsection{\acl{PTP}}
 While \ac{NTP} requires internet to poll the \ac{NTP} hierarchy, \ac{PTP} is designed for LAN.
 \ac{PTP} on the other hand uses the \ac{BMC} algorithm to determine a master and thereby disallowing us from making this decision.
-If we are to use \ac{PTP} each device would keep track of their offset towards the master.
+Were we to use \ac{PTP} each device would keep track of their offset towards the master.
 While \ac{PTP} has an expected accuracy in the nanoseconds, contrary to NTP's up to tens milliseconds, this is due to the LAN design.
 This expected accuracy is also with a cable connection, with wireless, which we are using, it is not expected to have a precision in nanoseconds, rather the performance is expected to be similar to \ac{NTP}.
 
@@ -71,7 +65,7 @@ In \cref{tab:pros_cons_sync} the pros and cons of the different synchronization 
 
 Unfortunately the GPS time features used in Android makes it such that GPS is not a feasible solution, since the precision is not expected to be able to fulfill requirement \ref{req:manipulate} from \cref{cha:requirement_elicitation}, which leaves us with four other possible solutions.
 
-We believe that all of the last three solutions could solve the issue and provide sufficient clock synchronization, and fulfilling requirement \ref{req:manipulate} from \cref{cha:requirement_elicitation}.
+We believe that any of the last three solutions could solve the issue and provide sufficient clock synchronization, and fulfilling requirement \ref{req:manipulate} from \cref{cha:requirement_elicitation}.
 However, as explained in the presentation of the audio synchronization this is comparatively far more complex to do than either of the two protocols we have mentioned.
 With our initial milestone being basic synchronization, we do not wish to overly complicate it, as such our initial solution will not be utilizing audio for synchronization.
 Despite us not using it initially, it may be worth reconsidering or perhaps looking into a hybrid solution for the advanced synchronization milestone, in the case that we get so far in the development process.
@@ -97,9 +91,9 @@ While we have no proof of better or worse performance for the two, the maturity 
 With the choice of synchronization method landing upon \ac{NTP}, we take a closer look at it, specifically in regard to \ac{SNTP}.
 As the name suggests \ac{SNTP} is based upon \ac{NTP} but vastly simplified, \ac{SNTP} trades accuracy and drift alleviation for simplicity and reduced resource requirements.
 \ac{SNTP} was developed as an \ac{NTP} alternative for small computers and micro-controllers, where smartphones happens to fit that description.
-Furthermore we would not be taking full advantage of the utilities \ac{NTP} provides over \ac{SNTP} resulting i needless complexity.
+Furthermore, we would not be taking full advantage of the utilities \ac{NTP} provides over \ac{SNTP} resulting i needless complexity.
 In reality, \ac{SNTP} is actually a better fit than \ac{NTP} considering how we want to use it.
-In order to understand why, first let us consider some of the major advantages which makes \ac{NTP} more accurate than \ac{SNTP} and why they are of little benefit to our use case.\cite{sntp_ntp}
+In order to understand why, first let us consider some major advantages which makes \ac{NTP} more accurate than \ac{SNTP} and why they are of little benefit to our use case.\cite{sntp_ntp}
 \begin{description}
     \item [Clock Skew] \hfill \\
     Part of the algorithms \ac{NTP} incorporates are designed to alleviate clock skew.
@@ -110,7 +104,7 @@ In order to understand why, first let us consider some of the major advantages w
     \item [Seamless Adjustments] \hfill \\
     Similarly to how drift alleviation works, the same technique is used by \ac{NTP} for when the clock is only slightly out of sync, this way a step in time is not introduced, i.e. the clock does not jump, which is how \ac{SNTP} synchronizes the clock.
     \item [Multiple Time References] \hfill \\
-    Lastly \ac{NTP} queries multiple time servers for the clock, and through its algorithms determines which ones to use, and then averages these to find the time, whereas \ac{SNTP} simply queries one server, is the server unavailable it asks another.
+    Lastly \ac{NTP} queries multiple time-servers for the clock, and through its algorithms determines which ones to use, and then averages these to find the time, whereas \ac{SNTP} simply queries one server, is the server unavailable it asks another.
     This is the part of \ac{NTP} which would have the largest impact on our specific use case.
 \end{description}
 

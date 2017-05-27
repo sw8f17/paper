@@ -1,20 +1,16 @@
 %vim: fo-=t
 \section{Android Apps}\label{sec:sota_apps}
 In this section we investigate the state of the art of synchronized streaming of music between different wirelessly connected mobile devices.
-We found two apps capable this:
-\begin{itemize}
-    \item SoundSeeder
-    \item AmpMe
-\end{itemize}
+We found two apps capable of this, \textit{SoundSeeder} and \textit{AmpMe}
 
-These apps are found by searching through sources like Google\footnote{\url{https://www.google.dk} with the search terms ``android sync music playback''}, YouTube\footnote{\url{https://www.youtube.com/} with same search terms as on Google}, and Google Play Store\footnote{\url{https://play.google.com/store}} and from recommendations on various forums.
-An additional criteria for an app to be considered here is that the app must not be abandoned by the developers,
+These apps were found by searching through sources like Google\footnote{\url{https://www.google.dk} with the search terms ``android sync music playback''} and Google Play Store\footnote{\url{https://play.google.com/store}}; and from recommendations on various forums.
+An additional criterion for an app to be considered here is that the app must not be abandoned by the developers,
 which we defined as being without an update since 2013, and being incompatible with new devices.
 
 To clarify, Google Play Store is the official place to install or buy apps for Android.
 
 Both of the apps use a master/slave connection and use different terms for their setup.
-For clarification we generalize these terms.
+For clarification, we generalize these terms.
 We call the device which selects the music and streams it, the master, and the devices which connects to the master (SoundSeeder calls it ``Speaker''), are referred to as slaves.
 
 \subsection{SoundSeeder}\label{subsec:soundseeder}
@@ -37,8 +33,7 @@ If it finds the device, it connects automatically.
 It can take a bit of time for the slave device to find the master device, which can seem confusing and make users think they need to connect manually with an IP address.
 
 The process of joining, when the slave is given the time, is rather simple.
-The user interface is clotted with features and menus, which makes the app hard to navigate.
-The user interface of the app looks and feels outdated, i.e.\ not following the same design guidelines as newer and more popular apps.
+The user interface is clotted with features and menus, which makes the app hard to navigate; and it looks and feels outdated, i.e.\ not following the same design guidelines as newer and more popular apps.
 
 SoundSeeder streams music via Wi-Fi,
 which means that all phones have to be on the same network\cite{soundseether_faq}, it is also possible to use an ad-hoc network (Android Hotspot).
@@ -49,7 +44,7 @@ The supported media formats further depend on the used master device and its And
 SoundSeeder synchronizes the audio playback when a slave connects, but it can also be done manually on the slave device.
 On \cref{fig:soundseeder_slider}, the manual synchronization adjustment for SoundSeeder can be seen.
 This slider is used in the case that the music is not fully synchronized, and goes from $-400 ms$ up to $+400 ms$, in $10 ms$ increments.
-Additionally there is an auto synchronization button in the top menu and on the slider menu window.
+Additionally, there is an auto synchronization button in the top menu and on the slider menu window.
 
 SoundSeeder is free to install but the free version only allows two slave devices to connect for up to 15 minutes at a time.
 The app license costs 39.90 DKK\@.

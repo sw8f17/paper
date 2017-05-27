@@ -21,7 +21,7 @@ naturally decomposed into chunks, you need multiple chunks to start the
 playback. These things together make it difficult to stream MP3 with the
 precision and control we desire.
 
-Instead we decide to transfer the sound data as raw \ac{PCM} encoded
+Instead, we decide to transfer the sound data as raw \ac{PCM} encoded
 byte arrays. \ac{PCM} data is directly related to audio produced, making
 arbitrary slicing and complex mixing possible. This control comes with the cost of space,
 as raw \ac{PCM} data is uncompressed. Sending the decoded
@@ -38,7 +38,7 @@ are able to interpret all the commands in a way that makes sense for
 synchronized playback.
 
 Conceptually the Android \code{MediaPlayer} fulfills three separate
-responsibilities, with some ancillary responsibilities, that wont be
+responsibilities, with some ancillary responsibilities, that will not be
 touched on here: decoding, playback control, and presentation. In our
 replacement we have structured them as can be seen on
 \cref{fig:mediaplayerParts}. The rest of the app interacts with the
@@ -50,23 +50,29 @@ The next part of this section will dive into how these parts work, we will expan
 \tikzset{%
 	presentationNode/.style = {%
 		fill=GoogleYellow,
+        draw,
 	},
 	playbackNode/.style = {%
 		fill=GoogleOrange,
+        draw,
 	},
 	decodingNode/.style = {%
 		fill=GoogleLightGreen,
+        draw,
 	},
 	presentationNodebg/.style = {%
 		fill=GoogleYellow!40,
 		dashed,
+        draw=GoogleYellow,
 	},
 	playbackNodebg/.style = {%
 		fill=GoogleOrange!40,
 		dashed,
+        draw=GoogleOrange,
 	},
 	decodingNodebg/.style = {%
 		fill=GoogleLightGreen!40,
+        draw=GoogleLightGreen,
 		dashed,
 	},
 }
@@ -75,7 +81,6 @@ The next part of this section will dive into how these parts work, we will expan
 	\centering
 	\begin{tikzpicture}[
 			every node/.style = {%
-				draw,
 				rectangle,
 				rounded corners = 1mm,
 				line width = 0.2mm,
@@ -128,7 +133,7 @@ layer which converts the data from Java methods and object parameters,
 and passes it to the appropriate libmpg123 methods, with the expected
 datatypes. Since libmpg123 has support for opening and processing
 multiple files simultaneously, we create a separate object to hold the
-file instance. In our Java code we create a handle to the decoder called, \code{MP3Decoder}, 
+file instance. In our Java code we create a handle to the decoder called, \code{MP3Decoder},
 and a handle to each MP3 file called \code{MP3File}.
 The \code{MP3Decoder} has the responsibility
 of resolving Android content URLs into file descriptors, opening them
@@ -147,7 +152,6 @@ decoding just discussed creates a diagram as shown in
 	\resizebox{\linewidth}{!}{%
 		\begin{tikzpicture}[
 				every node/.style = {%
-					draw,
 					rectangle,
 					rounded corners = 1mm,
 					line width = 0.2mm,
@@ -228,8 +232,8 @@ encoded \ac{PCM} data, this value is $4$.
 
 By calculating the time it takes to play an amount of bytes, instead of relying on the
 presentation component, we get an authoritative player, which we can
-reliably control and tweak to fit the network, even if the master
-devices presentation component has faults, such as playing too quickly
+reliably control and tweak to fit the network, even if the presentation component of the master
+device has faults, such as playing too quickly
 or too slowly.
 
 This active proxy component, which we call the virtual player, has the
@@ -246,14 +250,13 @@ frame time. At that time it calculates the current ``correct'' playhead
 position, and schedules frames into the presentation component, until
 a preload condition is fulfilled. One possible preload condition could be
 that we must have scheduled three MP3 frames ahead of the current playback
-position. However many other possible preload conditions could be used.
+position. However, many other possible preload conditions could be used.
 
 \begin{figure}[ht]
 	\centering
 	\resizebox{\linewidth}{!}{%
 		\begin{tikzpicture}[
 				every node/.style = {%
-					draw,
 					rectangle,
 					rounded corners = 1mm,
 					line width = 0.2mm,
@@ -327,7 +330,7 @@ The \code{AudioTrack}, an Android framework component, accepts audio
 written into a limited buffer and plays it at a steady, configurable
 rate. Even though it is actively pushing data from its internal buffer
 to the native soundcard buffer, the API that faces user apps is passive.
-To add data the app has to call a write method, which will write the
+To add data the app has to call a \enquote{write method}, which will write the
 buffer to the internal \code{AudioTrack} buffer. This means that the app
 will have to keep track of when the \code{AudioTrack} buffer is missing data,
 and fill it back up, to avoid a buffer underflow, which manifests itself
@@ -420,7 +423,7 @@ possible. From the design we observe that the presentation is what needs
 to be replicated on multiple devices. In other words, a loose coupling
 between the playback controller and the presentation layer can
 facilitate code reuse between the master and the slaves. To loosen the
-coupling we split the Playback Control into a intent parsing part, and
+coupling we split the Playback Control into an intent parsing part, and
 an action executing part. The intent parsing, or the front-end, only
 needs to operate on the server and coverts the intention of the user
 into concrete distinct actions. The executing part, or the back-end,
@@ -432,7 +435,7 @@ their own strategy.
 
 The specific actions we have identified are as follows: Play, Pause,
 MediaChange, and PlayFrame. PlayFrame is the only different action, since
-it is not handled by the same code-path as the other actions. Instead the
+it is not handled by the same code-path as the other actions. Instead, the
 PlayFrame command is handed off to the AudioMixer, where the frame of
 sound gets scheduled. The back-end has also been added to
 \cref{fig:mediaplayerPartspresenter}.

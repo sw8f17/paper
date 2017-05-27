@@ -1,5 +1,5 @@
 In this chapter we explore some key elements in the development of our application related to the playback of audio data.
-The chapter includes our decisions, the reasoning behind them, some of the complications we encountered and how we dealt with them.
+The chapter includes our decisions, the reasoning behind them, some complications we encountered and how we dealt with them.
 Before we present the implementation and what that entails, we firstly present some audio terminology, as well as the Android sound stack, as this domain knowledge is used in our implementation.
 
 \section{Audio Terminology}
@@ -9,7 +9,7 @@ Before we present the implementation and what that entails, we firstly present s
     The rate may vary from file to file with $44,100$ Hz being the de facto and most supported sample rate.
     \item [Bit Depth]\cite{bit_depth} \hfill \\
     Bit depth is the number of bits used per sample.
-    Bit depth is largely dependant on the data encoding used, and if relevant also described alongside sample rate, e.g.\ a data rate of $44.1$ kHz/$16$ translates to a sample rate of $44,100$ Hz and a bit depth of $16$ bit.
+    Bit depth is largely dependent on the data encoding used, and if relevant also described alongside sample rate, e.g.\ a data rate of $44.1$ kHz/$16$ translates to a sample rate of $44,100$ Hz and a bit depth of $16$ bit.
     In our project we work with MP3 and \ac{PCM} encoding, and as such we are only concerned with these two formats.
     MP3 does not encode any bit depth in its data, as such the bit depth for the \ac{PCM} data depends on the decoder settings.
     As for \ac{PCM}, this does contain bit depth data, and once again this may differ for each file with 16 and 24 bit both being common with 16-bit being the standard for CD, both Blu-ray and DVD also supports 24-bit.

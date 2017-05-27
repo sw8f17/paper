@@ -20,7 +20,7 @@ Multi-room audio is a competitive area and as such information on technologies a
 Multi-room audio is not exclusively a concept which is bought, hobbyists have created their own home multi-room audio systems using open source projects such as PulseAudio.\cite{pulseAudioHobbyist}
 PulseAudio is a sound-server program accepting sound from one or multiple sources and then redirecting it to one or more of sinks supporting several streaming protocols.\cite{pulseAudioModules}
 
-\section{Conclusion and Summation}
+\section{Summary and Conclusion}
 From the information gathered in this chapter we derive conclusions to help us formulate the problem and elicit requirements in order to solve said problem.
 
 \bigskip
@@ -32,7 +32,7 @@ First off is the audio playback support, both SoundSeeder and AmpMe support vari
 The two apps use their own respective solutions for device connectivity, SoundSeeder uses WiFi/ad-hoc Android hotspots where AmpMe uses any Internet connection.
 This implies that either solution is capable of solving the problem, tests in \cref{sec:sota_test} evaluate just how good these solutions are and determines whether one solution performs better than the other.
 While both solutions may be suffucient, due to the use case presented, it would be preferred if a solution without internet requirement is possible, although we do not wish to impose this as a strict requirement.
-Both apps also support the feature of manual synchronization, the need for such a feature implies that to some extend the automatic synchronization is not enough.
+Both apps also support the feature of manual synchronization, the need for such a feature implies that to some extent the automatic synchronization is not enough.
 It can be quite difficult to assert exactly how desynchronized two devices are.
 SoundSeeder allows the user to change at intervals of $10 ms$ between $-400 ms$ and $+400 ms$ whereas AmpMe uses an arbitrary value from $-15$ to $+15$.
 
@@ -47,5 +47,5 @@ Our insight into the applications we have selected, shows that the same system, 
 As for how to do it, Sonos and their competitors gives us little details into how it can be done, merely that it can be done with a variety of technologies.
 There is a myriad of solutions, they include WiFi, Bluetooth, Internet, proprietary network establishment and communication as well as common streaming protocols.
 
-This convinces us that there are no significant differences in choosing network type or communication protocols, which would rule them out as possibilities, rather the differences are trade-offs to be considered depending on what the goal is.
-Furthermore this inclines us to believe that developing an application to compete with the apps we have chosen as the best, is possible.
+This convinces us that there are no significant differences in choosing type of network or communication protocols, which would rule them out as possibilities, rather the differences are trade-offs to be considered depending on what the goal is.
+Furthermore, this inclines us to believe that developing an application to compete with the apps we have chosen as the best, is possible.

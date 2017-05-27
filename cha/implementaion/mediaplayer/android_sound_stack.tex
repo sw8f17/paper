@@ -17,7 +17,7 @@ When using the application framework, the Android \ac{SDK} is used.
 
 Using the application framework can potentially be slower, compared to the native framework.
 This is caused by the fact that the application framework is higher up the stack than the native framework thus further away from the ``bare metal''.
-Therefore it is important to consider if the application framework should be used,
+Therefore, it is important to consider if the application framework should be used,
 since it is the only thing the Java app interfaces with directly,
 and the choice of framework can have big consequences on the performance and functionality of the app.
 
@@ -32,7 +32,7 @@ When writing apps for the native framework, the Android \ac{NDK} is used.
 
 Using the native framework can give improved performance compared to the application framework used with Java\cite{nat_perf_2}.
 This can result in lower latency, and could potential be an advantage when dealing with synchronization of audio.
-Therefore the native framework should be considered when designing an app to solve the problem statement.
+Therefore, the native framework should be considered when designing an app to solve the problem statement.
 
 \subsubsection*{Binder Inter-process Communication Proxies}
 One level down in the stack, below the native framework, are the Binder \ac{IPC} Proxies.
@@ -63,7 +63,7 @@ Different audio drivers exist, e.g. \ac{ALSA} and \ac{OSS}, which are made for L
 Since the \ac{HAL} is driver-agnostic, then the audio driver can be changed without having to alter the \ac{HAL}.
 Several audio drivers exist for Android, e.g. ``Voodoo Sound'' or ``ViPER4Android音效FX v2版'',
 but it is also possible to make a custom audio driver\cite{voodoo_sound, viper4_android}.
-Therefore the sound driver in the Linux kernel should be considered as well, in the design of an app to solve the problem statement.
+Therefore, the sound driver in the Linux kernel should be considered as well, in the design of an app to solve the problem statement.
 \begin{figure}[!bht]
     \centering
     \includegraphics[width=0.5\textwidth]{img/sound_stack.png}

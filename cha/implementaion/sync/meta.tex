@@ -1,5 +1,5 @@
 In this chapter we discuss how we implement the methods of synchronization we discussed in \cref{cha:sync}.
-First we summarize what lead us to implementing synchronization the way we did.
+First we summarize what led us to implementing synchronization the way we did.
 Then we will explain how each of the implemented synchronization methods work, and lastly we explain where we use the synchronization in the app.
 
 In \namecref{sec:sync_methods}, we decided that \ac{NTP} would suit us best.
@@ -7,7 +7,7 @@ However due to the complexities of \ac{NTP} we decided to implement \ac{SNTP}, w
 
 Since a persistent internet connection is not an ideal requirement for our application we also implemented our own time-synchronization over the local wireless network, made using WiFi Direct.
 This method would not synchronize each slave to a global clock, like \ac{NTP} and \ac{SNTP}, but rather synchronize the clock of the slaves to the clock of the master.
-However for our application this it not a worry, our goal is to synchronize audio accurately across devices in our network, which does not require each clock to be globally synchronized, only locally.
+However, for our application this it not a worry, our goal is to synchronize audio accurately across devices in our network, which does not require each clock to be globally synchronized, only locally.
 
 We decided to implement both of these, that is \ac{SNTP} over the Internet and time-synchronization over WiFi Direct.
 This allows the application to work in scenarios where internet is not available, should having an Internet connection prove superior, this could be a default setting, but still support working without Internet available.

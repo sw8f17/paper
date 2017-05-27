@@ -42,9 +42,9 @@ The clients are only used to make the services accessible by the user, as the se
 
 Moreover, this architectural pattern allows for a myriad of different clients to use a given service, such that the same functionality can be available in different scenarios.
 E.g.~if playback of music is implemented as a service, a local client driven by the user could change songs just as easily as a client controlled remotely.
-This would give a seamless experience of control, since both clients are connected to the same service; meanwhile, they do not need to know about each others' existence.
+This would give a seamless experience of control, since both clients are connected to the same service; meanwhile, they do not need to know about the existence of one another.
 
 The separation of client and service also allows for more focused testing, since the components can be tested completely independent and in conjunction of each other.
 In our case the client-server architecture lies somewhere between the two previously presented architectures, and gives a middle ground where we do not need a heavy focus on data.
-However, because we want to disconnect client functionality from presentation, to improve testability and maintainability, the concept of a client in the client-server architecture, will have to be designed and developed with a more fine grained aspect.
+However, because we want to disconnect client functionality from presentation, to improve testability and maintainability, the concept of a client in the client-server architecture, will have to be designed and developed with a more fine-grained aspect.
 \end{description}

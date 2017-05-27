@@ -1,7 +1,7 @@
 \section{Discussion of Test Results}
 
 We have tested the apps which we deemed to be state of the art in \cref{cha:sota}, in order to see if they fulfill the initial problem statement we posed in \vref{sec:initial_problem}.
-Moreover in \vref{sec:sota_test}, we posed several specific questions that the tests should answer.
+Moreover, in \vref{sec:sota_test}, we posed several specific questions that the tests should answer.
 The questions are in three categories: offset, consistency, and drift.
 We will go through each of them, and try to answer them.
 
@@ -9,11 +9,11 @@ We will go through each of them, and try to answer them.
 \begin{description}
     \item[Is the audio synchronized without any manual adjustment?] \hfill \\
     For both apps, the answer is \textbf{no}.
-    This can be seen in all of the tests, for example in \vref{fig:soundseeder_test} and \vref{fig:ampmedelay_test}, where the measured delay was $-70.497 ms$ and $+131.260 ms$ for SoundSeeder and AmpMe respectively.
+    This can be seen in all the tests, for example in \vref{fig:soundseeder_test} and \vref{fig:ampmedelay_test}, where the measured delay was $-70.497 ms$ and $+131.260 ms$ for SoundSeeder and AmpMe respectively.
 
     For SoundSeeder we did the additional test of using their synchronize button.
-    This test, results in \vref{fig:soundseedersyncbutton}, show that the measured delay between the two phones are different, after pressing the synchronize button, but it does not get closer to $0$.
-    Additionally the change seems arbitrary.
+    This test, results in \vref{fig:soundseedersyncbutton}, show that the measured delay between the two phones are different, after pressing the \enquote{synchronize button}, but it does not get closer to $0$.
+    Additionally, the change seems arbitrary.
     \item[Can the manual adjustment make them synchronized?] \hfill \\
     In the tests we discovered the actual adjustments the offset sliders make.
     SoundSeeder shows milliseconds as a unit for their slider, with a granularity of $10 ms$.
@@ -35,7 +35,7 @@ We will go through each of them, and try to answer them.
     For AmpMe, the change relative to the previous was very close to one step on their slider in three out of four measurements, and the last had almost no change.
     This is interesting, as using the manual slider could be used to correct this.
 
-    However for both apps the delay is \textbf{not consistent} between playback.
+    However, for both apps the delay is \textbf{not consistent} between playback.
 \end{description}
 
 \subsection*{Drift:}
@@ -49,12 +49,12 @@ We will go through each of them, and try to answer them.
     For AmpMe the graph appears to be two distinct sets of points, interestingly they are approximately $23.211$ ms apart.
     This is the same number which we observed earlier as the amount of time their manual synchronization slider changes the observed offset.
     If one looks at the two parts of the data seperately then they drift $-0.0034$ ms pr. second and $-0.0033$ ms pr. second.
-    That is they both get closer to synchronization by a very small change, however it is bigger than SoundSeeder.
+    I.e.~they both get closer to synchronization by a very small change, however it is bigger than SoundSeeder.
 
     Both applications drift a very small amount of time, and the synchronization they have is considered stable over time.
 \end{description}
 
-\section{Test Conclusion}\label{sec:sota_test_conclusion}
+\section{Conclusion}\label{sec:sota_test_conclusion}
 These test shows the shortcomings of the apps.
 Neither of them are able to synchronize the audio without manual adjustment, and moreover they can not preserve a synchronization when the song is changed.
 Even though both of them were had a low amount of drift, neither of them answers our initial problem statement due to the shortcomings we have shown here.
