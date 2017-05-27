@@ -9,7 +9,6 @@ In \cref{sec:communication_methods} we decided to use WiFi Direct as our communi
 In this section we determine a way to structure the data for network transmission.
 First we describe the different ways to structure the data, thereafter we choose one to implement.
 
-\bigskip
 The goal is for data transmission of various data types to have the least amount of overhead.
 We have two types of data to transmit between the devices: music data, and commands.
 Music data is parts of the song itself which is transmitted to the devices,
@@ -20,7 +19,6 @@ We desire to minimize two kinds of overhead: The size of the data, and the proce
 To do this we want to use a well-defined, mature, and well-supported technology to do it.
 Furthermore, the data does not need to be human readable.
 
-\bigskip
 To fulfill the requirements stated above, we have found two interchange formats: Protocol Buffers and Cap'n Proto.
 
 \begin{description}
@@ -47,7 +45,7 @@ According to the roadmap of Cap'n Proto, there is still testing needed to be don
     \begin{tabularx}{0.9\textwidth}{rXX}\toprule
         Data format & Pros                              & Cons \\\midrule
         Protobuf    & Tried and tested, \newline Official support for many languages & Not as fast as Cap'n Proto \\
-        Cap'n Proto & Fast                              & Only official support for C++ \newline Still need some testing and review \\
+        Cap'n Proto & Fast and lowest overhead          & Only official support for C++ \newline Relatively immature\\
     \end{tabularx}
     \caption{Pros and cons of protobuf and Cap'n Proto.}\label{tab:format_pros_cons}
 \end{table}
@@ -81,21 +79,25 @@ The protobufs we use can be separated into three groups: meta-data, commands and
         Meta-data is information about the data, the data in this case is the audio data.
         The purpose of sending meta-data is twofold: We send it such that the clients can present it in their UI, and such that our audio player can be set up correctly.
         Our meta-data contains the following:
+        \begin{multicols}{2}
         \begin{itemize}
             \item Artist name
             \item Album name
             \item Song name
-            \item Album art URL (An optional URL containing an image to be displayed)
+            \item Album art URL (optional)
             \item Song duration
             \item Media-info
         \end{itemize}
+        \end{multicols}
         Here the media-info contains the following information about the audio data (in the \ac{PCM} format).
+        \begin{multicols}{2}
         \begin{itemize}
             \item Sample rate
             \item Channels
             \item Encoding (bit depth per channel)
             \item Frame size
         \end{itemize}
+    \end{multicols}
     \item[Commands] \hfill \\
         Commands are used to change the playback on other devices.
         All commands contain a timestamp at which the given command should occur.
@@ -135,7 +137,7 @@ This is shown in \cref{fig:message_layout}.
 This allow us to continue reading for exactly the amount of bytes the protobuf is.
 
 Next the receiver can look up what decoder to use in order to deserialize the sent protobuf.
-After the protobuf have been deserialized, we call the method registered to handle the given protobuf. \tnote{Vi skal måske forklare lidt mere om hvad det her indebærer?}
+After the protobuf have been deserialized, we call the method registered to handle the given protobuf.
 
 \begin{figure}[htb]
     \centering
