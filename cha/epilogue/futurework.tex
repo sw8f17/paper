@@ -34,7 +34,7 @@ We know that device hardware and manufacturer matters from our tests in \cnamere
 \section{Psychoacoustic Effects}
 In the beginning, we put a lot of emphasis on psychoacoustic effects, first explained in \cref{sec:psychoacoustic_effects}.
 Despite making use of the psychoacoustic effect known as the precedence effect, this is an implicit use of the effect.
-In reality, we never prioritized to explicitly implement controlling psychoacoustic effects.
+In reality, we never prioritized to explicitly implement the control of psychoacoustic effects.
 Our vision was to utilize precise synchronization of audio, and the ability to manipulate it, stemming from the milestone~\ref{milestone:manipulating_playback_offset}, to achieve psychoacoustic effects.
 In order to truly make use of the psychoacoustic effects, a greater control of audio than we currently have in the system, is required.
 This control includes the successful implementation of the milestone~\ref{milestone:manipulating_playback_offset}, alongside explicit control of what channels are played and/or transmitted to each device.
@@ -68,6 +68,6 @@ Thirdly as previously mentioned, supporting some external sources of music, for 
 \section{Using an Alternative to WiFi Direct}
 In a WiFi Direct network, there is an upper limit on the maximum number of connected devices, theoretically the limit is 254 devices in a group.
 However, in practice it is up to the implementation and hardware limitation on the devices in question, realistically the limit is in the six to ten devices range\footnote{\url{http://www.wi-fi.org/knowledge-center/faq/how-many-devices-can-connect}}.
-We purposely built the application to depend little as possible on WiFi Direct, such that it could be changed in the future if required.
-That means that it should be possible to use other ways of communicating, the only element that is not readily changeable is the use of a persistent socket connection.
+We purposely built the application to depend as little as possible on WiFi Direct, such that it could be changed in the future if required.
+That means it should be possible to use other ways of communicating, the only element that is not readily changeable is the use of a persistent socket connection.
 
