@@ -1,5 +1,5 @@
 \section{Using the Synchronization in the App}
-Now that we have offsets, we can therefore convert local timestamps to be synchronized with the rest of the network.
+With the offsets we can convert local timestamps to be synchronized with the rest of the network.
 For simplicity, we decided to use the offset our synchronization gave us just before sending messages over the network, and just after receiving them.
 That is, when we send a message, the timestamp in it is of the master clock, and when we receive a message, it is converted to the local clock.
 This is illustrated in \ref{fig:sntp_example}.

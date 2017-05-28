@@ -58,7 +58,7 @@ Rather than simply using \ac{SNTP} we have implemented the same time synchroniza
 \bigskip
 %Implementation sepcifics / android.MedioCodec
 The application itself was build upon an example from Google samples on how to make a media player.
-We replaced the Android media player implementation which was used, in place of our own, for which we used \ac{JNI}.
+We replaced the Android media player implementation which was used, in place of our own, for which we used the \ac{JNI}.
 In doing so we swapped focus to decode MP3 data, and play this data while streaming it to multiple devices.
 Doing this through the \ac{JNI} may have been a hasty decision as we later came across an Android API, \code{android.MediaCodec}, which is low level access to the Android multimedia infrastructure.
 While we have performed no tests to see whether it would have been sufficient, it is an avenue we did not explore, which possibly could have saved us some \ac{JNI} trouble.
