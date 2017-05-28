@@ -1,11 +1,13 @@
 \begin{table}
 \centering
-\footnotesize
-\begin{tabularx}{\textwidth}{lXXXXXX}\toprule
-    & Single Point\newline of Failure & Network Resilience & Peer \newline Discovery & Internet Required & Consensus & External Hardware Required \\\midrule
-Remote Centralized & True                    & Medium              & N/A            & True              & Easy      & True                          \\
-Local Centralized  & True                    & Low                 & Easy           & False             & Easy      & False                         \\
-Peer-To-Peer     & False                   & High                & Easy           & False             & Hard      & False                         \\\bottomrule
+\begin{tabularx}{\textwidth}{Xccc}\toprule
+                                        & Remote Centralized    & Local Centralized     & Peer-To-Peer      \\\midrule
+    Single point of failure             & True                  & True                  & False             \\
+    Network resilience                  & Medium                & Low                   & High              \\
+    Peer discovery                      & N/A                   & Easy                  & Easy              \\
+    Internet required                   & True                  & False                 & False             \\
+    Consensus                           & Easy                  & Easy                  & Hard              \\
+    External hardware required          & True                  & False                 & False             \\\bottomrule
 \end{tabularx}
 \caption{Comparison of external architectures}
 \label{tbl:external_comparison}
