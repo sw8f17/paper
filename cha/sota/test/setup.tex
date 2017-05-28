@@ -18,21 +18,15 @@ An illustration of the test setup together with the jack cable can be seen on \c
 \begin{figure}[!bht]
     \centering
     \includegraphics[width=0.8\textwidth]{img/test_setup.png}
-    \caption{An illustration of the test setup with the three phones and the jack cable.}\label{fig:test_setup}
+    \caption{An illustration of the test setup with the three phones and the jack cable.\msmnote{New pic on monday, or I do photoshop magic}}\label{fig:test_setup}
 \end{figure}
 
-% Troels additions below
-Furthermore we limit our tests to a master/slave/slave setup, that is;
-one phone acts as a master, and we perform the tests on two slaves
-connected to it. This makes the two devices under test as similar as
-possible, since neither has the reference sound.
-Ideally we would also record the reference, the Master, but since we only have two input channels that is not possible.\msmnote{Did we though? Two slaves? Not with Scotty, I guarantee it.}
-
-In the tests we use three Android phones:\msmnote{Right phones?}
+In the tests we use two Android smartphones, one as master which also plays the transmitted audio, and a slave which receives the audio and plays it as well.
+We use identical smartphones to ensure that differences in hardware, does not affect the measurements.
+The specification of the smartphones are as follows:
 \begin{dankscription}{\bfseries}{Master}
 	\item[Master]OnePlus One (Android 6.0.1, Kernel 3.4.112-cyanogenmod-g62d75e8)
-	\item[Slave 1]Moto X Style (Android 6.0.1, Kernel 3.10.84-perf-gb67345b)
-	\item[Slave 2]OnePlus Two (Android 6.0.1, Kernel 3.10.84-perf+)
+    \item[Slave]OnePlus One (\msmnote{check when I get home})
 \end{dankscription}
 
 \subsection{Automating Testing With Scripts}
