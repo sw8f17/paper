@@ -5,18 +5,15 @@ Solutions such as wireless Bluetooth speakers exist, but are far less common to 
 
 We present an app allowing a network of smartphones to play audio synchronously, effectively increasing volume without degrading quality.
 
-\bigskip \noindent
 We investigate the scientific field related to human auditory perception, psychoacoustics.
 Our research into psychoacoustics reveals a useful effect, the precedence effect, which amplifies perceived audio by manipulating playback of audio sources.
 We also prove existing solutions on Google Play Store to be unsatisfactory, requiring manual tuning to achieve audible synchronization.
 
-\bigskip \noindent
 To outperform said existing solutions, we implement our own Android app.
 In the development we disregard UI/UX and focus on core technical aspects.
 We implement native audio decoding, low-level playback, and a communication system using persistent sockets and protobufs.
 We utilize a global wall time and timestamped commands to synchronously execute commands.
 
-\bigskip \noindent
 We test our app, under the same circumstances as the apps on the Play Store.
 The tests reveal that we have succeeded; our app outperforms the competition in regard to audible synchronization.
 The app remains unpublished, due to need of usability polish.
